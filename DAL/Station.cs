@@ -17,7 +17,7 @@ namespace IDAL
             public int ChargeSlots { get; set; }
             public override string ToString()
             {
-                return base.ToString();
+                return $"Station: Id-{Id}, Name-{Name}, Charge slots={ChargeSlots}.";
             }
         }
     }
