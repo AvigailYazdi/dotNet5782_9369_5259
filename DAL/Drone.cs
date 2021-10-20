@@ -13,7 +13,7 @@ namespace IDAL
             public double Battery { get; set; }
             public override string ToString()
             {
-                return base.ToString();
+                return $"Drone: Id-{Id}, Model-{Model}, Max Weight-{MaxWeight}, Status-{Status}, Battery-{Battery}";
             }
         }
     }
