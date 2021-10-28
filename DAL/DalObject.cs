@@ -15,19 +15,19 @@ namespace DalObject
         }
         public static void AddDrone(Drone d)
         {
-            DataSource.drones[DataSource.config.counterDrone] = d;
+            DataSource.drones[DataSource.config.counterDrone++] = d;
         }
         public static void AddBaseStation(BaseStation bs)
         {
-            DataSource.stations[DataSource.config.counterStation] = bs;
+            DataSource.stations[DataSource.config.counterStation++] = bs;
         }
         public static void AddCustomer(Customer c)
         {
-            DataSource.customers[DataSource.config.counterCustomer] = c;
+            DataSource.customers[DataSource.config.counterCustomer++] = c;
         }
         public static void AddParcel(Parcel p)
         {
-            DataSource.parcels[DataSource.config.counterParcel] = p;
+            DataSource.parcels[DataSource.config.counterParcel++] = p;
         }
         // updates
 
