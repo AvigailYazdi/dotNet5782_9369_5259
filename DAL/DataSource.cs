@@ -13,11 +13,13 @@ namespace DalObject
         internal class config
         {
             internal static int counterDrone = 0;
+            internal static int counterDroneCharge = 0;
             internal static int counterStation = 0;
             internal static int counterParcel = 0;
             internal static int counterCustomer = 0;
-            //מספר רץ לחבילה
+            internal static int parcelId = 0;
         }
+        internal static DroneCharge[] droneCharge = new DroneCharge[10];
         internal static Drone[] drones = new Drone[10];
         internal static BaseStation[] stations = new BaseStation[5];
         internal static Customer[] customers = new Customer[100];
@@ -59,7 +61,7 @@ namespace DalObject
             {
                 parcels[i] = new Parcel()
                 {
-                    Id = rand.Next(1, 300),
+                    Id = config.parcelId,
                     SenderId = rand.Next(100000000, 1000000000),
                     TargetId = rand.Next(100000000, 1000000000),
                     Weight = (WeightCategories)rand.Next(3),
@@ -71,6 +73,7 @@ namespace DalObject
                     PickedUp = DateTime.Now,
                 };
                 config.counterParcel++;
+                config.parcelId++;
             }
         }
         private static void createCustomer()
