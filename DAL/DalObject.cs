@@ -27,11 +27,51 @@ namespace DalObject
         }
         public static void AddParcel(Parcel p)
         {
-            DataSource.parcels[DataSource.config.counterParcel++] = p;
+            p.Id = DataSource.config.parcelId;
+            DataSource.parcels[DataSource.config.parcelId++] = p;
         }
-        // updates
-
-
+        public static void UpdateParcelToDrone(int DroneId, int ParcelId)
+        {
+            int i = 0;
+            for ( ; (i < DataSource.config.counterParcel) && (DataSource.parcels[i].Id != ParcelId); i++){ }
+            DataSource.parcels[i].DroneId = DroneId;
+            DataSource.parcels[i].Scheduled = DateTime.Now;
+            i = 0;
+            for (i=0 ; (i < DataSource.config.counterDrone) && (DataSource.drones[i].Id != DroneId); i++) { }
+            DataSource.drones[i].Status = DroneStatuses.Delivery;
+        }
+        public static void UpdateParcelCollect(int ParcelId)
+        {
+            int i = 0;
+            for (; (i < DataSource.config.counterParcel) && (DataSource.parcels[i].Id != ParcelId); i++) { }
+            DataSource.parcels[i].PickedUp = DateTime.Now;
+        }
+        public static void UpdateParcelDelivery(int ParcelId)
+        {
+            int i = 0;
+            for (; (i < DataSource.config.counterParcel) && (DataSource.parcels[i].Id != ParcelId); i++) { }
+            DataSource.parcels[i].Delivered = DateTime.Now;
+        }
+        public static void UpdateChargeDrone(int DroneId, int BaseStationId)
+        {
+            int i = 0;
+            for (; (i < DataSource.config.counterDrone) && (DataSource.drones[i].Id != DroneId); i++) { }
+            DataSource.drones[i].Status = DroneStatuses.Maintenance;
+            i = 0;
+            for(i = 0 ; (i < DataSource.config.counterStation) && (DataSource.stations[i].Id != BaseStationId); i++) { }
+            DataSource.stations[i].ChargeSlots--;
+            DataSource.droneCharge[DataSource.config.counterDroneCharge++].DroneId = DroneId;
+            DataSource.droneCharge[DataSource.config.counterDroneCharge++].StationId = BaseStationId;
+        }
+        public static void UpdateDischargeDrone(int DroneId)
+        {
+            int i = 0;
+            for (; (i < DataSource.config.counterDrone) && (DataSource.drones[i].Id != DroneId); i++) { }
+            DataSource.drones[i].Status = DroneStatuses.Avaliable;
+            i = 0;
+            for (; (i < DataSource.config.counterDroneCharge) && (DataSource.droneCharge[i].DroneId != DroneId); i++) { }
+            DataSource.stations[DataSource.droneCharge[i].StationId].ChargeSlots++;
+        }
         public static BaseStation ViewBaseStation(int Id)
         {
             return DataSource.stations[Id];

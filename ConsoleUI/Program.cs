@@ -6,7 +6,7 @@ namespace ConsoleUI
     {
         enum MenuOptions { Exit, Add, Update, ViewOne, ViewList};
         enum AddOrView { BaseStation, Drone, Customer, Parcel};
-        //enum UpDate {  }
+        enum UpDate { ParcelToDrone, Collect, Delivery, Charge , Discharge };
         enum ViewList { BaseStation, Drone, Customer, Parcel, NotConnected, AvaliableSlots};
        void PrintMenue()
         {
@@ -60,8 +60,7 @@ namespace ConsoleUI
                             DalObject.DalObject.AddCustomer(c);
                             break;
                         case AddOrView.Parcel:
-                            Console.WriteLine("Enter id, sender id, target id, weight and priority of a parcel");
-                            p.Id= Console.Read();
+                            Console.WriteLine("Enter sender id, target id, weight and priority of a parcel");
                             p.SenderId= Console.Read();
                             p.TargetId= Console.Read();
                             p.Weight= (WeightCategories)Console.Read();
@@ -75,6 +74,42 @@ namespace ConsoleUI
                     }
                     break;
                 case MenuOptions.Update:
+                    int DroneId, ParcelId, BaseStationId;
+                    UpDate up;
+                    check = int.TryParse(Console.ReadLine(), out option);
+                    up = (UpDate)option;
+                    switch (up)
+                    {
+                        case UpDate.ParcelToDrone:
+                            Console.WriteLine("Enter Drone and Parcel id");
+                            DroneId = Console.Read();
+                            ParcelId= Console.Read();
+                            DalObject.DalObject.UpdateParcelToDrone(DroneId, ParcelId);
+                            break;
+                        case UpDate.Collect:
+                            Console.WriteLine("Enter Parcel id");
+                            ParcelId = Console.Read();
+                            DalObject.DalObject.UpdateParcelCollect(ParcelId);
+                            break;
+                        case UpDate.Delivery:
+                            Console.WriteLine("Enter Parcel id");
+                            ParcelId = Console.Read();
+                            DalObject.DalObject.UpdateParcelDelivery(ParcelId);
+                            break;
+                        case UpDate.Charge:
+                            Console.WriteLine("Enter Drone and Base station id");
+                            DroneId = Console.Read();
+                            BaseStationId = Console.Read();
+                            DalObject.DalObject.UpdateChargeDrone(DroneId, BaseStationId);
+                            break;
+                        case UpDate.Discharge:
+                            Console.WriteLine("Enter Drone id");
+                            DroneId = Console.Read();
+                            DalObject.DalObject.UpdateDischargeDrone(DroneId);
+                            break;
+                        default:
+                            break;
+                    }
                     break;
                 case MenuOptions.ViewOne:
                     check = int.TryParse(Console.ReadLine(), out option);
