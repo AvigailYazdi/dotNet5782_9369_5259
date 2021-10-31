@@ -8,6 +8,11 @@ namespace IDAL
 {
     namespace DO
     {
+        /// <summary>
+        /// A struct of the base stations.
+        /// fields: id, name, Longitude, Lattitude and number of empty charge slots.
+        /// functions: To string- a function that returns the string to print.
+        /// </summary>
         public struct BaseStation
         {
             public int Id { get; set; }
@@ -17,7 +22,7 @@ namespace IDAL
             public int ChargeSlots { get; set; }
             public override string ToString()
             {
-                return $"Station: Id-{Id}, Name-{Name}, Charge slots={ChargeSlots}.";
+                return $"Base station- Id: {Id}, Name: {Name},Longitude: {DalObject.DalObject.base60(Longitude)},Lattitude: {DalObject.DalObject.base60(Lattitude)} Charge slots: {ChargeSlots}.";
             }
         }
     }

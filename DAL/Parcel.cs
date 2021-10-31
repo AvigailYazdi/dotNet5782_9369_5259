@@ -8,6 +8,12 @@ namespace IDAL
 {
     namespace DO
     {
+        /// <summary>
+        /// A struct of the parcels.
+        /// fields: id, sender id, target id, weight, priority, requested time,
+        /// drone id, scheduled time, picked up time and delivered time.
+        /// functions: To string- a function that returns the string to print.
+        /// </summary>
         public struct Parcel
         {
             public int Id { get; set; }
@@ -22,7 +28,7 @@ namespace IDAL
             public DateTime Delivered { get; set; }
             public override string ToString()
             {
-                return $"Parcel: Id-{Id}, Sender Id-{SenderId}, Target Id-{TargetId}, Weight-{Weight}, Priority-{Priority}, My Property-{MyProperty}, Drone Id-{DroneId}";
+                return $"Parcel- Id: {Id}, Sender Id: {SenderId}, Target Id: {TargetId}, Weight: {Weight}, Priority: {Priority}, Requested time: {Requested}, Drone Id: {DroneId}";
             }
         }
     }

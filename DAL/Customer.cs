@@ -8,6 +8,11 @@ namespace IDAL
 {
     namespace DO
     {
+        /// <summary>
+        /// A struct of the customers.
+        /// fields: id, name, phone number, Longitude and Lattitude .
+        /// functions: To string- a function that returns the string to print.
+        /// </summary>
         public struct Customer
         {
             public int Id { get; set; }
@@ -17,7 +22,7 @@ namespace IDAL
             public double Lattitude { get; set; }
             public override string ToString()
             {
-                return $"Customer: Id-{Id}, Name-{Name}, Phone-{Phone}.";
+                return $"Customer- Id: {Id}, Name: {Name}, Phone: {Phone}.";
             }
         }
     }

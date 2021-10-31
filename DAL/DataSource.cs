@@ -10,21 +10,28 @@ namespace DalObject
 {
     class DataSource
     {
+        /// <summary>
+        /// A class of counters to the different arrays.
+        /// </summary>
         internal class config
         {
-            internal static int counterDrone = 0;
+            internal static int counterDrone = 0; 
             internal static int counterDroneCharge = 0;
             internal static int counterStation = 0;
             internal static int counterParcel = 0;
             internal static int counterCustomer = 0;
             internal static int parcelId = 0;
         }
+        // Initialization of the arrarys
         internal static DroneCharge[] droneCharge = new DroneCharge[10];
         internal static Drone[] drones = new Drone[10];
         internal static BaseStation[] stations = new BaseStation[5];
         internal static Customer[] customers = new Customer[100];
         internal static Parcel[] parcels = new Parcel[1000];
         private static Random rand = new Random(DateTime.Now.Millisecond);
+        /// <summary>
+        /// A function that initialize the first five drones in the array
+        /// </summary>
         private static void createDrone()
         {
             for (int i = 0; i < 5; i++)
@@ -40,6 +47,9 @@ namespace DalObject
                 config.counterDrone++;
             }
         }
+        /// <summary>
+        /// A function that initialize the first two stations in the array
+        /// </summary>
         private static void createBaseStation()
         {
             for (int i = 0; i < 2; i++)
@@ -55,6 +65,9 @@ namespace DalObject
                 config.counterStation++;
             }
         }
+        /// <summary>
+        /// A function that initialize the first ten parcels in the array
+        /// </summary>
         private static void createParcel()
         {
             for (int i = 0; i < 10; i++)
@@ -76,6 +89,9 @@ namespace DalObject
                 config.parcelId++;
             }
         }
+        /// <summary>
+        /// A function that initialize the first ten customers in the array
+        /// </summary>
         private static void createCustomer()
         {
             for (int i = 0; i < 10; i++)
@@ -91,6 +107,9 @@ namespace DalObject
                 config.counterCustomer++;
             }
         }
+        /// <summary>
+        /// A function that initialize all the arrays
+        /// </summary>
         public static void Initialize()
         {
             createBaseStation();
