@@ -13,7 +13,7 @@ namespace DalObject
         /// <summary>
         /// A function that initialize the arrays.
         /// </summary>
-        static DalObject()
+        public DalObject()
         {
             Initialize();
         }
@@ -34,11 +34,34 @@ namespace DalObject
             return str + "E";
         }
         /// <summary>
+        /// A function that calculates the distance 
+        /// </summary>
+        /// <param name="lon"> the longtitude</param>
+        /// <param name="lat">the lattitude</param>
+        /// <param name="choice">the choice between a customer or base station</param>
+        /// <param name="id"> the id of base station or customer</param>
+        /// <returns>the distance</returns>
+        public double distance(double lon, double lat, int choice, int id)
+        {
+            double dis = 0;
+            if (choice == 0)// base station
+            {
+                int i = searchStation(id);
+                dis = Math.Sqrt(Math.Pow(lon - stations[i].Longitude, 2) + Math.Pow(lat - stations[i].Lattitude, 2));
+            }
+            else // customer
+            {
+                int i = searchCustomer(id);
+                dis = Math.Sqrt(Math.Pow(lon - customers[i].Longitude, 2) + Math.Pow(lat - customers[i].Lattitude, 2));
+            }
+            return dis;
+        }
+        /// <summary>
         /// A function that searches the drone that matches the given id 
         /// </summary>
         /// <param name="Id"> the id to look for</param>
         /// <returns> the index of the drone</returns>
-        private static int searchDrone(int Id)
+        private int searchDrone(int Id)
         {
             int i = 0;
             for (; (i < config.counterDrone) && (drones[i].Id != Id); i++) { }
@@ -49,7 +72,7 @@ namespace DalObject
         /// </summary>
         /// <param name="Id"> the id to look for</param>
         /// <returns> the index of the parcel</returns>
-        private static int searchParcel(int Id)
+        private int searchParcel(int Id)
         {
             int i = 0;
             for (; (i < config.counterParcel) && (parcels[i].Id != Id); i++) { }
@@ -60,7 +83,7 @@ namespace DalObject
         /// </summary>
         /// <param name="Id"> the id to look for</param>
         /// <returns> the index of the customer</returns>
-        private static int searchCustomer(int Id)
+        private int searchCustomer(int Id)
         {
             int i = 0;
             for (; (i < config.counterCustomer) && (customers[i].Id != Id); i++) { }
@@ -71,7 +94,7 @@ namespace DalObject
         /// </summary>
         /// <param name="Id"> the id to look for</param>
         /// <returns> the index of the station</returns>
-        private static int searchStation(int Id)
+        private int searchStation(int Id)
         {
             int i = 0;
             for (; (i < config.counterStation) && (stations[i].Id != Id); i++) { }
@@ -81,7 +104,7 @@ namespace DalObject
         ///  A function that adds a drone to the array
         /// </summary>
         /// <param name="d"> the drone to add </param>
-        public static void AddDrone(Drone d)
+        public void AddDrone(Drone d)
         {
             drones[config.counterDrone++] = d;
         }
@@ -89,7 +112,7 @@ namespace DalObject
         /// A function that adds a station to the array
         /// </summary>
         /// <param name="bs"> the station to add</param>
-        public static void AddBaseStation(BaseStation bs)
+        public void AddBaseStation(BaseStation bs)
         {
             stations[config.counterStation++] = bs;
         }
@@ -97,7 +120,7 @@ namespace DalObject
         /// A function that adds a customer to the array
         /// </summary>
         /// <param name="c"> the customer to add</param>
-        public static void AddCustomer(Customer c)
+        public void AddCustomer(Customer c)
         {
             customers[config.counterCustomer++] = c;
         }
@@ -105,7 +128,7 @@ namespace DalObject
         /// A function that adds a parcel to the array
         /// </summary>
         /// <param name="p"> the parcel to add</param>
-        public static void AddParcel(Parcel p)
+        public void AddParcel(Parcel p)
         {
             p.Id = config.parcelId++;
             parcels[config.counterParcel++] = p;
@@ -115,7 +138,7 @@ namespace DalObject
         /// </summary>
         /// <param name="DroneId"> the id of the requested drone</param>
         /// <param name="ParcelId">the id of the requested parcel</param>
-        public static void UpdateParcelToDrone(int DroneId, int ParcelId)
+        public void UpdateParcelToDrone(int DroneId, int ParcelId)
         {
             int i = searchParcel(ParcelId);
             parcels[i].DroneId = DroneId;
@@ -126,7 +149,7 @@ namespace DalObject
         /// A function that updates the time of picking up the parcel
         /// </summary>
         /// <param name="ParcelId"> the id of parcel that picked up</param>
-        public static void UpdateParcelCollect(int ParcelId)
+        public void UpdateParcelCollect(int ParcelId)
         {
             parcels[searchParcel(ParcelId)].PickedUp = DateTime.Now;
         }
@@ -134,7 +157,7 @@ namespace DalObject
         /// A function that updates the time of parcel delivery
         /// </summary>
         /// <param name="ParcelId"> the id of the parcel </param>
-        public static void UpdateParcelDelivery(int ParcelId)
+        public void UpdateParcelDelivery(int ParcelId)
         {
             parcels[searchParcel(ParcelId)].Delivered = DateTime.Now;
         }
@@ -143,7 +166,7 @@ namespace DalObject
         /// </summary>
         /// <param name="DroneId"> the id of the drone</param>
         /// <param name="BaseStationId"> the id of the base station</param>
-        public static void UpdateChargeDrone(int DroneId, int BaseStationId)
+        public void UpdateChargeDrone(int DroneId, int BaseStationId)
         {
             drones[searchDrone(DroneId)].Status = DroneStatuses.Maintenance;
             stations[searchStation(BaseStationId)].ChargeSlots--;
@@ -154,7 +177,7 @@ namespace DalObject
         /// A function that discharge a drone from a charge slot of a station
         /// </summary>
         /// <param name="DroneId"> the id of the drone to discharge</param>
-        public static void UpdateDischargeDrone(int DroneId)
+        public void UpdateDischargeDrone(int DroneId)
         {
             drones[searchDrone(DroneId)].Status = DroneStatuses.Avaliable;
             int i = 0;
@@ -166,7 +189,7 @@ namespace DalObject
         /// </summary>
         /// <param name="Id"> the id of the requested station</param>
         /// <returns> returns the requested station</returns>
-        public static BaseStation ViewBaseStation(int Id)
+        public BaseStation ViewBaseStation(int Id)
         {
             return stations[searchStation(Id)];
         }
@@ -175,7 +198,7 @@ namespace DalObject
         /// </summary>
         /// <param name="Id"> the id of the requested drone</param>
         /// <returns> returns the requested drone</returns>
-        public static Drone ViewDrone(int Id)
+        public Drone ViewDrone(int Id)
         {
             return drones[searchDrone(Id)];
         }
@@ -184,7 +207,7 @@ namespace DalObject
         /// </summary>
         /// <param name="Id"> the id of the requested customer</param>
         /// <returns> returns the requested customer</returns>
-        public static Customer ViewCustomer(int Id)
+        public Customer ViewCustomer(int Id)
         {
             return customers[searchCustomer(Id)];
         }
@@ -193,7 +216,7 @@ namespace DalObject
         /// </summary>
         /// <param name="Id"> the id of the requested parcel</param>
         /// <returns> returns the requested parcel</returns>
-        public static Parcel ViewParcel(int Id)
+        public Parcel ViewParcel(int Id)
         {
             return parcels[searchParcel(Id)];
         }
@@ -201,7 +224,7 @@ namespace DalObject
         /// A function that shows the list of the stations
         /// </summary>
         /// <returns> returns the list of the stations</returns>
-        public static BaseStation[] ListBaseStation()
+        public BaseStation[] ListBaseStation()
         {
             BaseStation[] temp = new BaseStation[config.counterStation]; 
             for (int i = 0; i < config.counterStation; i++)
@@ -214,7 +237,7 @@ namespace DalObject
         /// A function that showes the list of the drones
         /// </summary>
         /// <returns> returns the list of the drones</returns>
-        public static Drone[] ListDrone()
+        public Drone[] ListDrone()
         {
             Drone[] temp = new Drone[config.counterDrone];
             for (int i = 0; i < config.counterDrone; i++)
@@ -227,7 +250,7 @@ namespace DalObject
         /// A function that showes the list of the customer
         /// </summary>
         /// <returns> returns the list of the customer</returns>
-        public static Customer[] ListCustomer()
+        public Customer[] ListCustomer()
         {
             Customer[] temp = new Customer[config.counterCustomer];
             for (int i = 0; i < config.counterCustomer; i++)
@@ -240,7 +263,7 @@ namespace DalObject
         /// A function that showes the list of the parcels
         /// </summary>
         /// <returns> returns the list of the parcels</returns>
-        public static Parcel[] ListParcel()
+        public Parcel[] ListParcel()
         {
             Parcel[] temp = new Parcel[config.counterParcel];
             for (int i = 0; i < config.counterParcel; i++)
@@ -253,7 +276,7 @@ namespace DalObject
         /// A function that showes the list of the not connected parcels
         /// </summary>
         /// <returns> returns the list of the not connected parcels</returns>
-        public static Parcel[] ListNotConnected()
+        public Parcel[] ListNotConnected()
         {
             int counter = 0;
             for (int i = 0; i < config.counterParcel; i++)
@@ -274,7 +297,7 @@ namespace DalObject
         /// A function that showes the list of the stations with avaliable slots
         /// </summary>
         /// <returns> returns the list of the stations with avaliable slots</returns>
-        public static BaseStation[] ListAvaliableSlots()
+        public BaseStation[] ListAvaliableSlots()
         {
             int counter = 0;
             for (int i = 0; i < config.counterStation; i++)

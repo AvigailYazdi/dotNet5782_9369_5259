@@ -1,4 +1,5 @@
 ﻿// Avigail Yazdi 213259369, Shilat Shimon 212435259
+// We did both of the bonuses.
 using System;
 using IDAL.DO;
 using DalObject;
@@ -8,20 +9,21 @@ namespace ConsoleUI
     /// A class of the main program that run the process of delivery company by drones
     /// </summary>
     class Program
-    { 
+    {
         /// <summary>
         /// enums of the options to choose an action
         /// </summary>
         enum MenuOptions { Exit, Add, Update, ViewOne, ViewList};
         enum AddOrView { BaseStation=1, Drone, Customer, Parcel};
         enum UpDate { ParcelToDrone=1, Collect, Delivery, Charge , Discharge };
-        enum ViewList { BaseStation=1, Drone, Customer, Parcel, NotConnected, AvaliableSlots};
+        enum ViewList { BaseStation=1, Drone, Customer, Parcel, NotConnected, AvaliableSlots,viewDistance};
         /// <summary>
         /// A function that runs the process with a client
         /// </summary>
         /// <param name="args"></param>
         static void Main(string[] args)
         {
+            DalObject.DalObject dal= new();
             Drone d = new Drone() ;
             Parcel p = new Parcel() ;
             BaseStation b= new BaseStation();
@@ -64,7 +66,7 @@ namespace ConsoleUI
                                 b.Longitude = Convert.ToDouble(Console.ReadLine());
                                 b.Lattitude = Convert.ToDouble(Console.ReadLine());
                                 b.ChargeSlots = int.Parse(Console.ReadLine());
-                                DalObject.DalObject.AddBaseStation(b);
+                                dal.AddBaseStation(b);
                                 break;
                             case AddOrView.Drone:
                                 Console.WriteLine("Enter id, model, max weight, status and battery of a drone");
@@ -73,7 +75,7 @@ namespace ConsoleUI
                                 d.MaxWeight = (WeightCategories)int.Parse(Console.ReadLine());
                                 d.Status = (DroneStatuses)int.Parse(Console.ReadLine());
                                 d.Battery = int.Parse(Console.ReadLine());
-                                DalObject.DalObject.AddDrone(d);
+                                dal.AddDrone(d);
                                 break;
                             case AddOrView.Customer:
                                 Console.WriteLine("Enter id, name, phone number, longitude and lattitude of a customer");
@@ -82,7 +84,7 @@ namespace ConsoleUI
                                 c.Phone = Console.ReadLine();
                                 c.Longitude = Convert.ToDouble(Console.ReadLine());
                                 c.Lattitude = Convert.ToDouble(Console.ReadLine());
-                                DalObject.DalObject.AddCustomer(c);
+                                dal.AddCustomer(c);
                                 break;
                             case AddOrView.Parcel:
                                 Console.WriteLine("Enter sender id, target id, weight and priority of a parcel");
@@ -92,7 +94,7 @@ namespace ConsoleUI
                                 p.Priority = (Priorities)int.Parse(Console.ReadLine());
                                 p.Requested = DateTime.Now;
                                 p.DroneId = 0;
-                                DalObject.DalObject.AddParcel(p);
+                                dal.AddParcel(p);
                                 break;
                             default:
                                 break;
@@ -115,28 +117,28 @@ namespace ConsoleUI
                                 Console.WriteLine("Enter Drone and Parcel id");
                                 DroneId = int.Parse(Console.ReadLine());
                                 ParcelId = int.Parse(Console.ReadLine());
-                                DalObject.DalObject.UpdateParcelToDrone(DroneId, ParcelId);
+                                dal.UpdateParcelToDrone(DroneId, ParcelId);
                                 break;
                             case UpDate.Collect:
                                 Console.WriteLine("Enter Parcel id");
                                 ParcelId = int.Parse(Console.ReadLine());
-                                DalObject.DalObject.UpdateParcelCollect(ParcelId);
+                                dal.UpdateParcelCollect(ParcelId);
                                 break;
                             case UpDate.Delivery:
                                 Console.WriteLine("Enter Parcel id");
                                 ParcelId = int.Parse(Console.ReadLine());
-                                DalObject.DalObject.UpdateParcelDelivery(ParcelId);
+                                dal.UpdateParcelDelivery(ParcelId);
                                 break;
                             case UpDate.Charge:
                                 Console.WriteLine("Enter Drone and Base station id");
                                 DroneId = int.Parse(Console.ReadLine());
                                 BaseStationId = int.Parse(Console.ReadLine());
-                                DalObject.DalObject.UpdateChargeDrone(DroneId, BaseStationId);
+                                dal.UpdateChargeDrone(DroneId, BaseStationId);
                                 break;
                             case UpDate.Discharge:
                                 Console.WriteLine("Enter Drone id");
                                 DroneId = int.Parse(Console.ReadLine());
-                                DalObject.DalObject.UpdateDischargeDrone(DroneId);
+                                dal.UpdateDischargeDrone(DroneId);
                                 break;
                             default:
                                 break;
@@ -154,22 +156,22 @@ namespace ConsoleUI
                         {
                             case AddOrView.BaseStation:
                                 Console.WriteLine("Enter id of a base station");
-                                b = DalObject.DalObject.ViewBaseStation(int.Parse(Console.ReadLine()));
+                                b = dal.ViewBaseStation(int.Parse(Console.ReadLine()));
                                 Console.WriteLine(b);
                                 break;
                             case AddOrView.Drone:
                                 Console.WriteLine("Enter id of a drone");
-                                d = DalObject.DalObject.ViewDrone(int.Parse(Console.ReadLine()));
+                                d = dal.ViewDrone(int.Parse(Console.ReadLine()));
                                 Console.WriteLine(d);
                                 break;
                             case AddOrView.Customer:
                                 Console.WriteLine("Enter id of a customer");
-                                c = DalObject.DalObject.ViewCustomer(int.Parse(Console.ReadLine()));
+                                c = dal.ViewCustomer(int.Parse(Console.ReadLine()));
                                 Console.WriteLine(c);
                                 break;
                             case AddOrView.Parcel:
                                 Console.WriteLine("Enter id of a parcel");
-                                p = DalObject.DalObject.ViewParcel(int.Parse(Console.ReadLine()));
+                                p = dal.ViewParcel(int.Parse(Console.ReadLine()));
                                 Console.WriteLine(p);
                                 break;
                             default:
@@ -183,41 +185,51 @@ namespace ConsoleUI
 3- To print all customers,
 4- To print all parcels,
 5- To print all not- connected parcels,
-6- To print all avaliable base stations.");
+6- To print all avaliable base stations,
+7- To calculate a distance.");
                         ViewList vl;
                         check = int.TryParse(Console.ReadLine(), out option);
                         vl = (ViewList)option;
                         switch (vl)
                         {
                             case ViewList.BaseStation:
-                                BaseStation[] temp = DalObject.DalObject.ListBaseStation();
+                                BaseStation[] temp = dal.ListBaseStation();
                                 for (int i = 0; i < temp.Length; i++)
                                     Console.WriteLine(temp[i]);
                                 break;
                             case ViewList.Drone:
-                                Drone[] temp1 = DalObject.DalObject.ListDrone();
+                                Drone[] temp1 = dal.ListDrone();
                                 for (int i = 0; i < temp1.Length; i++)
                                     Console.WriteLine(temp1[i]);
                                 break;
                             case ViewList.Customer:
-                                Customer[] temp2 = DalObject.DalObject.ListCustomer();
+                                Customer[] temp2 = dal.ListCustomer();
                                 for (int i = 0; i < temp2.Length; i++)
                                     Console.WriteLine(temp2[i]);
                                 break;
                             case ViewList.Parcel:
-                                Parcel[] temp3 = DalObject.DalObject.ListParcel();
+                                Parcel[] temp3 = dal.ListParcel();
                                 for (int i = 0; i < temp3.Length; i++)
                                     Console.WriteLine(temp3[i]);
                                 break;
                             case ViewList.NotConnected:
-                                temp3 = DalObject.DalObject.ListNotConnected();
+                                temp3 = dal.ListNotConnected();
                                 for (int i = 0; i < temp3.Length; i++)
                                     Console.WriteLine(temp3[i]);
                                 break;
                             case ViewList.AvaliableSlots:
-                                temp = DalObject.DalObject.ListAvaliableSlots();
+                                temp = dal.ListAvaliableSlots();
                                 for (int i = 0; i < temp.Length; i++)
                                     Console.WriteLine(temp[i]);
+                                break;
+                            case ViewList.viewDistance:
+                                Console.WriteLine("Enter longtutude and lattitude");
+                                double lon = Convert.ToDouble(Console.ReadLine());
+                                double lat = Convert.ToDouble(Console.ReadLine());
+                                Console.WriteLine("Enter 0 to distance between a station and its id or between a customer and his/her id");
+                                int choice = int.Parse(Console.ReadLine());
+                                int id = int.Parse(Console.ReadLine());
+                                Console.WriteLine("The distance is: " + dal.distance(lon, lat, choice, id));
                                 break;
                             default:
                                 break;
@@ -287,7 +299,8 @@ Enter a number:
 3- To print all customers,
 4- To print all parcels,
 5- To print all not- connected parcels,
-6- To print all avaliable base stations.
+6- To print all avaliable base stations,
+7- To calculate a distance.
 2
 Drone- Id: 7401, Model: , Max Weight: Medium, Status: Delivery, Battery: 100
 Drone- Id: 5353, Model: , Max Weight: Heavy, Status: Avaliable, Battery: 100
@@ -343,7 +356,8 @@ Enter a number:
 3- To print all customers,
 4- To print all parcels,
 5- To print all not- connected parcels,
-6- To print all avaliable base stations.
+6- To print all avaliable base stations,
+7- To calculate a distance.
 1
 Base station- Id: 4643, Name: ,Longitude: 29°18'0''E,Lattitude: 33°47'59.999''E Charge slots: 7.
 Base station- Id: 7528, Name: ,Longitude: 32°53'59.999''E,Lattitude: 33°42'0''E Charge slots: 6.
