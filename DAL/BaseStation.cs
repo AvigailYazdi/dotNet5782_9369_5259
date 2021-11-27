@@ -18,11 +18,11 @@ namespace IDAL
             public int Id { get; set; }
             public string Name { get; set; }
             public double Longitude { get; set; }
-            public double Lattitude { get; set; }
+            public double Latitude { get; set; }
             public int ChargeSlots { get; set; }
             public override string ToString()
             {
-                return $"Base station- Id: {Id}, Name: {Name},Longitude: {DalObject.DalObject.base60(Longitude)},Lattitude: {DalObject.DalObject.base60(Lattitude)} Charge slots: {ChargeSlots}.";
+                return this.ToStringProperty();
             }
         }
     }

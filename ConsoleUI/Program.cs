@@ -1,6 +1,7 @@
 ﻿// Avigail Yazdi 213259369, Shilat Shimon 212435259
 // We did both of the bonuses.
 using System;
+using System.Collections.Generic;
 using IDAL.DO;
 using DalObject;
 namespace ConsoleUI
@@ -23,7 +24,7 @@ namespace ConsoleUI
         /// <param name="args"></param>
         static void Main(string[] args)
         {
-            DalObject.DalObject dal= new();
+            DalObject.DalObject dal= new DalObject.DalObject();
             Drone d = new Drone() ;
             Parcel p = new Parcel() ;
             BaseStation b= new BaseStation();
@@ -60,11 +61,11 @@ namespace ConsoleUI
                         switch (aov)
                         {
                             case AddOrView.BaseStation:
-                                Console.WriteLine("Enter id, name,Longitude, Lattitude and num of Charge slots:");
+                                Console.WriteLine("Enter id, name, Longitude, Lattitude and num of Charge slots:");
                                 b.Id = int.Parse(Console.ReadLine());
                                 b.Name = Console.ReadLine();
                                 b.Longitude = Convert.ToDouble(Console.ReadLine());
-                                b.Lattitude = Convert.ToDouble(Console.ReadLine());
+                                b.Latitude = Convert.ToDouble(Console.ReadLine());
                                 b.ChargeSlots = int.Parse(Console.ReadLine());
                                 dal.AddBaseStation(b);
                                 break;
@@ -73,8 +74,6 @@ namespace ConsoleUI
                                 d.Id = int.Parse(Console.ReadLine());
                                 d.Model = Console.ReadLine();
                                 d.MaxWeight = (WeightCategories)int.Parse(Console.ReadLine());
-                                d.Status = (DroneStatuses)int.Parse(Console.ReadLine());
-                                d.Battery = int.Parse(Console.ReadLine());
                                 dal.AddDrone(d);
                                 break;
                             case AddOrView.Customer:
@@ -83,7 +82,7 @@ namespace ConsoleUI
                                 c.Name = Console.ReadLine();
                                 c.Phone = Console.ReadLine();
                                 c.Longitude = Convert.ToDouble(Console.ReadLine());
-                                c.Lattitude = Convert.ToDouble(Console.ReadLine());
+                                c.Latitude = Convert.ToDouble(Console.ReadLine());
                                 dal.AddCustomer(c);
                                 break;
                             case AddOrView.Parcel:
@@ -156,22 +155,22 @@ namespace ConsoleUI
                         {
                             case AddOrView.BaseStation:
                                 Console.WriteLine("Enter id of a base station");
-                                b = dal.ViewBaseStation(int.Parse(Console.ReadLine()));
+                                b = dal.GetBaseStation(int.Parse(Console.ReadLine()));
                                 Console.WriteLine(b);
                                 break;
                             case AddOrView.Drone:
                                 Console.WriteLine("Enter id of a drone");
-                                d = dal.ViewDrone(int.Parse(Console.ReadLine()));
+                                d = dal.GetDrone(int.Parse(Console.ReadLine()));
                                 Console.WriteLine(d);
                                 break;
                             case AddOrView.Customer:
                                 Console.WriteLine("Enter id of a customer");
-                                c = dal.ViewCustomer(int.Parse(Console.ReadLine()));
+                                c = dal.GetCustomer(int.Parse(Console.ReadLine()));
                                 Console.WriteLine(c);
                                 break;
                             case AddOrView.Parcel:
                                 Console.WriteLine("Enter id of a parcel");
-                                p = dal.ViewParcel(int.Parse(Console.ReadLine()));
+                                p = dal.GetParcel(int.Parse(Console.ReadLine()));
                                 Console.WriteLine(p);
                                 break;
                             default:
@@ -193,34 +192,34 @@ namespace ConsoleUI
                         switch (vl)
                         {
                             case ViewList.BaseStation:
-                                BaseStation[] temp = dal.ListBaseStation();
-                                for (int i = 0; i < temp.Length; i++)
-                                    Console.WriteLine(temp[i]);
+                                List<BaseStation> temp = new List<BaseStation>(dal.ListBaseStation());
+                                foreach (BaseStation item in temp)
+                                    Console.WriteLine(item);
                                 break;
                             case ViewList.Drone:
-                                Drone[] temp1 = dal.ListDrone();
-                                for (int i = 0; i < temp1.Length; i++)
-                                    Console.WriteLine(temp1[i]);
+                                List<Drone> temp1 = new List<Drone>(dal.ListDrone()); 
+                                foreach (Drone item in temp1)
+                                    Console.WriteLine(item);
                                 break;
                             case ViewList.Customer:
-                                Customer[] temp2 = dal.ListCustomer();
-                                for (int i = 0; i < temp2.Length; i++)
-                                    Console.WriteLine(temp2[i]);
+                                List<Customer> temp2 = new List<Customer>(dal.ListCustomer());
+                                foreach (Customer item in temp2)
+                                    Console.WriteLine(item);
                                 break;
                             case ViewList.Parcel:
-                                Parcel[] temp3 = dal.ListParcel();
-                                for (int i = 0; i < temp3.Length; i++)
-                                    Console.WriteLine(temp3[i]);
+                                List<Parcel> temp3 = new List<Parcel>(dal.ListParcel());
+                                foreach (Parcel item in temp3)
+                                    Console.WriteLine(item);
                                 break;
                             case ViewList.NotConnected:
-                                temp3 = dal.ListNotConnected();
-                                for (int i = 0; i < temp3.Length; i++)
-                                    Console.WriteLine(temp3[i]);
+                                List<Parcel> temp4 =new List<Parcel>( dal.ListNotConnected());
+                                foreach (Parcel item in temp4)
+                                    Console.WriteLine(item);
                                 break;
                             case ViewList.AvaliableSlots:
-                                temp = dal.ListAvaliableSlots();
-                                for (int i = 0; i < temp.Length; i++)
-                                    Console.WriteLine(temp[i]);
+                                List<BaseStation> temp5 = new List<BaseStation>(dal.ListAvaliableSlots());
+                                foreach (BaseStation item in temp5)
+                                    Console.WriteLine(item);
                                 break;
                             case ViewList.viewDistance:
                                 Console.WriteLine("Enter longtutude and lattitude");

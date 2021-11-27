@@ -3,26 +3,21 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static IBL.BO.Enums;
 
-namespace IDAL
+namespace IBL
 {
-    namespace DO
+    namespace BO
     {
-        /// <summary>
-        /// A struct of the parcels.
-        /// fields: id, sender id, target id, weight, priority, requested time,
-        /// drone id, scheduled time, picked up time and delivered time.
-        /// functions: To string- a function that returns the string to print.
-        /// </summary>
-        public struct Parcel
+        public class Parcel
         {
             public int Id { get; set; }
-            public int SenderId { get; set; }
-            public int TargetId { get; set; }
+            public CustomerInP Sender { get; set; }
+            public CustomerInP Receiver { get; set; }
             public WeightCategories Weight { get; set; }
             public Priorities Priority { get; set; }
+            public DroneInP MyDrone { get; set; }
             public DateTime Requested { get; set; }
-            public int DroneId { get; set; }
             public DateTime Scheduled { get; set; }
             public DateTime PickedUp { get; set; }
             public DateTime Delivered { get; set; }
@@ -30,6 +25,7 @@ namespace IDAL
             {
                 return this.ToStringProperty();
             }
+
         }
     }
 }

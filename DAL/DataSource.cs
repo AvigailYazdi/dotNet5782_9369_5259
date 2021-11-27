@@ -14,20 +14,17 @@ namespace DalObject
         /// A class of counters to the different arrays.
         /// </summary>
         internal class config
-        {
-            internal static int counterDrone = 0; 
-            internal static int counterDroneCharge = 0;
-            internal static int counterStation = 0;
-            internal static int counterParcel = 0;
-            internal static int counterCustomer = 0;
-            internal static int parcelId = 0;
+        { 
+            internal static int parcelId = 1;
+
+
         }
         // Initialization of the arrarys
-        internal static DroneCharge[] droneCharge = new DroneCharge[10];
-        internal static Drone[] drones = new Drone[10];
-        internal static BaseStation[] stations = new BaseStation[5];
-        internal static Customer[] customers = new Customer[100];
-        internal static Parcel[] parcels = new Parcel[1000];
+        internal static List<DroneCharge> droneCharge;
+        internal static List<Drone> drones;
+        internal static List<BaseStation> stations;
+        internal static List<Customer> customers;
+        internal static List<Parcel> parcels;
         private static Random rand = new Random(DateTime.Now.Millisecond);
         /// <summary>
         /// A function that initialize the first five drones in the array
@@ -36,15 +33,13 @@ namespace DalObject
         {
             for (int i = 0; i < 5; i++)
             {
-                drones[i] = new Drone()
+                Drone d = new Drone()
                 {
                     Id = rand.Next(1000, 10000),
                     MaxWeight = (WeightCategories)rand.Next(3),
-                    Status = (DroneStatuses)rand.Next(3),
-                    Battery = 100,
                     Model = ""
                 };
-                config.counterDrone++;
+                drones.Add(d);
             }
         }
         /// <summary>
@@ -54,15 +49,15 @@ namespace DalObject
         {
             for (int i = 0; i < 2; i++)
             {
-                stations[i] = new BaseStation()
+                BaseStation s = new BaseStation()
                 {
                     Id = rand.Next(1000, 10000),
                     Name = "",
                     Longitude= (double)rand.Next(293, 336)/10,
-                    Lattitude= (double)rand.Next(337, 363) / 10,
+                    Latitude= (double)rand.Next(337, 363) / 10,
                     ChargeSlots= rand.Next(0, 11)
                 };
-                config.counterStation++;
+                stations.Add(s);
             }
         }
         /// <summary>
@@ -72,7 +67,7 @@ namespace DalObject
         {
             for (int i = 0; i < 10; i++)
             {
-                parcels[i] = new Parcel()
+                Parcel p = new Parcel()
                 {
                     Id = config.parcelId,
                     SenderId = rand.Next(100000000, 1000000000),
@@ -85,7 +80,7 @@ namespace DalObject
                     Delivered= DateTime.Now,
                     PickedUp = DateTime.Now,
                 };
-                config.counterParcel++;
+                parcels.Add(p);
                 config.parcelId++;
             }
         }
@@ -96,15 +91,15 @@ namespace DalObject
         {
             for (int i = 0; i < 10; i++)
             {
-                customers[i] = new Customer()
+                Customer c = new Customer()
                 {
                     Id = rand.Next(100000000, 1000000000),
                     Name = "",
                     Phone = "",
                     Longitude = (double)rand.Next(293, 336) / 10,
-                    Lattitude = (double)rand.Next(337, 363) / 10,
+                    Latitude = (double)rand.Next(337, 363) / 10,
                 };
-                config.counterCustomer++;
+                customers.Add(c);
             }
         }
         /// <summary>
