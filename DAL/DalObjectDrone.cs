@@ -21,11 +21,11 @@ namespace DalObject
         /// <summary>
         /// A function that checks if a drone appears in the list
         /// </summary>
-        /// <param name="Id">The id of the drone</param>
-        private void checkD(int Id)
+        /// <param name="id">The id of the drone</param>
+        private void checkD(int id)
         {
-            if (!drones.Any(dn => dn.Id == Id))
-                throw new MissingIdException(Id, "Drone");
+            if (!drones.Any(dn => dn.Id == id))
+                throw new MissingIdException(id, "Drone");
         }
         /// <summary>
         ///  A function that adds a drone to the array
@@ -40,15 +40,15 @@ namespace DalObject
         /// <summary>
         /// A function that updates a drone into a charge slot of a station
         /// </summary>
-        /// <param name="DroneId"> the id of the drone</param>
-        /// <param name="BaseStationId"> the id of the base station</param>
-        public void UpdateChargeDrone(int DroneId, int BaseStationId)
+        /// <param name="droneId"> the id of the drone</param>
+        /// <param name="baseStationId"> the id of the base station</param>
+        public void UpdateChargeDrone(int droneId, int baseStationId)
         {
-            checkD(DroneId);
-            checkS(BaseStationId);
+            checkD(droneId);
+            checkS(baseStationId);
             for (int i = 0; i < stations.Count; i++)
             {
-                if (stations[i].Id == BaseStationId)
+                if (stations[i].Id == baseStationId)
                 {
                     BaseStation b = stations[i];
                     b.ChargeSlots--;
@@ -57,22 +57,22 @@ namespace DalObject
                 }
             }
             DroneCharge dc = new DroneCharge();
-            dc.DroneId = DroneId;
-            dc.StationId = BaseStationId;
-            droneCharge.Add(dc);
+            dc.DroneId = droneId;
+            dc.StationId = baseStationId;
+            dronesCharge.Add(dc);
         }
         /// <summary>
         /// A function that discharge a drone from a charge slot of a station
         /// </summary>
-        /// <param name="DroneId"> the id of the drone to discharge</param>
-        public void UpdateDischargeDrone(int DroneId)
+        /// <param name="droneId"> the id of the drone to discharge</param>
+        public void UpdateDischargeDrone(int droneId)
         {
-            checkD(DroneId);
-            for (int i = 0; i < droneCharge.Count; i++)
+            checkD(droneId);
+            for (int i = 0; i < dronesCharge.Count; i++)
             {
-                if (droneCharge[i].DroneId == DroneId)
+                if (dronesCharge[i].DroneId == droneId)
                 {
-                    DroneCharge d = droneCharge[i];
+                    DroneCharge d = dronesCharge[i];
                     for (int j = 0; j < stations.Count; j++)
                     {
                         if (d.StationId == stations[j].Id)
@@ -86,16 +86,17 @@ namespace DalObject
                     break;
                 }
             }
+            DeleteDroneCharge(droneId);
         }
         /// <summary>
         /// A function that shows the requested drone
         /// </summary>
-        /// <param name="Id"> the id of the requested drone</param>
+        /// <param name="id"> the id of the requested drone</param>
         /// <returns> returns the requested drone</returns>
-        public Drone GetDrone(int Id)
+        public Drone GetDrone(int id)
         {
-            checkD(Id);
-            return drones.Find(d => d.Id == Id);
+            checkD(id);
+            return drones.Find(d => d.Id == id);
         }
         /// <summary>
         /// A function that showes the list of the drones
@@ -109,12 +110,17 @@ namespace DalObject
         /// <summary>
         /// A function that deletes a drone from the list
         /// </summary>
-        /// <param name="d"> The drone to delete </param>
+        /// <param name="id"> The id of the drone to delete </param>
         public void DeleteDrone(int id)
         {
             checkD(id);
             drones.Remove(GetDrone(id));
         }
+        /// <summary>
+        /// A function that returns the drones that stand in a condition
+        /// </summary>
+        /// <param name="predicate">The condition</param>
+        /// <returns>The drones that stand in the condition</returns>
         public IEnumerable<Drone> GetDronesByPerdicate(Predicate<Drone> predicate)
         {
             return from item in drones

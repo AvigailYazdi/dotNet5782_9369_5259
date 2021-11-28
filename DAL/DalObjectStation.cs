@@ -20,11 +20,11 @@ namespace DalObject
             if (!stations.Any(b => b.Id == id))
                 throw new MissingIdException(id, "Base Station");
         }
-        private void checkDc(int id)
-        {
-            if (!dronesCharge.Any(b => b.DroneId == id))
-                throw new MissingIdException(id, "Drone Charge");
-        }
+        /// <summary>
+        /// A function that returns the number of not avaliable slots in a certain station
+        /// </summary>
+        /// <param name="id">the id of the station</param>
+        /// <returns>the number of not avaliable slots</returns>
         public int NumOfNotAvaliableSlots(int id)
         {
             checkS(id);
@@ -49,12 +49,12 @@ namespace DalObject
         /// <summary>
         /// A function that shows the requested station
         /// </summary>
-        /// <param name="Id"> the id of the requested station</param>
+        /// <param name="id"> the id of the requested station</param>
         /// <returns> returns the requested station</returns>
-        public BaseStation GetBaseStation(int Id)
+        public BaseStation GetBaseStation(int id)
         {
-            checkS(Id);
-            return stations.Find(s => s.Id == Id);
+            checkS(id);
+            return stations.Find(s => s.Id == id);
         }
         /// <summary>
         /// A function that shows the list of the stations
@@ -76,28 +76,22 @@ namespace DalObject
         /// <summary>
         /// A function that deletes a station from the list
         /// </summary>
-        /// <param name="s"> The station to delete</param>
+        /// <param name="id"> The station id to delete</param>
         public void DeleteStation(int id)
         {
             checkS(id);
             stations.Remove(GetBaseStation(id));
         }
+        /// <summary>
+        /// A function that returns the stations that stand in a condition 
+        /// </summary>
+        /// <param name="predicate">The condition to check</param>
+        /// <returns>A collection of the stations that stand in the condition</returns>
         public IEnumerable<BaseStation> GetStationsByPerdicate(Predicate<BaseStation> predicate)
         {
             return from item in stations
                    where predicate(item)
                    select item;
-        }
-        public IEnumerable<DroneCharge> GetDronesInChargeByPerdicate(Predicate<DroneCharge> predicate)
-        {
-            return from item in droneCharge
-                   where predicate(item)
-                   select item;
-        }
-        public DroneCharge GetDronesCharge(int id)
-        {
-            checkDc(id);
-            return droneCharge.Find(s => s.DroneId == id);
         }
     }
 }
