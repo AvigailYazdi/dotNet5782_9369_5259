@@ -14,7 +14,7 @@ namespace IBL
         /// A function that adds a drone to the data base
         /// </summary>
         /// <param name="drone"> The drone to add</param>
-        public void AddDrone(BO.Drone drone)
+        public void AddDrone(BO.Drone drone, int stationId)
         {
             IDAL.DO.Drone d= new IDAL.DO.Drone();
             d.Id = drone.Id;
@@ -28,15 +28,22 @@ namespace IBL
             {
                 throw new BO.DuplicateIdException(ex.Id, ex.EntityName);
             }
+            BO.BaseStation b = GetStation(num);
             BO.DroneToL droneToList = new BO.DroneToL();
             droneToList.Id= drone.Id;
             droneToList.Model= drone.Model;
             droneToList.Weight= drone.Weight;
-            droneToList.Battery = rand.NextDouble()+rand.Next(20,39);
+            droneToList.Battery = rand.NextDouble()+rand.Next(20,40);
             droneToList.Status = BO.DroneStatus.Maintenance;
-            droneToList.CurrentPlace = new BO.Location() { Longitude= drone.CurrentPlace.Longitude, Latitude= drone.CurrentPlace.Latitude};
-            DList.Add(droneToList);
+            droneToList.CurrentPlace = new BO.Location() { Longitude= b.Place.Longitude, Latitude= b.Place.Latitude };
+            dl.UpdateChargeDrone(drone.Id, stationId);
+            dList.Add(droneToList);
         }
+        /// <summary>
+        /// A function that sets the name of a drone
+        /// </summary>
+        /// <param name="id">the drone id to change</param>
+        /// <param name="name">the name to change to</param>
         public void UpdateDroneName(int id, string name)
         {
             IDAL.DO.Drone d = new IDAL.DO.Drone();
@@ -52,28 +59,78 @@ namespace IBL
             {
                 throw new BO.DuplicateIdException(ex.Id, ex.EntityName);
             }
-            BO.DroneToL droneToList = DList.Find(dr => dr.Id == id);
-            DList.Remove(droneToList);
+            BO.DroneToL droneToList = dList.Find(dr => dr.Id == id);
+            dList.Remove(droneToList);
             droneToList.Model = name;
-            DList.Add(droneToList);
+            dList.Add(droneToList);
         }
+        /// <summary>
+        /// A function that put a drone in charge
+        /// </summary>
+        /// <param name="id">the id of the drone to charge</param>
         public void UpdateDroneToCharge(int id)
         {
-            IDAL.DO.Drone d = new IDAL.DO.Drone();
+            BO.Drone d = new BO.Drone();
             try
             {
-                d = dl.GetDrone(id);
-                if()
+                d = GetDrone(id);
+                if (d.Status == BO.DroneStatus.Avaliable)
+                {
+                    IDAL.DO.BaseStation b = shortDis(d.CurrentPlace.Longitude, d.CurrentPlace.Latitude);
+                    if (GetMinBattery() > d.Battery)
+                        throw new BO.NotEnoughBatteryException(id);
+                    dl.UpdateChargeDrone(id, b.Id);
+                    BO.DroneToL droneToList = new BO.DroneToL();
+                    droneToList = GetDroneToL(id);
+                    dList.Remove(droneToList);
+                    droneToList.Status = BO.DroneStatus.Maintenance;
+                    droneToList.Battery -= GetMinBattery();
+                    droneToList.CurrentPlace = new BO.Location() { Longitude = b.Longitude, Latitude = b.Latitude };
+                    dList.Add(droneToList);
+                }
+                else
+                    throw new BO.NotAvaliableDroneException(id);
             }
             catch (IDAL.DO.MissingIdException ex)
             {
                 throw new BO.MissingIdException(ex.Id, ex.EntityName);
             }
         }
+        /// <summary>
+        /// A function that discharges a drone
+        /// </summary>
+        /// <param name="id">the id of a drone to discharge</param>
+        /// <param name="time">the time that the drone was in charging</param>
         public void UpdateDisChargeDrone(int id, double time)
         {
+            BO.Drone d = new BO.Drone();
+            try
+            {
+                d = GetDrone(id);
+                if (d.Status == BO.DroneStatus.Maintenance)
+                {
+                    dl.UpdateDischargeDrone(id);
+                    BO.DroneToL droneToList = new BO.DroneToL();
+                    droneToList = GetDroneToL(id);
+                    dList.Remove(droneToList);
+                    droneToList.Status = BO.DroneStatus.Avaliable;
+                    droneToList.Battery += ;//////////////////
+                    dList.Add(droneToList);
+                }
+                else
+                    throw new BO.NotMaintenanceDroneException(id);
+            }
+            catch (IDAL.DO.MissingIdException ex)
+            {
+                throw new BO.MissingIdException(ex.Id, ex.EntityName);
+            }
 
         }
+        /// <summary>
+        /// A function that returns the drone
+        /// </summary>
+        /// <param name="id">The id of a drone to get</param>
+        /// <returns>The drone</returns>
         public BO.Drone GetDrone(int id)
         {
             BO.Drone drone = new BO.Drone();
@@ -90,9 +147,9 @@ namespace IBL
                 {
                     drone.MyParcel = new BO.ParcelInTran();
                     drone.MyParcel.Id = GetDroneToL(id).ParcelId;
-                    if (GetParcelStatus(id) == BO.ParcelStatus.Connected)
+                    if (getParcelStatus(id) == BO.ParcelStatus.Connected)
                         drone.MyParcel.ParcelStatus = BO.ParcelInTranStatus.WaitToCollect;
-                    if (GetParcelStatus(id) == BO.ParcelStatus.PickedUp)
+                    if (getParcelStatus(id) == BO.ParcelStatus.PickedUp)
                         drone.MyParcel.ParcelStatus = BO.ParcelInTranStatus.OnWay;
                     BO.Parcel p = GetParcel(GetDroneToL(id).ParcelId);
                     drone.MyParcel.Weight = p.Weight;
@@ -112,6 +169,10 @@ namespace IBL
             }
             return drone;
         }
+        /// <summary>
+        /// A function that returns the drones
+        /// </summary>
+        /// <returns>List of drones</returns>
         public IEnumerable<BO.Drone> DroneList()
         {
             return from item in dl.ListDrone()

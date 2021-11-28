@@ -50,5 +50,10 @@ namespace DalObject
             }
             return dis;
         }
+        public double [] ElectricUse()
+        {
+            double[] arr = new double[] { config.avaliable, config.light, config.medium, config.heavy, config.batteryCharge };
+            return arr;
+        }
     }
 }

@@ -118,11 +118,11 @@ namespace DalObject
         /// <summary>
         /// A function that deletes a parcel from the list
         /// </summary>
-        /// <param name=""> the parcel to delete</param>
-        public void DeleteParcel(Parcel p)
+        /// <param name="id"> the id of a parcel to delete</param>
+        public void DeleteParcel(int id)
         {
-            checkP(p.Id);
-            parcels.Remove(p);
+            checkP(id);
+            parcels.Remove(GetParcel(id));
         }
         /// <summary>
         /// A function that returns the parcels that stand in a condition

@@ -83,6 +83,94 @@ namespace IBL
                 return base.ToString() + $" ,The {EntityName} id: {Id} is already exist";
             }
         }
+        [Serializable]
+        public class NotEnoughBatteryException : Exception
+        {
+            public int Id { get; set; }
+            public NotEnoughBatteryException() : base() { }
+            public NotEnoughBatteryException(int id) : base()
+            {
+                Id = id;
+            }
+            public NotEnoughBatteryException(int id, string message) : base(message)
+            {
+                Id = id;
+            }
+            public NotEnoughBatteryException(int id, string message, Exception inner) : base(message, inner)
+            {
+                Id = id;
+            }
+            public override string ToString()
+            {
+                return base.ToString() + $" ,The battery of id: {Id} drone is not enough";
+            }
+        }
+        [Serializable]
+        public class NotAvaliableDroneException : Exception
+        {
+            public int Id { get; set; }
+            public NotAvaliableDroneException() : base() { }
+            public NotAvaliableDroneException(int id) : base()
+            {
+                Id = id;
+            }
+            public NotAvaliableDroneException(int id, string message) : base(message)
+            {
+                Id = id;
+            }
+            public NotAvaliableDroneException(int id, string message, Exception inner) : base(message, inner)
+            {
+                Id = id;
+            }
+            public override string ToString()
+            {
+                return base.ToString() + $" ,The drone: {Id} is not avaliable";
+            }
+        }
+        [Serializable]
+        public class NotMaintenanceDroneException : Exception
+        {
+            public int Id { get; set; }
+            public NotMaintenanceDroneException() : base() { }
+            public NotMaintenanceDroneException(int id) : base()
+            {
+                Id = id;
+            }
+            public NotMaintenanceDroneException(int id, string message) : base(message)
+            {
+                Id = id;
+            }
+            public NotMaintenanceDroneException(int id, string message, Exception inner) : base(message, inner)
+            {
+                Id = id;
+            }
+            public override string ToString()
+            {
+                return base.ToString() + $" ,The drone: {Id} is not maintenance";
+            }
+        }
+        [Serializable]
+        public class NotInDeliveryException : Exception
+        {
+            public int Id { get; set; }
+            public NotInDeliveryException() : base() { }
+            public NotInDeliveryException(int id) : base()
+            {
+                Id = id;
+            }
+            public NotInDeliveryException(int id, string message) : base(message)
+            {
+                Id = id;
+            }
+            public NotInDeliveryException(int id, string message, Exception inner) : base(message, inner)
+            {
+                Id = id;
+            }
+            public override string ToString()
+            {
+                return base.ToString() + $" ,The drone: {Id} is not in delivery";
+            }
+        }
     }
 }
 

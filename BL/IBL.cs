@@ -9,7 +9,7 @@ namespace IBL
     interface IBL
     {
         #region Drone
-        public void AddDrone(BO.Drone drone);
+        public void AddDrone(BO.Drone drone, int stationId);
         public void UpdateDroneName(int id, string name);
         public void UpdateDroneToCharge(int id);
         public void UpdateDisChargeDrone(int id, double time);

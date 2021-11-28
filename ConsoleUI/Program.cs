@@ -228,7 +228,7 @@ namespace ConsoleUI
                                 Console.WriteLine("Enter 0 to distance between a station and its id or between a customer and his/her id");
                                 int choice = int.Parse(Console.ReadLine());
                                 int id = int.Parse(Console.ReadLine());
-                                Console.WriteLine("The distance is: " + dal.distance(lon, lat, choice, id));
+                                Console.WriteLine("The distance is: " + dal.Distance(lon, lat, choice, id));
                                 break;
                             default:
                                 break;

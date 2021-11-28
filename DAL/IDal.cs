@@ -43,7 +43,7 @@ namespace IDAL
         public Parcel GetParcel(int id);
         public IEnumerable<Parcel> ListParcel();
         public IEnumerable<Parcel> ListNotConnected();
-        public void DeleteParcel(Parcel p);
+        public void DeleteParcel(int id);
         public IEnumerable<Parcel> GetParcelsByPerdicate(Predicate<Parcel> predicate);
 
         #endregion

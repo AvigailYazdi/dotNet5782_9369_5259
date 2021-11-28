@@ -10,7 +10,7 @@ namespace IBL
     {
         private DalObject.DalObject dl;
         private static Random rand;
-        private List<BO.DroneToL> DList;
+        private List<BO.DroneToL> dList;
         /// <summary>
         /// A constructor
         /// </summary>
@@ -18,7 +18,7 @@ namespace IBL
         {
             rand = new Random(DateTime.Now.Millisecond);
             dl = new DalObject.DalObject();
-            DList = (from item in dl.ListDrone()
+            dList = (from item in dl.ListDrone()
                      select new BO.DroneToL()
                      {
                          Id = item.Id,
@@ -30,7 +30,7 @@ namespace IBL
                          ParcelId = -1
                      }).ToList(); 
             DateTime t = new DateTime();
-            foreach (var item in DList)
+            foreach (var item in dList)
             {
                 BO.DroneToL drone = new BO.DroneToL() { Id = item.Id };
                 if (item.ParcelId > 0 && dl.GetParcel(item.ParcelId).Delivered == t)
@@ -38,7 +38,7 @@ namespace IBL
                     IDAL.DO.Parcel p = dl.GetParcel(item.ParcelId);
                     item.Status = BO.DroneStatus.Delivery;
                     if (p.PickedUp == t)
-                        item.CurrentPlace =;///////////
+                        item.CurrentPlace = new BO.Location() { Longitude =};///////////////////
                     else
                         item.CurrentPlace = new BO.Location() { Longitude = GetCustomer(p.SenderId).Place.Longitude, Latitude = GetCustomer(p.SenderId).Place.Latitude };
                     item.Battery = rand.NextDouble()+rand.Next(GetMinBattery(),100);//////
@@ -62,19 +62,19 @@ namespace IBL
                     item.CurrentPlace = new BO.Location() { Longitude = dl.GetCustomer(pc.TargetId).Longitude, Latitude= dl.GetCustomer(pc.TargetId).Latitude };
                     item.Battery = rand.NextDouble() + rand.Next(GetMinBattery(), 100);//////
                 }
-                DList.Remove(drone);
-                DList.Add(item);
+                dList.Remove(drone);
+                dList.Add(item);
             }
 
         }
-        private IDAL.DO.BaseStation ShortDis(double longitude, double latitude)
+        private IDAL.DO.BaseStation shortDis(double longitude, double latitude)
         {
             double min = 1000000000000;
             double dis;
             int id=0;
-            foreach (var item in dl.ListBaseStation())
+            foreach (var item in dl.ListAvaliableSlots())
             {
-                dis = dl.distance(longitude,latitude,0, item.Id);
+                dis = dl.Distance(longitude,latitude,0, item.Id);
                 if (dis < min)
                 {
                     min = dis;

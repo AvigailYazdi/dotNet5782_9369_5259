@@ -63,11 +63,11 @@ namespace ConsoleUI_BL
                                 d.Model = Console.ReadLine();
                                 d.Weight = (WeightCategories)int.Parse(Console.ReadLine());
                                 int num = int.Parse(Console.ReadLine());
-                                b = bl.GetStation(num);
-                                d.CurrentPlace = new Location();
-                                d.CurrentPlace.Longitude = b.Place.Longitude;
-                                d.CurrentPlace.Latitude = b.Place.Latitude;
-                                bl.AddDrone(d);
+                                //b = bl.GetStation(num);
+                                //d.CurrentPlace = new Location();
+                                //d.CurrentPlace.Longitude = b.Place.Longitude;
+                                //d.CurrentPlace.Latitude = b.Place.Latitude;
+                                bl.AddDrone(d, num);
                                 break;
                             case AddOrView.Customer:
                                 Console.WriteLine("Enter id, name, phone number, and location of a customer");

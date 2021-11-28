@@ -15,81 +15,20 @@ namespace IBL
         /// <summary>
         /// A function that returns the customer name
         /// </summary>
-        /// <param name="Id"> The id of the customer</param>
+        /// <param name="id"> The id of the customer</param>
         /// <returns> Returns the name of the customer </returns>
-        private string GetCustomerName(int Id)
+        private string getCustomerName(int id)
         {
             IDAL.DO.Customer c =new IDAL.DO.Customer();
             try
             {
-                c = dl.GetCustomer(Id);
+                c = dl.GetCustomer(id);
             }
             catch (IDAL.DO.MissingIdException ex)
             {
                 throw new  BO.MissingIdException(ex.Id, ex.EntityName);
             }
             return c.Name;
-        }
-        /// <summary>
-        /// A function that returns the status of the parcel
-        /// </summary>
-        /// <param name="p"> The parcel</param>
-        /// <returns> Returns the status</returns>
-        private BO.ParcelStatus GetParcelStatus(int Id)
-        {
-            DateTime t = new DateTime();
-            IDAL.DO.Parcel p = dl.GetParcel(Id);
-            if (p.Delivered != t) // The parcel delivered
-                return BO.ParcelStatus.Provided;
-            if (p.PickedUp != t) // The parcel Picked up
-                return BO.ParcelStatus.PickedUp;
-            if (p.Scheduled != t) // The parcel connected
-                return BO.ParcelStatus.Connected;
-            return BO.ParcelStatus.Created; // The parcel created
-        }
-        /// <summary>
-        /// A function that returns all the parcel the customer has sent
-        /// </summary>
-        /// <param name="id"> The id of the customer</param>
-        /// <returns> The list of the parcels</returns>
-        private IEnumerable<BO.ParcelAtC> GetSendParcel(int id)
-        {
-            return from item in dl.GetParcelsByPerdicate(item => item.SenderId == id)
-                   let p = dl.GetParcel(item.SenderId)
-                   select new BO.ParcelAtC()
-                   {
-                       Id = p.Id,
-                       Weight = (BO.WeightCategories)p.Weight,
-                       Priority = (BO.Priorities)p.Priority,
-                       Status = GetParcelStatus(p.Id),
-                       OtherC = new BO.CustomerInP()
-                       {
-                           Id = p.Id,
-                           Name = GetCustomerName(p.SenderId)
-                       }                
-                   };                         
-        }
-        /// <summary>
-        /// A function that returns all the parcels the customer has recieved
-        /// </summary>
-        /// <param name="id"> The id of the customer</param>
-        /// <returns> The list of the parcels </returns>
-        private IEnumerable<BO.ParcelAtC> GetRecievedParcel(int id)
-        {
-            return from item in dl.GetParcelsByPerdicate(item => item.TargetId == id)
-                   let p = dl.GetParcel(item.TargetId)
-                   select new BO.ParcelAtC()
-                   {
-                       Id = p.Id,
-                       Weight = (BO.WeightCategories)p.Weight,
-                       Priority = (BO.Priorities)p.Priority,
-                       Status = GetParcelStatus(p),
-                       OtherC = new BO.CustomerInP()
-                       {
-                           Id = p.Id,
-                           Name = GetCustomerName(p.TargetId)
-                       }
-                   };
         }
         /// <summary>
         /// A function that adds a customer to the data base
@@ -152,8 +91,8 @@ namespace IBL
                 c.PhoneNum = customer.Phone;
                 c.Place.Longitude = customer.Longitude;
                 c.Place.Latitude = customer.Latitude;
-                c.SendParcel = GetSendParcel(id);
-                c.GetParcel = GetRecievedParcel(id);
+                c.SendParcel = getSendParcel(id);
+                c.GetParcel = getRecievedParcel(id);
             }
             catch (IDAL.DO.MissingIdException ex)
             {
