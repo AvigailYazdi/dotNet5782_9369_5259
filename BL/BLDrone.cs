@@ -34,7 +34,7 @@ namespace IBL
             droneToList.Weight= drone.Weight;
             droneToList.Battery = rand.NextDouble()+rand.Next(20,39);
             droneToList.Status = BO.DroneStatus.Maintenance;
-            droneToList.CurrentPlace = drone.CurrentPlace;
+            droneToList.CurrentPlace = new BO.Location() { Longitude= drone.CurrentPlace.Longitude, Latitude= drone.CurrentPlace.Latitude};
             DList.Add(droneToList);
         }
         public void UpdateDroneName(int id, string name)
@@ -67,7 +67,7 @@ namespace IBL
             }
             catch (IDAL.DO.MissingIdException ex)
             {
-                throw new BO.DuplicateIdException(ex.Id, ex.EntityName);
+                throw new BO.MissingIdException(ex.Id, ex.EntityName);
             }
         }
         public void UpdateDisChargeDrone(int id, double time)
@@ -86,17 +86,36 @@ namespace IBL
                 drone.Weight = (BO.WeightCategories)d.MaxWeight;
                 drone.Battery = GetDroneToL(id).Battery;
                 drone.Status = GetDroneToL(id).Status;
-                drone.MyParcel = new BO.ParcelInTran();
-                drone.MyParcel.Id = GetDroneToL(id).ParcelId;
-                drone.MyParcel.ParcelStatus = GetParcelStatus(id);
+                if (drone.Status == BO.DroneStatus.Delivery)
+                {
+                    drone.MyParcel = new BO.ParcelInTran();
+                    drone.MyParcel.Id = GetDroneToL(id).ParcelId;
+                    if (GetParcelStatus(id) == BO.ParcelStatus.Connected)
+                        drone.MyParcel.ParcelStatus = BO.ParcelInTranStatus.WaitToCollect;
+                    if (GetParcelStatus(id) == BO.ParcelStatus.PickedUp)
+                        drone.MyParcel.ParcelStatus = BO.ParcelInTranStatus.OnWay;
+                    BO.Parcel p = GetParcel(GetDroneToL(id).ParcelId);
+                    drone.MyParcel.Weight = p.Weight;
+                    drone.MyParcel.Priority = p.Priority;
+                    drone.MyParcel.Sender = new BO.CustomerInP() { Id = p.Sender.Id, Name = p.Sender.Name };
+                    drone.MyParcel.Receiver = new BO.CustomerInP() { Id = p.Receiver.Id, Name = p.Receiver.Name };
+                    drone.MyParcel.Collection = new BO.Location() { Longitude = GetCustomer(p.Sender.Id).Place.Longitude, Latitude = GetCustomer(p.Sender.Id).Place.Latitude };
+                    drone.MyParcel.Destination = new BO.Location() { Longitude = GetCustomer(p.Receiver.Id).Place.Longitude, Latitude = GetCustomer(p.Receiver.Id).Place.Latitude };
+                    drone.MyParcel.Distance =;///////////////////
+                }
                 drone.CurrentPlace = new BO.Location();
-                drone.CurrentPlace=GetDroneToL(id).CurrentPlace;
-                
+                drone.CurrentPlace = GetDroneToL(id).CurrentPlace;
             }
+            catch (IDAL.DO.MissingIdException ex)
+            {
+                throw new BO.MissingIdException(ex.Id, ex.EntityName);
+            }
+            return drone;
         }
         public IEnumerable<BO.Drone> DroneList()
         {
-
+            return from item in dl.ListDrone()
+                   select GetDrone(item.Id);
         }
     }
 }

@@ -11,7 +11,7 @@ namespace IBL
         public class ParcelInTran
         {
             public int Id { get; set; }
-            public bool ParcelStatus { get; set; }
+            public ParcelInTranStatus ParcelStatus { get; set; }
             public WeightCategories Weight { get; set; }
             public Priorities Priority { get; set; }
             public CustomerInP Sender { get; set; }

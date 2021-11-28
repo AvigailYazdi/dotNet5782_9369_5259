@@ -11,26 +11,7 @@ namespace IBL
     public partial class BL : IBL
     {
         private object customer;
-        private static Random rand; 
-        private DalObject.DalObject dl;
-        private List<BO.DroneToL> DList;
-        /// <summary>
-        /// A constructor
-        /// </summary>
-        public BL()
-        {
-            rand = new Random(DateTime.Now.Millisecond);
-            dl = new DalObject.DalObject();
-            DateTime t = new DateTime();
-            IEnumerable<IDAL.DO.Drone> d= dl.ListDrone();
-            BO.DroneToL drone = new BO.DroneToL();
-            foreach (IDAL.DO.Drone item1 in d)
-            {
-                from item2 in dl.GetParcelsByPerdicate(item2 => item2.DroneId == item1.Id && item2.Delivered == t)
-                
-            }
 
-        }
         /// <summary>
         /// A function that returns the customer name
         /// </summary>
@@ -54,9 +35,10 @@ namespace IBL
         /// </summary>
         /// <param name="p"> The parcel</param>
         /// <returns> Returns the status</returns>
-        private BO.ParcelStatus GetParcelStatus(IDAL.DO.Parcel p)
+        private BO.ParcelStatus GetParcelStatus(int Id)
         {
             DateTime t = new DateTime();
+            IDAL.DO.Parcel p = dl.GetParcel(Id);
             if (p.Delivered != t) // The parcel delivered
                 return BO.ParcelStatus.Provided;
             if (p.PickedUp != t) // The parcel Picked up
@@ -79,7 +61,7 @@ namespace IBL
                        Id = p.Id,
                        Weight = (BO.WeightCategories)p.Weight,
                        Priority = (BO.Priorities)p.Priority,
-                       Status = GetParcelStatus(p),
+                       Status = GetParcelStatus(p.Id),
                        OtherC = new BO.CustomerInP()
                        {
                            Id = p.Id,

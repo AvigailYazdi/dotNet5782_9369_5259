@@ -48,45 +48,46 @@ namespace IBL
         public BO.Parcel GetParcel(int id)
         {
             IDAL.DO.Parcel p= new IDAL.DO.Parcel();
+            BO.Parcel parcel = new BO.Parcel();
             try
             {
                 p = dl.GetParcel(id);
-                BO.Parcel parcel = new BO.Parcel()
+                parcel.Id = p.Id;
+                parcel.Sender = new BO.CustomerInP()
                 {
-                    Id = p.Id,
-                    Sender = new BO.CustomerInP()
-                    {
-                        Id = p.SenderId,
-                        Name = GetCustomerName(p.SenderId)
-                    },
-                    Receiver = new BO.CustomerInP()
-                    {
-                        Id = p.TargetId,
-                        Name = GetCustomerName(p.TargetId)
-                    },
-                    Weight = (BO.WeightCategories)p.Weight,
-                    Priority = (BO.Priorities)p.Priority,
-                    MyDrone = new BO.DroneInP()
+                    Id = p.SenderId,
+                    Name = GetCustomerName(p.SenderId)
+                };
+                parcel.Receiver = new BO.CustomerInP()
+                {
+                    Id = p.TargetId,
+                    Name = GetCustomerName(p.TargetId)
+                };
+                parcel.Weight = (BO.WeightCategories)p.Weight;
+                parcel.Priority = (BO.Priorities)p.Priority;
+                if (GetParcelStatus(p.Id) != BO.ParcelStatus.Created)
+                {
+                    parcel.MyDrone = new BO.DroneInP()
                     {
                         Id = p.DroneId,
-                        ////////Battery=p.///////////////////////////////////////
+                        Battery = GetDroneToL(p.DroneId).Battery,
                         CurrentPlace = new BO.Location()
                         {
-                            ///// Longitude = 
-                            /////// Latitude = 
-                        },
-                    },
-                    Requested = p.Requested,
-                    Scheduled = p.Scheduled,
-                    PickedUp = p.PickedUp,
-                    Delivered = p.Delivered
-                };
-                return parcel;
+                            Longitude = GetDroneToL(p.DroneId).CurrentPlace.Longitude,
+                            Latitude = GetDroneToL(p.DroneId).CurrentPlace.Latitude
+                        }
+                    };
+                }
+                parcel.Requested = p.Requested;
+                parcel.Scheduled = p.Scheduled;
+                parcel.PickedUp = p.PickedUp;
+                parcel.Delivered = p.Delivered;
             }
             catch (IDAL.DO.MissingIdException ex)
             {
                 throw new BO.MissingIdException(ex.Id, ex.EntityName);
             }
+            return parcel;
         }
         public IEnumerable<BO.Parcel> ParcelList()
         {

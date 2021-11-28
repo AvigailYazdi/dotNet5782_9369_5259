@@ -183,19 +183,62 @@ namespace ConsoleUI_BL
                                 break;
                             case AddOrView.Customer:
                                 Console.WriteLine("Enter id of a customer");
-                                c = dal.GetCustomer(int.Parse(Console.ReadLine()));
+                                c = bl.GetCustomer(int.Parse(Console.ReadLine()));
                                 Console.WriteLine(c);
                                 break;
                             case AddOrView.Parcel:
                                 Console.WriteLine("Enter id of a parcel");
-                                p = dal.GetParcel(int.Parse(Console.ReadLine()));
+                                p = bl.GetParcel(int.Parse(Console.ReadLine()));
                                 Console.WriteLine(p);
                                 break;
                             default:
                                 break;
                         }
                         break;
-                }
+                    case MenuOptions.ViewList:
+                        Console.WriteLine(@"Enter a number:          
+1- To print all base stations,
+2- To print all drones,
+3- To print all customers,
+4- To print all parcels,
+5- To print all not- connected parcels,
+6- To print all avaliable base stations.");
+                        ViewList vl;
+                        check = int.TryParse(Console.ReadLine(), out option);
+                        vl = (ViewList)option;
+                        switch (vl)
+                        {
+                            case ViewList.BaseStation:
+                                List<BaseStation> temp = new List<BaseStation>(bl.StationList());
+                                foreach (BaseStation item in temp)
+                                    Console.WriteLine(item);
+                                break;
+                            case ViewList.Drone:
+                                List<Drone> temp1 = new List<Drone>(bl.DroneList());
+                                foreach (Drone item in temp1)
+                                    Console.WriteLine(item);
+                                break;
+                            case ViewList.Customer:
+                                List<Customer> temp2 = new List<Customer>(bl.CustomerList());
+                                foreach (Customer item in temp2)
+                                    Console.WriteLine(item);
+                                break;
+                            case ViewList.Parcel:
+                                List<Parcel> temp3 = new List<Parcel>(bl.ParcelList());
+                                foreach (Parcel item in temp3)
+                                    Console.WriteLine(item);
+                                break;
+                            case ViewList.NotConnected:
+                                List<Parcel> temp4 = new List<Parcel>(bl.NotConnectedParcelList());
+                                foreach (Parcel item in temp4)
+                                    Console.WriteLine(item);
+                                break;
+                            case ViewList.AvaliableSlots:
+                                List<BaseStation> temp5 = new List<BaseStation>(bl.AvaliableStationList());
+                                foreach (BaseStation item in temp5)
+                                    Console.WriteLine(item);
+                                break;
+                        }
             }
         }
     }
