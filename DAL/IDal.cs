@@ -26,6 +26,9 @@ namespace IDAL
         public IEnumerable<BaseStation> ListAvaliableSlots();
         public void DeleteStation(int id);
         public IEnumerable<BaseStation> GetStationsByPerdicate(Predicate<BaseStation> predicate);
+        public IEnumerable<DroneCharge> GetDronesInChargeByPerdicate(Predicate<DroneCharge> predicate);
+        public DroneCharge GetDronesCharge(int id);
+
         #endregion
         #region Customer
         public void AddCustomer(Customer c);

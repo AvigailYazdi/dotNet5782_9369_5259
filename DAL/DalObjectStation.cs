@@ -20,6 +20,11 @@ namespace DalObject
             if (!stations.Any(b => b.Id == Id))
                 throw new MissingIdException(Id, "Base Station");
         }
+        private void checkDc(int Id)
+        {
+            if (!droneCharge.Any(b => b.DroneId == Id))
+                throw new MissingIdException(Id, "Drone Charge");
+        }
         public int numOfNotAvaliableSlots(int id)
         {
             checkS(id);
@@ -82,6 +87,17 @@ namespace DalObject
             return from item in stations
                    where predicate(item)
                    select item;
+        }
+        public IEnumerable<DroneCharge> GetDronesInChargeByPerdicate(Predicate<DroneCharge> predicate)
+        {
+            return from item in droneCharge
+                   where predicate(item)
+                   select item;
+        }
+        public DroneCharge GetDronesCharge(int id)
+        {
+            checkDc(id);
+            return droneCharge.Find(s => s.DroneId == id);
         }
     }
 }

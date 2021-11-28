@@ -161,6 +161,40 @@ namespace ConsoleUI_BL
                                 break;
                         }
                         break;
+                    case MenuOptions.ViewOne:
+                        Console.WriteLine(@"Enter a number:          
+1- To print a base station,
+2- To print a drone,
+3- To print a customer,
+4- To print a parcel.");
+                        check = int.TryParse(Console.ReadLine(), out option);
+                        aov = (AddOrView)option;
+                        switch (aov)
+                        {
+                            case AddOrView.BaseStation:
+                                Console.WriteLine("Enter id of a base station");
+                                b = bl.GetStation(int.Parse(Console.ReadLine()));
+                                Console.WriteLine(b);
+                                break;
+                            case AddOrView.Drone:
+                                Console.WriteLine("Enter id of a drone");
+                                d = bl.GetDrone(int.Parse(Console.ReadLine()));
+                                Console.WriteLine(d);
+                                break;
+                            case AddOrView.Customer:
+                                Console.WriteLine("Enter id of a customer");
+                                c = dal.GetCustomer(int.Parse(Console.ReadLine()));
+                                Console.WriteLine(c);
+                                break;
+                            case AddOrView.Parcel:
+                                Console.WriteLine("Enter id of a parcel");
+                                p = dal.GetParcel(int.Parse(Console.ReadLine()));
+                                Console.WriteLine(p);
+                                break;
+                            default:
+                                break;
+                        }
+                        break;
                 }
             }
         }

@@ -76,7 +76,23 @@ namespace IBL
         }
         public BO.Drone GetDrone(int id)
         {
-
+            BO.Drone drone = new BO.Drone();
+            IDAL.DO.Drone d = new IDAL.DO.Drone();
+            try
+            {
+                d = dl.GetDrone(id);
+                drone.Id = d.Id;
+                drone.Model = d.Model;
+                drone.Weight = (BO.WeightCategories)d.MaxWeight;
+                drone.Battery = GetDroneToL(id).Battery;
+                drone.Status = GetDroneToL(id).Status;
+                drone.MyParcel = new BO.ParcelInTran();
+                drone.MyParcel.Id = GetDroneToL(id).ParcelId;
+                drone.MyParcel.ParcelStatus = GetParcelStatus(id);
+                drone.CurrentPlace = new BO.Location();
+                drone.CurrentPlace=GetDroneToL(id).CurrentPlace;
+                
+            }
         }
         public IEnumerable<BO.Drone> DroneList()
         {

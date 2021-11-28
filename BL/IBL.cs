@@ -38,5 +38,9 @@ namespace IBL
         public IEnumerable<BO.BaseStation> StationList();
         public IEnumerable<BO.BaseStation> AvaliableStationList();
         #endregion
+        #region DroneToL
+        public BO.DroneToL GetDroneToL(int id);
+
+        #endregion
     }
 }

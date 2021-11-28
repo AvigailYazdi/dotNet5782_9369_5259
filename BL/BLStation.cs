@@ -61,7 +61,13 @@ namespace IBL
                 station.Place.Longitude = b.Longitude;
                 station.Place.Latitude = b.Latitude;
                 station.AvaliableSlots = b.ChargeSlots;
-                //////station.DroneSlots = /////;
+                station.DroneSlots = from item in dl.GetDronesInChargeByPerdicate(item => item.StationId == id)
+                                     let dc = dl.GetDronesCharge(item.DroneId)
+                                     select new BO.DroneInCharge()
+                                     {
+                                         Id = dc.DroneId,
+                                         Battery = GetDroneToL(dc.DroneId).Battery
+                                     };
             }
             catch (IDAL.DO.MissingIdException ex)
             {
