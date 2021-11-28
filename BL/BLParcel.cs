@@ -122,7 +122,7 @@ namespace IBL
                 droneToList.Status = BO.DroneStatus.Delivery;
                 droneToList.ParcelId = pTemp.Id;
                 dList.Add(droneToList);
-                dl.DeleteParcel(pTemp);
+                dl.DeleteParcel(pTemp.Id);
                 pTemp.DroneId = droneToList.Id;
                 pTemp.Scheduled = DateTime.Now;;
                 dl.AddParcel(pTemp);
