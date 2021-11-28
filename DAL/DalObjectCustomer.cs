@@ -15,11 +15,11 @@ namespace DalObject
         /// <summary>
         /// A function that checks if a customer appears in the list 
         /// </summary>
-        /// <param name="Id"> The id of the customer</param>
-        private void checkC(int Id)
+        /// <param name="id"> The id of the customer</param>
+        private void checkC(int id)
         {
-            if (!customers.Any(cs => cs.Id == Id))
-                throw new MissingIdException(Id, "Customer");
+            if (!customers.Any(cs => cs.Id == id))
+                throw new MissingIdException(id, "Customer");
         }
         /// <summary>
         /// A function that adds a customer to the array
@@ -34,12 +34,12 @@ namespace DalObject
         /// <summary>
         /// A function that shows the requested customer
         /// </summary>
-        /// <param name="Id"> the id of the requested customer</param>
+        /// <param name="id"> the id of the requested customer</param>
         /// <returns> returns the requested customer</returns>
-        public Customer GetCustomer(int Id)
+        public Customer GetCustomer(int id)
         {
-            checkC(Id);
-            return customers.Find(c => c.Id == Id);
+            checkC(id);
+            return customers.Find(c => c.Id == id);
         }
         /// <summary>
         /// A function that showes the list of the customer
@@ -53,12 +53,17 @@ namespace DalObject
         /// <summary>
         /// A function that deletes a customer from the list
         /// </summary>
-        /// <param name="c"> the customer to delete</param>
-        public void DeleteCustomer(int Id)
+        /// <param name="id"> the id of the customer to delete</param>
+        public void DeleteCustomer(int id)
         {
-            checkC(Id);
-            customers.Remove(GetCustomer(Id));
+            checkC(id);
+            customers.Remove(GetCustomer(id));
         }
+        /// <summary>
+        /// A function that returns the customers that stand in a condition
+        /// </summary>
+        /// <param name="predicate"> The condition</param>
+        /// <returns>The customers that stand in a condition </returns>
         public IEnumerable<Customer> GetCustomersByPerdicate(Predicate<Customer> predicate)
         {
             return from item in customers

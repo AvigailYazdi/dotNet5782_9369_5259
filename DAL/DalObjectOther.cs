@@ -16,7 +16,7 @@ namespace DalObject
         /// </summary>
         /// <param name="num"> the number to change </param>
         /// <returns> returns the number number at base 60 </returns>
-        public string base60(double num)///////////////////////////////////////////////////
+        public string Base60(double num)///////////////////////////////////////////////////
         {
             string str = Math.Abs((int)num) + "°";
             num = (num - (int)num) * 60.0;
@@ -35,7 +35,7 @@ namespace DalObject
         /// <param name="choice">the choice between a customer or base station</param>
         /// <param name="id"> the id of base station or customer</param>
         /// <returns>the distance</returns>
-        public double distance(double lon, double lat, int choice, int id)
+        public double Distance(double lon, double lat, int choice, int id)
         {
             double dis = 0;
             if (choice == 0)// base station

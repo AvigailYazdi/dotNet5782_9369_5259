@@ -14,11 +14,11 @@ namespace DalObject
         /// <summary>
         /// A function that checks if a parcel appears in the list
         /// </summary>
-        /// <param name="Id">The id of the parcel</param>
-        private void checkP(int Id)
+        /// <param name="id">The id of the parcel</param>
+        private void checkP(int id)
         {
-            if (!parcels.Any(ps => ps.Id == Id))
-                throw new MissingIdException(Id, "Parcel");
+            if (!parcels.Any(ps => ps.Id == id))
+                throw new MissingIdException(id, "Parcel");
         }
         /// <summary>
         /// A function that adds a parcel to the array
@@ -34,18 +34,18 @@ namespace DalObject
         /// <summary>
         /// A function that connects between a parcel and a drone
         /// </summary>
-        /// <param name="DroneId"> the id of the requested drone</param>
-        /// <param name="ParcelId">the id of the requested parcel</param>
-        public void UpdateParcelToDrone(int DroneId, int ParcelId)
+        /// <param name="droneId"> the id of the requested drone</param>
+        /// <param name="parcelId">the id of the requested parcel</param>
+        public void UpdateParcelToDrone(int droneId, int parcelId)
         {
-            checkP(ParcelId);
-            checkD(DroneId);
+            checkP(parcelId);
+            checkD(droneId);
             for (int i = 0; i < parcels.Count; i++)
             {
-                if (parcels[i].Id == ParcelId)
+                if (parcels[i].Id == parcelId)
                 {
                     Parcel p = parcels[i];
-                    p.DroneId = DroneId;
+                    p.DroneId = droneId;
                     p.Scheduled = DateTime.Now;
                     parcels[i] = p;
                     break;
@@ -55,13 +55,13 @@ namespace DalObject
         /// <summary>
         /// A function that updates the time of picking up the parcel
         /// </summary>
-        /// <param name="ParcelId"> the id of parcel that picked up</param>
-        public void UpdateParcelCollect(int ParcelId)
+        /// <param name="parcelId"> the id of parcel that picked up</param>
+        public void UpdateParcelCollect(int parcelId)
         {
-            checkP(ParcelId);
+            checkP(parcelId);
             for (int i = 0; i < parcels.Count; i++)
             {
-                if (parcels[i].Id == ParcelId)
+                if (parcels[i].Id == parcelId)
                 {
                     Parcel p = parcels[i];
                     p.PickedUp = DateTime.Now;
@@ -73,13 +73,13 @@ namespace DalObject
         /// <summary>
         /// A function that updates the time of parcel delivery
         /// </summary>
-        /// <param name="ParcelId"> the id of the parcel </param>
-        public void UpdateParcelDelivery(int ParcelId)
+        /// <param name="parcelId"> the id of the parcel </param>
+        public void UpdateParcelDelivery(int parcelId)
         {
-            checkP(ParcelId);
+            checkP(parcelId);
             for (int i = 0; i < parcels.Count; i++)
             {
-                if (parcels[i].Id == ParcelId)
+                if (parcels[i].Id == parcelId)
                 {
                     Parcel p = parcels[i];
                     p.Delivered = DateTime.Now;
@@ -91,12 +91,12 @@ namespace DalObject
         /// <summary>
         /// A function that shows the requested parcel
         /// </summary>
-        /// <param name="Id"> the id of the requested parcel</param>
+        /// <param name="id"> the id of the requested parcel</param>
         /// <returns> returns the requested parcel</returns>
-        public Parcel GetParcel(int Id)
+        public Parcel GetParcel(int id)
         {
-            checkP(Id);
-            return parcels.Find(p => p.Id == Id);
+            checkP(id);
+            return parcels.Find(p => p.Id == id);
         }
         /// <summary>
         /// A function that showes the list of the parcels
@@ -118,12 +118,17 @@ namespace DalObject
         /// <summary>
         /// A function that deletes a parcel from the list
         /// </summary>
-        /// <param name="p"> the parcel to delete</param>
+        /// <param name=""> the parcel to delete</param>
         public void DeleteParcel(Parcel p)
         {
             checkP(p.Id);
             parcels.Remove(p);
         }
+        /// <summary>
+        /// A function that returns the parcels that stand in a condition
+        /// </summary>
+        /// <param name="predicate"> The condition</param>
+        /// <returns> The parcels that stand in a condition </returns>
         public IEnumerable<Parcel> GetParcelsByPerdicate(Predicate<Parcel> predicate)
         {
             return from item in parcels
