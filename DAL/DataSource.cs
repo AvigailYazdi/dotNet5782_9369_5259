@@ -16,11 +16,14 @@ namespace DalObject
         internal class config
         { 
             internal static int parcelId = 1;
-
-
+            internal static double avaliable;
+            internal static double light;
+            internal static double medium;
+            internal static double heavy;
+            internal static double batteryCharge;
         }
         // Initialization of the arrarys
-        internal static List<DroneCharge> droneCharge;
+        internal static List<DroneCharge> dronesCharge;
         internal static List<Drone> drones;
         internal static List<BaseStation> stations;
         internal static List<Customer> customers;
@@ -76,9 +79,9 @@ namespace DalObject
                     Priority = (Priorities)rand.Next(3),
                     Requested = DateTime.Now,
                     DroneId = 0,
-                    Scheduled= DateTime.Now,
-                    Delivered= DateTime.Now,
-                    PickedUp = DateTime.Now,
+                    Scheduled= new DateTime(),
+                    Delivered= new DateTime(),
+                    PickedUp = new DateTime(),
                 };
                 parcels.Add(p);
                 config.parcelId++;

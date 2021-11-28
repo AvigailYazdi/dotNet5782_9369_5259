@@ -14,22 +14,22 @@ namespace DalObject
         /// <summary>
         /// A function that checks if a station appears in the list
         /// </summary>
-        /// <param name="Id">The id of the station</param>
-        private void checkS(int Id)
+        /// <param name="id">The id of the station</param>
+        private void checkS(int id)
         {
-            if (!stations.Any(b => b.Id == Id))
-                throw new MissingIdException(Id, "Base Station");
+            if (!stations.Any(b => b.Id == id))
+                throw new MissingIdException(id, "Base Station");
         }
-        private void checkDc(int Id)
+        private void checkDc(int id)
         {
-            if (!droneCharge.Any(b => b.DroneId == Id))
-                throw new MissingIdException(Id, "Drone Charge");
+            if (!dronesCharge.Any(b => b.DroneId == id))
+                throw new MissingIdException(id, "Drone Charge");
         }
-        public int numOfNotAvaliableSlots(int id)
+        public int NumOfNotAvaliableSlots(int id)
         {
             checkS(id);
             int count = 0;
-            foreach (var item in droneCharge)
+            foreach (var item in dronesCharge)
             {
                 if (item.StationId == id)
                     count++;
