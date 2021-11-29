@@ -77,11 +77,11 @@ namespace IBL
                 {
                     IDAL.DO.BaseStation b = closeStation(droneToList.CurrentPlace.Longitude, droneToList.CurrentPlace.Latitude);
                     double distance = shortDis(droneToList.CurrentPlace.Longitude, droneToList.CurrentPlace.Latitude, b);
-                    if (getMinBattery(distance,id) > droneToList.Battery)
+                    if (getBattery(distance,id) > droneToList.Battery)
                         throw new BO.NotEnoughBatteryException(id);
                     dl.UpdateChargeDrone(id, b.Id);//dal
                     droneToList.Status = BO.DroneStatus.Maintenance;
-                    droneToList.Battery -= getMinBattery(distance,id);
+                    droneToList.Battery -= getBattery(distance,id);
                     droneToList.CurrentPlace = new BO.Location() { Longitude = b.Longitude, Latitude = b.Latitude };
                     UpdateDroneToL(droneToList);
                 }

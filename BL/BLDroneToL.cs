@@ -38,14 +38,25 @@ namespace IBL
                 throw new BO.MissingIdException(id, "Drone In List");
             dList.RemoveAll(d => d.Id == id);
         }
+        private int indexDroneToL(int id)
+        {
+            for (int i = 0; i < dList.Count(); i++)
+            {
+                if (dList[i].Id == id)
+                    return i;
+            }
+            return -1;
+        }
         /// <summary>
         /// A function that updates a drone
         /// </summary>
         /// <param name="d">The updated drone</param>
         public void UpdateDroneToL(BO.DroneToL d)
         {
-            DeleteDroneToL(d.Id);
-            AddDroneToL(d);
+            int i = indexDroneToL(d.Id);
+            dList[i] = d;
+            //DeleteDroneToL(d.Id);
+            //AddDroneToL(d);
         }
         /// <summary>
         ///  A function that adds a drone to the list
