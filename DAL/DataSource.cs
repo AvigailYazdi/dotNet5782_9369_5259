@@ -16,11 +16,11 @@ namespace DalObject
         internal class config
         { 
             internal static int parcelId = 1;
-            internal static double avaliable;
-            internal static double light;
-            internal static double medium;
-            internal static double heavy;
-            internal static double batteryCharge;
+            internal static double avaliable=5;//per km
+            internal static double light=7;
+            internal static double medium=10;
+            internal static double heavy=20;
+            internal static double batteryCharge=50;//per hour
         }
         // Initialization of the arrarys
         internal static List<DroneCharge> dronesCharge;

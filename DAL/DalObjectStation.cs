@@ -15,10 +15,9 @@ namespace DalObject
         /// A function that checks if a station appears in the list
         /// </summary>
         /// <param name="id">The id of the station</param>
-        private void checkS(int id)
+        private bool checkS(int id)
         {
-            if (!stations.Any(b => b.Id == id))
-                throw new MissingIdException(id, "Base Station");
+            return stations.Any(b => b.Id == id);
         }
         /// <summary>
         /// A function that returns the number of not avaliable slots in a certain station
@@ -27,7 +26,8 @@ namespace DalObject
         /// <returns>the number of not avaliable slots</returns>
         public int NumOfNotAvaliableSlots(int id)
         {
-            checkS(id);
+            if(!checkS(id))
+                throw new MissingIdException(id, "Base Station");
             int count = 0;
             foreach (var item in dronesCharge)
             {
@@ -42,7 +42,7 @@ namespace DalObject
         /// <param name="bs"> the station to add</param>
         public void AddBaseStation(BaseStation bs)
         {
-            if (stations.Any(s => s.Id == bs.Id))
+            if (checkS(bs.Id))
                 throw new DuplicateIdException(bs.Id, "Base station");
             stations.Add(bs);
         }
@@ -53,8 +53,18 @@ namespace DalObject
         /// <returns> returns the requested station</returns>
         public BaseStation GetBaseStation(int id)
         {
-            checkS(id);
+            if(!checkS(id))
+                throw new MissingIdException(id, "Base Station");
             return stations.Find(s => s.Id == id);
+        }
+        /// <summary>
+        /// A function that updates a station
+        /// </summary>
+        /// <param name="bs">The updated station</param>
+        public void UpdateStation(BaseStation bs)
+        {
+            DeleteStation(bs.Id);
+            AddBaseStation(bs);
         }
         /// <summary>
         /// A function that shows the list of the stations
@@ -79,8 +89,9 @@ namespace DalObject
         /// <param name="id"> The station id to delete</param>
         public void DeleteStation(int id)
         {
-            checkS(id);
-            stations.Remove(GetBaseStation(id));
+            if (!checkS(id))
+                throw new MissingIdException(id, "Base Station");
+            stations.RemoveAll(b=>b.Id==id);
         }
         /// <summary>
         /// A function that returns the stations that stand in a condition 

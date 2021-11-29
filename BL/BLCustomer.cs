@@ -19,32 +19,34 @@ namespace IBL
         /// <returns> Returns the name of the customer </returns>
         private string getCustomerName(int id)
         {
-            IDAL.DO.Customer c =new IDAL.DO.Customer();
+            IDAL.DO.Customer customerDo;
             try
             {
-                c = dl.GetCustomer(id);
+                customerDo = dl.GetCustomer(id);
             }
             catch (IDAL.DO.MissingIdException ex)
             {
-                throw new  BO.MissingIdException(ex.Id, ex.EntityName);
+                throw new BO.MissingIdException(ex.Id, ex.EntityName);
             }
-            return c.Name;
+            return customerDo.Name;
         }
         /// <summary>
         /// A function that adds a customer to the data base
         /// </summary>
-        /// <param name="customer"> The customer to add</param>
-        public void AddCustomer(BO.Customer customer)
+        /// <param name="customerBo"> The customer to add</param>
+        public void AddCustomer(BO.Customer customerBo)
         {
-            IDAL.DO.Customer c= new IDAL.DO.Customer();
-            c.Id = customer.Id;
-            c.Name = customer.Name;
-            c.Phone = customer.PhoneNum;
-            c.Longitude = customer.Place.Longitude;
-            c.Latitude = customer.Place.Latitude;
+            IDAL.DO.Customer customerDo = new IDAL.DO.Customer()
+            {
+                Id = customerBo.Id,
+                Name = customerBo.Name,
+                Phone = customerBo.PhoneNum,
+                Longitude = customerBo.Place.Longitude,
+                Latitude = customerBo.Place.Latitude
+            };
             try
             {
-                dl.AddCustomer(c);
+                dl.AddCustomer(customerDo);
             }
             catch(IDAL.DO.DuplicateIdException ex)
             {
@@ -59,16 +61,14 @@ namespace IBL
         /// <param name="phoneNum"> The new phone number</param>
         public void UpdateCustomer(int id, string name, string phoneNum)
         {
-            BO.Customer c = new BO.Customer();
             try
             {
-                c = GetCustomer(id);
+                IDAL.DO.Customer customerDo = dl.GetCustomer(id);
                 if (name != "")
-                    c.Name = name;
+                    customerDo.Name = name;
                 if (phoneNum != "")
-                    c.PhoneNum = phoneNum;
-                dl.DeleteCustomer(id);
-                AddCustomer(c);
+                    customerDo.Phone = phoneNum;
+                dl.UpdateCustomer(customerDo);
             }
             catch (IDAL.DO.MissingIdException ex)
             {
@@ -82,23 +82,24 @@ namespace IBL
         /// <returns> The customer </returns>
         public BO.Customer GetCustomer(int id)
         {
-            BO.Customer c = new BO.Customer();
             try
             {
-                IDAL.DO.Customer customer = dl.GetCustomer(id);
-                c.Id = customer.Id;
-                c.Name = customer.Name;
-                c.PhoneNum = customer.Phone;
-                c.Place.Longitude = customer.Longitude;
-                c.Place.Latitude = customer.Latitude;
-                c.SendParcel = getSendParcel(id);
-                c.GetParcel = getRecievedParcel(id);
+                IDAL.DO.Customer customerDo = dl.GetCustomer(id);
+                BO.Customer customerBo = new BO.Customer()
+                {
+                    Id = customerDo.Id,
+                    Name = customerDo.Name,
+                    PhoneNum = customerDo.Phone,
+                    Place = new BO.Location() { Longitude = customerDo.Longitude, Latitude = customerDo.Latitude },
+                    SendParcel = getSendParcel(id),
+                    GetParcel = getRecievedParcel(id)
+                };
+                return customerBo;
             }
             catch (IDAL.DO.MissingIdException ex)
             {
                 throw new BO.MissingIdException(ex.Id, ex.EntityName);
             }
-            return c;
         }
         /// <summary>
         /// A function that returns the list of all the customers

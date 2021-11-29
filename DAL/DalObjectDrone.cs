@@ -22,10 +22,9 @@ namespace DalObject
         /// A function that checks if a drone appears in the list
         /// </summary>
         /// <param name="id">The id of the drone</param>
-        private void checkD(int id)
+        private bool checkD(int id)
         {
-            if (!drones.Any(dn => dn.Id == id))
-                throw new MissingIdException(id, "Drone");
+            return drones.Any(dn => dn.Id == id);
         }
         /// <summary>
         ///  A function that adds a drone to the array
@@ -33,9 +32,19 @@ namespace DalObject
         /// <param name="d"> the drone to add </param>
         public void AddDrone(Drone d)
         {
-            if (drones.Any(dr => dr.Id == d.Id))
+            if (checkD(d.Id))
                 throw new DuplicateIdException(d.Id, "Drone");
             drones.Add(d);
+        }
+        public int GetConnectParcel(int id)
+        {
+            Parcel pr=new Parcel() { };
+            if (checkD(id))
+                pr = parcels.Find(p => p.DroneId == id);
+            if (pr.Id != 0)
+                return pr.Id;
+            else
+                return -1;
         }
         /// <summary>
         /// A function that updates a drone into a charge slot of a station
@@ -44,8 +53,10 @@ namespace DalObject
         /// <param name="baseStationId"> the id of the base station</param>
         public void UpdateChargeDrone(int droneId, int baseStationId)
         {
-            checkD(droneId);
-            checkS(baseStationId);
+            if(!checkD(droneId))
+                throw new MissingIdException(droneId, "Drone");
+            if(!checkS(baseStationId))
+                throw new MissingIdException(baseStationId, "Base station");
             for (int i = 0; i < stations.Count; i++)
             {
                 if (stations[i].Id == baseStationId)
@@ -67,7 +78,8 @@ namespace DalObject
         /// <param name="droneId"> the id of the drone to discharge</param>
         public void UpdateDischargeDrone(int droneId)
         {
-            checkD(droneId);
+            if(!checkD(droneId))
+                throw new MissingIdException(droneId, "Drone");
             for (int i = 0; i < dronesCharge.Count; i++)
             {
                 if (dronesCharge[i].DroneId == droneId)
@@ -95,8 +107,18 @@ namespace DalObject
         /// <returns> returns the requested drone</returns>
         public Drone GetDrone(int id)
         {
-            checkD(id);
+            if(!checkD(id))
+                throw new MissingIdException(id, "Drone");
             return drones.Find(d => d.Id == id);
+        }
+        /// <summary>
+        /// A function that updates a drone
+        /// </summary>
+        /// <param name="d">The updated drone</param>
+        public void UpdateDrone(Drone d)
+        {
+            DeleteDrone(d.Id);
+            AddDrone(d);
         }
         /// <summary>
         /// A function that showes the list of the drones
@@ -113,8 +135,9 @@ namespace DalObject
         /// <param name="id"> The id of the drone to delete </param>
         public void DeleteDrone(int id)
         {
-            checkD(id);
-            drones.Remove(GetDrone(id));
+            if(!checkD(id))
+                throw new MissingIdException(id, "Drone");
+            drones.RemoveAll(d=>d.Id==id);
         }
         /// <summary>
         /// A function that returns the drones that stand in a condition

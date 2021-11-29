@@ -12,18 +12,20 @@ namespace IBL
         /// <summary>
         /// A function that adds a station to the list
         /// </summary>
-        /// <param name="station">the station to add</param>
-        public void AddStation(BO.BaseStation station)
+        /// <param name="stationBo">the station to add</param>
+        public void AddStation(BO.BaseStation stationBo)
         {
-            IDAL.DO.BaseStation s= new IDAL.DO.BaseStation(); 
-            s.Id = station.Id;
-            s.Name = station.Name;
-            s.Longitude = station.Place.Longitude;
-            s.Latitude = station.Place.Latitude;
-            s.ChargeSlots = station.AvaliableSlots;
+            IDAL.DO.BaseStation stationDo = new IDAL.DO.BaseStation()
+            {
+                Id = stationBo.Id,
+                Name = stationBo.Name,
+                Longitude = stationBo.Place.Longitude,
+                Latitude = stationBo.Place.Latitude,
+                ChargeSlots = stationBo.AvaliableSlots
+            };
             try
             {
-                dl.AddBaseStation(s);
+                dl.AddBaseStation(stationDo);
             }
             catch (IDAL.DO.DuplicateIdException ex)
             {
@@ -40,18 +42,17 @@ namespace IBL
         {
             try
             {
-                IDAL.DO.BaseStation bs = dl.GetBaseStation(id);
+                IDAL.DO.BaseStation stationDo = dl.GetBaseStation(id);
                 if (name != "")
-                    bs.Name = name;
+                    stationDo.Name = name;
                 if (numSlots != 0)
                 {
                     int num = dl.NumOfNotAvaliableSlots(id);
-                    bs.ChargeSlots = numSlots - num;
-                    if (bs.ChargeSlots < 0)
+                    stationDo.ChargeSlots = numSlots - num;
+                    if (stationDo.ChargeSlots < 0)
                         throw new BO.NegativeSlotsException(id);
                 }
-                dl.DeleteStation(id);
-                dl.AddBaseStation(bs);
+                dl.UpdateStation(stationDo);
             }
             catch (IDAL.DO.MissingIdException ex)
             {
@@ -65,17 +66,16 @@ namespace IBL
         /// <returns>a station</returns>
         public BO.BaseStation GetStation(int id)
         {
-            IDAL.DO.BaseStation b = new IDAL.DO.BaseStation();
-            BO.BaseStation station= new BO.BaseStation();
+            BO.BaseStation stationBo= new BO.BaseStation();
             try
             {
-                b = dl.GetBaseStation(id);
-                station.Id = b.Id;
-                station.Name = b.Name;
-                station.Place.Longitude = b.Longitude;
-                station.Place.Latitude = b.Latitude;
-                station.AvaliableSlots = b.ChargeSlots;
-                station.DroneSlots = from item in dl.GetDronesInChargeByPerdicate(item => item.StationId == id)
+                IDAL.DO.BaseStation stationDo = dl.GetBaseStation(id);
+                stationBo.Id = stationDo.Id;
+                stationBo.Name = stationDo.Name;
+                stationBo.Place.Longitude = stationDo.Longitude;
+                stationBo.Place.Latitude = stationDo.Latitude;
+                stationBo.AvaliableSlots = stationDo.ChargeSlots;
+                stationBo.DroneSlots = from item in dl.GetDronesInChargeByPerdicate(item => item.StationId == id)
                                      let dc = dl.GetDroneCharge(item.DroneId)
                                      select new BO.DroneInCharge()
                                      {
@@ -87,7 +87,7 @@ namespace IBL
             {
                 throw new BO.MissingIdException(ex.Id, ex.EntityName);
             }
-            return station;
+            return stationBo;
         }
         /// <summary>
         /// A function that returns stations

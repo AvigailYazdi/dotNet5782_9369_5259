@@ -14,6 +14,8 @@ namespace IDAL
         public void UpdateChargeDrone(int droneId, int baseStationId);
         public void UpdateDischargeDrone(int droneId);
         public Drone GetDrone(int id);
+        public int GetConnectParcel(int id);
+        public void UpdateDrone(Drone d);
         public IEnumerable<Drone> ListDrone();
         public void DeleteDrone(int id);
         public IEnumerable<Drone> GetDronesByPerdicate(Predicate<Drone> predicate);
@@ -22,6 +24,7 @@ namespace IDAL
         public int NumOfNotAvaliableSlots(int id);
         public void AddBaseStation(BaseStation bs);
         public BaseStation GetBaseStation(int id);
+        public void UpdateStation(BaseStation bs);
         public IEnumerable<BaseStation> ListBaseStation();
         public IEnumerable<BaseStation> ListAvaliableSlots();
         public void DeleteStation(int id);
@@ -31,6 +34,7 @@ namespace IDAL
         #region Customer
         public void AddCustomer(Customer c);
         public Customer GetCustomer(int id);
+        public void UpdateCustomer(Customer c);
         public IEnumerable<Customer> ListCustomer();
         public void DeleteCustomer(int id);
         public IEnumerable<Customer> GetCustomersByPerdicate(Predicate<Customer> predicate);
@@ -41,6 +45,7 @@ namespace IDAL
         public void UpdateParcelCollect(int parcelId);
         public void UpdateParcelDelivery(int parcelId);
         public Parcel GetParcel(int id);
+        public void UpdateParcel(Parcel p);
         public IEnumerable<Parcel> ListParcel();
         public IEnumerable<Parcel> ListNotConnected();
         public void DeleteParcel(int id);
@@ -53,8 +58,9 @@ namespace IDAL
         public void DeleteDroneCharge(int id);
         #endregion
         #region Others
-        public double Distance(double lon, double lat, int choice, int id);
+        public double DistanceInKm(double lat1, double lon1, double lat2, double lon2);
         public string Base60(double num);
+        public double[] ElectricUse();
         #endregion
     }
 }

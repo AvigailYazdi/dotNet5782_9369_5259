@@ -15,10 +15,9 @@ namespace DalObject
         /// A function that checks if a drone charge appears int the list
         /// </summary>
         /// <param name="id">The id of drone charge</param>
-        private void checkDc(int id)
+        private bool checkDc(int id)
         {
-            if (!dronesCharge.Any(b => b.DroneId == id))
-                throw new MissingIdException(id, "Drone Charge");
+            return dronesCharge.Any(b => b.DroneId == id);
         }
         /// <summary>
         /// A function that returns the sdrones in chrges that stand in a condition 
@@ -38,7 +37,8 @@ namespace DalObject
         /// <returns></returns>
         public DroneCharge GetDroneCharge(int id)
         {
-            checkDc(id);
+            if(!checkDc(id))
+                throw new MissingIdException(id, "Drone Charge");
             return dronesCharge.Find(s => s.DroneId == id);
         }
         /// <summary>
@@ -47,8 +47,9 @@ namespace DalObject
         /// <param name="id"> The id of the drone charge to delete </param>
         public void DeleteDroneCharge(int id)
         {
-            checkDc(id);
-            dronesCharge.Remove(GetDroneCharge(id));
+            if(!checkDc(id))
+                throw new MissingIdException(id, "Drone Charge");
+            dronesCharge.RemoveAll(dc=>dc.DroneId==id);
         }
     }
 }

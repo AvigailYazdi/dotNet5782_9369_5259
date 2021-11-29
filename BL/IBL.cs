@@ -40,6 +40,9 @@ namespace IBL
         #endregion
         #region DroneToL
         public BO.DroneToL GetDroneToL(int id);
+        public void DeleteDroneToL(int id);
+        public void UpdateDroneToL(BO.DroneToL d);
+        public void AddDroneToL(BO.DroneToL d);
 
         #endregion
     }

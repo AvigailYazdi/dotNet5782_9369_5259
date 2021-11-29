@@ -15,10 +15,9 @@ namespace DalObject
         /// A function that checks if a parcel appears in the list
         /// </summary>
         /// <param name="id">The id of the parcel</param>
-        private void checkP(int id)
+        private bool checkP(int id)
         {
-            if (!parcels.Any(ps => ps.Id == id))
-                throw new MissingIdException(id, "Parcel");
+            return parcels.Any(ps => ps.Id == id);
         }
         /// <summary>
         /// A function that adds a parcel to the array
@@ -26,10 +25,19 @@ namespace DalObject
         /// <param name="p"> the parcel to add</param>
         public void AddParcel(Parcel p)
         {
-            if (parcels.Any(ps => ps.Id == p.Id))
+            if (checkP(p.Id))
                 throw new DuplicateIdException(p.Id, "Parcel");
             p.Id = config.parcelId++;
             parcels.Add(p);
+        }
+        /// <summary>
+        /// A function that updates a parcel
+        /// </summary>
+        /// <param name="p">The updated parcel</param>
+        public void UpdateParcel(Parcel p)
+        {
+            DeleteParcel(p.Id);
+            AddParcel(p);
         }
         /// <summary>
         /// A function that connects between a parcel and a drone
@@ -38,8 +46,10 @@ namespace DalObject
         /// <param name="parcelId">the id of the requested parcel</param>
         public void UpdateParcelToDrone(int droneId, int parcelId)
         {
-            checkP(parcelId);
-            checkD(droneId);
+            if (!checkP(parcelId))
+                throw new MissingIdException(parcelId, "Parcel");
+            if (checkD(droneId))
+                throw new MissingIdException(droneId, "Drone");
             for (int i = 0; i < parcels.Count; i++)
             {
                 if (parcels[i].Id == parcelId)
@@ -58,7 +68,8 @@ namespace DalObject
         /// <param name="parcelId"> the id of parcel that picked up</param>
         public void UpdateParcelCollect(int parcelId)
         {
-            checkP(parcelId);
+            if (!checkP(parcelId))
+                throw new MissingIdException(parcelId, "Parcel");
             for (int i = 0; i < parcels.Count; i++)
             {
                 if (parcels[i].Id == parcelId)
@@ -76,7 +87,8 @@ namespace DalObject
         /// <param name="parcelId"> the id of the parcel </param>
         public void UpdateParcelDelivery(int parcelId)
         {
-            checkP(parcelId);
+            if (!checkP(parcelId))
+                throw new MissingIdException(parcelId, "Parcel");
             for (int i = 0; i < parcels.Count; i++)
             {
                 if (parcels[i].Id == parcelId)
@@ -95,7 +107,8 @@ namespace DalObject
         /// <returns> returns the requested parcel</returns>
         public Parcel GetParcel(int id)
         {
-            checkP(id);
+            if (!checkP(id))
+                throw new MissingIdException(id, "Parcel");
             return parcels.Find(p => p.Id == id);
         }
         /// <summary>
@@ -113,7 +126,7 @@ namespace DalObject
         /// <returns> returns the list of the not connected parcels</returns>
         public IEnumerable<Parcel> ListNotConnected()
         {
-            return GetParcelsByPerdicate(p => p.Id == 0);
+            return GetParcelsByPerdicate(p => p.DroneId == 0);
         }
         /// <summary>
         /// A function that deletes a parcel from the list
@@ -121,8 +134,9 @@ namespace DalObject
         /// <param name="id"> the id of a parcel to delete</param>
         public void DeleteParcel(int id)
         {
-            checkP(id);
-            parcels.Remove(GetParcel(id));
+            if (!checkP(id))
+                throw new MissingIdException(id, "Parcel");
+            parcels.RemoveAll(pr=>pr.Id==id);/////////////לשנות
         }
         /// <summary>
         /// A function that returns the parcels that stand in a condition
