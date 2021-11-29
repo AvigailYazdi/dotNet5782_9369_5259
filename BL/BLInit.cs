@@ -36,7 +36,7 @@ namespace IBL
             double distance1, distance2;
             try
             {
-                foreach (var item in dList)
+                foreach (var item in dList.ToList())
                 {
                     BO.DroneToL temp = GetDroneToL(item.Id);
                     if (temp.ParcelId > 0 && dl.GetParcel(temp.ParcelId).Delivered == t)

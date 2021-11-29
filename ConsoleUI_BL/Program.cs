@@ -260,4 +260,214 @@ namespace ConsoleUI_BL
         }
     }
 }
+/*Enter a number:
+0- Exit,
+1- To add,
+2- To update,
+3- To print,
+4- To print all.
+1
+Enter a number:
+1- To add a base station,
+2- To add a drone,
+3- To add a customer,
+4- To add a parcel.
+3
+Enter id, name, phone number, and location of a customer
+12
+aaa
+782513648
+45.6
+32.4
+Enter a number:
+0- Exit,
+1- To add,
+2- To update,
+3- To print,
+4- To print all.
+3
+Enter a number:
+1- To print a base station,
+2- To print a drone,
+3- To print a customer,
+4- To print a parcel.
+3
+Enter id of a customer
+12
+
+Id: 12
+Name: aaa
+PhoneNum: 782513648
+Place:
+Longitude: 45.6
+Latitude: 32.4
+SendParcel: System.Linq.Enumerable+WhereSelectListIterator`2[IDAL.DO.Parcel,IBL.BO.ParcelAtC]
+GetParcel: System.Linq.Enumerable+WhereSelectListIterator`2[IDAL.DO.Parcel,IBL.BO.ParcelAtC]
+Enter a number:
+0- Exit,
+1- To add,
+2- To update,
+3- To print,
+4- To print all.
+4
+Enter a number:
+1- To print all base stations,
+2- To print all drones,
+3- To print all customers,
+4- To print all parcels,
+5- To print all not- connected parcels,
+6- To print all avaliable base stations.
+3
+
+Id: 1
+Name:
+PhoneNum:
+Place:
+Longitude: 32
+Latitude: 35.9
+SendParcel: System.Linq.Enumerable+WhereSelectListIterator`2[IDAL.DO.Parcel,IBL.BO.ParcelAtC]
+GetParcel: System.Linq.Enumerable+WhereSelectListIterator`2[IDAL.DO.Parcel,IBL.BO.ParcelAtC]
+
+Id: 2
+Name:
+PhoneNum:
+Place:
+Longitude: 30.9
+Latitude: 34.8
+SendParcel: System.Linq.Enumerable+WhereSelectListIterator`2[IDAL.DO.Parcel,IBL.BO.ParcelAtC]
+GetParcel: System.Linq.Enumerable+WhereSelectListIterator`2[IDAL.DO.Parcel,IBL.BO.ParcelAtC]
+
+Id: 3
+Name:
+PhoneNum:
+Place:
+Longitude: 33.5
+Latitude: 35.3
+SendParcel: System.Linq.Enumerable+WhereSelectListIterator`2[IDAL.DO.Parcel,IBL.BO.ParcelAtC]
+GetParcel: System.Linq.Enumerable+WhereSelectListIterator`2[IDAL.DO.Parcel,IBL.BO.ParcelAtC]
+
+Id: 4
+Name:
+PhoneNum:
+Place:
+Longitude: 30.7
+Latitude: 35.5
+SendParcel: System.Linq.Enumerable+WhereSelectListIterator`2[IDAL.DO.Parcel,IBL.BO.ParcelAtC]
+GetParcel: System.Linq.Enumerable+WhereSelectListIterator`2[IDAL.DO.Parcel,IBL.BO.ParcelAtC]
+
+Id: 5
+Name:
+PhoneNum:
+Place:
+Longitude: 30.8
+Latitude: 34
+SendParcel: System.Linq.Enumerable+WhereSelectListIterator`2[IDAL.DO.Parcel,IBL.BO.ParcelAtC]
+GetParcel: System.Linq.Enumerable+WhereSelectListIterator`2[IDAL.DO.Parcel,IBL.BO.ParcelAtC]
+
+Id: 6
+Name:
+PhoneNum:
+Place:
+Longitude: 29.3
+Latitude: 34.3
+SendParcel: System.Linq.Enumerable+WhereSelectListIterator`2[IDAL.DO.Parcel,IBL.BO.ParcelAtC]
+GetParcel: System.Linq.Enumerable+WhereSelectListIterator`2[IDAL.DO.Parcel,IBL.BO.ParcelAtC]
+
+Id: 7
+Name:
+PhoneNum:
+Place:
+Longitude: 32.4
+Latitude: 34.2
+SendParcel: System.Linq.Enumerable+WhereSelectListIterator`2[IDAL.DO.Parcel,IBL.BO.ParcelAtC]
+GetParcel: System.Linq.Enumerable+WhereSelectListIterator`2[IDAL.DO.Parcel,IBL.BO.ParcelAtC]
+
+Id: 8
+Name:
+PhoneNum:
+Place:
+Longitude: 29.3
+Latitude: 35.9
+SendParcel: System.Linq.Enumerable+WhereSelectListIterator`2[IDAL.DO.Parcel,IBL.BO.ParcelAtC]
+GetParcel: System.Linq.Enumerable+WhereSelectListIterator`2[IDAL.DO.Parcel,IBL.BO.ParcelAtC]
+
+Id: 9
+Name:
+PhoneNum:
+Place:
+Longitude: 33.5
+Latitude: 35.4
+SendParcel: System.Linq.Enumerable+WhereSelectListIterator`2[IDAL.DO.Parcel,IBL.BO.ParcelAtC]
+GetParcel: System.Linq.Enumerable+WhereSelectListIterator`2[IDAL.DO.Parcel,IBL.BO.ParcelAtC]
+
+Id: 10
+Name:
+PhoneNum:
+Place:
+Longitude: 30.1
+Latitude: 35
+SendParcel: System.Linq.Enumerable+WhereSelectListIterator`2[IDAL.DO.Parcel,IBL.BO.ParcelAtC]
+GetParcel: System.Linq.Enumerable+WhereSelectListIterator`2[IDAL.DO.Parcel,IBL.BO.ParcelAtC]
+
+Id: 12
+Name: aaa
+PhoneNum: 782513648
+Place:
+Longitude: 45.6
+Latitude: 32.4
+SendParcel: System.Linq.Enumerable+WhereSelectListIterator`2[IDAL.DO.Parcel,IBL.BO.ParcelAtC]
+GetParcel: System.Linq.Enumerable+WhereSelectListIterator`2[IDAL.DO.Parcel,IBL.BO.ParcelAtC]
+Enter a number:
+0- Exit,
+1- To add,
+2- To update,
+3- To print,
+4- To print all.
+2
+Enter a number:
+1- To update drone model,
+2- To update a base station,
+3- To update a customer,
+4- To update drone to charge,
+5- To update discharge drone,
+6- To update parcel to drone,
+7- To update parcel collect,
+8-To update parcel delivered.
+3
+Enter id, name and phone number of a customer
+12
+ghj
+
+Enter a number:
+0- Exit,
+1- To add,
+2- To update,
+3- To print,
+4- To print all.
+3
+Enter a number:
+1- To print a base station,
+2- To print a drone,
+3- To print a customer,
+4- To print a parcel.
+3
+Enter id of a customer
+12
+
+Id: 12
+Name: ghj
+PhoneNum: 782513648
+Place:
+Longitude: 45.6
+Latitude: 32.4
+SendParcel: System.Linq.Enumerable+WhereSelectListIterator`2[IDAL.DO.Parcel,IBL.BO.ParcelAtC]
+GetParcel: System.Linq.Enumerable+WhereSelectListIterator`2[IDAL.DO.Parcel,IBL.BO.ParcelAtC]
+Enter a number:
+0- Exit,
+1- To add,
+2- To update,
+3- To print,
+4- To print all.
+0
+*/
 

@@ -72,8 +72,7 @@ namespace IBL
                 IDAL.DO.BaseStation stationDo = dl.GetBaseStation(id);
                 stationBo.Id = stationDo.Id;
                 stationBo.Name = stationDo.Name;
-                stationBo.Place.Longitude = stationDo.Longitude;
-                stationBo.Place.Latitude = stationDo.Latitude;
+                stationBo.Place = new BO.Location() { Longitude = stationDo.Longitude, Latitude = stationDo.Latitude };
                 stationBo.AvaliableSlots = stationDo.ChargeSlots;
                 stationBo.DroneSlots = from item in dl.GetDronesInChargeByPerdicate(item => item.StationId == id)
                                      let dc = dl.GetDroneCharge(item.DroneId)

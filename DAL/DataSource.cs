@@ -49,15 +49,17 @@ namespace DalObject
         /// </summary>
         private static void createBaseStation()
         {
-            BaseStation s = new BaseStation();
             int count = 1;
             for (int i = 0; i < 2; i++)
             {
-                s.Id = count++;//rand.Next(1000, 10000);
-                s.Name = "";
-                s.Longitude = (double)rand.Next(293, 336) / 10;
-                s.Latitude = (double)rand.Next(337, 363) / 10;
-                s.ChargeSlots = rand.Next(0, 11);
+                BaseStation s = new BaseStation()
+                {
+                    Id = count++,//rand.Next(1000, 10000);
+                    Name = "",
+                    Longitude = (double)rand.Next(293, 336) / 10,
+                    Latitude = (double)rand.Next(337, 363) / 10,
+                    ChargeSlots = rand.Next(0, 11)
+                };
                 stations.Add(s);
             }
         }
