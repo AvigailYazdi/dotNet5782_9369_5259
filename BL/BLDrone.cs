@@ -81,7 +81,7 @@ namespace IBL
                         throw new BO.NotEnoughBatteryException(id);
                     dl.UpdateChargeDrone(id, b.Id);//dal
                     droneToList.Status = BO.DroneStatus.Maintenance;
-                    droneToList.Battery -= getBattery(distance,id);
+                    droneToList.Battery = Math.Max(0, getBattery(distance, id));
                     droneToList.CurrentPlace = new BO.Location() { Longitude = b.Longitude, Latitude = b.Latitude };
                     UpdateDroneToL(droneToList);
                 }
@@ -107,7 +107,7 @@ namespace IBL
                 {
                     dl.UpdateDischargeDrone(id);//dal
                     droneToList.Status = BO.DroneStatus.Avaliable;
-                    droneToList.Battery += time*electricUse[4];
+                    droneToList.Battery = Math.Min(time * electricUse[4], 100);
                     UpdateDroneToL(droneToList);
                 }
                 else

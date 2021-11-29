@@ -129,9 +129,8 @@ namespace IBL
             {
                 if (droneToList.Status == BO.DroneStatus.Avaliable)
                 {
-                    IEnumerable<IDAL.DO.Parcel> p = dl.ListNotConnected();
                     /////בדיקת תקינות
-                    IDAL.DO.Parcel pTemp = p.ElementAtOrDefault(0);
+                    IDAL.DO.Parcel pTemp = new IDAL.DO.Parcel();
                     IDAL.DO.Customer senderDo, targetDo;
                     double dis1, dis2, dis3;
                     foreach (var item in dl.ListNotConnected())
@@ -144,7 +143,7 @@ namespace IBL
                         dis3 = shortDis(targetDo.Longitude, targetDo.Latitude, b);
                         if (getBattery(dis1 + dis2 + dis3, id) <= droneToList.Battery)
                         {
-                            if (item.Priority > pTemp.Priority)
+                            if (item.Priority > pTemp.Priority && (BO.WeightCategories)item.Weight <= droneToList.Weight)
                                 pTemp = item;
                             else if (item.Priority == pTemp.Priority && item.Weight > pTemp.Weight && (BO.WeightCategories)item.Weight <= droneToList.Weight)
                                 pTemp = item;

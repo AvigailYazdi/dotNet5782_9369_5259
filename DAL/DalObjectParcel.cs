@@ -48,7 +48,7 @@ namespace DalObject
         {
             if (!checkP(parcelId))
                 throw new MissingIdException(parcelId, "Parcel");
-            if (checkD(droneId))
+            if (!checkD(droneId))
                 throw new MissingIdException(droneId, "Drone");
             for (int i = 0; i < parcels.Count; i++)
             {
