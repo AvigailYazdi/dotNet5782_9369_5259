@@ -72,7 +72,7 @@ namespace ConsoleUI
                                     dal.AddBaseStation(b);
                                     break;
                                 case AddOrView.Drone:
-                                    Console.WriteLine("Enter id, model, max weight, status and battery of a drone");
+                                    Console.WriteLine("Enter id, model and max weight of a drone");
                                     d.Id = int.Parse(Console.ReadLine());
                                     d.Model = Console.ReadLine();
                                     d.MaxWeight = (WeightCategories)int.Parse(Console.ReadLine());

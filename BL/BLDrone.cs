@@ -39,8 +39,11 @@ namespace IBL
                 Status = BO.DroneStatus.Maintenance,
                 CurrentPlace = GetStation(stationId).Place,
             };
-            dl.UpdateChargeDrone(droneBo.Id, stationId);
             dList.Add(droneToList);
+            if (GetStation(stationId).AvaliableSlots > 0)
+                dl.UpdateChargeDrone(droneBo.Id, stationId);
+            else
+                throw new BO.NotEnoughSlotsException(); 
         }
         /// <summary>
         /// A function that sets the name of a drone

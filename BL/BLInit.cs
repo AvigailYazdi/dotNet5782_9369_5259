@@ -162,7 +162,7 @@ namespace IBL
                         break;
                 }
             }
-            return ((int)battery*100)/100;
+            return (int)(battery*100)/100.0;
         }
     }
 }

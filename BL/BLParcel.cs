@@ -198,7 +198,7 @@ namespace IBL
                     dl.UpdateParcelCollect(droneToList.ParcelId);
                 }
                 else
-                    throw new BO.NotInDeliveryException(id);///////////////////////זריקה
+                    throw new BO.NotInDeliveryException(id);
             }
             catch (IDAL.DO.DuplicateIdException ex)
             {
@@ -223,7 +223,7 @@ namespace IBL
                     dl.UpdateParcelDelivery(droneToList.ParcelId);
                 }
                 else
-                    throw new BO.NotInDeliveryException(id);///////////////////////
+                    throw new BO.NotInDeliveryException(id);
             }
             catch (IDAL.DO.DuplicateIdException ex)
             {

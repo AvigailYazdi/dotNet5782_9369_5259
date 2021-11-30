@@ -45,13 +45,11 @@ namespace IBL
                 IDAL.DO.BaseStation stationDo = dl.GetBaseStation(id);
                 if (name != "")
                     stationDo.Name = name;
-                if (numSlots != 0)
-                {
-                    int num = dl.NumOfNotAvaliableSlots(id);
+                int num = dl.NumOfNotAvaliableSlots(id);
+                if (numSlots- num > 0)
                     stationDo.ChargeSlots = numSlots - num;
-                    if (stationDo.ChargeSlots < 0)
-                        throw new BO.NegativeSlotsException(id);
-                }
+                else
+                    throw new BO.NegativeSlotsException(id);
                 dl.UpdateStation(stationDo);
             }
             catch (IDAL.DO.MissingIdException ex)
