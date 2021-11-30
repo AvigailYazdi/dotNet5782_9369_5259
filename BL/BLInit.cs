@@ -55,7 +55,7 @@ namespace IBL
                         distance1 = dl.DistanceInKm(temp.CurrentPlace.Longitude, temp.CurrentPlace.Latitude, targetDo.Longitude, targetDo.Latitude);
                         stationDo = closeStation(targetDo.Longitude, targetDo.Latitude);
                         distance2 = shortDis(targetDo.Longitude, targetDo.Latitude, stationDo);
-                        temp.Battery = rand.NextDouble() + rand.Next((int)getBattery(distance1 + distance2, temp.Id) + 1, 100);
+                        temp.Battery =(double)(rand.Next((int)(getBattery(distance1 + distance2, temp.Id)*100), 100*100)/100);
                     }
                     if (temp.ParcelId <= 0)
                     {
@@ -66,7 +66,7 @@ namespace IBL
                         IEnumerable<IDAL.DO.BaseStation> bs = dl.ListBaseStation();
                         stationDo = bs.ElementAtOrDefault(rand.Next(0, bs.Count()));
                         temp.CurrentPlace = new BO.Location() { Longitude = stationDo.Longitude, Latitude = stationDo.Latitude };
-                        temp.Battery = rand.NextDouble() + rand.Next(0, 20);
+                        temp.Battery = (double)(rand.Next(0, 20*100)/100);
                         dl.UpdateChargeDrone(temp.Id, stationDo.Id);
                     }
                     if (temp.Status == BO.DroneStatus.Avaliable)
@@ -78,7 +78,7 @@ namespace IBL
                             temp.CurrentPlace = new BO.Location() { Longitude = dl.GetCustomer(pc.TargetId).Longitude, Latitude = dl.GetCustomer(pc.TargetId).Latitude };
                             stationDo = closeStation(temp.CurrentPlace.Longitude, temp.CurrentPlace.Latitude);
                             distance1 = shortDis(temp.CurrentPlace.Longitude, temp.CurrentPlace.Latitude, stationDo);
-                            temp.Battery = rand.NextDouble() + rand.Next((int)getBattery(distance1, stationDo.Id) + 1, 100);
+                            temp.Battery = (double)(rand.Next((int)(getBattery(distance1, stationDo.Id)*100), 100*100)/100);
                             dl.UpdateChargeDrone(temp.Id, stationDo.Id);
                         }
                     }
@@ -142,27 +142,27 @@ namespace IBL
         private double getBattery(double distance,int droneId)
         {
             BO.DroneToL droneList = GetDroneToL(droneId);
-            double minBattery=-1;
+            double battery=-1;
             if (droneList.Status == BO.DroneStatus.Avaliable)
-                minBattery= electricUse[0] * distance;
+                battery= electricUse[0] * distance;
             else if (droneList.Status == BO.DroneStatus.Delivery)
             {
                 switch (GetParcel(droneList.ParcelId).Weight)
                 {
                     case BO.WeightCategories.Light:
-                        minBattery= electricUse[1] * distance;
+                        battery= electricUse[1] * distance;
                         break;
                     case BO.WeightCategories.Medium:
-                        minBattery = electricUse[2] * distance;
+                        battery = electricUse[2] * distance;
                         break;
                     case BO.WeightCategories.Heavy:
-                        minBattery = electricUse[3] * distance;
+                        battery = electricUse[3] * distance;
                         break;
                     default:
                         break;
                 }
             }
-            return minBattery;
+            return ((int)battery*100)/100;
         }
     }
 }

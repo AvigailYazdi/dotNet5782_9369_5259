@@ -129,11 +129,11 @@ namespace IBL
             {
                 if (droneToList.Status == BO.DroneStatus.Avaliable)
                 {
-                    /////בדיקת תקינות
-                    IDAL.DO.Parcel pTemp = new IDAL.DO.Parcel();
+                    IEnumerable<IDAL.DO.Parcel> pList=dl.GetParcelsByPerdicate(p => p.Weight <= (IDAL.DO.WeightCategories)droneToList.Weight && p.DroneId == 0);
+                    IDAL.DO.Parcel pTemp = pList.ElementAtOrDefault(0);
                     IDAL.DO.Customer senderDo, targetDo;
                     double dis1, dis2, dis3;
-                    foreach (var item in dl.ListNotConnected())
+                    foreach (var item in pList.ToList())
                     {
                         senderDo = dl.GetCustomer(item.SenderId);
                         dis1 = dl.DistanceInKm(droneToList.CurrentPlace.Longitude, droneToList.CurrentPlace.Latitude, senderDo.Longitude, senderDo.Latitude);
@@ -143,21 +143,27 @@ namespace IBL
                         dis3 = shortDis(targetDo.Longitude, targetDo.Latitude, b);
                         if (getBattery(dis1 + dis2 + dis3, id) <= droneToList.Battery)
                         {
-                            if (item.Priority > pTemp.Priority && (BO.WeightCategories)item.Weight <= droneToList.Weight)
+                            if (item.Priority > pTemp.Priority)
                                 pTemp = item;
-                            else if (item.Priority == pTemp.Priority && item.Weight > pTemp.Weight && (BO.WeightCategories)item.Weight <= droneToList.Weight)
+                            else if (item.Priority == pTemp.Priority && item.Weight > pTemp.Weight)
                                 pTemp = item;
-                            dis1 = dl.DistanceInKm(droneToList.CurrentPlace.Longitude, droneToList.CurrentPlace.Latitude, senderDo.Longitude, senderDo.Latitude);
-                            senderDo = dl.GetCustomer(pTemp.SenderId);
-                            dis2 = dl.DistanceInKm(droneToList.CurrentPlace.Longitude, droneToList.CurrentPlace.Latitude, senderDo.Longitude, senderDo.Latitude);
-                            if (item.Priority == pTemp.Priority && item.Weight == pTemp.Weight && dis1 < dis2)
-                                pTemp = item;
+                            else if(item.Priority == pTemp.Priority && item.Weight == pTemp.Weight)
+                            {
+                                dis1 = dl.DistanceInKm(droneToList.CurrentPlace.Longitude, droneToList.CurrentPlace.Latitude, senderDo.Longitude, senderDo.Latitude);
+                                senderDo = dl.GetCustomer(pTemp.SenderId);
+                                dis2 = dl.DistanceInKm(droneToList.CurrentPlace.Longitude, droneToList.CurrentPlace.Latitude, senderDo.Longitude, senderDo.Latitude);
+                                if (dis1 < dis2)
+                                    pTemp = item;
+                            }
                         }
                     }
-                    droneToList.Status = BO.DroneStatus.Delivery;
-                    droneToList.ParcelId = pTemp.Id;
-                    UpdateDroneToL(droneToList);
-                    dl.UpdateParcelToDrone(id, pTemp.Id);
+                    if (pTemp.Id != 0)
+                    {
+                        droneToList.Status = BO.DroneStatus.Delivery;
+                        droneToList.ParcelId = pTemp.Id;
+                        UpdateDroneToL(droneToList);
+                        dl.UpdateParcelToDrone(id, pTemp.Id);
+                    }
                 }
                 else
                     throw new BO.NotAvaliableDroneException(id);
@@ -165,6 +171,10 @@ namespace IBL
             catch (IDAL.DO.DuplicateIdException ex)
             {
                 throw new BO.DuplicateIdException(ex.Id, ex.EntityName);
+            }
+            catch(IDAL.DO.MissingIdException ex)
+            {
+                throw new BO.MissingIdException(ex.Id, ex.EntityName);
             }
         }
         /// <summary>
@@ -183,7 +193,7 @@ namespace IBL
                     IDAL.DO.Customer c = dl.GetCustomer(p.SenderId);
                     droneToList.CurrentPlace = new BO.Location() { Longitude = c.Longitude, Latitude = c.Latitude };
                     dis = dl.DistanceInKm(droneToList.CurrentPlace.Longitude, droneToList.CurrentPlace.Latitude, c.Longitude, c.Latitude);
-                    droneToList.Battery -= getBattery(dis, id);
+                    droneToList.Battery = Math.Max(0, droneToList.Battery - getBattery(dis, id)); ;
                     UpdateDroneToL(droneToList);
                     dl.UpdateParcelCollect(droneToList.ParcelId);
                 }
@@ -207,7 +217,7 @@ namespace IBL
                     IDAL.DO.Customer c = dl.GetCustomer(p.TargetId);
                     droneToList.CurrentPlace = new BO.Location() { Longitude = c.Longitude, Latitude = c.Latitude };
                     dis = dl.DistanceInKm(droneToList.CurrentPlace.Longitude, droneToList.CurrentPlace.Latitude, c.Longitude, c.Latitude);
-                    droneToList.Battery -= getBattery(dis, id);
+                    droneToList.Battery =  Math.Max(0, droneToList.Battery - getBattery(dis, id)); ;
                     droneToList.Status = BO.DroneStatus.Avaliable;
                     UpdateDroneToL(droneToList);
                     dl.UpdateParcelDelivery(droneToList.ParcelId);

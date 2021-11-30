@@ -35,7 +35,7 @@ namespace IBL
                 Id = droneBo.Id,
                 Model = droneBo.Model,
                 Weight = droneBo.Weight,
-                Battery = rand.NextDouble() + rand.Next(20, 40),
+                Battery = (double)(rand.Next(20*100, 40*100)/100),
                 Status = BO.DroneStatus.Maintenance,
                 CurrentPlace = GetStation(stationId).Place,
             };
@@ -81,7 +81,7 @@ namespace IBL
                         throw new BO.NotEnoughBatteryException(id);
                     dl.UpdateChargeDrone(id, b.Id);//dal
                     droneToList.Status = BO.DroneStatus.Maintenance;
-                    droneToList.Battery = Math.Max(0, getBattery(distance, id));
+                    droneToList.Battery = Math.Max(0, droneToList.Battery-getBattery(distance, id));
                     droneToList.CurrentPlace = new BO.Location() { Longitude = b.Longitude, Latitude = b.Latitude };
                     UpdateDroneToL(droneToList);
                 }
@@ -107,7 +107,7 @@ namespace IBL
                 {
                     dl.UpdateDischargeDrone(id);//dal
                     droneToList.Status = BO.DroneStatus.Avaliable;
-                    droneToList.Battery = Math.Min(time * electricUse[4], 100);
+                    droneToList.Battery = Math.Min(time * electricUse[4]+ droneToList.Battery, 100);
                     UpdateDroneToL(droneToList);
                 }
                 else
@@ -150,7 +150,7 @@ namespace IBL
                     droneBo.MyParcel.Receiver = p.Receiver;
                     droneBo.MyParcel.Collection = GetCustomer(p.Sender.Id).Place;
                     droneBo.MyParcel.Destination =GetCustomer(p.Receiver.Id).Place;
-                    droneBo.MyParcel.Distance = dl.DistanceInKm(droneBo.MyParcel.Collection.Longitude, droneBo.MyParcel.Collection.Latitude, droneBo.MyParcel.Destination.Longitude, droneBo.MyParcel.Destination.Latitude);
+                    droneBo.MyParcel.Distance =dl.DistanceInKm(droneBo.MyParcel.Collection.Longitude, droneBo.MyParcel.Collection.Latitude, droneBo.MyParcel.Destination.Longitude, droneBo.MyParcel.Destination.Latitude);
                 }
                 droneBo.CurrentPlace = GetDroneToL(id).CurrentPlace;
             }

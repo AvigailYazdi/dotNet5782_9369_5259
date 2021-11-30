@@ -246,7 +246,7 @@ namespace ConsoleUI_BL
                 }
                 catch(Exception ex)
                 {
-                    Console.WriteLine(ex.Message);
+                    Console.WriteLine(ex);
                 }
                     Console.WriteLine(@"Enter a number:          
 0- Exit,
