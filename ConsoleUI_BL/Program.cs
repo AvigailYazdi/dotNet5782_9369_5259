@@ -100,7 +100,7 @@ namespace ConsoleUI_BL
 5- To update discharge drone,
 6- To update parcel to drone,
 7- To update parcel collect,
-8-To update parcel delivered.");
+8- To update parcel delivered.");
                             int Id, NumSlots;
                             string Model, Name, phoneNum;
                             double time;
@@ -219,7 +219,12 @@ namespace ConsoleUI_BL
                                 case ViewList.Customer:
                                     List<Customer> temp2 = new List<Customer>(bl.CustomerList());
                                     foreach (Customer item in temp2)
+                                    {
                                         Console.WriteLine(item);
+                                        foreach (ParcelAtC i in item.SendParcel)
+                                        Console.WriteLine(i);
+                                    }
+
                                     break;
                                 case ViewList.Parcel:
                                     List<Parcel> temp3 = new List<Parcel>(bl.ParcelList());

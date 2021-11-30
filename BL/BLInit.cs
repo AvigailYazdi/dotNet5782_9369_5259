@@ -55,7 +55,7 @@ namespace IBL
                         distance1 = dl.DistanceInKm(temp.CurrentPlace.Longitude, temp.CurrentPlace.Latitude, targetDo.Longitude, targetDo.Latitude);
                         stationDo = closeStation(targetDo.Longitude, targetDo.Latitude);
                         distance2 = shortDis(targetDo.Longitude, targetDo.Latitude, stationDo);
-                        temp.Battery =(double)(rand.Next((int)(getBattery(distance1 + distance2, temp.Id)*100), 100*100)/100);
+                        temp.Battery = rand.Next((int)(getBattery(distance1 + distance2, temp.Id) * 100), 100 * 100) / 100.0;
                     }
                     if (temp.ParcelId <= 0)
                     {
@@ -66,7 +66,7 @@ namespace IBL
                         IEnumerable<IDAL.DO.BaseStation> bs = dl.ListBaseStation();
                         stationDo = bs.ElementAtOrDefault(rand.Next(0, bs.Count()));
                         temp.CurrentPlace = new BO.Location() { Longitude = stationDo.Longitude, Latitude = stationDo.Latitude };
-                        temp.Battery = (double)(rand.Next(0, 20*100)/100);
+                        temp.Battery = rand.Next(0, 20 * 100) / 100.0;
                         dl.UpdateChargeDrone(temp.Id, stationDo.Id);
                     }
                     if (temp.Status == BO.DroneStatus.Avaliable)
@@ -78,7 +78,7 @@ namespace IBL
                             temp.CurrentPlace = new BO.Location() { Longitude = dl.GetCustomer(pc.TargetId).Longitude, Latitude = dl.GetCustomer(pc.TargetId).Latitude };
                             stationDo = closeStation(temp.CurrentPlace.Longitude, temp.CurrentPlace.Latitude);
                             distance1 = shortDis(temp.CurrentPlace.Longitude, temp.CurrentPlace.Latitude, stationDo);
-                            temp.Battery = (double)(rand.Next((int)(getBattery(distance1, stationDo.Id)*100), 100*100)/100);
+                            temp.Battery = rand.Next((int)(getBattery(distance1, stationDo.Id) * 100), 100 * 100) / 100.0;
                             dl.UpdateChargeDrone(temp.Id, stationDo.Id);
                         }
                     }

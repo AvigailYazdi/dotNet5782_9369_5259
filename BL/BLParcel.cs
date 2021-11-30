@@ -71,7 +71,7 @@ namespace IBL
         {
             try
             {
-                return from item in dl.GetParcelsByPerdicate(item => item.TargetId == id)
+                return from item in dl.GetParcelsByPerdicate(item => item.TargetId == id&& getParcelStatus(item.Id)==BO.ParcelStatus.Provided)
                        let p = dl.GetParcel(item.Id)
                        select new BO.ParcelAtC()
                        {
@@ -191,8 +191,8 @@ namespace IBL
                 {
                     IDAL.DO.Parcel p = dl.GetParcel(droneToList.ParcelId);
                     IDAL.DO.Customer c = dl.GetCustomer(p.SenderId);
-                    droneToList.CurrentPlace = new BO.Location() { Longitude = c.Longitude, Latitude = c.Latitude };
                     dis = dl.DistanceInKm(droneToList.CurrentPlace.Longitude, droneToList.CurrentPlace.Latitude, c.Longitude, c.Latitude);
+                    droneToList.CurrentPlace = new BO.Location() { Longitude = c.Longitude, Latitude = c.Latitude };
                     droneToList.Battery = Math.Max(0, droneToList.Battery - getBattery(dis, id)); ;
                     UpdateDroneToL(droneToList);
                     dl.UpdateParcelCollect(droneToList.ParcelId);
@@ -215,8 +215,8 @@ namespace IBL
                 {
                     IDAL.DO.Parcel p = dl.GetParcel(droneToList.ParcelId);
                     IDAL.DO.Customer c = dl.GetCustomer(p.TargetId);
-                    droneToList.CurrentPlace = new BO.Location() { Longitude = c.Longitude, Latitude = c.Latitude };
                     dis = dl.DistanceInKm(droneToList.CurrentPlace.Longitude, droneToList.CurrentPlace.Latitude, c.Longitude, c.Latitude);
+                    droneToList.CurrentPlace = new BO.Location() { Longitude = c.Longitude, Latitude = c.Latitude };
                     droneToList.Battery =  Math.Max(0, droneToList.Battery - getBattery(dis, id)); ;
                     droneToList.Status = BO.DroneStatus.Avaliable;
                     UpdateDroneToL(droneToList);

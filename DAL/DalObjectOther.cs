@@ -43,7 +43,7 @@ namespace DalObject
             double a = Math.Sin(dLat / 2) * Math.Sin(dLat / 2) +Math.Cos(deg2rad(lat1)) * Math.Cos(deg2rad(lat2)) *Math.Sin(dLon / 2) * Math.Sin(dLon / 2);
             double c = 2 * Math.Atan2(Math.Sqrt(a), Math.Sqrt(1 - a));
             double d = R * c; // Distance in km
-            return d;
+            return (int)(d * 1000) / 1000.0;
         }
         /// <summary>
         /// A function that is part of the function 'DistanceInKm'

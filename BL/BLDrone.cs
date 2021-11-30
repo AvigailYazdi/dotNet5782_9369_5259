@@ -35,7 +35,7 @@ namespace IBL
                 Id = droneBo.Id,
                 Model = droneBo.Model,
                 Weight = droneBo.Weight,
-                Battery = (double)(rand.Next(20*100, 40*100)/100),
+                Battery = rand.Next(20 * 100, 40 * 100) / 100.0,
                 Status = BO.DroneStatus.Maintenance,
                 CurrentPlace = GetStation(stationId).Place,
             };
