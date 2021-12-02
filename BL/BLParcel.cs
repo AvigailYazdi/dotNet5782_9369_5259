@@ -10,6 +10,51 @@ namespace IBL
     {
         private object parcel;
         /// <summary>
+        /// A function that returns the parcels that sent and provieded
+        /// </summary>
+        /// <param name="id">The id of the customer</param>
+        /// <returns> The parcels that sent and provieded </returns>
+        private IEnumerable<BO.ParcelAtC> getSentAndProviededParcels(int id)
+        {
+            return from item in getSendParcel(id)
+                   where getParcelStatus(item.Id) == BO.ParcelStatus.Provided
+                   select item;
+
+        }
+        /// <summary>
+        /// A function that returns the parcels that sent and not provieded
+        /// </summary>
+        /// <param name="id">The id of the customer</param>
+        /// <returns> The parcels that sent and not provieded </returns>
+        private IEnumerable<BO.ParcelAtC> getSentAndNotProviededParcels(int id)
+        {
+            return from item in getSendParcel(id)
+                   where getParcelStatus(item.Id) != BO.ParcelStatus.Provided
+                   select item;
+        }
+        /// <summary>
+        /// A function that returns all parcels that on way to a customer
+        /// </summary>
+        /// <param name="id"> Thhe id of tje customer </param>
+        /// <returns> Parcels that on way</returns>
+        private IEnumerable<BO.ParcelAtC> getOnWayParcels(int id)
+        {
+            return from item in dl.GetParcelsByPerdicate(item => item.TargetId == id && getParcelStatus(item.Id) == BO.ParcelStatus.PickedUp)
+                   let p = dl.GetParcel(item.Id)
+                   select new BO.ParcelAtC()
+                   {
+                       Id = p.Id,
+                       Weight = (BO.WeightCategories)p.Weight,
+                       Priority = (BO.Priorities)p.Priority,
+                       Status = getParcelStatus(p.Id),
+                       OtherC = new BO.CustomerInP()
+                       {
+                           Id = p.Id,
+                           Name = getCustomerName(p.TargetId)
+                       }
+                   };
+        }
+        /// <summary>
         /// A function that returns the status of the parcel
         /// </summary>
         /// <param name="id"> The parcel</param>
@@ -71,7 +116,7 @@ namespace IBL
         {
             try
             {
-                return from item in dl.GetParcelsByPerdicate(item => item.TargetId == id&& getParcelStatus(item.Id)==BO.ParcelStatus.Provided)
+                return from item in dl.GetParcelsByPerdicate(item => item.TargetId == id && getParcelStatus(item.Id)==BO.ParcelStatus.Provided)
                        let p = dl.GetParcel(item.Id)
                        select new BO.ParcelAtC()
                        {
@@ -278,10 +323,19 @@ namespace IBL
         /// A function that returns the parcels
         /// </summary>
         /// <returns>List of parcels</returns>
-        public IEnumerable<BO.Parcel> ParcelList()
+        public IEnumerable<BO.ParcelToL> ParcelList()
         {
             return from item in dl.ListParcel()
-                   select GetParcel(item.Id);
+                   let p = GetParcel(item.Id)
+                   select new BO.ParcelToL()
+                   {
+                       Id=p.Id,
+                       SenderName= p.Sender.Name,
+                       ReceiverName= p.Receiver.Name,
+                       Weight= p.Weight,
+                       Priority= p.Priority,
+                       Status= getParcelStatus(p.Id)
+                   };
         }
         /// <summary>
         /// A function that returns the parcels that are not connected to a drone

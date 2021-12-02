@@ -219,39 +219,27 @@ namespace ConsoleUI_BL
                             switch (vl)
                             {
                                 case ViewList.BaseStation:
-                                    List<BaseStation> temp = new List<BaseStation>(bl.StationList());
-                                    foreach (BaseStation item in temp)
+                                    List<StationToL> temp = new List<StationToL>(bl.StationList());
+                                    foreach (StationToL item in temp)
                                     {
                                         Console.WriteLine(item);
-                                        Console.WriteLine("The drones in charge:");
-                                        foreach (DroneInCharge i in item.DroneSlots)
-                                            Console.Write(i.Id + " ");
-                                        Console.WriteLine();
                                     }
                                     break;
                                 case ViewList.Drone:
-                                    List<Drone> temp1 = new List<Drone>(bl.DroneList());
-                                    foreach (Drone item in temp1)
+                                    List<DroneToL> temp1 = new List<DroneToL>(bl.DroneList());
+                                    foreach (DroneToL item in temp1)
                                         Console.WriteLine(item);
                                     break;
                                 case ViewList.Customer:
-                                    List<Customer> temp2 = new List<Customer>(bl.CustomerList());
-                                    foreach (Customer item in temp2)
+                                    List<CustomerToL> temp2 = new List<CustomerToL>(bl.CustomerList());
+                                    foreach (CustomerToL item in temp2)
                                     {
                                         Console.WriteLine(item);
-                                        Console.WriteLine("The sent parcel:");
-                                        foreach (ParcelAtC i in item.SendParcel)
-                                            Console.Write(i.Id + " ");
-                                        Console.WriteLine();
-                                        Console.WriteLine("The recieved parcels:");
-                                        foreach (ParcelAtC i in item.GetParcel)
-                                            Console.Write(i.Id + " ");
-                                        Console.WriteLine();
                                     }
                                     break;
                                 case ViewList.Parcel:
-                                    List<Parcel> temp3 = new List<Parcel>(bl.ParcelList());
-                                    foreach (Parcel item in temp3)
+                                    List<ParcelToL> temp3 = new List<ParcelToL>(bl.ParcelList());
+                                    foreach (ParcelToL item in temp3)
                                         Console.WriteLine(item);
                                     break;
                                 case ViewList.NotConnected:
@@ -326,12 +314,12 @@ Enter id of a drone
 Id: 123
 Model: aaa
 Weight: Medium
-Battery: 21.64
+Battery: 21.49
 Status: Maintenance
 MyParcel:
 CurrentPlace:
-Longitude: 29.4
-Latitude: 34
+Longitude: 29.7
+Latitude: 33.9
 Enter a number:
 0- Exit,
 1- To add,
@@ -375,8 +363,8 @@ Battery: 100
 Status: Avaliable
 MyParcel:
 CurrentPlace:
-Longitude: 29.4
-Latitude: 34
+Longitude: 29.7
+Latitude: 33.9
 Enter a number:
 0- Exit,
 1- To add,
@@ -436,26 +424,68 @@ Weight: Medium
 Battery: 100
 Status: Delivery
 MyParcel:
-Id: 6
+Id: 9
 ParcelStatus: WaitToCollect
 Weight: Medium
 Priority: Emergency
 Sender:
-Id: 9
-Name:
-Receiver:
 Id: 3
 Name:
+Receiver:
+Id: 8
+Name:
 Collection:
-Longitude: 31
-Latitude: 34.5
+Longitude: 32.2
+Latitude: 33.7
 Destination:
-Longitude: 32.8
-Latitude: 34.4
-Distance: 200.373
-CurrentPlace:
-Longitude: 29.4
+Longitude: 33.4
 Latitude: 34
+Distance: 136.348
+CurrentPlace:
+Longitude: 29.7
+Latitude: 33.9
+Enter a number:
+0- Exit,
+1- To add,
+2- To update,
+3- To print,
+4- To print all.
+3
+Enter a number:
+1- To print a base station,
+2- To print a drone,
+3- To print a customer,
+4- To print a parcel.
+2
+Enter id of a drone
+123
+
+Id: 123
+Model: aaa
+Weight: Medium
+Battery: 100
+Status: Delivery
+MyParcel:
+Id: 9
+ParcelStatus: WaitToCollect
+Weight: Medium
+Priority: Emergency
+Sender:
+Id: 3
+Name:
+Receiver:
+Id: 8
+Name:
+Collection:
+Longitude: 32.2
+Latitude: 33.7
+Destination:
+Longitude: 33.4
+Latitude: 34
+Distance: 136.348
+CurrentPlace:
+Longitude: 29.7
+Latitude: 33.9
 Enter a number:
 0- Exit,
 1- To add,
@@ -470,18 +500,18 @@ Enter a number:
 4- To print a parcel.
 3
 Enter id of a customer
-9
+3
 
-Id: 9
+Id: 3
 Name:
 PhoneNum:
 Place:
-Longitude: 31
-Latitude: 34.5
+Longitude: 32.2
+Latitude: 33.7
 SendParcel: System.Linq.Enumerable+WhereSelectListIterator`2[IDAL.DO.Parcel,IBL.BO.ParcelAtC]
 GetParcel: System.Linq.Enumerable+WhereSelectListIterator`2[IDAL.DO.Parcel,IBL.BO.ParcelAtC]
 The sent parcels:
-6
+5 9 11
 The recieved parcels:
 
 Enter a number:
@@ -526,26 +556,26 @@ Weight: Medium
 Battery: 100
 Status: Delivery
 MyParcel:
-Id: 6
+Id: 9
 ParcelStatus: WaitToCollect
 Weight: Medium
 Priority: Emergency
 Sender:
-Id: 9
-Name:
-Receiver:
 Id: 3
 Name:
+Receiver:
+Id: 8
+Name:
 Collection:
-Longitude: 31
-Latitude: 34.5
+Longitude: 32.2
+Latitude: 33.7
 Destination:
-Longitude: 32.8
-Latitude: 34.4
-Distance: 200.373
-CurrentPlace:
-Longitude: 29.4
+Longitude: 33.4
 Latitude: 34
+Distance: 136.348
+CurrentPlace:
+Longitude: 29.7
+Latitude: 33.9
 Enter a number:
 0- Exit,
 1- To add,
@@ -579,26 +609,26 @@ Enter a number:
 4- To print a parcel.
 4
 Enter id of a parcel
-6
+9
 
-Id: 6
-Sender:
 Id: 9
+Sender:
+Id: 3
 Name:
 Receiver:
-Id: 3
+Id: 8
 Name:
 Weight: Medium
 Priority: Emergency
 MyDrone:
 Id: 123
-Battery: 82
+Battery: 72.14
 CurrentPlace:
-Longitude: 31
-Latitude: 34.5
-Requested: 30/11/2021 20:24:39
-Scheduled: 30/11/2021 20:25:44
-PickedUp: 30/11/2021 20:27:47
+Longitude: 32.2
+Latitude: 33.7
+Requested: 02/12/2021 23:12:34
+Scheduled: 02/12/2021 23:15:53
+PickedUp: 02/12/2021 23:18:17
 Delivered: 01/01/0001 00:00:00
 Enter a number:
 0- Exit,
@@ -633,27 +663,52 @@ Enter a number:
 4- To print a parcel.
 4
 Enter id of a parcel
-6
+9
 
-Id: 6
-Sender:
 Id: 9
+Sender:
+Id: 3
 Name:
 Receiver:
-Id: 3
+Id: 8
 Name:
 Weight: Medium
 Priority: Emergency
 MyDrone:
 Id: 123
-Battery: 62
+Battery: 58.51
 CurrentPlace:
-Longitude: 32.8
-Latitude: 34.4
-Requested: 30/11/2021 20:24:39
-Scheduled: 30/11/2021 20:25:44
-PickedUp: 30/11/2021 20:27:47
-Delivered: 30/11/2021 20:28:26
+Longitude: 33.4
+Latitude: 34
+Requested: 02/12/2021 23:12:34
+Scheduled: 02/12/2021 23:15:53
+PickedUp: 02/12/2021 23:18:17
+Delivered: 02/12/2021 23:18:56
+Enter a number:
+0- Exit,
+1- To add,
+2- To update,
+3- To print,
+4- To print all.
+3
+Enter a number:
+1- To print a base station,
+2- To print a drone,
+3- To print a customer,
+4- To print a parcel.
+2
+Enter id of a drone
+123
+
+Id: 123
+Model: bbb
+Weight: Medium
+Battery: 58.51
+Status: Avaliable
+MyParcel:
+CurrentPlace:
+Longitude: 33.4
+Latitude: 34
 Enter a number:
 0- Exit,
 1- To add,
@@ -738,12 +793,12 @@ Enter id of a base station
 Id: 1
 Name:
 Place:
-Longitude: 29.4
-Latitude: 34
-AvaliableSlots: 5
+Longitude: 29.7
+Latitude: 33.9
+AvaliableSlots: 1
 DroneSlots: System.Linq.Enumerable+WhereSelectListIterator`2[IDAL.DO.DroneCharge,IBL.BO.DroneInCharge]
 The drones in charge:
-
+2 3
 Enter a number:
 0- Exit,
 1- To add,
@@ -762,166 +817,113 @@ Enter a number:
 
 Id: 1
 Name:
-Place:
-Longitude: 29.4
-Latitude: 34
-AvaliableSlots: 5
-DroneSlots: System.Linq.Enumerable+WhereSelectListIterator`2[IDAL.DO.DroneCharge,IBL.BO.DroneInCharge]
-The drones in charge:
-
+AvaliableSlots: 1
+DisAvaliableSlots: 2
 
 Id: 2
 Name:
-Place:
-Longitude: 31.1
-Latitude: 35.3
-AvaliableSlots: 0
-DroneSlots: System.Linq.Enumerable+WhereSelectListIterator`2[IDAL.DO.DroneCharge,IBL.BO.DroneInCharge]
-The drones in charge:
-4
+AvaliableSlots: 4
+DisAvaliableSlots: 2
 
 Id: 444
 Name: zzz
-Place:
-Longitude: 30.1
-Latitude: 23.4
 AvaliableSlots: 31
-DroneSlots: System.Linq.Enumerable+WhereSelectListIterator`2[IDAL.DO.DroneCharge,IBL.BO.DroneInCharge]
-The drones in charge:
-
+DisAvaliableSlots: 0
 Enter a number:
 0- Exit,
 1- To add,
 2- To update,
 3- To print,
 4- To print all.
-2
-Enter a number:
-1- To update drone model,
-2- To update a base station,
-3- To update a customer,
-4- To update drone to charge,
-5- To update discharge drone,
-6- To update parcel to drone,
-7- To update parcel collect,
-8- To update parcel delivered.
-5
-Enter drone id and Charging time
 4
-1
 Enter a number:
-0- Exit,
-1- To add,
-2- To update,
-3- To print,
-4- To print all.
+1- To print all base stations,
+2- To print all drones,
+3- To print all customers,
+4- To print all parcels,
+5- To print all not- connected parcels,
+6- To print all avaliable base stations.
 3
-Enter a number:
-1- To print a base station,
-2- To print a drone,
-3- To print a customer,
-4- To print a parcel.
-1
-Enter id of a base station
-2
+
+Id: 1
+Name:
+PhoneNum:
+NumArrived: 0
+NumSend: 1
+NumGot: 0
+NumOnWay: 0
 
 Id: 2
 Name:
-Place:
-Longitude: 31.1
-Latitude: 35.3
-AvaliableSlots: 1
-DroneSlots: System.Linq.Enumerable+WhereSelectListIterator`2[IDAL.DO.DroneCharge,IBL.BO.DroneInCharge]
-The drones in charge:
+PhoneNum:
+NumArrived: 0
+NumSend: 2
+NumGot: 0
+NumOnWay: 0
 
-Enter a number:
-0- Exit,
-1- To add,
-2- To update,
-3- To print,
-4- To print all.
-1
-Enter a number:
-1- To add a base station,
-2- To add a drone,
-3- To add a customer,
-4- To add a parcel.
-2
-Enter id, model, max weight and station num of a drone
-7654
-wertre
-2
-1
-Enter a number:
-0- Exit,
-1- To add,
-2- To update,
-3- To print,
-4- To print all.
-3
-Enter a number:
-1- To print a base station,
-2- To print a drone,
-3- To print a customer,
-4- To print a parcel.
-2
-Enter id of a drone
-7654
+Id: 3
+Name:
+PhoneNum:
+NumArrived: 1
+NumSend: 2
+NumGot: 0
+NumOnWay: 0
 
-Id: 7654
-Model: wertre
-Weight: Heavy
-Battery: 39.79
-Status: Maintenance
-MyParcel:
-CurrentPlace:
-Longitude: 29.4
-Latitude: 34
-Enter a number:
-0- Exit,
-1- To add,
-2- To update,
-3- To print,
-4- To print all.
-2
-Enter a number:
-1- To update drone model,
-2- To update a base station,
-3- To update a customer,
-4- To update drone to charge,
-5- To update discharge drone,
-6- To update parcel to drone,
-7- To update parcel collect,
-8- To update parcel delivered.
-5
-Enter drone id and Charging time
-7654
-0.5
-Enter a number:
-0- Exit,
-1- To add,
-2- To update,
-3- To print,
-4- To print all.
-3
-Enter a number:
-1- To print a base station,
-2- To print a drone,
-3- To print a customer,
-4- To print a parcel.
-2
-Enter id of a drone
-7654
+Id: 4
+Name:
+PhoneNum:
+NumArrived: 0
+NumSend: 0
+NumGot: 0
+NumOnWay: 0
 
-Id: 7654
-Model: wertre
-Weight: Heavy
-Battery: 64.78
-Status: Avaliable
-MyParcel:
-CurrentPlace:
-Longitude: 29.4
-Latitude: 34
+Id: 5
+Name:
+PhoneNum:
+NumArrived: 0
+NumSend: 2
+NumGot: 0
+NumOnWay: 0
+
+Id: 6
+Name:
+PhoneNum:
+NumArrived: 0
+NumSend: 0
+NumGot: 0
+NumOnWay: 0
+
+Id: 7
+Name:
+PhoneNum:
+NumArrived: 0
+NumSend: 0
+NumGot: 0
+NumOnWay: 0
+
+Id: 8
+Name:
+PhoneNum:
+NumArrived: 0
+NumSend: 0
+NumGot: 1
+NumOnWay: 0
+
+Id: 9
+Name:
+PhoneNum:
+NumArrived: 0
+NumSend: 1
+NumGot: 0
+NumOnWay: 0
+
+Id: 10
+Name:
+PhoneNum:
+NumArrived: 0
+NumSend: 2
+NumGot: 0
+NumOnWay: 0
 Enter a number:
 0- Exit,
 1- To add,

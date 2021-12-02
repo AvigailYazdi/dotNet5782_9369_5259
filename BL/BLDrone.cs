@@ -167,10 +167,10 @@ namespace IBL
         /// A function that returns the drones
         /// </summary>
         /// <returns>List of drones</returns>
-        public IEnumerable<BO.Drone> DroneList()
+        public IEnumerable<BO.DroneToL> DroneList()
         {
-            return from item in dl.ListDrone()
-                   select GetDrone(item.Id);
+            return from item in dList
+                   select item;
         }
     }
 }

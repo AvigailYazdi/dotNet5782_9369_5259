@@ -42,7 +42,7 @@ namespace IBL
                     if (temp.ParcelId > 0 && dl.GetParcel(temp.ParcelId).Delivered == t)
                     {
                         IDAL.DO.Parcel p = dl.GetParcel(temp.ParcelId);
-                        temp.Status = BO.DroneStatus.Delivery;//
+                        temp.Status = BO.DroneStatus.Delivery;
                         IDAL.DO.Customer senderDo = dl.GetCustomer(p.SenderId);
                         IDAL.DO.Customer targetDo = dl.GetCustomer(p.TargetId);
                         if (p.PickedUp == t)
@@ -67,7 +67,6 @@ namespace IBL
                         stationDo = bs.ElementAtOrDefault(rand.Next(0, bs.Count()));
                         temp.CurrentPlace = new BO.Location() { Longitude = stationDo.Longitude, Latitude = stationDo.Latitude };
                         temp.Battery = rand.Next(0, 20 * 100) / 100.0;
-                        dl.UpdateChargeDrone(temp.Id, stationDo.Id);
                     }
                     if (temp.Status == BO.DroneStatus.Avaliable)
                     {

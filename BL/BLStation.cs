@@ -90,10 +90,17 @@ namespace IBL
         /// A function that returns stations
         /// </summary>
         /// <returns>List of stations</returns>
-        public IEnumerable<BO.BaseStation> StationList()
+        public IEnumerable<BO.StationToL> StationList()
         {
             return from item in dl.ListBaseStation()
-                   select GetStation(item.Id);
+                   let s = GetStation(item.Id)
+                   select new BO.StationToL()
+                   {
+                       Id= s.Id,
+                       Name= s.Name,
+                       AvaliableSlots= s.AvaliableSlots,
+                       DisAvaliableSlots= dl.NumOfNotAvaliableSlots(s.Id)
+                   };
         }
         /// <summary>
         /// A function that returns the stations with avaliable slots

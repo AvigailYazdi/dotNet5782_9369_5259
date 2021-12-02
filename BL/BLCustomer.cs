@@ -105,10 +105,20 @@ namespace IBL
         /// A function that returns the list of all the customers
         /// </summary>
         /// <returns> All the customers</returns>
-        public IEnumerable<BO.Customer> CustomerList()
+        public IEnumerable<BO.CustomerToL> CustomerList()
         {
             return from item in dl.ListCustomer()
-                   select GetCustomer(item.Id);
+                   let c = GetCustomer(item.Id)
+                   select new BO.CustomerToL()
+                   {
+                       Id = c.Id,
+                       Name= c.Name,
+                       PhoneNum= c.PhoneNum,
+                       NumArrived= getSentAndProviededParcels(c.Id).Count(),
+                       NumSend= getSentAndNotProviededParcels(c.Id).Count(),
+                       NumGot=c.GetParcel.Count(),
+                       NumOnWay= getOnWayParcels(c.Id).Count()
+                   };
         }
     }
 }
