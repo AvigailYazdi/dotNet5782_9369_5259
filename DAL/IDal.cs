@@ -26,7 +26,6 @@ namespace IDAL
         public BaseStation GetBaseStation(int id);
         public void UpdateStation(BaseStation bs);
         public IEnumerable<BaseStation> ListBaseStation();
-        public IEnumerable<BaseStation> ListAvaliableSlots();
         public void DeleteStation(int id);
         public IEnumerable<BaseStation> GetStationsByPerdicate(Predicate<BaseStation> predicate);
 
@@ -47,7 +46,6 @@ namespace IDAL
         public Parcel GetParcel(int id);
         public void UpdateParcel(Parcel p);
         public IEnumerable<Parcel> ListParcel();
-        public IEnumerable<Parcel> ListNotConnected();
         public void DeleteParcel(int id);
         public IEnumerable<Parcel> GetParcelsByPerdicate(Predicate<Parcel> predicate);
 

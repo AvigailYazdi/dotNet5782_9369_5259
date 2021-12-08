@@ -61,15 +61,14 @@ namespace IBL
         /// <returns> Returns the status</returns>
         private BO.ParcelStatus getParcelStatus(int id)
         {
-            DateTime t = new DateTime();
             try
             {
                 IDAL.DO.Parcel p = dl.GetParcel(id);
-                if (p.Delivered != t) // The parcel delivered
+                if (p.Delivered != null) // The parcel delivered
                     return BO.ParcelStatus.Provided;
-                if (p.PickedUp != t) // The parcel Picked up
+                if (p.PickedUp != null) // The parcel Picked up
                     return BO.ParcelStatus.PickedUp;
-                if (p.Scheduled != t) // The parcel connected
+                if (p.Scheduled != null) // The parcel connected
                     return BO.ParcelStatus.Connected;
                 return BO.ParcelStatus.Created; // The parcel created
             }
@@ -343,7 +342,7 @@ namespace IBL
         /// <returns> not connected parcels list</returns>
         public IEnumerable<BO.Parcel> NotConnectedParcelList()
         {
-            return from item in dl.ListNotConnected()
+            return from item in dl.GetParcelsByPerdicate(p => p.DroneId == 0)
                    select GetParcel(item.Id);
         }
     }

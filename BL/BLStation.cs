@@ -108,7 +108,7 @@ namespace IBL
         /// <returns>List of stations with avaliable slots</returns>
         public IEnumerable<BO.BaseStation> AvaliableStationList()
         {
-            return from item in dl.ListAvaliableSlots()
+            return from item in dl.GetStationsByPerdicate(s => s.ChargeSlots != 0)
                    select GetStation(item.Id);
         }
     }

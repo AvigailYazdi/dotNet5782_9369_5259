@@ -31,7 +31,6 @@ namespace IBL
                          CurrentPlace = new BO.Location(),
                          ParcelId = dl.GetConnectParcel(item.Id)
                      }).ToList();
-            DateTime t = new DateTime();
             IDAL.DO.BaseStation stationDo;
             double distance1, distance2;
             try
@@ -39,13 +38,13 @@ namespace IBL
                 foreach (var item in dList.ToList())
                 {
                     BO.DroneToL temp = GetDroneToL(item.Id);
-                    if (temp.ParcelId > 0 && dl.GetParcel(temp.ParcelId).Delivered == t)
+                    if (temp.ParcelId > 0 && dl.GetParcel(temp.ParcelId).Delivered == null)
                     {
                         IDAL.DO.Parcel p = dl.GetParcel(temp.ParcelId);
                         temp.Status = BO.DroneStatus.Delivery;
                         IDAL.DO.Customer senderDo = dl.GetCustomer(p.SenderId);
                         IDAL.DO.Customer targetDo = dl.GetCustomer(p.TargetId);
-                        if (p.PickedUp == t)
+                        if (p.PickedUp == null)
                         {
                             stationDo = closeStation(senderDo.Longitude, senderDo.Latitude);
                             temp.CurrentPlace = new BO.Location() { Longitude = stationDo.Longitude, Latitude = stationDo.Latitude };
@@ -70,7 +69,7 @@ namespace IBL
                     }
                     if (temp.Status == BO.DroneStatus.Avaliable)
                     {
-                        IEnumerable<IDAL.DO.Parcel> p = dl.GetParcelsByPerdicate(it => it.Delivered != t);
+                        IEnumerable<IDAL.DO.Parcel> p = dl.GetParcelsByPerdicate(it => it.Delivered != null);
                         if (p.Count() != 0)
                         {
                             IDAL.DO.Parcel pc = p.ElementAtOrDefault(rand.Next(0, p.Count()));

@@ -121,14 +121,6 @@ namespace DalObject
                    select item;
         }
         /// <summary>
-        /// A function that showes the list of the not connected parcels
-        /// </summary>
-        /// <returns> returns the list of the not connected parcels</returns>
-        public IEnumerable<Parcel> ListNotConnected()
-        {
-            return GetParcelsByPerdicate(p => p.DroneId == 0);
-        }
-        /// <summary>
         /// A function that deletes a parcel from the list
         /// </summary>
         /// <param name="id"> the id of a parcel to delete</param>

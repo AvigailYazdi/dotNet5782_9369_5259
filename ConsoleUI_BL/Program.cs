@@ -219,36 +219,36 @@ namespace ConsoleUI_BL
                             switch (vl)
                             {
                                 case ViewList.BaseStation:
-                                    List<StationToL> temp = new List<StationToL>(bl.StationList());
+                                    IEnumerable<StationToL> temp = bl.StationList();
                                     foreach (StationToL item in temp)
                                     {
                                         Console.WriteLine(item);
                                     }
                                     break;
                                 case ViewList.Drone:
-                                    List<DroneToL> temp1 = new List<DroneToL>(bl.DroneList());
+                                    IEnumerable<DroneToL> temp1 = bl.DroneList();
                                     foreach (DroneToL item in temp1)
                                         Console.WriteLine(item);
                                     break;
                                 case ViewList.Customer:
-                                    List<CustomerToL> temp2 = new List<CustomerToL>(bl.CustomerList());
+                                    IEnumerable<CustomerToL> temp2 = bl.CustomerList();
                                     foreach (CustomerToL item in temp2)
                                     {
                                         Console.WriteLine(item);
                                     }
                                     break;
                                 case ViewList.Parcel:
-                                    List<ParcelToL> temp3 = new List<ParcelToL>(bl.ParcelList());
+                                    IEnumerable<ParcelToL> temp3 = bl.ParcelList();
                                     foreach (ParcelToL item in temp3)
                                         Console.WriteLine(item);
                                     break;
                                 case ViewList.NotConnected:
-                                    List<Parcel> temp4 = new List<Parcel>(bl.NotConnectedParcelList());
+                                    IEnumerable<Parcel> temp4 = bl.NotConnectedParcelList();
                                     foreach (Parcel item in temp4)
                                         Console.WriteLine(item);
                                     break;
                                 case ViewList.AvaliableSlots:
-                                    List<BaseStation> temp5 = new List<BaseStation>(bl.AvaliableStationList());
+                                    IEnumerable<BaseStation> temp5 = bl.AvaliableStationList();
                                     foreach (BaseStation item in temp5)
                                         Console.WriteLine(item);
                                     break;

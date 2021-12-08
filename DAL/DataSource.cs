@@ -79,9 +79,9 @@ namespace DalObject
                     Priority = (Priorities)rand.Next(3),
                     Requested = DateTime.Now,
                     DroneId = 0,
-                    Scheduled= new DateTime(),
-                    Delivered= new DateTime(),
-                    PickedUp = new DateTime(),
+                    Scheduled= null,
+                    Delivered= null,
+                    PickedUp = null,
                 };
                 parcels.Add(p);
                 config.parcelId++;

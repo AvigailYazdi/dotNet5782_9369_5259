@@ -20,7 +20,6 @@ namespace DalObject
         {
             return customers.Any(cs => cs.Id == id);
         }
-        /////////////////////////////////////////////update
         /// <summary>
         /// A function that adds a customer to the array
         /// </summary>

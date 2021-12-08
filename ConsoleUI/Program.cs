@@ -193,32 +193,32 @@ namespace ConsoleUI
                             switch (vl)
                             {
                                 case ViewList.BaseStation:
-                                    List<BaseStation> temp = new List<BaseStation>(dal.ListBaseStation());
+                                    IEnumerable<BaseStation> temp = dal.ListBaseStation();
                                     foreach (BaseStation item in temp)
                                         Console.WriteLine(item);
                                     break;
                                 case ViewList.Drone:
-                                    List<Drone> temp1 = new List<Drone>(dal.ListDrone());
+                                    IEnumerable<Drone> temp1 = dal.ListDrone();
                                     foreach (Drone item in temp1)
                                         Console.WriteLine(item);
                                     break;
                                 case ViewList.Customer:
-                                    List<Customer> temp2 = new List<Customer>(dal.ListCustomer());
+                                    IEnumerable<Customer> temp2 = dal.ListCustomer();
                                     foreach (Customer item in temp2)
                                         Console.WriteLine(item);
                                     break;
                                 case ViewList.Parcel:
-                                    List<Parcel> temp3 = new List<Parcel>(dal.ListParcel());
+                                    IEnumerable<Parcel> temp3 = dal.ListParcel();
                                     foreach (Parcel item in temp3)
                                         Console.WriteLine(item);
                                     break;
                                 case ViewList.NotConnected:
-                                    List<Parcel> temp4 = new List<Parcel>(dal.ListNotConnected());
+                                    IEnumerable<Parcel> temp4 = dal.GetParcelsByPerdicate(p => p.DroneId == 0);
                                     foreach (Parcel item in temp4)
                                         Console.WriteLine(item);
                                     break;
                                 case ViewList.AvaliableSlots:
-                                    List<BaseStation> temp5 = new List<BaseStation>(dal.ListAvaliableSlots());
+                                    IEnumerable<BaseStation> temp5 = dal.GetStationsByPerdicate(s => s.ChargeSlots != 0);
                                     foreach (BaseStation item in temp5)
                                         Console.WriteLine(item);
                                     break;

@@ -76,14 +76,6 @@ namespace DalObject
                    select item;
         }
         /// <summary>
-        /// A function that showes the list of the stations with avaliable slots
-        /// </summary>
-        /// <returns> returns the list of the stations with avaliable slots</returns>
-        public IEnumerable<BaseStation> ListAvaliableSlots()
-        {
-            return GetStationsByPerdicate(s => s.ChargeSlots != 0);
-        }
-        /// <summary>
         /// A function that deletes a station from the list
         /// </summary>
         /// <param name="id"> The station id to delete</param>
