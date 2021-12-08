@@ -172,5 +172,12 @@ namespace IBL
             return from item in dList
                    select item;
         }
+
+        public IEnumerable<BO.DroneToL> GetDronesByPerdicate(Predicate<BO.DroneToL> predicate)
+        {
+            return from item in dList
+                   where predicate(item)
+                   select item;
+        }
     }
 }

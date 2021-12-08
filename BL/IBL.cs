@@ -15,6 +15,7 @@ namespace IBL
         public void UpdateDisChargeDrone(int id, double time);
         public BO.Drone GetDrone(int id);
         public IEnumerable<BO.DroneToL> DroneList();
+        public IEnumerable<BO.DroneToL> GetDronesByPerdicate(Predicate<BO.DroneToL> predicate);
         #endregion
         #region Parcel
         public void AddParcel(BO.Parcel parcel);

@@ -101,7 +101,7 @@ namespace IBL
             double min = 1000000000000;
             double dis;
             int id = 0;
-            foreach (var item in dl.ListAvaliableSlots())
+            foreach (var item in dl.GetStationsByPerdicate(s=>s.ChargeSlots!=0))
             {
                 dis = dl.DistanceInKm(lon1, lat1, item.Longitude, item.Latitude);
                 if (dis < min)
