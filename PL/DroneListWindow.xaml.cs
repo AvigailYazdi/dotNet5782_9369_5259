@@ -26,13 +26,28 @@ namespace PL
             bL = bl;
             DronesListView.ItemsSource = bl.DroneList();
             StatusSelector.ItemsSource = Enum.GetValues(typeof(IBL.BO.DroneStatus));
-
+            WeightSelector.ItemsSource = Enum.GetValues(typeof(IBL.BO.WeightCategories));
         }
 
         private void StatusSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            DronesListView.ItemsSource = bL.GetDronesByPerdicate(d => d.Status == (IBL.BO.DroneStatus)StatusSelector.SelectedItem);
-            DronesListView.ItemsSource.
+            if (WeightSelector.SelectedIndex == -1)
+                DronesListView.ItemsSource = bL.GetDronesByPerdicate(d => d.Status == (IBL.BO.DroneStatus)StatusSelector.SelectedItem);
+            else
+                DronesListView.ItemsSource = bL.GetDronesByPerdicate(d => d.Status == (IBL.BO.DroneStatus)StatusSelector.SelectedItem && d.Weight == (IBL.BO.WeightCategories)WeightSelector.SelectedItem);
+        }
+
+        private void WeightSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (StatusSelector.SelectedIndex == -1)
+                DronesListView.ItemsSource = bL.GetDronesByPerdicate(d => d.Weight == (IBL.BO.WeightCategories)WeightSelector.SelectedItem);
+            else
+                DronesListView.ItemsSource = bL.GetDronesByPerdicate(d => d.Weight == (IBL.BO.WeightCategories)WeightSelector.SelectedItem && d.Status == (IBL.BO.DroneStatus)StatusSelector.SelectedItem);
+        }
+
+        private void AddDroneButton_Click(object sender, RoutedEventArgs e)
+        {
+            new DroneWindow(bL).Show();
         }
     }
 }
