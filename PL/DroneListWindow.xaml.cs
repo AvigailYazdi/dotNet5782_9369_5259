@@ -32,7 +32,6 @@ namespace PL
         private void StatusSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             DronesListView.ItemsSource = bL.GetDronesByPerdicate(d => d.Status == (IBL.BO.DroneStatus)StatusSelector.SelectedItem);
-            DronesListView.ItemsSource.
         }
     }
 }

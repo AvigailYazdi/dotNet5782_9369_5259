@@ -19,6 +19,7 @@ namespace DalObject
         {
             return dronesCharge.Any(b => b.DroneId == id);
         }
+
         /// <summary>
         /// A function that returns the sdrones in chrges that stand in a condition 
         /// </summary>
@@ -30,6 +31,7 @@ namespace DalObject
                    where predicate(item)
                    select item;
         }
+
         /// <summary>
         /// A function that returns a drone charge by its id
         /// </summary>
@@ -41,6 +43,7 @@ namespace DalObject
                 throw new MissingIdException(id, "Drone Charge");
             return dronesCharge.Find(s => s.DroneId == id);
         }
+
         /// <summary>
         /// A function that deletes a drone charge from the list
         /// </summary>

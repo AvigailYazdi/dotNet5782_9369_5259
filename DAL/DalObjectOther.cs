@@ -27,6 +27,7 @@ namespace DalObject
                 return str + "S";
             return str + "E";
         }
+
         /// <summary>
         /// A function that calculates the distance 
         /// </summary>
@@ -45,6 +46,7 @@ namespace DalObject
             double d = R * c; // Distance in km
             return (int)(d * 1000) / 1000.0;
         }
+
         /// <summary>
         /// A function that is part of the function 'DistanceInKm'
         /// </summary>
@@ -54,6 +56,7 @@ namespace DalObject
         {
             return deg * (Math.PI / 180);
         }
+
         /// <summary>
         /// A function that returns the static properties
         /// </summary>

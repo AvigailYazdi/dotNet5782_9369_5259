@@ -181,7 +181,8 @@ namespace ConsoleUI_BL
                                 case AddOrView.Drone:
                                     Console.WriteLine("Enter id of a drone");
                                     d = bl.GetDrone(int.Parse(Console.ReadLine()));
-                                    Console.WriteLine(d);
+                                    Console.WriteLine(d); 
+                                    Console.WriteLine();
                                     break;
                                 case AddOrView.Customer:
                                     Console.WriteLine("Enter id of a customer");
@@ -200,6 +201,7 @@ namespace ConsoleUI_BL
                                     Console.WriteLine("Enter id of a parcel");
                                     p = bl.GetParcel(int.Parse(Console.ReadLine()));
                                     Console.WriteLine(p);
+                                    Console.WriteLine();
                                     break;
                                 default:
                                     break;
@@ -224,11 +226,13 @@ namespace ConsoleUI_BL
                                     {
                                         Console.WriteLine(item);
                                     }
+                                    Console.WriteLine();
                                     break;
                                 case ViewList.Drone:
                                     IEnumerable<DroneToL> temp1 = bl.DroneList();
                                     foreach (DroneToL item in temp1)
                                         Console.WriteLine(item);
+                                    Console.WriteLine();
                                     break;
                                 case ViewList.Customer:
                                     IEnumerable<CustomerToL> temp2 = bl.CustomerList();
@@ -236,21 +240,25 @@ namespace ConsoleUI_BL
                                     {
                                         Console.WriteLine(item);
                                     }
+                                    Console.WriteLine();
                                     break;
                                 case ViewList.Parcel:
                                     IEnumerable<ParcelToL> temp3 = bl.ParcelList();
                                     foreach (ParcelToL item in temp3)
                                         Console.WriteLine(item);
+                                    Console.WriteLine();
                                     break;
                                 case ViewList.NotConnected:
                                     IEnumerable<Parcel> temp4 = bl.NotConnectedParcelList();
                                     foreach (Parcel item in temp4)
                                         Console.WriteLine(item);
+                                    Console.WriteLine();
                                     break;
                                 case ViewList.AvaliableSlots:
                                     IEnumerable<BaseStation> temp5 = bl.AvaliableStationList();
                                     foreach (BaseStation item in temp5)
                                         Console.WriteLine(item);
+                                    Console.WriteLine();
                                     break;
                                 default:
                                     break;

@@ -29,33 +29,60 @@ namespace DalObject
         internal static List<Customer> customers=new List<Customer>();
         internal static List<Parcel> parcels=new List<Parcel>();
         private static Random rand = new Random(DateTime.Now.Millisecond);
+
+
+        enum Name { Aviad,Shilat,Nitay,Rinat,Itay,Avigail,Yehuda,Eyal,Michal,Talya};
+        enum BaseName { Macabim,Yarden};
+        enum ModelName { GC126, UI538X,E765,RFT3,H234};
+
+        /// <summary>
+        /// A function that initialize the first ten customers in the array
+        /// </summary>
+        private static void createCustomer()
+        {
+            for (int i = 0; i < 10; i++)
+            {
+                Customer c = new Customer()
+                {
+                    Id = 212435840+i,//rand.Next(100000000, 1000000000),
+                    Name = ((Name)i).ToString(),
+                    Phone = "0" + rand.Next(50000000, 56000000).ToString()+i,
+                    Longitude = (double)rand.Next(293, 336) / 10,
+                    Latitude = (double)rand.Next(337, 363) / 10,
+                };
+                customers.Add(c);
+            }
+        }
+
         /// <summary>
         /// A function that initialize the first five drones in the array
         /// </summary>
         private static void createDrone()
         {
-            Drone d=new Drone();
-            int count = 1;
             for (int i = 0; i < 5; i++)
             {
-                d.Id = count++;// rand.Next(1000, 10000);
-                d.MaxWeight = (WeightCategories)rand.Next(3);
-                d.Model = "";
+                Drone d = new Drone()
+                {
+                    Id = 450 + i,// rand.Next(1000, 10000);
+                    MaxWeight = (WeightCategories)rand.Next(3),
+                    Model = ((ModelName)i).ToString()
+
+                };
                 drones.Add(d);
             }
         }
+
         /// <summary>
         /// A function that initialize the first two stations in the array
         /// </summary>
         private static void createBaseStation()
         {
-            int count = 1;
             for (int i = 0; i < 2; i++)
             {
                 BaseStation s = new BaseStation()
                 {
-                    Id = count++,//rand.Next(1000, 10000);
-                    Name = "",
+                    Id = 21001+i,//rand.Next(1000, 10000);
+                    Name = ((BaseName)i).ToString(),
                     Longitude = (double)rand.Next(293, 336) / 10,
                     Latitude = (double)rand.Next(337, 363) / 10,
                     ChargeSlots = rand.Next(0, 11)
@@ -63,6 +90,7 @@ namespace DalObject
                 stations.Add(s);
             }
         }
+
         /// <summary>
         /// A function that initialize the first ten parcels in the array
         /// </summary>
@@ -73,8 +101,8 @@ namespace DalObject
                 Parcel p = new Parcel()
                 {
                     Id = config.parcelId,
-                    SenderId = rand.Next(1, 11),//rand.Next(100000000, 1000000000),
-                    TargetId = rand.Next(1, 11), //rand.Next(100000000, 1000000000),
+                    SenderId = rand.Next(212435840, 212435850),//rand.Next(100000000, 1000000000),
+                    TargetId = rand.Next(212435840, 212435850), //rand.Next(100000000, 1000000000),
                     Weight = (WeightCategories)rand.Next(3),
                     Priority = (Priorities)rand.Next(3),
                     Requested = DateTime.Now,
@@ -87,25 +115,7 @@ namespace DalObject
                 config.parcelId++;
             }
         }
-        /// <summary>
-        /// A function that initialize the first ten customers in the array
-        /// </summary>
-        private static void createCustomer()
-        {
-            int count = 1;
-            for (int i = 0; i < 10; i++)
-            {
-                Customer c = new Customer()
-                {
-                    Id = count++,//rand.Next(100000000, 1000000000),
-                    Name = "",
-                    Phone = "",
-                    Longitude = (double)rand.Next(293, 336) / 10,
-                    Latitude = (double)rand.Next(337, 363) / 10,
-                };
-                customers.Add(c);
-            }
-        }
+
         /// <summary>
         /// A function that initialize all the arrays
         /// </summary>

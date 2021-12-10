@@ -20,6 +20,7 @@ namespace DalObject
         {
             return customers.Any(cs => cs.Id == id);
         }
+
         /// <summary>
         /// A function that adds a customer to the array
         /// </summary>
@@ -30,6 +31,7 @@ namespace DalObject
                 throw new DuplicateIdException(c.Id, "Customer");
             customers.Add(c);
         }
+
         /// <summary>
         /// A function that shows the requested customer
         /// </summary>
@@ -41,6 +43,7 @@ namespace DalObject
                 throw new MissingIdException(id, "Customer");
             return customers.Find(c => c.Id == id);
         }
+
         /// <summary>
         /// A function that updates a coustomer
         /// </summary>
@@ -50,6 +53,7 @@ namespace DalObject
             DeleteCustomer(c.Id);
             AddCustomer(c);
         }
+
         /// <summary>
         /// A function that showes the list of the customer
         /// </summary>
@@ -59,6 +63,7 @@ namespace DalObject
             return from item in customers
                    select item;
         }
+
         /// <summary>
         /// A function that deletes a customer from the list
         /// </summary>
@@ -69,6 +74,7 @@ namespace DalObject
                 throw new MissingIdException(id, "Customer");
             customers.RemoveAll(c=>c.Id==id);
         }
+
         /// <summary>
         /// A function that returns the customers that stand in a condition
         /// </summary>

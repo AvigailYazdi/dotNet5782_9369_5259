@@ -18,6 +18,7 @@ namespace DalObject
         {
             Initialize();
         }
+
         /// <summary>
         /// A function that checks if a drone appears in the list
         /// </summary>
@@ -26,6 +27,7 @@ namespace DalObject
         {
             return drones.Any(dn => dn.Id == id);
         }
+
         /// <summary>
         ///  A function that adds a drone to the array
         /// </summary>
@@ -36,6 +38,12 @@ namespace DalObject
                 throw new DuplicateIdException(d.Id, "Drone");
             drones.Add(d);
         }
+
+        /// <summary>
+        /// A function that returns the id of the parcel that the drone is connected to, else -1
+        /// </summary>
+        /// <param name="id">the id of a derone to check</param>
+        /// <returns>the id of the connected parcel, else -1</returns>
         public int GetConnectParcel(int id)
         {
             Parcel pr=new Parcel() { };
@@ -46,6 +54,7 @@ namespace DalObject
             else
                 return -1;
         }
+
         /// <summary>
         /// A function that updates a drone into a charge slot of a station
         /// </summary>
@@ -72,6 +81,7 @@ namespace DalObject
             dc.StationId = baseStationId;
             dronesCharge.Add(dc);
         }
+
         /// <summary>
         /// A function that discharge a drone from a charge slot of a station
         /// </summary>
@@ -100,6 +110,7 @@ namespace DalObject
             }
             DeleteDroneCharge(droneId);
         }
+
         /// <summary>
         /// A function that shows the requested drone
         /// </summary>
@@ -111,6 +122,7 @@ namespace DalObject
                 throw new MissingIdException(id, "Drone");
             return drones.Find(d => d.Id == id);
         }
+
         /// <summary>
         /// A function that updates a drone
         /// </summary>
@@ -120,6 +132,7 @@ namespace DalObject
             DeleteDrone(d.Id);
             AddDrone(d);
         }
+
         /// <summary>
         /// A function that showes the list of the drones
         /// </summary>
@@ -129,6 +142,7 @@ namespace DalObject
             return from item in drones
                    select item;
         }
+
         /// <summary>
         /// A function that deletes a drone from the list
         /// </summary>
@@ -139,6 +153,7 @@ namespace DalObject
                 throw new MissingIdException(id, "Drone");
             drones.RemoveAll(d=>d.Id==id);
         }
+
         /// <summary>
         /// A function that returns the drones that stand in a condition
         /// </summary>

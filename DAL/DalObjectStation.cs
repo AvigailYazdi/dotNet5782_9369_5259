@@ -19,6 +19,7 @@ namespace DalObject
         {
             return stations.Any(b => b.Id == id);
         }
+
         /// <summary>
         /// A function that returns the number of not avaliable slots in a certain station
         /// </summary>
@@ -36,6 +37,7 @@ namespace DalObject
             }
             return count;
         }
+
         /// <summary>
         /// A function that adds a station to the array
         /// </summary>
@@ -46,6 +48,7 @@ namespace DalObject
                 throw new DuplicateIdException(bs.Id, "Base station");
             stations.Add(bs);
         }
+
         /// <summary>
         /// A function that shows the requested station
         /// </summary>
@@ -57,6 +60,7 @@ namespace DalObject
                 throw new MissingIdException(id, "Base Station");
             return stations.Find(s => s.Id == id);
         }
+
         /// <summary>
         /// A function that updates a station
         /// </summary>
@@ -66,6 +70,7 @@ namespace DalObject
             DeleteStation(bs.Id);
             AddBaseStation(bs);
         }
+
         /// <summary>
         /// A function that shows the list of the stations
         /// </summary>
@@ -75,6 +80,7 @@ namespace DalObject
             return from item in stations
                    select item;
         }
+
         /// <summary>
         /// A function that deletes a station from the list
         /// </summary>
@@ -85,6 +91,7 @@ namespace DalObject
                 throw new MissingIdException(id, "Base Station");
             stations.RemoveAll(b=>b.Id==id);
         }
+
         /// <summary>
         /// A function that returns the stations that stand in a condition 
         /// </summary>

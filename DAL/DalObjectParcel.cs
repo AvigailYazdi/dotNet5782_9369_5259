@@ -19,6 +19,7 @@ namespace DalObject
         {
             return parcels.Any(ps => ps.Id == id);
         }
+
         /// <summary>
         /// A function that adds a parcel to the array
         /// </summary>
@@ -30,6 +31,7 @@ namespace DalObject
             p.Id = config.parcelId++;
             parcels.Add(p);
         }
+
         /// <summary>
         /// A function that updates a parcel
         /// </summary>
@@ -39,6 +41,7 @@ namespace DalObject
             DeleteParcel(p.Id);
             AddParcel(p);
         }
+
         /// <summary>
         /// A function that connects between a parcel and a drone
         /// </summary>
@@ -62,6 +65,7 @@ namespace DalObject
                 }
             }
         }
+
         /// <summary>
         /// A function that updates the time of picking up the parcel
         /// </summary>
@@ -81,6 +85,7 @@ namespace DalObject
                 }
             }
         }
+
         /// <summary>
         /// A function that updates the time of parcel delivery
         /// </summary>
@@ -100,6 +105,7 @@ namespace DalObject
                 }
             }
         }
+
         /// <summary>
         /// A function that shows the requested parcel
         /// </summary>
@@ -111,6 +117,7 @@ namespace DalObject
                 throw new MissingIdException(id, "Parcel");
             return parcels.Find(p => p.Id == id);
         }
+
         /// <summary>
         /// A function that showes the list of the parcels
         /// </summary>
@@ -120,6 +127,7 @@ namespace DalObject
             return from item in parcels
                    select item;
         }
+
         /// <summary>
         /// A function that deletes a parcel from the list
         /// </summary>
@@ -130,6 +138,7 @@ namespace DalObject
                 throw new MissingIdException(id, "Parcel");
             parcels.RemoveAll(pr=>pr.Id==id);/////////////לשנות
         }
+
         /// <summary>
         /// A function that returns the parcels that stand in a condition
         /// </summary>
