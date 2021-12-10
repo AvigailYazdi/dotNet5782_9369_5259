@@ -19,9 +19,12 @@ namespace PL
     /// </summary>
     public partial class DroneWindow : Window
     {
-        public DroneWindow()
+        IBL.BL bL;
+        public DroneWindow(IBL.BL bl)
         {
             InitializeComponent();
+            bL = bl;
+            WeightCBox.ItemsSource = Enum.GetValues(typeof(IBL.BO.WeightCategories));
         }
     }
 }
