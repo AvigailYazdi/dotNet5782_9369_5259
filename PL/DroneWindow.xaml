@@ -5,14 +5,18 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
-        Title="DroneWindow" Height="450" Width="800">
+        Title="DroneWindow" Height="450" Width="800" >
     <Grid>
-        <Label x:Name="IdLabel" Content="ID:" HorizontalAlignment="Left" Margin="247,111,0,0" VerticalAlignment="Top" Height="24" Width="37"/>
-        <TextBox x:Name="IdTxt" HorizontalAlignment="Left" Margin="268,115,0,0" Text="Type Here" TextWrapping="Wrap" VerticalAlignment="Top" Width="94" Height="22"/>
+        <Label x:Name="IdLabel" Content="ID:" HorizontalAlignment="Left" Margin="247,91,0,0" VerticalAlignment="Top" Height="24" Width="37"/>
+        <TextBox x:Name="IdTxt" HorizontalAlignment="Left" Margin="268,95,0,0" Text="Type Here" TextWrapping="Wrap" VerticalAlignment="Top" Width="94" Height="22" />
         <Label x:Name="ModelLabel" Content="Model:" HorizontalAlignment="Left" Margin="247,137,0,0" VerticalAlignment="Top" Height="24" Width="54"/>
-        <TextBox x:Name="ModelTxt" HorizontalAlignment="Left" Margin="294,141,0,0" Text="Type Here" TextWrapping="Wrap" VerticalAlignment="Top" Width="94" Height="22"/>
-        <Label x:Name="WeightLabel" Content="Max Weight:" HorizontalAlignment="Left" Margin="247,161,0,0" VerticalAlignment="Top" Height="24" Width="80"/>
-        <ComboBox x:Name="WeightCBox" HorizontalAlignment="Left" Margin="320,166,0,0" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="ModelTxt" HorizontalAlignment="Left" Margin="294,141,0,0" Text="Type Here" TextWrapping="Wrap" VerticalAlignment="Top" Width="94" Height="22" />
+        <Label x:Name="WeightLabel" Content="Max Weight:" HorizontalAlignment="Left" Margin="247,179,0,0" VerticalAlignment="Top" Height="27" Width="80"/>
+        <ComboBox x:Name="WeightCBox" HorizontalAlignment="Left" Margin="320,184,0,0" VerticalAlignment="Top" Width="120" />
+        <Label x:Name="IdStationLabel" Content="Station Number:" HorizontalAlignment="Left" Margin="245,222,0,0" VerticalAlignment="Top" Width="107"/>
+        <TextBox x:Name="IdStationTxt" HorizontalAlignment="Left" Margin="340,224,0,0" Text="Type Here" TextWrapping="Wrap" VerticalAlignment="Top" Width="94" Height="22" />
+        <Button x:Name="CancelButton" Content="Cancel" HorizontalAlignment="Left" Margin="434,340,0,0" VerticalAlignment="Top" Height="27" Width="104" Click="CancelButton_Click"/>
+        <Button x:Name="AddButon" Content="Add" HorizontalAlignment="Left" Margin="560,340,0,0" VerticalAlignment="Top" Height="27" Width="104" Click="AddButon_Click" Background="#FFDDDDDD" UseLayoutRounding="False" BorderBrush="#FF254CA7"/>
 
     </Grid>
 </Window>

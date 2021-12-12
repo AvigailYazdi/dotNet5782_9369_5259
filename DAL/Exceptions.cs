@@ -31,7 +31,7 @@ namespace IDAL
             }
             public override string ToString()
             {
-                return base.ToString() + $" ,The {EntityName} id: {Id} is not exist";
+                return $"The {EntityName} id: {Id} is not exist";
             }
         }
         [Serializable]
@@ -57,7 +57,7 @@ namespace IDAL
             }
             public override string ToString()
             {
-                return base.ToString() + $" ,The {EntityName} id: {Id} is already exist";
+                return  $"The {EntityName} id: {Id} is already exist";
             }
         }
     }

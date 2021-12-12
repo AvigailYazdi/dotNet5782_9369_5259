@@ -26,5 +26,33 @@ namespace PL
             bL = bl;
             WeightCBox.ItemsSource = Enum.GetValues(typeof(IBL.BO.WeightCategories));
         }
+        public DroneWindow(IBL.BL bl, IBL.BO.Drone d)
+        {
+            InitializeComponent();
+            bL = bl;
+        }
+
+        private void AddButon_Click(object sender, RoutedEventArgs e)
+        {
+            IBL.BO.Drone d = new IBL.BO.Drone();
+            d.Id = int.Parse(IdTxt.Text);
+            d.Model = ModelTxt.Text;
+            d.Weight = (IBL.BO.WeightCategories)WeightCBox.SelectedItem;
+            try
+            {
+                bL.AddDrone(d, int.Parse(IdStationTxt.Text));
+                MessageBox.Show("The drone is added successfully!");
+                this.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString()); 
+            }
+        }
+
+        private void CancelButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
     }
 }

@@ -49,5 +49,22 @@ namespace PL
         {
             new DroneWindow(bL).Show();
         }
+
+        private void ActivatedWindow(object sender, EventArgs e)
+        {
+            if (WeightSelector.SelectedIndex == -1 && StatusSelector.SelectedIndex == -1)
+                DronesListView.ItemsSource = bL.DroneList();
+            else if(WeightSelector.SelectedIndex == -1)
+                DronesListView.ItemsSource = bL.GetDronesByPerdicate(d => d.Status == (IBL.BO.DroneStatus)StatusSelector.SelectedItem);
+            else if(StatusSelector.SelectedIndex == -1)
+                DronesListView.ItemsSource = bL.GetDronesByPerdicate(d => d.Weight == (IBL.BO.WeightCategories)WeightSelector.SelectedItem);
+            else
+                DronesListView.ItemsSource = bL.GetDronesByPerdicate(d => d.Weight == (IBL.BO.WeightCategories)WeightSelector.SelectedItem && d.Status == (IBL.BO.DroneStatus)StatusSelector.SelectedItem);
+        }
+
+        private void DoubleClick(object sender, MouseButtonEventArgs e)
+        {
+           // new DroneWindow(bL,DronesListView.);
+        }
     }
 }

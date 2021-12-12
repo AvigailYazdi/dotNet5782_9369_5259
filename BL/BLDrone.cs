@@ -25,25 +25,31 @@ namespace IBL
             try
             {
                 dl.AddDrone(droneDo);
+                BO.DroneToL droneToList = new BO.DroneToL()
+                {
+                    Id = droneBo.Id,
+                    Model = droneBo.Model,
+                    Weight = droneBo.Weight,
+                    Battery = rand.Next(20 * 100, 40 * 100) / 100.0,
+                    Status = BO.DroneStatus.Maintenance,
+                    CurrentPlace = GetStation(stationId).Place,
+                    ParcelId = -1
+                };
+                dList.Add(droneToList);
+                if (GetStation(stationId).AvaliableSlots > 0)
+                    dl.UpdateChargeDrone(droneBo.Id, stationId);
+                else
+                    throw new BO.NotEnoughSlotsException();
             }
             catch (IDAL.DO.DuplicateIdException ex)
             {
                 throw new BO.DuplicateIdException(ex.Id, ex.EntityName);
             }
-            BO.DroneToL droneToList = new BO.DroneToL()
+            catch (IDAL.DO.MissingIdException ex)
             {
-                Id = droneBo.Id,
-                Model = droneBo.Model,
-                Weight = droneBo.Weight,
-                Battery = rand.Next(20 * 100, 40 * 100) / 100.0,
-                Status = BO.DroneStatus.Maintenance,
-                CurrentPlace = GetStation(stationId).Place,
-            };
-            dList.Add(droneToList);
-            if (GetStation(stationId).AvaliableSlots > 0)
-                dl.UpdateChargeDrone(droneBo.Id, stationId);
-            else
-                throw new BO.NotEnoughSlotsException(); 
+                throw new BO.MissingIdException(ex.Id, ex.EntityName);
+
+            }
         }
         /// <summary>
         /// A function that sets the name of a drone

@@ -28,7 +28,7 @@ namespace IBL
             }
             public override string ToString()
             {
-                return base.ToString() + $" ,The number of avaliable slots of basstation {Id} has to be positive.";
+                return $"The number of avaliable slots of basstation {Id} has to be positive.";
             }
         }
         [Serializable]
@@ -54,7 +54,7 @@ namespace IBL
             }
             public override string ToString()
             {
-                return base.ToString() + $" ,The {EntityName} id: {Id} is not exist";
+                return $"The {EntityName} id: {Id} is not exist";
             }
         }
         [Serializable]
@@ -80,7 +80,7 @@ namespace IBL
             }
             public override string ToString()
             {
-                return base.ToString() + $" ,The {EntityName} id: {Id} is already exist";
+                return $"The {EntityName} id: {Id} is already exist";
             }
         }
         [Serializable]
@@ -102,7 +102,7 @@ namespace IBL
             }
             public override string ToString()
             {
-                return base.ToString() + $" ,The battery of id: {Id} drone is not enough";
+                return $"The battery of id: {Id} drone is not enough";
             }
         }
         [Serializable]
@@ -124,7 +124,7 @@ namespace IBL
             }
             public override string ToString()
             {
-                return base.ToString() + $" ,The drone: {Id} is not avaliable";
+                return $"The drone: {Id} is not avaliable";
             }
         }
         [Serializable]
@@ -146,7 +146,7 @@ namespace IBL
             }
             public override string ToString()
             {
-                return base.ToString() + $" ,The drone: {Id} is not maintenance";
+                return $"The drone: {Id} is not maintenance";
             }
         }
         [Serializable]
@@ -168,7 +168,7 @@ namespace IBL
             }
             public override string ToString()
             {
-                return base.ToString() + $" ,The drone: {Id} is not in delivery";
+                return $"The drone: {Id} is not in delivery";
             }
         }
         [Serializable]
@@ -190,7 +190,7 @@ namespace IBL
             }
             public override string ToString()
             {
-                return base.ToString() + $" ,The drone: {Id} is not in delivery";
+                return $"The drone: {Id} is not in delivery";
             }
         }
     }
