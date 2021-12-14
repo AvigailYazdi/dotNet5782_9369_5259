@@ -208,6 +208,8 @@ namespace IBL
                         UpdateDroneToL(droneToList);
                         dl.UpdateParcelToDrone(id, pTemp.Id);
                     }
+                    else
+                        UpdateDroneToCharge(id);
                 }
                 else
                     throw new BO.NotAvaliableDroneException(id);
@@ -265,6 +267,7 @@ namespace IBL
                     droneToList.Status = BO.DroneStatus.Avaliable;
                     UpdateDroneToL(droneToList);
                     dl.UpdateParcelDelivery(droneToList.ParcelId);
+                    droneToList.ParcelId = -1;
                 }
                 else
                     throw new BO.NotInDeliveryException(id);

@@ -60,12 +60,11 @@ namespace ConsoleUI_BL
                                     bl.AddStation(b);
                                     break;
                                 case AddOrView.Drone:
-                                    Console.WriteLine("Enter id, model, max weight and station num of a drone");
+                                    Console.WriteLine("Enter id, model and max weight of a drone");
                                     d.Id = int.Parse(Console.ReadLine());
                                     d.Model = Console.ReadLine();
                                     d.Weight = (WeightCategories)int.Parse(Console.ReadLine());
-                                    int num = int.Parse(Console.ReadLine());
-                                    bl.AddDrone(d, num);
+                                    bl.AddDrone(d);
                                     break;
                                 case AddOrView.Customer:
                                     Console.WriteLine("Enter id, name, phone number, and location of a customer");
@@ -103,7 +102,6 @@ namespace ConsoleUI_BL
 8- To update parcel delivered.");
                             int Id, NumSlots;
                             string Model, Name, phoneNum;
-                            double time;
                             UpDate up;
                             check = int.TryParse(Console.ReadLine(), out option);
                             up = (UpDate)option;
@@ -135,10 +133,9 @@ namespace ConsoleUI_BL
                                     bl.UpdateDroneToCharge(Id);
                                     break;
                                 case UpDate.DisChargeDrone:
-                                    Console.WriteLine("Enter drone id and Charging time");
+                                    Console.WriteLine("Enter drone id");
                                     Id = int.Parse(Console.ReadLine());
-                                    time = Convert.ToDouble(Console.ReadLine());
-                                    bl.UpdateDisChargeDrone(Id, time);
+                                    bl.UpdateDisChargeDrone(Id);
                                     break;
                                 case UpDate.ParcelToDrone:
                                     Console.WriteLine("Enter drone id");

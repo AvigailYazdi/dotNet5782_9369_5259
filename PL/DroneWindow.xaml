@@ -7,16 +7,57 @@
         mc:Ignorable="d"
         Title="DroneWindow" Height="450" Width="800" >
     <Grid>
-        <Label x:Name="IdLabel" Content="ID:" HorizontalAlignment="Left" Margin="247,91,0,0" VerticalAlignment="Top" Height="24" Width="37"/>
-        <TextBox x:Name="IdTxt" HorizontalAlignment="Left" Margin="268,95,0,0" Text="Type Here" TextWrapping="Wrap" VerticalAlignment="Top" Width="94" Height="22" />
-        <Label x:Name="ModelLabel" Content="Model:" HorizontalAlignment="Left" Margin="247,137,0,0" VerticalAlignment="Top" Height="24" Width="54"/>
-        <TextBox x:Name="ModelTxt" HorizontalAlignment="Left" Margin="294,141,0,0" Text="Type Here" TextWrapping="Wrap" VerticalAlignment="Top" Width="94" Height="22" />
-        <Label x:Name="WeightLabel" Content="Max Weight:" HorizontalAlignment="Left" Margin="247,179,0,0" VerticalAlignment="Top" Height="27" Width="80"/>
-        <ComboBox x:Name="WeightCBox" HorizontalAlignment="Left" Margin="320,184,0,0" VerticalAlignment="Top" Width="120" />
-        <Label x:Name="IdStationLabel" Content="Station Number:" HorizontalAlignment="Left" Margin="245,222,0,0" VerticalAlignment="Top" Width="107"/>
-        <TextBox x:Name="IdStationTxt" HorizontalAlignment="Left" Margin="340,224,0,0" Text="Type Here" TextWrapping="Wrap" VerticalAlignment="Top" Width="94" Height="22" />
-        <Button x:Name="CancelButton" Content="Cancel" HorizontalAlignment="Left" Margin="434,340,0,0" VerticalAlignment="Top" Height="27" Width="104" Click="CancelButton_Click"/>
-        <Button x:Name="AddButon" Content="Add" HorizontalAlignment="Left" Margin="560,340,0,0" VerticalAlignment="Top" Height="27" Width="104" Click="AddButon_Click" Background="#FFDDDDDD" UseLayoutRounding="False" BorderBrush="#FF254CA7"/>
+        <Grid x:Name="gridOneDrone"  HorizontalAlignment="Center" Margin="0,103,0,0" VerticalAlignment="Top" Visibility="Visible">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Label Content="Battery:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="0" VerticalAlignment="Center" />
+            <TextBox x:Name="batteryTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="0" Text="{Binding Battery, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120" IsEnabled="False"/>
+            <Label x:Name="IdLabel" Content="Id:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="1" VerticalAlignment="Center"/>
+            <TextBox x:Name="idTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="1" Text="{Binding Id, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+            <Label x:Name="ModelLabel" Content="Model:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="2" VerticalAlignment="Center"/>
+            <TextBox x:Name="modelTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="2" Text="{Binding Model, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+            <Label x:Name="ParcelIdLabel" Content="Parcel Id:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="5" VerticalAlignment="Center"/>
+            <TextBox x:Name="parcelIdTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="5" Text="{Binding ParcelId, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120" IsEnabled="False"/>
+            <Label x:Name="WeightLabel" Content="Weight:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="3" VerticalAlignment="Center"/>
+            <Label x:Name="StatusLabel" Content="Status:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="4" VerticalAlignment="Center"/>
+            <ComboBox x:Name="weightComboBox" Grid.Column="1" HorizontalAlignment="Left" Height="Auto" Margin="3" Grid.Row="3" VerticalAlignment="Center" Width="120">
+                <ComboBox.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <VirtualizingStackPanel/>
+                    </ItemsPanelTemplate>
+                </ComboBox.ItemsPanel>
+            </ComboBox>
+            <ComboBox x:Name="statusComboBox" Grid.Column="1" HorizontalAlignment="Left" Height="Auto" Margin="3" Grid.Row="4" VerticalAlignment="Center" Width="120" IsReadOnly="True">
+                <ComboBox.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <VirtualizingStackPanel/>
+                    </ItemsPanelTemplate>
+                </ComboBox.ItemsPanel>
+            </ComboBox>
+            <Label Content="Latitude:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="6" VerticalAlignment="Center" Visibility="Collapsed"/>
+            <TextBox x:Name="latitudeTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="6" Text="{Binding CurrentPlace.Latitude, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120" Visibility="Collapsed"/>
+            <Label Content="Longitude:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="7" VerticalAlignment="Center" Visibility="Collapsed"/>
+            <TextBox x:Name="longitudeTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="7" Text="{Binding CurrentPlace.Longitude, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120" Visibility="Collapsed"/>
+        </Grid>
+
+
+
+        <Button x:Name="CancelOrCloseButton" Content="Cancel" HorizontalAlignment="Left" Margin="196,340,0,0" VerticalAlignment="Top" Height="27" Width="104" Click="CancelOrCloseButton_Click"/>
+        <Button x:Name="OpButton" Content="Add" HorizontalAlignment="Left" Margin="70,340,0,0" VerticalAlignment="Top" Height="27" Width="104" Click="OpButton_Click" Background="#FFDDDDDD" UseLayoutRounding="False" BorderBrush="#FF54D4EE" BorderThickness="3,3,3,3"/>
+        <Button x:Name="ChargingButton" Content="Charge/Discharge" HorizontalAlignment="Left" Margin="486,340,0,0" VerticalAlignment="Top" Height="27" Width="104" Click="ChargingButton_Click"/>
+        <Button x:Name="DelieveryButton" Content="Next Step of delievery" HorizontalAlignment="Left" Margin="320,340,0,0" VerticalAlignment="Top" Height="27" Width="144" Click="DelieveryButton_Click"/>
 
     </Grid>
 </Window>

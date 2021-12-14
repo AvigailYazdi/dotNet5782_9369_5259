@@ -26,7 +26,7 @@ namespace IBL
                          Id = item.Id,
                          Model = item.Model,
                          Weight = (BO.WeightCategories)item.MaxWeight,
-                         Battery = 0,
+                         Battery = rand.Next(20 * 100, 40 * 100) / 100.0,
                          Status = BO.DroneStatus.Avaliable,
                          CurrentPlace = new BO.Location(),
                          ParcelId = dl.GetConnectParcel(item.Id)
@@ -62,10 +62,11 @@ namespace IBL
                     }
                     if (temp.Status == BO.DroneStatus.Maintenance)
                     {
-                        IEnumerable<IDAL.DO.BaseStation> bs = dl.ListBaseStation();
+                        IEnumerable<IDAL.DO.BaseStation> bs = dl.GetStationsByPerdicate(s => s.ChargeSlots != 0);
                         stationDo = bs.ElementAtOrDefault(rand.Next(0, bs.Count()));
                         temp.CurrentPlace = new BO.Location() { Longitude = stationDo.Longitude, Latitude = stationDo.Latitude };
                         temp.Battery = rand.Next(0, 20 * 100) / 100.0;
+                        dl.UpdateChargeDrone(temp.Id, stationDo.Id);
                     }
                     if (temp.Status == BO.DroneStatus.Avaliable)
                     {

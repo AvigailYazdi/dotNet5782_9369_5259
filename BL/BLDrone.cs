@@ -14,7 +14,7 @@ namespace IBL
         /// A function that adds a drone to the data base
         /// </summary>
         /// <param name="droneBo"> The drone to add</param>
-        public void AddDrone(BO.Drone droneBo, int stationId)
+        public void AddDrone(BO.Drone droneBo)// ,int stationId)
         {
             IDAL.DO.Drone droneDo = new IDAL.DO.Drone()
             {
@@ -25,6 +25,8 @@ namespace IBL
             try
             {
                 dl.AddDrone(droneDo);
+                IEnumerable<IDAL.DO.BaseStation> bs = dl.GetStationsByPerdicate(s => s.ChargeSlots != 0);
+                IDAL.DO.BaseStation stationDo = bs.ElementAtOrDefault(rand.Next(0, bs.Count()));
                 BO.DroneToL droneToList = new BO.DroneToL()
                 {
                     Id = droneBo.Id,
@@ -32,14 +34,11 @@ namespace IBL
                     Weight = droneBo.Weight,
                     Battery = rand.Next(20 * 100, 40 * 100) / 100.0,
                     Status = BO.DroneStatus.Maintenance,
-                    CurrentPlace = GetStation(stationId).Place,
+                    CurrentPlace = new BO.Location() { Longitude = stationDo.Longitude, Latitude = stationDo.Latitude },
                     ParcelId = -1
                 };
                 dList.Add(droneToList);
-                if (GetStation(stationId).AvaliableSlots > 0)
-                    dl.UpdateChargeDrone(droneBo.Id, stationId);
-                else
-                    throw new BO.NotEnoughSlotsException();
+                dl.UpdateChargeDrone(droneBo.Id, stationDo.Id);
             }
             catch (IDAL.DO.DuplicateIdException ex)
             {
@@ -107,16 +106,18 @@ namespace IBL
         /// </summary>
         /// <param name="id">the id of a drone to discharge</param>
         /// <param name="time">the time that the drone was in charging</param>
-        public void UpdateDisChargeDrone(int id, double time)
+        public void UpdateDisChargeDrone(int id)
         {
             try
             {
                 BO.DroneToL droneToList = GetDroneToL(id);
                 if (droneToList.Status == BO.DroneStatus.Maintenance)
                 {
+                    TimeSpan? time = DateTime.Now - dl.GetDroneCharge(droneToList.Id).insertTime;
+                    IDAL.DO.DroneCharge dc= dl.GetDroneCharge(droneToList.Id);
                     dl.UpdateDischargeDrone(id);//dal
                     droneToList.Status = BO.DroneStatus.Avaliable;
-                    droneToList.Battery = Math.Min(time * electricUse[4]+ droneToList.Battery, 100);
+                    droneToList.Battery =(int)( Math.Min(time.Value.TotalHours * electricUse[4]*100 + droneToList.Battery, 100)*100)/100.0;
                     UpdateDroneToL(droneToList);
                 }
                 else

@@ -79,6 +79,7 @@ namespace DalObject
             DroneCharge dc = new DroneCharge();
             dc.DroneId = droneId;
             dc.StationId = baseStationId;
+            dc.insertTime = DateTime.Now;
             dronesCharge.Add(dc);
         }
 

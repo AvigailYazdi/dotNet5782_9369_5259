@@ -9,10 +9,10 @@ namespace IBL
     interface IBL
     {
         #region Drone
-        public void AddDrone(BO.Drone drone, int stationId);
+        public void AddDrone(BO.Drone drone);
         public void UpdateDroneName(int id, string name);
         public void UpdateDroneToCharge(int id);
-        public void UpdateDisChargeDrone(int id, double time);
+        public void UpdateDisChargeDrone(int id);
         public BO.Drone GetDrone(int id);
         public IEnumerable<BO.DroneToL> DroneList();
         public IEnumerable<BO.DroneToL> GetDronesByPerdicate(Predicate<BO.DroneToL> predicate);

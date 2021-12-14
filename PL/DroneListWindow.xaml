@@ -11,8 +11,7 @@
             <RowDefinition Height="50*"/>
             <RowDefinition Height="400*"/>
         </Grid.RowDefinitions>
-        <Grid Name="UpGrid" HorizontalAlignment="Stretch" Height="auto" Grid.Row="0"
-VerticalAlignment="Stretch" Width="auto">
+        <Grid Name="UpGrid" HorizontalAlignment="Stretch" Height="auto" Grid.Row="0" VerticalAlignment="Stretch" Width="auto">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
@@ -24,13 +23,20 @@ VerticalAlignment="Stretch" Width="auto">
             <Label x:Name="StatusLabel" Content="Status:" Grid.Column="0" HorizontalAlignment="Stretch" Margin="94,10,0,0" VerticalAlignment="Stretch" FontSize="20" FontFamily="Dubai Medium"/>
             <Label x:Name="WeightLabel" Content="Weight:" Grid.Column="2" HorizontalAlignment="Stretch" Margin="94,10,0,0" VerticalAlignment="Stretch" FontSize="20" FontFamily="Dubai Medium"/>
         </Grid>
-        <ListView x:Name="DronesListView" FontFamily="Dubai Medium" Margin="0,69,0,91" Grid.RowSpan="2" MouseDoubleClick="DoubleClick">
-            <ListView.View>
-                <GridView>
-                    <GridViewColumn/>
-                </GridView>
-            </ListView.View>
-        </ListView>
+        <Grid Grid.Row="1" >
+            <DataGrid x:Name="dronesDataGrid" RowDetailsVisibilityMode="VisibleWhenSelected" Margin="164,59,164,278" ItemsSource="{Binding}" EnableRowVirtualization="True" AutoGenerateColumns="False" MouseDoubleClick="DoubleClickDataGrid">
+                <DataGrid.Columns>
+                    <DataGridTextColumn x:Name="batteryColumn" Width="SizeToHeader" Header="Battery" Binding="{Binding Battery}"/>
+                    <DataGridTextColumn x:Name="idColumn" Width="40" Header="Id" Binding="{Binding Id}" CanUserResize="True"/>
+                    <DataGridTextColumn x:Name="modelColumn" Width="60" Header="Model" Binding="{Binding Model}"/>
+                    <DataGridTextColumn x:Name="parcelIdColumn" Width="SizeToHeader" Header="Parcel Id" Binding="{Binding ParcelId}"/>
+                    <DataGridTextColumn x:Name="statusColumn" Width="80" Header="Status" Binding="{Binding Status}"/>
+                    <DataGridTextColumn x:Name="weightColumn" Width="60" Header="Weight" Binding="{Binding Weight}"/>
+                    <DataGridTextColumn x:Name="longitudeColumn" Width="SizeToHeader" Header="Logitude" Binding="{Binding CurrentPlace.Longitude}"/>
+                    <DataGridTextColumn x:Name="latitudeColumn" Width="SizeToHeader" Header="Latitude" Binding="{Binding CurrentPlace.Latitude}"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
         <Button x:Name="AddDroneButton" Content="Add a new drone" HorizontalAlignment="Left" Margin="617,483,0,0" VerticalAlignment="Top" Height="49" Width="132" Click="AddDroneButton_Click" Grid.Row="1"/>
     </Grid>
 </Window>

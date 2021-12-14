@@ -171,28 +171,6 @@ namespace IBL
                 return $"The drone: {Id} is not in delivery";
             }
         }
-        [Serializable]
-        public class NotEnoughSlotsException : Exception
-        {
-            public int Id { get; set; }
-            public NotEnoughSlotsException() : base() { }
-            public NotEnoughSlotsException(int id) : base()
-            {
-                Id = id;
-            }
-            public NotEnoughSlotsException(int id, string message) : base(message)
-            {
-                Id = id;
-            }
-            public NotEnoughSlotsException(int id, string message, Exception inner) : base(message, inner)
-            {
-                Id = id;
-            }
-            public override string ToString()
-            {
-                return $"The drone: {Id} is not in delivery";
-            }
-        }
     }
 }
 
