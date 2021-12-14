@@ -73,5 +73,10 @@ namespace PL
             if (curDroneToL != null)
                 new DroneWindow(bl, curDroneToL).Show();
         }
+
+        private void CloseButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
     }
 }

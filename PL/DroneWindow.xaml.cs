@@ -38,9 +38,8 @@ namespace PL
             this.Title = "Add Drone";
             OpButton.Content = "Add";
             CancelOrCloseButton.Content = "Cancel";
-            ChargingButton.Visibility = Visibility.Collapsed;
-            DelieveryButton.Visibility = Visibility.Collapsed;
-
+            ChargingButton.Visibility = DelieveryButton.Visibility=Visibility.Collapsed;
+            batteryTextBox.Visibility = BatteryLabel.Visibility = Visibility.Collapsed;
             statusComboBox.Visibility = parcelIdTextBox.Visibility = Visibility.Collapsed;
             StatusLabel.Visibility = ParcelIdLabel.Visibility = Visibility.Collapsed;
         }
@@ -81,18 +80,19 @@ namespace PL
                     d.Model = modelTextBox.Text;//currentDroneToL.Model;
                     d.Weight = (IBL.BO.WeightCategories)weightComboBox.SelectedItem;//currentDroneToL.Weight;
                     bl.AddDrone(d);
-                    MessageBox.Show("The drone is added successfully!");
+                    MessageBox.Show("The drone is added successfully!", "Add");
                     this.Close();
                 }
                 else
                 {
                     //currentDroneToL = gridOneDrone.DataContext as IBL.BO.DroneToL;
                     bl.UpdateDroneName(currentDroneToL.Id, currentDroneToL.Model);
+                    MessageBox.Show("The drone Model is updated successfully!","Update");
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString());
+                MessageBox.Show(ex.ToString(), "ERROR");
             }
         }
 
@@ -107,12 +107,14 @@ namespace PL
             {
                 bl.UpdateDroneToCharge(currentDroneToL.Id);
                 statusComboBox.SelectedItem = IBL.BO.DroneStatus.Maintenance;
+                MessageBox.Show("The drone is in charge", "Charging");
             }
             else if (currentDroneToL.Status == IBL.BO.DroneStatus.Maintenance)
             {
                 bl.UpdateDisChargeDrone(currentDroneToL.Id);
                 statusComboBox.SelectedItem = IBL.BO.DroneStatus.Avaliable;
                 batteryTextBox.Text = Convert.ToString(currentDroneToL.Battery);
+                MessageBox.Show("The drone discharged", "Discharging");
             }
         }
 
@@ -126,25 +128,84 @@ namespace PL
                     parcelIdTextBox.Text = Convert.ToString(currentDroneToL.ParcelId);
                     statusComboBox.SelectedItem = IBL.BO.DroneStatus.Delivery;
                     batteryTextBox.Text = Convert.ToString(currentDroneToL.Battery);
+                    MessageBox.Show("The drone is connected to a parcel", "Connection");
+                }
+                else
+                {
+                    MessageBox.Show("The connection failed", "ERROR");
                 }
             }
-            else
+            else if(currentDroneToL.Status == IBL.BO.DroneStatus.Delivery)
             {
                 IBL.BO.Parcel p = bl.GetParcel(currentDroneToL.ParcelId);
-                if (currentDroneToL.Status == IBL.BO.DroneStatus.Delivery && p.PickedUp == null)
+                if (p.PickedUp == null)
                 {
                     bl.UpdateParcelCollect(currentDroneToL.Id);
                     batteryTextBox.Text = Convert.ToString(currentDroneToL.Battery);
+                    MessageBox.Show("The parcel was picked up", "Picking up");
                 }
-                else if (currentDroneToL.Status == IBL.BO.DroneStatus.Delivery && p.PickedUp != null && p.Delivered == null)
+                else if (p.PickedUp != null && p.Delivered == null)
                 {
                     bl.UpdateParcelProvide(currentDroneToL.Id);
                     batteryTextBox.Text = Convert.ToString(currentDroneToL.Battery);
                     parcelIdTextBox.Text = "-1";
                     statusComboBox.SelectedItem = IBL.BO.DroneStatus.Avaliable;
+                    MessageBox.Show("The parcel was provided", "Providing");
                 }
             }
+        }
+        private void TextBox_OnlyNumbers_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            TextBox text = sender as TextBox;
+            if (text == null) return;
+            if (e == null) return;
 
+            //allow get out of the text box
+            if (e.Key == Key.Enter || e.Key == Key.Return || e.Key == Key.Tab)
+                return;
+
+            //allow list of system keys (add other key here if you want to allow)
+            if (e.Key == Key.Escape || e.Key == Key.Back || e.Key == Key.Delete ||
+                e.Key == Key.CapsLock || e.Key == Key.LeftShift || e.Key == Key.Home
+             || e.Key == Key.End || e.Key == Key.Insert || e.Key == Key.Down || e.Key == Key.Right)
+                return;
+
+            char c = (char)KeyInterop.VirtualKeyFromKey(e.Key);
+
+            //allow control system keys
+            if (Char.IsControl(c)) return;
+
+            //allow digits (without Shift or Alt)
+            if (Char.IsDigit(c))
+                if (!(Keyboard.IsKeyDown(Key.LeftShift) || Keyboard.IsKeyDown(Key.RightAlt)))
+                    return; //let this key be written inside the textbox
+
+            //forbid letters and signs (#,$, %, ...)
+            e.Handled = true; //ignore this key. mark event as handled, will not be routed to other controls
+            return;
+        }
+
+        private void idTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (idTextBox.Text.Length < 3 || idTextBox.Text.Length > 4)
+            {
+                idTextBox.BorderBrush = Brushes.Red;
+                OpButton.IsEnabled = false;
+            }
+            else
+            {
+                idTextBox.BorderBrush = modelTextBox.BorderBrush;
+                OpButton.IsEnabled = true;
+            }
+        }
+
+        private void ClosingWindow(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            Button b = sender as Button;
+            if (b == null)
+                //e.Cancel = false;
+            else
+                //e.Cancel = false;
         }
     }
 }
