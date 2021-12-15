@@ -56,7 +56,7 @@ namespace IBL
                         distance2 = shortDis(targetDo.Longitude, targetDo.Latitude, stationDo);
                         temp.Battery = rand.Next((int)(getBattery(distance1 + distance2, temp.Id) * 100), 100 * 100) / 100.0;
                     }
-                    if (temp.ParcelId <= 0)
+                    else if (temp.ParcelId <= 0)
                     {
                         temp.Status = (BO.DroneStatus)rand.Next(0, 2);
                     }
@@ -68,8 +68,11 @@ namespace IBL
                         temp.Battery = rand.Next(0, 20 * 100) / 100.0;
                         dl.UpdateChargeDrone(temp.Id, stationDo.Id);
                     }
-                    if (temp.Status == BO.DroneStatus.Avaliable)
+                    else if (temp.Status == BO.DroneStatus.Avaliable)
                     {
+                        IEnumerable<IDAL.DO.BaseStation> bs = dl.GetStationsByPerdicate(s => s.ChargeSlots != 0);
+                        stationDo = bs.ElementAtOrDefault(rand.Next(0, bs.Count()));
+                        temp.CurrentPlace = new BO.Location() { Longitude = stationDo.Longitude, Latitude = stationDo.Latitude };
                         IEnumerable<IDAL.DO.Parcel> p = dl.GetParcelsByPerdicate(it => it.Delivered != null);
                         if (p.Count() != 0)
                         {
@@ -78,7 +81,7 @@ namespace IBL
                             stationDo = closeStation(temp.CurrentPlace.Longitude, temp.CurrentPlace.Latitude);
                             distance1 = shortDis(temp.CurrentPlace.Longitude, temp.CurrentPlace.Latitude, stationDo);
                             temp.Battery = rand.Next((int)(getBattery(distance1, stationDo.Id) * 100), 100 * 100) / 100.0;
-                            dl.UpdateChargeDrone(temp.Id, stationDo.Id);
+                           // dl.UpdateChargeDrone(temp.Id, stationDo.Id);
                         }
                     }
                     UpdateDroneToL(temp);
@@ -161,7 +164,7 @@ namespace IBL
                         break;
                 }
             }
-            return (int)(battery*100)/100.0;
+            return ((int)(battery*100))/100.0;
         }
     }
 }

@@ -171,6 +171,17 @@ namespace IBL
                 return $"The drone: {Id} is not in delivery";
             }
         }
+        [Serializable]
+        public class NotAvaliableStationException : Exception
+        {
+            public NotAvaliableStationException() : base() { }
+            public NotAvaliableStationException(string message) : base(message) { }
+            public NotAvaliableStationException(string message, Exception inner) : base(message, inner) { }
+            public override string ToString()
+            {
+                return $"There are no avaliable stations.";
+            }
+        }
     }
 }
 

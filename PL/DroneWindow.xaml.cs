@@ -23,6 +23,9 @@ namespace PL
         enum op { Add, Update };
         op option;
         IBL.BO.DroneToL currentDroneToL;
+        bool flag = true;
+        MessageBoxButton b = MessageBoxButton.OK;
+        MessageBoxImage i = MessageBoxImage.Information;
         public DroneWindow(IBL.BL _bl)//ctor for add
         {
             InitializeComponent();
@@ -42,6 +45,7 @@ namespace PL
             batteryTextBox.Visibility = BatteryLabel.Visibility = Visibility.Collapsed;
             statusComboBox.Visibility = parcelIdTextBox.Visibility = Visibility.Collapsed;
             StatusLabel.Visibility = ParcelIdLabel.Visibility = Visibility.Collapsed;
+            OpButton.IsEnabled = false;
         }
         public DroneWindow(IBL.BL _bl, IBL.BO.DroneToL _d)//ctor for update
         {
@@ -80,19 +84,21 @@ namespace PL
                     d.Model = modelTextBox.Text;//currentDroneToL.Model;
                     d.Weight = (IBL.BO.WeightCategories)weightComboBox.SelectedItem;//currentDroneToL.Weight;
                     bl.AddDrone(d);
-                    MessageBox.Show("The drone is added successfully!", "Add");
+                    MessageBox.Show("The drone is added successfully!", "Add", b, i);
                     this.Close();
                 }
                 else
                 {
                     //currentDroneToL = gridOneDrone.DataContext as IBL.BO.DroneToL;
                     bl.UpdateDroneName(currentDroneToL.Id, currentDroneToL.Model);
-                    MessageBox.Show("The drone Model is updated successfully!","Update");
+                    MessageBox.Show("The drone Model is updated successfully!", "Update", b, i);
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString(), "ERROR");
+                i = MessageBoxImage.Error;
+                MessageBox.Show(ex.ToString(), "ERROR", b, i);
+                i = MessageBoxImage.Information;
             }
         }
 
@@ -103,55 +109,76 @@ namespace PL
 
         private void ChargingButton_Click(object sender, RoutedEventArgs e)
         {
-            if (currentDroneToL.Status == IBL.BO.DroneStatus.Avaliable)
+            try
             {
-                bl.UpdateDroneToCharge(currentDroneToL.Id);
-                statusComboBox.SelectedItem = IBL.BO.DroneStatus.Maintenance;
-                MessageBox.Show("The drone is in charge", "Charging");
+                if (currentDroneToL.Status == IBL.BO.DroneStatus.Avaliable)
+                {
+                    bl.UpdateDroneToCharge(currentDroneToL.Id);
+                    statusComboBox.SelectedItem = IBL.BO.DroneStatus.Maintenance;
+                    MessageBox.Show("The drone is in charge", "Charging", b, i);
+                }
+                else if (currentDroneToL.Status == IBL.BO.DroneStatus.Maintenance)
+                {
+                    bl.UpdateDisChargeDrone(currentDroneToL.Id);
+                    statusComboBox.SelectedItem = IBL.BO.DroneStatus.Avaliable;
+                    batteryTextBox.Text = Convert.ToString(currentDroneToL.Battery);
+                    MessageBox.Show("The drone discharged", "Discharging", b, i);
+
+                }
             }
-            else if (currentDroneToL.Status == IBL.BO.DroneStatus.Maintenance)
+            catch (Exception ex)
             {
-                bl.UpdateDisChargeDrone(currentDroneToL.Id);
-                statusComboBox.SelectedItem = IBL.BO.DroneStatus.Avaliable;
-                batteryTextBox.Text = Convert.ToString(currentDroneToL.Battery);
-                MessageBox.Show("The drone discharged", "Discharging");
+                i = MessageBoxImage.Error;
+                MessageBox.Show(ex.ToString(), "ERROR", b, i);
+                i = MessageBoxImage.Information;
             }
         }
 
         private void DelieveryButton_Click(object sender, RoutedEventArgs e)
         {
-            if (currentDroneToL.Status == IBL.BO.DroneStatus.Avaliable)
+            try
             {
-                bl.UpdateParcelToDrone(currentDroneToL.Id);
-                if (currentDroneToL.ParcelId != -1)
+                if (currentDroneToL.Status == IBL.BO.DroneStatus.Avaliable)
                 {
-                    parcelIdTextBox.Text = Convert.ToString(currentDroneToL.ParcelId);
-                    statusComboBox.SelectedItem = IBL.BO.DroneStatus.Delivery;
-                    batteryTextBox.Text = Convert.ToString(currentDroneToL.Battery);
-                    MessageBox.Show("The drone is connected to a parcel", "Connection");
+                    bl.UpdateParcelToDrone(currentDroneToL.Id);
+                    if (currentDroneToL.ParcelId != -1)
+                    {
+                        parcelIdTextBox.Text = Convert.ToString(currentDroneToL.ParcelId);
+                        statusComboBox.SelectedItem = IBL.BO.DroneStatus.Delivery;
+                        batteryTextBox.Text = Convert.ToString(currentDroneToL.Battery);
+                        MessageBox.Show("The drone is connected to a parcel", "Connection", b, i);
+                    }
+                    else
+                    {
+                        i = MessageBoxImage.Error;
+                        MessageBox.Show("The connection failed", "ERROR", b, i);
+                        i = MessageBoxImage.Information;
+                    }
                 }
-                else
+                else if (currentDroneToL.Status == IBL.BO.DroneStatus.Delivery)
                 {
-                    MessageBox.Show("The connection failed", "ERROR");
+                    IBL.BO.Parcel p = bl.GetParcel(currentDroneToL.ParcelId);
+                    if (p.PickedUp == null)
+                    {
+                        bl.UpdateParcelCollect(currentDroneToL.Id);
+                        batteryTextBox.Text = Convert.ToString(currentDroneToL.Battery);
+                        MessageBox.Show("The parcel was picked up", "Picking up", b, i);
+                    }
+                    else if (p.PickedUp != null && p.Delivered == null)
+                    {
+                        bl.UpdateParcelProvide(currentDroneToL.Id);
+                        batteryTextBox.Text = Convert.ToString(currentDroneToL.Battery);
+                        parcelIdTextBox.Text = "-1";
+                        statusComboBox.SelectedItem = IBL.BO.DroneStatus.Avaliable;
+                        MessageBox.Show("The parcel was provided", "Providing", b, i);
+                    }
                 }
             }
-            else if(currentDroneToL.Status == IBL.BO.DroneStatus.Delivery)
+            catch (Exception ex)
             {
-                IBL.BO.Parcel p = bl.GetParcel(currentDroneToL.ParcelId);
-                if (p.PickedUp == null)
-                {
-                    bl.UpdateParcelCollect(currentDroneToL.Id);
-                    batteryTextBox.Text = Convert.ToString(currentDroneToL.Battery);
-                    MessageBox.Show("The parcel was picked up", "Picking up");
-                }
-                else if (p.PickedUp != null && p.Delivered == null)
-                {
-                    bl.UpdateParcelProvide(currentDroneToL.Id);
-                    batteryTextBox.Text = Convert.ToString(currentDroneToL.Battery);
-                    parcelIdTextBox.Text = "-1";
-                    statusComboBox.SelectedItem = IBL.BO.DroneStatus.Avaliable;
-                    MessageBox.Show("The parcel was provided", "Providing");
-                }
+                i = MessageBoxImage.Error;
+                MessageBox.Show(ex.ToString(), "ERROR", b, i);
+                i = MessageBoxImage.Information;
             }
         }
         private void TextBox_OnlyNumbers_PreviewKeyDown(object sender, KeyEventArgs e)
@@ -191,21 +218,39 @@ namespace PL
             {
                 idTextBox.BorderBrush = Brushes.Red;
                 OpButton.IsEnabled = false;
+                flag = false;
+                IntegrityIdLabel.Visibility = Visibility.Visible;
             }
             else
             {
+                IntegrityIdLabel.Visibility = Visibility.Collapsed;
                 idTextBox.BorderBrush = modelTextBox.BorderBrush;
-                OpButton.IsEnabled = true;
+                flag = true;
+                if (idTextBox.Text != "" && modelTextBox.Text != "" && weightComboBox.SelectedIndex != -1)
+                    OpButton.IsEnabled = true;
             }
+            
         }
 
-        private void ClosingWindow(object sender, System.ComponentModel.CancelEventArgs e)
+        private void modelTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            Button b = sender as Button;
-            if (b == null)
-                //e.Cancel = false;
-            else
-                //e.Cancel = false;
+            if (idTextBox.Text != "" && modelTextBox.Text != "" && weightComboBox.SelectedIndex != -1 && flag)
+                OpButton.IsEnabled = true;
         }
+
+        private void weightComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (idTextBox.Text != "" && modelTextBox.Text != "" && weightComboBox.SelectedIndex != -1 && flag)
+                OpButton.IsEnabled = true;
+        }
+
+        //private void ClosingWindow(object sender, System.ComponentModel.CancelEventArgs e)
+        //{
+        //    Button b = sender as Button;
+        //    if (b == null)
+        //        e.Cancel = false;
+        //    else
+        //        e.Cancel = false;
+        //}
     }
 }

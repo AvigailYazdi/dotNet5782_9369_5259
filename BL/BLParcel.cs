@@ -174,10 +174,11 @@ namespace IBL
                 if (droneToList.Status == BO.DroneStatus.Avaliable)
                 {
                     IEnumerable<IDAL.DO.Parcel> pList=dl.GetParcelsByPerdicate(p => p.Weight <= (IDAL.DO.WeightCategories)droneToList.Weight && p.DroneId == 0);
-                    IDAL.DO.Parcel pTemp = pList.ElementAtOrDefault(0);
+                    IDAL.DO.Parcel pTemp = pList.First();
                     IDAL.DO.Customer senderDo, targetDo;
                     double dis1, dis2, dis3;
-                    foreach (var item in pList.ToList())
+                    bool flag = false;
+                    foreach(var item in pList.ToList())
                     {
                         senderDo = dl.GetCustomer(item.SenderId);
                         dis1 = dl.DistanceInKm(droneToList.CurrentPlace.Longitude, droneToList.CurrentPlace.Latitude, senderDo.Longitude, senderDo.Latitude);
@@ -188,20 +189,29 @@ namespace IBL
                         if (getBattery(dis1 + dis2 + dis3, id) <= droneToList.Battery)
                         {
                             if (item.Priority > pTemp.Priority)
+                            {
+                                flag = true;
                                 pTemp = item;
+                            }
                             else if (item.Priority == pTemp.Priority && item.Weight > pTemp.Weight)
+                            {
+                                flag = true;
                                 pTemp = item;
-                            else if(item.Priority == pTemp.Priority && item.Weight == pTemp.Weight)
+                            }
+                            else if (item.Priority == pTemp.Priority && item.Weight == pTemp.Weight)
                             {
                                 dis1 = dl.DistanceInKm(droneToList.CurrentPlace.Longitude, droneToList.CurrentPlace.Latitude, senderDo.Longitude, senderDo.Latitude);
                                 senderDo = dl.GetCustomer(pTemp.SenderId);
                                 dis2 = dl.DistanceInKm(droneToList.CurrentPlace.Longitude, droneToList.CurrentPlace.Latitude, senderDo.Longitude, senderDo.Latitude);
-                                if (dis1 < dis2)
+                                if (dis1 <= dis2)
+                                {
                                     pTemp = item;
+                                    flag = true;
+                                }
                             }
                         }
                     }
-                    if (pTemp.Id != 0)
+                    if (flag)
                     {
                         droneToList.Status = BO.DroneStatus.Delivery;
                         droneToList.ParcelId = pTemp.Id;
@@ -239,7 +249,7 @@ namespace IBL
                     IDAL.DO.Customer c = dl.GetCustomer(p.SenderId);
                     dis = dl.DistanceInKm(droneToList.CurrentPlace.Longitude, droneToList.CurrentPlace.Latitude, c.Longitude, c.Latitude);
                     droneToList.CurrentPlace = new BO.Location() { Longitude = c.Longitude, Latitude = c.Latitude };
-                    droneToList.Battery = Math.Max(0, droneToList.Battery - getBattery(dis, id)); ;
+                    droneToList.Battery = ((int)((Math.Max(0, droneToList.Battery - getBattery(dis, id))) * 100)) / 100.0;
                     UpdateDroneToL(droneToList);
                     dl.UpdateParcelCollect(droneToList.ParcelId);
                 }
@@ -263,7 +273,7 @@ namespace IBL
                     IDAL.DO.Customer c = dl.GetCustomer(p.TargetId);
                     dis = dl.DistanceInKm(droneToList.CurrentPlace.Longitude, droneToList.CurrentPlace.Latitude, c.Longitude, c.Latitude);
                     droneToList.CurrentPlace = new BO.Location() { Longitude = c.Longitude, Latitude = c.Latitude };
-                    droneToList.Battery =  Math.Max(0, droneToList.Battery - getBattery(dis, id)); ;
+                    droneToList.Battery = ((int)((Math.Max(0, droneToList.Battery - getBattery(dis, id))) * 100)) / 100.0;
                     droneToList.Status = BO.DroneStatus.Avaliable;
                     UpdateDroneToL(droneToList);
                     dl.UpdateParcelDelivery(droneToList.ParcelId);

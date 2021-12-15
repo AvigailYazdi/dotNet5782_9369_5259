@@ -50,7 +50,7 @@ namespace PL
 
         private void AddDroneButton_Click(object sender, RoutedEventArgs e)
         {
-            new DroneWindow(bl).Show();
+            new DroneWindow(bl).ShowDialog();
         }
 
         private void ActivatedWindow(object sender, EventArgs e)
@@ -71,7 +71,7 @@ namespace PL
         {
             IBL.BO.DroneToL curDroneToL = dronesDataGrid.SelectedItem as IBL.BO.DroneToL;
             if (curDroneToL != null)
-                new DroneWindow(bl, curDroneToL).Show();
+                new DroneWindow(bl, curDroneToL).ShowDialog();
         }
 
         private void CloseButton_Click(object sender, RoutedEventArgs e)

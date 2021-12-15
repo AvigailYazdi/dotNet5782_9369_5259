@@ -38,6 +38,8 @@ namespace IBL
                     ParcelId = -1
                 };
                 dList.Add(droneToList);
+                if (stationDo.Id == 0)
+                    throw new BO.NotAvaliableStationException();
                 dl.UpdateChargeDrone(droneBo.Id, stationDo.Id);
             }
             catch (IDAL.DO.DuplicateIdException ex)
@@ -114,10 +116,9 @@ namespace IBL
                 if (droneToList.Status == BO.DroneStatus.Maintenance)
                 {
                     TimeSpan? time = DateTime.Now - dl.GetDroneCharge(droneToList.Id).insertTime;
-                    IDAL.DO.DroneCharge dc= dl.GetDroneCharge(droneToList.Id);
                     dl.UpdateDischargeDrone(id);//dal
                     droneToList.Status = BO.DroneStatus.Avaliable;
-                    droneToList.Battery =(int)( Math.Min(time.Value.TotalHours * electricUse[4]*100 + droneToList.Battery, 100)*100)/100.0;
+                    droneToList.Battery =(int)( Math.Min(time.Value.TotalHours * electricUse[4] + droneToList.Battery, 100)*100)/100.0;
                     UpdateDroneToL(droneToList);
                 }
                 else

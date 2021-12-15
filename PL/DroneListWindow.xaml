@@ -18,15 +18,15 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions >
-            <ComboBox x:Name="StatusSelector" Grid.Column="1" HorizontalAlignment="Stretch" Margin="0,10,0,0" VerticalAlignment="Stretch" Width="120" FontFamily="Arial Black"  SelectionChanged="StatusSelector_SelectionChanged"/>
-            <ComboBox x:Name="WeightSelector" Width="120" Grid.Column="3" Margin="40,10,40,0" FontFamily="Arial Black"  SelectionChanged="WeightSelector_SelectionChanged"/>
-            <Label x:Name="StatusLabel" Content="Status:" Grid.Column="0" HorizontalAlignment="Stretch" Margin="94,10,0,0" VerticalAlignment="Stretch" FontSize="20" FontFamily="Dubai Medium"/>
-            <Label x:Name="WeightLabel" Content="Weight:" Grid.Column="2" HorizontalAlignment="Stretch" Margin="94,10,0,0" VerticalAlignment="Stretch" FontSize="20" FontFamily="Dubai Medium"/>
+            <ComboBox x:Name="StatusSelector" Grid.Column="1" Margin="6,17,74,18" Width="120" FontFamily="Arial Black"  SelectionChanged="StatusSelector_SelectionChanged" VerticalAlignment="Center" HorizontalAlignment="Left" Height="25"/>
+            <ComboBox x:Name="WeightSelector" Width="120" Grid.Column="3" Margin="10,16,70,18" FontFamily="Arial Black"  SelectionChanged="WeightSelector_SelectionChanged" Height="25" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+            <Label x:Name="StatusLabel" Content="Status:" Grid.Column="0" Margin="110,10,12,0" FontSize="20" FontFamily="Dubai Medium"/>
+            <Label x:Name="WeightLabel" Content="Weight:" Grid.Column="2" Margin="100,10,21,0" FontSize="20" FontFamily="Dubai Medium"/>
         </Grid>
         <Grid Grid.Row="1" >
             <DataGrid x:Name="dronesDataGrid" RowDetailsVisibilityMode="VisibleWhenSelected" Margin="164,59,164,278" ItemsSource="{Binding}" EnableRowVirtualization="True" AutoGenerateColumns="False" MouseDoubleClick="DoubleClickDataGrid">
                 <DataGrid.Columns>
-                    <DataGridTextColumn x:Name="batteryColumn" Width="SizeToHeader" Header="Battery" Binding="{Binding Battery}"/>
+                    <DataGridTextColumn x:Name="batteryColumn" Width="SizeToHeader" Header="Battery" Binding="{Binding Battery}" FontWeight="Normal"/>
                     <DataGridTextColumn x:Name="idColumn" Width="40" Header="Id" Binding="{Binding Id}" CanUserResize="True"/>
                     <DataGridTextColumn x:Name="modelColumn" Width="60" Header="Model" Binding="{Binding Model}"/>
                     <DataGridTextColumn x:Name="parcelIdColumn" Width="SizeToHeader" Header="Parcel Id" Binding="{Binding ParcelId}"/>

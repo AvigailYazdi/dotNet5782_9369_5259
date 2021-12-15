@@ -38,6 +38,11 @@ namespace IBL
                 throw new BO.MissingIdException(id, "Drone In List");
             dList.RemoveAll(d => d.Id == id);
         }
+        /// <summary>
+        /// A function thet returns the index of the drone in the list
+        /// </summary>
+        /// <param name="id"> Id of a drone</param>
+        /// <returns> The index of the drone</returns>
         private int indexDroneToL(int id)
         {
             for (int i = 0; i < dList.Count(); i++)

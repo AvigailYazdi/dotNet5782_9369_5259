@@ -47,8 +47,8 @@ namespace DalObject
                     Id = 212435840+i,//rand.Next(100000000, 1000000000),
                     Name = ((Name)i).ToString(),
                     Phone = "0" + rand.Next(50000000, 56000000).ToString()+i,
-                    Longitude = (double)rand.Next(293, 336) / 10,
-                    Latitude = (double)rand.Next(337, 363) / 10,
+                    Longitude = (double)rand.Next(317, 336) / 10,
+                    Latitude = (double)rand.Next(350, 363) / 10,
                 };
                 customers.Add(c);
             }
@@ -83,9 +83,9 @@ namespace DalObject
                 {
                     Id = 21001+i,//rand.Next(1000, 10000);
                     Name = ((BaseName)i).ToString(),
-                    Longitude = (double)rand.Next(293, 336) / 10,
-                    Latitude = (double)rand.Next(337, 363) / 10,
-                    ChargeSlots = rand.Next(0, 11)
+                    Longitude = (double)rand.Next(317, 336) / 10,
+                    Latitude = (double)rand.Next(350, 363) / 10,
+                    ChargeSlots = rand.Next(4, 16)
                 };
                 stations.Add(s);
             }
