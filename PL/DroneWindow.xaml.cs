@@ -228,6 +228,8 @@ namespace PL
                 flag = true;
                 if (idTextBox.Text != "" && modelTextBox.Text != "" && weightComboBox.SelectedIndex != -1)
                     OpButton.IsEnabled = true;
+                else
+                    OpButton.IsEnabled = false;
             }
             
         }
@@ -236,12 +238,16 @@ namespace PL
         {
             if (idTextBox.Text != "" && modelTextBox.Text != "" && weightComboBox.SelectedIndex != -1 && flag)
                 OpButton.IsEnabled = true;
+            else
+                OpButton.IsEnabled = false;
         }
 
         private void weightComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (idTextBox.Text != "" && modelTextBox.Text != "" && weightComboBox.SelectedIndex != -1 && flag)
                 OpButton.IsEnabled = true;
+            else
+                OpButton.IsEnabled = false;
         }
 
         //private void ClosingWindow(object sender, System.ComponentModel.CancelEventArgs e)
