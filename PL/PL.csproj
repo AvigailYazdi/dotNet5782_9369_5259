@@ -8,7 +8,16 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="DeliveryDrones.jpg" />
+    <None Remove="משלוחי רחפן אביגיל.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\BL\BL.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="DeliveryDrones.jpg" />
   </ItemGroup>
 
 </Project>

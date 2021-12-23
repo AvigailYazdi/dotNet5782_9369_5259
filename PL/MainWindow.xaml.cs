@@ -25,6 +25,7 @@ namespace PL
         {
             InitializeComponent();
             bl = new IBL.BL() { };
+            
         }
 
         private void ShowDronesButton_Click(object sender, RoutedEventArgs e)
