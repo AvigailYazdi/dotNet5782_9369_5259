@@ -85,7 +85,7 @@ namespace DalObject
                     Name = ((BaseName)i).ToString(),
                     Longitude = (double)rand.Next(317, 336) / 10,
                     Latitude = (double)rand.Next(350, 363) / 10,
-                    ChargeSlots = rand.Next(4, 16)
+                    ChargeSlots = rand.Next(15, 30)
                 };
                 stations.Add(s);
             }

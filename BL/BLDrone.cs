@@ -14,7 +14,7 @@ namespace IBL
         /// A function that adds a drone to the data base
         /// </summary>
         /// <param name="droneBo"> The drone to add</param>
-        public void AddDrone(BO.Drone droneBo)// ,int stationId)
+        public void AddDrone(BO.Drone droneBo ,int stationId)
         {
             IDAL.DO.Drone droneDo = new IDAL.DO.Drone()
             {
@@ -25,8 +25,7 @@ namespace IBL
             try
             {
                 dl.AddDrone(droneDo);
-                IEnumerable<IDAL.DO.BaseStation> bs = dl.GetStationsByPerdicate(s => s.ChargeSlots != 0);
-                IDAL.DO.BaseStation stationDo = bs.ElementAtOrDefault(rand.Next(0, bs.Count()));
+                BO.BaseStation stationBo = GetStation(stationId);
                 BO.DroneToL droneToList = new BO.DroneToL()
                 {
                     Id = droneBo.Id,
@@ -34,13 +33,13 @@ namespace IBL
                     Weight = droneBo.Weight,
                     Battery = rand.Next(20 * 100, 40 * 100) / 100.0,
                     Status = BO.DroneStatus.Maintenance,
-                    CurrentPlace = new BO.Location() { Longitude = stationDo.Longitude, Latitude = stationDo.Latitude },
+                    CurrentPlace = new BO.Location() { Longitude = stationBo.Place.Longitude, Latitude = stationBo.Place.Latitude },
                     ParcelId = -1
                 };
                 dList.Add(droneToList);
-                if (stationDo.Id == 0)
-                    throw new BO.NotAvaliableStationException();
-                dl.UpdateChargeDrone(droneBo.Id, stationDo.Id);
+                //if (stationBo.Id == 0)
+                //    throw new BO.NotAvaliableStationException();
+                dl.UpdateChargeDrone(droneBo.Id, stationBo.Id);
             }
             catch (IDAL.DO.DuplicateIdException ex)
             {

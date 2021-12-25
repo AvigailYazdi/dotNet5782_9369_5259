@@ -32,7 +32,9 @@ namespace PL
             bl = _bl;
             weightComboBox.ItemsSource = Enum.GetValues(typeof(IBL.BO.WeightCategories));
             statusComboBox.ItemsSource = Enum.GetValues(typeof(IBL.BO.DroneStatus));
-
+            StationIdCBox.ItemsSource = bl.AvaliableStationList();
+            StationIdCBox.DisplayMemberPath = "Name";
+            StationIdCBox.SelectedValuePath = "Id";
 
             currentDroneToL = new IBL.BO.DroneToL();
 
@@ -40,11 +42,13 @@ namespace PL
             this.Title = "Add Drone";
             OpButton.Content = "Add";
             CancelOrCloseButton.Content = "Cancel";
+            StationIdCBox.Visibility = StationIdLabel.Visibility = Visibility.Visible;
             ChargingButton.Visibility = DelieveryButton.Visibility=Visibility.Collapsed;
             batteryTextBox.Visibility = BatteryLabel.Visibility = Visibility.Collapsed;
             statusComboBox.Visibility = parcelIdTextBox.Visibility = Visibility.Collapsed;
             StatusLabel.Visibility = ParcelIdLabel.Visibility = Visibility.Collapsed;
             OpButton.IsEnabled = false;
+
         }
         public DroneWindow(IBL.BL _bl, IBL.BO.DroneToL _d)//ctor for update
         {
@@ -60,6 +64,7 @@ namespace PL
             OpButton.Content = "Update";
             CancelOrCloseButton.Content = "Close";
 
+            StationIdCBox.Visibility = StationIdLabel.Visibility = Visibility.Hidden;
             ChargingButton.Visibility = DelieveryButton.Visibility = Visibility.Visible;
             statusComboBox.Visibility = parcelIdTextBox.Visibility = Visibility.Visible;
             StatusLabel.Visibility = ParcelIdLabel.Visibility = Visibility.Visible;
@@ -81,13 +86,12 @@ namespace PL
                     d.Id = int.Parse(idTextBox.Text);//currentDroneToL.Id;
                     d.Model = modelTextBox.Text;//currentDroneToL.Model;
                     d.Weight = (IBL.BO.WeightCategories)weightComboBox.SelectedItem;//currentDroneToL.Weight;
-                    bl.AddDrone(d);
+                    bl.AddDrone(d, int.Parse(StationIdCBox.SelectedValue.ToString()));
                     MessageBox.Show("The drone is added successfully!", "Add", b, i);
                     this.Close();
                 }
-                else
+                else 
                 {
-                    //currentDroneToL = gridOneDrone.DataContext as IBL.BO.DroneToL;
                     bl.UpdateDroneName(currentDroneToL.Id, currentDroneToL.Model);
                     MessageBox.Show("The drone Model is updated successfully!", "Update", b, i);
                 }
@@ -212,40 +216,70 @@ namespace PL
 
         private void idTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (idTextBox.Text.Length < 3 || idTextBox.Text.Length > 4)
+            if (option == op.Add)
             {
-                idTextBox.BorderBrush = Brushes.Red;
-                OpButton.IsEnabled = false;
-                flag = false;
-                IntegrityIdLabel.Visibility = Visibility.Visible;
+                if (idTextBox.Text.Length < 3 || idTextBox.Text.Length > 4)
+                {
+                    idTextBox.BorderBrush = Brushes.Red;
+                    OpButton.IsEnabled = false;
+                    flag = false;
+                    IntegrityIdLabel.Visibility = Visibility.Visible;
+                }
+                else
+                {
+                    IntegrityIdLabel.Visibility = Visibility.Collapsed;
+                    idTextBox.BorderBrush = modelTextBox.BorderBrush;
+                    flag = true;
+                    if (idTextBox.Text != "" && modelTextBox.Text != "" && weightComboBox.SelectedIndex != -1 && StationIdCBox.SelectedIndex != -1)
+                        OpButton.IsEnabled = true;
+                    else
+                        OpButton.IsEnabled = false;
+                }
             }
             else
             {
-                IntegrityIdLabel.Visibility = Visibility.Collapsed;
-                idTextBox.BorderBrush = modelTextBox.BorderBrush;
-                flag = true;
-                if (idTextBox.Text != "" && modelTextBox.Text != "" && weightComboBox.SelectedIndex != -1)
+                if (modelTextBox.Text != "")
                     OpButton.IsEnabled = true;
                 else
                     OpButton.IsEnabled = false;
             }
-            
         }
 
         private void modelTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (idTextBox.Text != "" && modelTextBox.Text != "" && weightComboBox.SelectedIndex != -1 && flag)
-                OpButton.IsEnabled = true;
+            if (option == op.Add)
+            {
+
+                if (idTextBox.Text != "" && modelTextBox.Text != "" && weightComboBox.SelectedIndex != -1 && flag && StationIdCBox.SelectedIndex != -1)
+                    OpButton.IsEnabled = true;
+                else
+                    OpButton.IsEnabled = false;
+            }
             else
-                OpButton.IsEnabled = false;
+            {
+                if (modelTextBox.Text != "")
+                    OpButton.IsEnabled = true;
+                else
+                    OpButton.IsEnabled = false;
+            }
         }
 
-        private void weightComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (idTextBox.Text != "" && modelTextBox.Text != "" && weightComboBox.SelectedIndex != -1 && flag)
-                OpButton.IsEnabled = true;
+            if (option == op.Add)
+            {
+                if (idTextBox.Text != "" && modelTextBox.Text != "" && weightComboBox.SelectedIndex != -1 && flag && StationIdCBox.SelectedIndex != -1)
+                    OpButton.IsEnabled = true;
+                else
+                    OpButton.IsEnabled = false;
+            }
             else
-                OpButton.IsEnabled = false;
+            {
+                if (modelTextBox.Text != "")
+                    OpButton.IsEnabled = true;
+                else
+                    OpButton.IsEnabled = false;
+            }
         }
 
         //private void ClosingWindow(object sender, System.ComponentModel.CancelEventArgs e)
