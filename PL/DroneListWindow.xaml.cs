@@ -20,32 +20,30 @@ namespace PL
     public partial class DroneListWindow : Window
     {
         IBL.BL bl;
+        enum Weight { Light, Medium, Heavy, Clear};
+        enum Status { Avaliable, Maintenance, Delivery, Clear }
         public DroneListWindow(IBL.BL _bl)
         {
             InitializeComponent();
             bl = _bl;
-
-            StatusSelector.ItemsSource = Enum.GetValues(typeof(IBL.BO.DroneStatus));
-            WeightSelector.ItemsSource = Enum.GetValues(typeof(IBL.BO.WeightCategories));
+            
+            StatusSelector.ItemsSource = Enum.GetValues(typeof(Status));
+            WeightSelector.ItemsSource = Enum.GetValues(typeof(Weight));
 
             dronesDataGrid.DataContext = bl.DroneList();
             dronesDataGrid.IsReadOnly = true;
         }
 
-        private void StatusSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void Selector_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (WeightSelector.SelectedIndex == -1)
+            if ((WeightSelector.SelectedIndex == -1||WeightSelector.SelectedIndex == 3) && StatusSelector.SelectedIndex != 3)
                 dronesDataGrid.DataContext = bl.GetDronesByPerdicate(d => d.Status == (IBL.BO.DroneStatus)StatusSelector.SelectedItem);
-            else
-                dronesDataGrid.DataContext = bl.GetDronesByPerdicate(d => d.Status == (IBL.BO.DroneStatus)StatusSelector.SelectedItem && d.Weight == (IBL.BO.WeightCategories)WeightSelector.SelectedItem);
-        }
-
-        private void WeightSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if (StatusSelector.SelectedIndex == -1)
+            else if((WeightSelector.SelectedIndex == -1||WeightSelector.SelectedIndex == 3) && (StatusSelector.SelectedIndex == 3|| StatusSelector.SelectedIndex == -1))
+                dronesDataGrid.DataContext = bl.DroneList();
+            else if(WeightSelector.SelectedIndex != 3 && (StatusSelector.SelectedIndex == 3|| StatusSelector.SelectedIndex == -1))
                 dronesDataGrid.DataContext = bl.GetDronesByPerdicate(d => d.Weight == (IBL.BO.WeightCategories)WeightSelector.SelectedItem);
             else
-                dronesDataGrid.DataContext = bl.GetDronesByPerdicate(d => d.Weight == (IBL.BO.WeightCategories)WeightSelector.SelectedItem && d.Status == (IBL.BO.DroneStatus)StatusSelector.SelectedItem);
+                dronesDataGrid.DataContext = bl.GetDronesByPerdicate(d => d.Status == (IBL.BO.DroneStatus)StatusSelector.SelectedItem && d.Weight == (IBL.BO.WeightCategories)WeightSelector.SelectedItem);
         }
 
         private void AddDroneButton_Click(object sender, RoutedEventArgs e)
@@ -55,16 +53,15 @@ namespace PL
 
         private void ActivatedWindow(object sender, EventArgs e)
         {
-            //dronesDataGrid.DataContext = bl.DroneList();
 
-            if (WeightSelector.SelectedIndex == -1 && StatusSelector.SelectedIndex == -1)
+            if ((WeightSelector.SelectedIndex == -1 || WeightSelector.SelectedIndex == 3) && (StatusSelector.SelectedIndex == 3 || StatusSelector.SelectedIndex == -1))
                 dronesDataGrid.DataContext = bl.DroneList();
-            else if (WeightSelector.SelectedIndex == -1)
+            else if ((WeightSelector.SelectedIndex == -1 || WeightSelector.SelectedIndex == 3) && StatusSelector.SelectedIndex != 3)
                 dronesDataGrid.DataContext = bl.GetDronesByPerdicate(d => d.Status == (IBL.BO.DroneStatus)StatusSelector.SelectedItem);
-            else if (StatusSelector.SelectedIndex == -1)
+            else if (WeightSelector.SelectedIndex != 3 && (StatusSelector.SelectedIndex == 3 || StatusSelector.SelectedIndex == -1))
                 dronesDataGrid.DataContext = bl.GetDronesByPerdicate(d => d.Weight == (IBL.BO.WeightCategories)WeightSelector.SelectedItem);
             else
-                dronesDataGrid.DataContext = bl.GetDronesByPerdicate(d => d.Weight == (IBL.BO.WeightCategories)WeightSelector.SelectedItem && d.Status == (IBL.BO.DroneStatus)StatusSelector.SelectedItem);
+                dronesDataGrid.DataContext = bl.GetDronesByPerdicate(d => d.Status == (IBL.BO.DroneStatus)StatusSelector.SelectedItem && d.Weight == (IBL.BO.WeightCategories)WeightSelector.SelectedItem);
         }
 
         private void DoubleClickDataGrid(object sender, MouseButtonEventArgs e)
