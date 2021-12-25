@@ -30,7 +30,6 @@ namespace PL
         {
             InitializeComponent();
             bl = _bl;
-
             weightComboBox.ItemsSource = Enum.GetValues(typeof(IBL.BO.WeightCategories));
             statusComboBox.ItemsSource = Enum.GetValues(typeof(IBL.BO.DroneStatus));
 
@@ -53,7 +52,6 @@ namespace PL
             bl = _bl;
             weightComboBox.ItemsSource = Enum.GetValues(typeof(IBL.BO.WeightCategories));
             statusComboBox.ItemsSource = Enum.GetValues(typeof(IBL.BO.DroneStatus));
-
             currentDroneToL = _d;
             gridOneDrone.DataContext = currentDroneToL;
 
