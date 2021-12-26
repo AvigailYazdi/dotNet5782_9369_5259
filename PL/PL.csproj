@@ -13,7 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\BL\BL.csproj" />
+    <ProjectReference Include="..\BL1\BL1.csproj" />
   </ItemGroup>
 
   <ItemGroup>

@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using BlApi;
 
 namespace PL
 {
@@ -19,24 +20,24 @@ namespace PL
     /// </summary>
     public partial class DroneWindow : Window
     {
-        IBL.BL bl;
+        IBL bl;
         enum op { Add, Update };
         op option;
-        IBL.BO.DroneToL currentDroneToL;
+        BO.DroneToL currentDroneToL;
         bool flag = true;
         MessageBoxButton b = MessageBoxButton.OK;
         MessageBoxImage i = MessageBoxImage.Information;
-        public DroneWindow(IBL.BL _bl)//ctor for add
+        public DroneWindow(IBL _bl)//ctor for add
         {
             InitializeComponent();
             bl = _bl;
-            weightComboBox.ItemsSource = Enum.GetValues(typeof(IBL.BO.WeightCategories));
-            statusComboBox.ItemsSource = Enum.GetValues(typeof(IBL.BO.DroneStatus));
+            weightComboBox.ItemsSource = Enum.GetValues(typeof(BO.WeightCategories));
+            statusComboBox.ItemsSource = Enum.GetValues(typeof(BO.DroneStatus));
             StationIdCBox.ItemsSource = bl.AvaliableStationList();
             StationIdCBox.DisplayMemberPath = "Name";
             StationIdCBox.SelectedValuePath = "Id";
 
-            currentDroneToL = new IBL.BO.DroneToL();
+            currentDroneToL = new BO.DroneToL();
 
             option = op.Add;
             this.Title = "Add Drone";
@@ -50,12 +51,12 @@ namespace PL
             OpButton.IsEnabled = false;
 
         }
-        public DroneWindow(IBL.BL _bl, IBL.BO.DroneToL _d)//ctor for update
+        public DroneWindow(IBL _bl, BO.DroneToL _d)//ctor for update
         {
             InitializeComponent();
             bl = _bl;
-            weightComboBox.ItemsSource = Enum.GetValues(typeof(IBL.BO.WeightCategories));
-            statusComboBox.ItemsSource = Enum.GetValues(typeof(IBL.BO.DroneStatus));
+            weightComboBox.ItemsSource = Enum.GetValues(typeof(BO.WeightCategories));
+            statusComboBox.ItemsSource = Enum.GetValues(typeof(BO.DroneStatus));
             currentDroneToL = _d;
             gridOneDrone.DataContext = currentDroneToL;
 
@@ -77,15 +78,15 @@ namespace PL
 
         private void OpButton_Click(object sender, RoutedEventArgs e)
         {
-            currentDroneToL = gridOneDrone.DataContext as IBL.BO.DroneToL;
+            currentDroneToL = gridOneDrone.DataContext as BO.DroneToL;
             try
             {
                 if (option == op.Add)
                 {
-                    IBL.BO.Drone d = new IBL.BO.Drone();
+                    BO.Drone d = new BO.Drone();
                     d.Id = int.Parse(idTextBox.Text);//currentDroneToL.Id;
                     d.Model = modelTextBox.Text;//currentDroneToL.Model;
-                    d.Weight = (IBL.BO.WeightCategories)weightComboBox.SelectedItem;//currentDroneToL.Weight;
+                    d.Weight = (BO.WeightCategories)weightComboBox.SelectedItem;//currentDroneToL.Weight;
                     bl.AddDrone(d, int.Parse(StationIdCBox.SelectedValue.ToString()));
                     MessageBox.Show("The drone is added successfully!", "Add", b, i);
                     this.Close();
@@ -113,16 +114,16 @@ namespace PL
         {
             try
             {
-                if (currentDroneToL.Status == IBL.BO.DroneStatus.Avaliable)
+                if (currentDroneToL.Status == BO.DroneStatus.Avaliable)
                 {
                     bl.UpdateDroneToCharge(currentDroneToL.Id);
-                    statusComboBox.SelectedItem = IBL.BO.DroneStatus.Maintenance;
+                    statusComboBox.SelectedItem = BO.DroneStatus.Maintenance;
                     MessageBox.Show("The drone is in charge", "Charging", b, i);
                 }
-                else if (currentDroneToL.Status == IBL.BO.DroneStatus.Maintenance)
+                else if (currentDroneToL.Status == BO.DroneStatus.Maintenance)
                 {
                     bl.UpdateDisChargeDrone(currentDroneToL.Id);
-                    statusComboBox.SelectedItem = IBL.BO.DroneStatus.Avaliable;
+                    statusComboBox.SelectedItem = BO.DroneStatus.Avaliable;
                     batteryTextBox.Text = Convert.ToString(currentDroneToL.Battery);
                     MessageBox.Show("The drone discharged", "Discharging", b, i);
 
@@ -140,13 +141,13 @@ namespace PL
         {
             try
             {
-                if (currentDroneToL.Status == IBL.BO.DroneStatus.Avaliable)
+                if (currentDroneToL.Status == BO.DroneStatus.Avaliable)
                 {
                     bl.UpdateParcelToDrone(currentDroneToL.Id);
                     if (currentDroneToL.ParcelId != -1)
                     {
                         parcelIdTextBox.Text = Convert.ToString(currentDroneToL.ParcelId);
-                        statusComboBox.SelectedItem = IBL.BO.DroneStatus.Delivery;
+                        statusComboBox.SelectedItem = BO.DroneStatus.Delivery;
                         batteryTextBox.Text = Convert.ToString(currentDroneToL.Battery);
                         MessageBox.Show("The drone is connected to a parcel", "Connection", b, i);
                     }
@@ -157,9 +158,9 @@ namespace PL
                         i = MessageBoxImage.Information;
                     }
                 }
-                else if (currentDroneToL.Status == IBL.BO.DroneStatus.Delivery)
+                else if (currentDroneToL.Status == BO.DroneStatus.Delivery)
                 {
-                    IBL.BO.Parcel p = bl.GetParcel(currentDroneToL.ParcelId);
+                    BO.Parcel p = bl.GetParcel(currentDroneToL.ParcelId);
                     if (p.PickedUp == null)
                     {
                         bl.UpdateParcelCollect(currentDroneToL.Id);
@@ -171,7 +172,7 @@ namespace PL
                         bl.UpdateParcelProvide(currentDroneToL.Id);
                         batteryTextBox.Text = Convert.ToString(currentDroneToL.Battery);
                         parcelIdTextBox.Text = "-1";
-                        statusComboBox.SelectedItem = IBL.BO.DroneStatus.Avaliable;
+                        statusComboBox.SelectedItem = BO.DroneStatus.Avaliable;
                         MessageBox.Show("The parcel was provided", "Providing", b, i);
                     }
                 }

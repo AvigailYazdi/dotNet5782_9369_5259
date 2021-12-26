@@ -60,11 +60,12 @@ namespace ConsoleUI_BL
                                     bl.AddStation(b);
                                     break;
                                 case AddOrView.Drone:
-                                    Console.WriteLine("Enter id, model and max weight of a drone");
+                                    Console.WriteLine("Enter id, model, max weight and id of station of a drone");
                                     d.Id = int.Parse(Console.ReadLine());
                                     d.Model = Console.ReadLine();
                                     d.Weight = (WeightCategories)int.Parse(Console.ReadLine());
-                                    bl.AddDrone(d);
+                                    int num= int.Parse(Console.ReadLine());
+                                    bl.AddDrone(d,num);
                                     break;
                                 case AddOrView.Customer:
                                     Console.WriteLine("Enter id, name, phone number, and location of a customer");

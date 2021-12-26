@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using BlApi;
 
 namespace PL
 {
@@ -19,10 +20,10 @@ namespace PL
     /// </summary>
     public partial class DroneListWindow : Window
     {
-        IBL.BL bl;
+        IBL bl;
         enum Weight { Light, Medium, Heavy, Clear};
         enum Status { Avaliable, Maintenance, Delivery, Clear }
-        public DroneListWindow(IBL.BL _bl)
+        public DroneListWindow(IBL _bl)
         {
             InitializeComponent();
             bl = _bl;
@@ -37,13 +38,13 @@ namespace PL
         private void Selector_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if ((WeightSelector.SelectedIndex == -1||WeightSelector.SelectedIndex == 3) && StatusSelector.SelectedIndex != 3)
-                dronesDataGrid.DataContext = bl.GetDronesByPerdicate(d => d.Status == (IBL.BO.DroneStatus)StatusSelector.SelectedItem);
+                dronesDataGrid.DataContext = bl.GetDronesByPerdicate(d => d.Status == (BO.DroneStatus)StatusSelector.SelectedItem);
             else if((WeightSelector.SelectedIndex == -1||WeightSelector.SelectedIndex == 3) && (StatusSelector.SelectedIndex == 3|| StatusSelector.SelectedIndex == -1))
                 dronesDataGrid.DataContext = bl.DroneList();
             else if(WeightSelector.SelectedIndex != 3 && (StatusSelector.SelectedIndex == 3|| StatusSelector.SelectedIndex == -1))
-                dronesDataGrid.DataContext = bl.GetDronesByPerdicate(d => d.Weight == (IBL.BO.WeightCategories)WeightSelector.SelectedItem);
+                dronesDataGrid.DataContext = bl.GetDronesByPerdicate(d => d.Weight == (BO.WeightCategories)WeightSelector.SelectedItem);
             else
-                dronesDataGrid.DataContext = bl.GetDronesByPerdicate(d => d.Status == (IBL.BO.DroneStatus)StatusSelector.SelectedItem && d.Weight == (IBL.BO.WeightCategories)WeightSelector.SelectedItem);
+                dronesDataGrid.DataContext = bl.GetDronesByPerdicate(d => d.Status == (BO.DroneStatus)StatusSelector.SelectedItem && d.Weight == (BO.WeightCategories)WeightSelector.SelectedItem);
         }
 
         private void AddDroneButton_Click(object sender, RoutedEventArgs e)
@@ -57,16 +58,16 @@ namespace PL
             if ((WeightSelector.SelectedIndex == -1 || WeightSelector.SelectedIndex == 3) && (StatusSelector.SelectedIndex == 3 || StatusSelector.SelectedIndex == -1))
                 dronesDataGrid.DataContext = bl.DroneList();
             else if ((WeightSelector.SelectedIndex == -1 || WeightSelector.SelectedIndex == 3) && StatusSelector.SelectedIndex != 3)
-                dronesDataGrid.DataContext = bl.GetDronesByPerdicate(d => d.Status == (IBL.BO.DroneStatus)StatusSelector.SelectedItem);
+                dronesDataGrid.DataContext = bl.GetDronesByPerdicate(d => d.Status == (BO.DroneStatus)StatusSelector.SelectedItem);
             else if (WeightSelector.SelectedIndex != 3 && (StatusSelector.SelectedIndex == 3 || StatusSelector.SelectedIndex == -1))
-                dronesDataGrid.DataContext = bl.GetDronesByPerdicate(d => d.Weight == (IBL.BO.WeightCategories)WeightSelector.SelectedItem);
+                dronesDataGrid.DataContext = bl.GetDronesByPerdicate(d => d.Weight == (BO.WeightCategories)WeightSelector.SelectedItem);
             else
-                dronesDataGrid.DataContext = bl.GetDronesByPerdicate(d => d.Status == (IBL.BO.DroneStatus)StatusSelector.SelectedItem && d.Weight == (IBL.BO.WeightCategories)WeightSelector.SelectedItem);
+                dronesDataGrid.DataContext = bl.GetDronesByPerdicate(d => d.Status == (BO.DroneStatus)StatusSelector.SelectedItem && d.Weight == (BO.WeightCategories)WeightSelector.SelectedItem);
         }
 
         private void DoubleClickDataGrid(object sender, MouseButtonEventArgs e)
         {
-            IBL.BO.DroneToL curDroneToL = dronesDataGrid.SelectedItem as IBL.BO.DroneToL;
+            BO.DroneToL curDroneToL = dronesDataGrid.SelectedItem as BO.DroneToL;
             if (curDroneToL != null)
                 new DroneWindow(bl, curDroneToL).ShowDialog();
         }
