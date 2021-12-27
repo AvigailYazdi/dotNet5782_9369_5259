@@ -23,12 +23,19 @@ namespace PL
     public partial class MainWindow : Window
     {
         internal readonly IBL bl = BlFactory.GetBl();
+        /// <summary>
+        /// A ctor
+        /// </summary>
         public MainWindow()
         {
             InitializeComponent();           
         }
-
-        private void ShowDronesButton_Click(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// A function that opens the drone list window
+        /// </summary>
+        /// <param name="sender"> The sent object</param>
+        /// <param name="e"> Routed event args</param>
+        private void showDronesButton_Click(object sender, RoutedEventArgs e)
         {
             new DroneListWindow(bl).ShowDialog();
         }

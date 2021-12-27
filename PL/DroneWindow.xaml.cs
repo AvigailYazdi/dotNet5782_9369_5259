@@ -21,13 +21,17 @@ namespace PL
     public partial class DroneWindow : Window
     {
         IBL bl;
-        enum op { Add, Update };
-        op option;
-        BO.DroneToL currentDroneToL;
-        bool flag = true;
-        MessageBoxButton b = MessageBoxButton.OK;
-        MessageBoxImage i = MessageBoxImage.Information;
-        public DroneWindow(IBL _bl)//ctor for add
+        enum op { Add, Update }; // Enum of the options 
+        op option; // The selected option- add/ update
+        BO.DroneToL currentDroneToL; // The selected drone 
+        bool flag = true; // A flag for id integrity
+        MessageBoxButton b = MessageBoxButton.OK; // A button of the message box
+        MessageBoxImage i = MessageBoxImage.Information; // An icon of the message box
+        /// <summary>
+        /// ctor for add
+        /// </summary>
+        /// <param name="_bl"> An accses for bl functions</param>
+        public DroneWindow(IBL _bl)
         {
             InitializeComponent();
             bl = _bl;
@@ -51,7 +55,12 @@ namespace PL
             OpButton.IsEnabled = false;
 
         }
-        public DroneWindow(IBL _bl, BO.DroneToL _d)//ctor for update
+        /// <summary>
+        /// ctor for update
+        /// </summary>
+        /// <param name="_bl">An accses for bl functions </param>
+        /// <param name="_d"> The selected drone</param>
+        public DroneWindow(IBL _bl, BO.DroneToL _d)
         {
             InitializeComponent();
             bl = _bl;
@@ -75,13 +84,17 @@ namespace PL
             weightComboBox.SelectedItem = currentDroneToL.Weight;
             statusComboBox.SelectedItem = currentDroneToL.Status;
         }
-
-        private void OpButton_Click(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// A function that adds/ updates a drone
+        /// </summary>
+        /// <param name="sender"> The sent object</param>
+        /// <param name="e">Routed event args </param>
+        private void opButton_Click(object sender, RoutedEventArgs e)
         {
             currentDroneToL = gridOneDrone.DataContext as BO.DroneToL;
             try
             {
-                if (option == op.Add)
+                if (option == op.Add)// The button is add
                 {
                     BO.Drone d = new BO.Drone();
                     d.Id = int.Parse(idTextBox.Text);//currentDroneToL.Id;
@@ -91,7 +104,7 @@ namespace PL
                     MessageBox.Show("The drone is added successfully!", "Add", b, i);
                     this.Close();
                 }
-                else 
+                else // The button is update
                 {
                     bl.UpdateDroneName(currentDroneToL.Id, currentDroneToL.Model);
                     MessageBox.Show("The drone Model is updated successfully!", "Update", b, i);
@@ -104,13 +117,21 @@ namespace PL
                 i = MessageBoxImage.Information;
             }
         }
-
-        private void CancelOrCloseButton_Click(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// A function that closes the current window
+        /// </summary>
+        /// <param name="sender"> The sent object</param>
+        /// <param name="e"> Routed event args</param>
+        private void cancelOrCloseButton_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
         }
-
-        private void ChargingButton_Click(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// A function that charge/ dischage the drone
+        /// </summary>
+        /// <param name="sender">The sent object</param>
+        /// <param name="e">Routed event args</param>
+        private void chargingButton_Click(object sender, RoutedEventArgs e)
         {
             try
             {
@@ -136,8 +157,12 @@ namespace PL
                 i = MessageBoxImage.Information;
             }
         }
-
-        private void DelieveryButton_Click(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// A function that promotes the delivery process 
+        /// </summary>
+        /// <param name="sender">The sent object</param>
+        /// <param name="e"> Routed event args</param>
+        private void delieveryButton_Click(object sender, RoutedEventArgs e)
         {
             try
             {
@@ -153,6 +178,7 @@ namespace PL
                     }
                     else
                     {
+                        statusComboBox.SelectedItem = BO.DroneStatus.Maintenance;
                         i = MessageBoxImage.Error;
                         MessageBox.Show("The connection failed", "ERROR", b, i);
                         i = MessageBoxImage.Information;
@@ -184,7 +210,12 @@ namespace PL
                 i = MessageBoxImage.Information;
             }
         }
-        private void TextBox_OnlyNumbers_PreviewKeyDown(object sender, KeyEventArgs e)
+        /// <summary>
+        /// A function that ensures that the input of id contains just numbers
+        /// </summary>
+        /// <param name="sender">The sent object </param>
+        /// <param name="e">Key event args </param>
+        private void textBox_OnlyNumbers_PreviewKeyDown(object sender, KeyEventArgs e)
         {
             TextBox text = sender as TextBox;
             if (text == null) return;
@@ -214,7 +245,11 @@ namespace PL
             e.Handled = true; //ignore this key. mark event as handled, will not be routed to other controls
             return;
         }
-
+        /// <summary>
+        /// A function that checks the id integrity
+        /// </summary>
+        /// <param name="sender"> The sent object</param>
+        /// <param name="e"> Text changed event args</param>
         private void idTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             if (option == op.Add)
@@ -245,7 +280,11 @@ namespace PL
                     OpButton.IsEnabled = false;
             }
         }
-
+        /// <summary>
+        ///  A function that checks the model integrity
+        /// </summary>
+        /// <param name="sender">The sent object</param>
+        /// <param name="e"> Text changed event args</param>
         private void modelTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             if (option == op.Add)
@@ -264,8 +303,12 @@ namespace PL
                     OpButton.IsEnabled = false;
             }
         }
-
-        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        /// <summary>
+        /// A function that checks if the selection changed
+        /// </summary>
+        /// <param name="sender"> The sent object</param>
+        /// <param name="e"> Selection changed event args</param>
+        private void comboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (option == op.Add)
             {

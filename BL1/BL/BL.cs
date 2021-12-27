@@ -59,7 +59,7 @@ namespace BL
                             temp.CurrentPlace = new BO.Location() { Longitude = senderDo.Longitude, Latitude = senderDo.Latitude };
                         distance1 = dl.DistanceInKm(temp.CurrentPlace.Longitude, temp.CurrentPlace.Latitude, targetDo.Longitude, targetDo.Latitude);
                         stationDo = closeStation(targetDo.Longitude, targetDo.Latitude);
-                        distance2 = shortDis(targetDo.Longitude, targetDo.Latitude, stationDo);
+                        distance2 = dl.DistanceInKm(targetDo.Longitude, targetDo.Latitude, stationDo.Longitude, stationDo.Latitude);
                         temp.Battery = rand.Next((int)(getBattery(distance1 + distance2, temp.Id) * 100), 100 * 100) / 100.0;
                     }
                     else if (temp.ParcelId <= 0)
@@ -85,7 +85,7 @@ namespace BL
                             DO.Parcel pc = p.ElementAtOrDefault(rand.Next(0, p.Count()));
                             temp.CurrentPlace = new BO.Location() { Longitude = dl.GetCustomer(pc.TargetId).Longitude, Latitude = dl.GetCustomer(pc.TargetId).Latitude };
                             stationDo = closeStation(temp.CurrentPlace.Longitude, temp.CurrentPlace.Latitude);
-                            distance1 = shortDis(temp.CurrentPlace.Longitude, temp.CurrentPlace.Latitude, stationDo);
+                            distance1 = dl.DistanceInKm(temp.CurrentPlace.Longitude, temp.CurrentPlace.Latitude, stationDo.Longitude, stationDo.Latitude);
                             temp.Battery = rand.Next((int)(getBattery(distance1, stationDo.Id) * 100), 100 * 100) / 100.0;
                             // dl.UpdateChargeDrone(temp.Id, stationDo.Id);
                         }
@@ -131,17 +131,6 @@ namespace BL
 
         }
         /// <summary>
-        /// the distance between the station and a location
-        /// </summary>
-        /// <param name="lon">logitude</param>
-        /// <param name="lat">latitude</param>
-        /// <param name="b">the station</param>
-        /// <returns>the distance</returns>
-        private double shortDis(double lon, double lat, DO.BaseStation b)
-        {
-            return dl.DistanceInKm(lon, lat, b.Longitude, b.Latitude);
-        }
-        /// <summary>
         /// A function that colculates the wasted batttery
         /// </summary>
         /// <param name="distance">distance</param>
@@ -171,6 +160,37 @@ namespace BL
                 }
             }
             return ((int)(battery * 100)) / 100.0;
+        }
+        /// <summary>
+        /// A funciton that returns the battery that will be wasted in the way
+        /// </summary>
+        /// <param name="distance"> The distance in KM </param>
+        /// <param name="parcelId"> The id of the parcel</param>
+        /// <returns> The battery</returns>
+        private double getWasteBattery(double distance, int parcelId)
+        {
+            double battery = -1;
+            if (parcelId == 0)
+                battery = electricUse[0] * distance;
+            else
+            {
+                BO.Parcel parcel = GetParcel(parcelId);
+                switch (parcel.Weight)
+                {
+                    case BO.WeightCategories.Light:
+                        battery = electricUse[1] * distance;
+                        break;
+                    case BO.WeightCategories.Medium:
+                        battery = electricUse[2] * distance;
+                        break;
+                    case BO.WeightCategories.Heavy:
+                        battery = electricUse[3] * distance;
+                        break;
+                    default:
+                        break;
+                }
+            }
+            return battery;
         }
     }
 }

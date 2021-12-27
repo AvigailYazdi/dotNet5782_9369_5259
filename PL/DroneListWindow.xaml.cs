@@ -23,6 +23,10 @@ namespace PL
         IBL bl;
         enum Weight { Light, Medium, Heavy, Clear};
         enum Status { Avaliable, Maintenance, Delivery, Clear }
+        /// <summary>
+        /// ctor 
+        /// </summary>
+        /// <param name="_bl"> An accses to bl functions</param>
         public DroneListWindow(IBL _bl)
         {
             InitializeComponent();
@@ -34,8 +38,12 @@ namespace PL
             dronesDataGrid.DataContext = bl.DroneList();
             dronesDataGrid.IsReadOnly = true;
         }
-
-        private void Selector_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        /// <summary>
+        /// A function that filters the view by selectors
+        /// </summary>
+        /// <param name="sender"> The sent object </param>
+        /// <param name="e"> Selection changed event args</param>
+        private void selector_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if ((WeightSelector.SelectedIndex == -1||WeightSelector.SelectedIndex == 3) && StatusSelector.SelectedIndex != 3)
                 dronesDataGrid.DataContext = bl.GetDronesByPerdicate(d => d.Status == (BO.DroneStatus)StatusSelector.SelectedItem);
@@ -46,15 +54,22 @@ namespace PL
             else
                 dronesDataGrid.DataContext = bl.GetDronesByPerdicate(d => d.Status == (BO.DroneStatus)StatusSelector.SelectedItem && d.Weight == (BO.WeightCategories)WeightSelector.SelectedItem);
         }
-
-        private void AddDroneButton_Click(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// A function that opens the drone window for add
+        /// </summary>
+        /// <param name="sender"> The sent object</param>
+        /// <param name="e"> Routed event args</param>
+        private void addDroneButton_Click(object sender, RoutedEventArgs e)
         {
             new DroneWindow(bl).ShowDialog();
         }
-
-        private void ActivatedWindow(object sender, EventArgs e)
+        /// <summary>
+        /// A function that keeps the window updated
+        /// </summary>
+        /// <param name="sender"> The sent object </param>
+        /// <param name="e"> Event args</param>
+        private void activatedWindow(object sender, EventArgs e)
         {
-
             if ((WeightSelector.SelectedIndex == -1 || WeightSelector.SelectedIndex == 3) && (StatusSelector.SelectedIndex == 3 || StatusSelector.SelectedIndex == -1))
                 dronesDataGrid.DataContext = bl.DroneList();
             else if ((WeightSelector.SelectedIndex == -1 || WeightSelector.SelectedIndex == 3) && StatusSelector.SelectedIndex != 3)
@@ -64,15 +79,23 @@ namespace PL
             else
                 dronesDataGrid.DataContext = bl.GetDronesByPerdicate(d => d.Status == (BO.DroneStatus)StatusSelector.SelectedItem && d.Weight == (BO.WeightCategories)WeightSelector.SelectedItem);
         }
-
-        private void DoubleClickDataGrid(object sender, MouseButtonEventArgs e)
+        /// <summary>
+        /// A function that opens the drone window for update the selected drone
+        /// </summary>
+        /// <param name="sender">The sent object </param>
+        /// <param name="e"> Mouse button event args</param>
+        private void doubleClickDataGrid(object sender, MouseButtonEventArgs e)
         {
             BO.DroneToL curDroneToL = dronesDataGrid.SelectedItem as BO.DroneToL;
             if (curDroneToL != null)
                 new DroneWindow(bl, curDroneToL).ShowDialog();
         }
-
-        private void CloseButton_Click(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// A function that closes the window
+        /// </summary>
+        /// <param name="sender"> The sent object</param>
+        /// <param name="e"> Routed event args</param>
+        private void closeButton_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
         }

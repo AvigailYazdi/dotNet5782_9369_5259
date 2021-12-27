@@ -87,7 +87,7 @@ namespace BL
                 if (droneToList.Status == BO.DroneStatus.Avaliable)
                 {
                     DO.BaseStation b = closeStation(droneToList.CurrentPlace.Longitude, droneToList.CurrentPlace.Latitude);
-                    double distance = shortDis(droneToList.CurrentPlace.Longitude, droneToList.CurrentPlace.Latitude, b);
+                    double distance = dl.DistanceInKm(droneToList.CurrentPlace.Longitude, droneToList.CurrentPlace.Latitude, b.Longitude, b.Latitude);
                     if (getBattery(distance,id) > droneToList.Battery)
                         throw new BO.NotEnoughBatteryException(id);
                     dl.UpdateChargeDrone(id, b.Id);//dal

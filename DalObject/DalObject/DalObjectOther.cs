@@ -42,7 +42,7 @@ namespace Dal
             int R = 6371; // Radius of the earth in km
             double dLat = deg2rad(lat2 - lat1);  // deg2rad below
             double dLon = deg2rad(lon2 - lon1);
-            double a = Math.Sin(dLat / 2) * Math.Sin(dLat / 2) +Math.Cos(deg2rad(lat1)) * Math.Cos(deg2rad(lat2)) *Math.Sin(dLon / 2) * Math.Sin(dLon / 2);
+            double a = Math.Sin(dLat / 2) * Math.Sin(dLat / 2) + Math.Cos(deg2rad(lat1)) * Math.Cos(deg2rad(lat2)) *Math.Sin(dLon / 2) * Math.Sin(dLon / 2);
             double c = 2 * Math.Atan2(Math.Sqrt(a), Math.Sqrt(1 - a));
             double d = R * c; // Distance in km
             return (int)(d * 1000) / 1000.0;

@@ -31,14 +31,14 @@
             <Label x:Name="BatteryLabel" Content="Battery:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="0" VerticalAlignment="Center" FontWeight="Bold" />
             <TextBox x:Name="batteryTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="0" Text="{Binding Battery, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120" IsEnabled="False"/>
             <Label x:Name="IdLabel" Content="Id:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="1" VerticalAlignment="Center" FontWeight="Bold"/>
-            <TextBox x:Name="idTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="1" Text="{Binding Id, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120" PreviewKeyDown="TextBox_OnlyNumbers_PreviewKeyDown" TextChanged="idTextBox_TextChanged" />
+            <TextBox x:Name="idTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="1" Text="{Binding Id, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120" PreviewKeyDown="textBox_OnlyNumbers_PreviewKeyDown" TextChanged="idTextBox_TextChanged" />
             <Label x:Name="ModelLabel" Content="Model:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="2" VerticalAlignment="Center" FontWeight="Bold"/>
             <TextBox x:Name="modelTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="2" Text="{Binding Model, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120" TextChanged="modelTextBox_TextChanged"/>
             <Label x:Name="ParcelIdLabel" Content="Parcel Id:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="5" VerticalAlignment="Center" FontWeight="Bold"/>
             <TextBox x:Name="parcelIdTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="5" Text="{Binding ParcelId, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120" IsEnabled="False"/>
             <Label x:Name="WeightLabel" Content="Weight:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="3" VerticalAlignment="Center" FontWeight="Bold"/>
             <Label x:Name="StatusLabel" Content="Status:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="4" VerticalAlignment="Center" FontWeight="Bold"/>
-            <ComboBox x:Name="weightComboBox" Grid.Column="1" HorizontalAlignment="Left" Height="Auto" Margin="3" Grid.Row="3" VerticalAlignment="Center" Width="120" SelectionChanged="ComboBox_SelectionChanged">
+            <ComboBox x:Name="weightComboBox" Grid.Column="1" HorizontalAlignment="Left" Height="Auto" Margin="3" Grid.Row="3" VerticalAlignment="Center" Width="120" SelectionChanged="comboBox_SelectionChanged">
                 <ComboBox.ItemsPanel>
                     <ItemsPanelTemplate>
                         <VirtualizingStackPanel/>
@@ -56,7 +56,7 @@
             <TextBox x:Name="latitudeTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="6" Text="{Binding CurrentPlace.Latitude, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120" Visibility="Collapsed"/>
             <Label Content="Longitude:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="7" VerticalAlignment="Center" Visibility="Collapsed"/>
             <TextBox x:Name="longitudeTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="7" Text="{Binding CurrentPlace.Longitude, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120" Visibility="Collapsed"/>
-            <ComboBox x:Name="StationIdCBox" Grid.Column="1" HorizontalAlignment="Center" Height="Auto" VerticalAlignment="Top" Width="120" SelectionChanged="ComboBox_SelectionChanged" Margin="0,-25,0,0">
+            <ComboBox x:Name="StationIdCBox" Grid.Column="1" HorizontalAlignment="Center" Height="Auto" VerticalAlignment="Top" Width="120" SelectionChanged="comboBox_SelectionChanged" Margin="0,-25,0,0">
                 <ComboBox.ItemsPanel>
                     <ItemsPanelTemplate>
                         <VirtualizingStackPanel/>
@@ -68,10 +68,10 @@
 
 
 
-        <Button x:Name="CancelOrCloseButton" Content="Cancel" HorizontalAlignment="Left" Margin="196,340,0,0" VerticalAlignment="Top" Height="27" Width="104" Click="CancelOrCloseButton_Click"/>
-        <Button x:Name="OpButton" Content="Add" HorizontalAlignment="Left" Margin="70,340,0,0" VerticalAlignment="Top" Height="27" Width="104" Click="OpButton_Click" Background="#FFDDDDDD" UseLayoutRounding="False" BorderBrush="#FF0C5990" BorderThickness="2,2,2,2"/>
-        <Button x:Name="ChargingButton" Content="Charge/Discharge" HorizontalAlignment="Left" Margin="486,340,0,0" VerticalAlignment="Top" Height="27" Width="110" Click="ChargingButton_Click"/>
-        <Button x:Name="DelieveryButton" Content="Next Step of delievery" HorizontalAlignment="Left" Margin="320,340,0,0" VerticalAlignment="Top" Height="27" Width="144" Click="DelieveryButton_Click"/>
+        <Button x:Name="CancelOrCloseButton" Content="Cancel" HorizontalAlignment="Left" Margin="196,340,0,0" VerticalAlignment="Top" Height="27" Width="104" Click="cancelOrCloseButton_Click"/>
+        <Button x:Name="OpButton" Content="Add" HorizontalAlignment="Left" Margin="70,340,0,0" VerticalAlignment="Top" Height="27" Width="104" Click="opButton_Click" Background="#FFDDDDDD" UseLayoutRounding="False" BorderBrush="#FF0C5990" BorderThickness="2,2,2,2"/>
+        <Button x:Name="ChargingButton" Content="Charge/Discharge" HorizontalAlignment="Left" Margin="486,340,0,0" VerticalAlignment="Top" Height="27" Width="110" Click="chargingButton_Click"/>
+        <Button x:Name="DelieveryButton" Content="Next Step of delievery" HorizontalAlignment="Left" Margin="320,340,0,0" VerticalAlignment="Top" Height="27" Width="144" Click="delieveryButton_Click"/>
         <Label x:Name="IntegrityIdLabel" Content="Id must have 3-4 digits" HorizontalAlignment="Left" Margin="359,124,0,0" VerticalAlignment="Top" Height="23" Width="114" FontSize="10" Foreground="#FFEE0808" Visibility="Collapsed"/>
 
     </Grid>

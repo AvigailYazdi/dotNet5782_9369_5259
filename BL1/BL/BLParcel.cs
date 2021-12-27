@@ -11,7 +11,7 @@ namespace BL
 {
     sealed partial class BL : IBL
     {
-        private object parcel;
+        //private object parcel;
         /// <summary>
         /// A function that returns the parcels that sent and provieded
         /// </summary>
@@ -188,8 +188,8 @@ namespace BL
                         targetDo = dl.GetCustomer(item.TargetId);
                         dis2 = dl.DistanceInKm(targetDo.Longitude, targetDo.Latitude, senderDo.Longitude, senderDo.Latitude);
                         DO.BaseStation b = closeStation(targetDo.Longitude, targetDo.Latitude);
-                        dis3 = shortDis(targetDo.Longitude, targetDo.Latitude, b);
-                        if (getBattery(dis1 + dis2 + dis3, id) <= droneToList.Battery)
+                        dis3 = dl.DistanceInKm(targetDo.Longitude, targetDo.Latitude, b.Longitude, b.Latitude);
+                        if (getBattery(dis1, id) + getWasteBattery(dis2 + dis3, item.Id) <= droneToList.Battery) 
                         {
                             if (item.Priority > pTemp.Priority)
                             {
