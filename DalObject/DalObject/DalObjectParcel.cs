@@ -54,14 +54,14 @@ namespace Dal
                 throw new MissingIdException(parcelId, "Parcel");
             if (!checkD(droneId))
                 throw new MissingIdException(droneId, "Drone");
-            for (int i = 0; i < parcels.Count; i++)
+            foreach (Parcel item in parcels)
             {
-                if (parcels[i].Id == parcelId)
+                if (item.Id == parcelId)
                 {
-                    Parcel p = parcels[i];
+                    Parcel p = item;
                     p.DroneId = droneId;
                     p.Scheduled = DateTime.Now;
-                    parcels[i] = p;
+                    UpdateParcel(p);
                     break;
                 }
             }
@@ -75,13 +75,13 @@ namespace Dal
         {
             if (!checkP(parcelId))
                 throw new MissingIdException(parcelId, "Parcel");
-            for (int i = 0; i < parcels.Count; i++)
+            foreach (Parcel item in parcels)
             {
-                if (parcels[i].Id == parcelId)
+                if (item.Id == parcelId)
                 {
-                    Parcel p = parcels[i];
+                    Parcel p = item;
                     p.PickedUp = DateTime.Now;
-                    parcels[i] = p;
+                    UpdateParcel(p);
                     break;
                 }
             }
@@ -95,13 +95,13 @@ namespace Dal
         {
             if (!checkP(parcelId))
                 throw new MissingIdException(parcelId, "Parcel");
-            for (int i = 0; i < parcels.Count; i++)
+            foreach (Parcel item  in parcels)
             {
-                if (parcels[i].Id == parcelId)
+                if (item.Id == parcelId)
                 {
-                    Parcel p = parcels[i];
+                    Parcel p = item;
                     p.Delivered = DateTime.Now;
-                    parcels[i] = p;
+                    UpdateParcel(p);
                     break;
                 }
             }

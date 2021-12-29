@@ -45,11 +45,11 @@ namespace PL
         /// <param name="e"> Selection changed event args</param>
         private void selector_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if ((WeightSelector.SelectedIndex == -1||WeightSelector.SelectedIndex == 3) && StatusSelector.SelectedIndex != 3)
-                dronesDataGrid.DataContext = bl.GetDronesByPerdicate(d => d.Status == (BO.DroneStatus)StatusSelector.SelectedItem);
-            else if((WeightSelector.SelectedIndex == -1||WeightSelector.SelectedIndex == 3) && (StatusSelector.SelectedIndex == 3|| StatusSelector.SelectedIndex == -1))
+            if ((WeightSelector.SelectedIndex == -1 || WeightSelector.SelectedIndex == 3) && (StatusSelector.SelectedIndex == 3 || StatusSelector.SelectedIndex == -1))
                 dronesDataGrid.DataContext = bl.DroneList();
-            else if(WeightSelector.SelectedIndex != 3 && (StatusSelector.SelectedIndex == 3|| StatusSelector.SelectedIndex == -1))
+            else if ((WeightSelector.SelectedIndex == -1 || WeightSelector.SelectedIndex == 3) && StatusSelector.SelectedIndex != 3)
+                dronesDataGrid.DataContext = bl.GetDronesByPerdicate(d => d.Status == (BO.DroneStatus)StatusSelector.SelectedItem);
+            else if (WeightSelector.SelectedIndex != 3 && (StatusSelector.SelectedIndex == 3 || StatusSelector.SelectedIndex == -1))
                 dronesDataGrid.DataContext = bl.GetDronesByPerdicate(d => d.Weight == (BO.WeightCategories)WeightSelector.SelectedItem);
             else
                 dronesDataGrid.DataContext = bl.GetDronesByPerdicate(d => d.Status == (BO.DroneStatus)StatusSelector.SelectedItem && d.Weight == (BO.WeightCategories)WeightSelector.SelectedItem);

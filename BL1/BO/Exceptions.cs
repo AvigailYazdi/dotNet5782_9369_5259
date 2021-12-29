@@ -26,7 +26,7 @@ namespace BO
         }
         public override string ToString()
         {
-            return $"The number of avaliable slots of basstation {Id} has to be positive.";
+            return $"There are not enough avaliable slots in base station: {Id}.";
         }
     }
     [Serializable]

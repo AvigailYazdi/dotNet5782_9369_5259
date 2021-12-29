@@ -59,13 +59,14 @@ namespace Dal
                 throw new MissingIdException(droneId, "Drone");
             if (!checkS(baseStationId))
                 throw new MissingIdException(baseStationId, "Base station");
-            for (int i = 0; i < stations.Count; i++)
+
+            foreach (BaseStation item in stations) 
             {
-                if (stations[i].Id == baseStationId)
+                if (item.Id == baseStationId)
                 {
-                    BaseStation b = stations[i];
+                    BaseStation b = item;
                     b.ChargeSlots--;
-                    stations[i] = b;
+                    UpdateStation(b);
                     break;
                 }
             }
@@ -84,18 +85,18 @@ namespace Dal
         {
             if (!checkD(droneId))
                 throw new MissingIdException(droneId, "Drone");
-            for (int i = 0; i < dronesCharge.Count; i++)
+            foreach (DroneCharge item1 in dronesCharge)
             {
-                if (dronesCharge[i].DroneId == droneId)
+                if (item1.DroneId == droneId)
                 {
-                    DroneCharge d = dronesCharge[i];
-                    for (int j = 0; j < stations.Count; j++)
+                    DroneCharge d = item1;
+                    foreach (BaseStation item2 in stations)
                     {
-                        if (d.StationId == stations[j].Id)
+                        if (d.StationId == item2.Id)
                         {
-                            BaseStation s = stations[j];
+                            BaseStation s = item2;
                             s.ChargeSlots++;
-                            stations[j] = s;
+                            UpdateStation(s);
                             break;
                         }
                     }
