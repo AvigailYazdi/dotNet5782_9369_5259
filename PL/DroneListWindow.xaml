@@ -5,13 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
-        Title="DroneListWindow" Height="640" Width="800" Activated="activatedWindow">
-    <Window.Background>
-        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-            <GradientStop Color="#FFEAFFFE"/>
-            <GradientStop Color="#FFBFFEFC" Offset="0.505"/>
-        </LinearGradientBrush>
-    </Window.Background>
+        Title="DroneListWindow" Height="640" Width="800" Activated="activatedWindow"
+        Background="{StaticResource windowBackground}">
     <Grid x:Name="MainGrid">
         <Grid.RowDefinitions>
             <RowDefinition Height="50*"/>
@@ -32,7 +27,7 @@
         <Grid Grid.Row="1" >
             <DataGrid x:Name="dronesDataGrid" RowDetailsVisibilityMode="VisibleWhenSelected" Margin="164,59,164,278" ItemsSource="{Binding}" EnableRowVirtualization="True" AutoGenerateColumns="False" MouseDoubleClick="doubleClickDataGrid">
                 <DataGrid.Columns>
-                    <DataGridTextColumn x:Name="batteryColumn" Width="SizeToHeader" Header="Battery" Binding="{Binding Battery}" FontWeight="Normal"/>
+                    <DataGridTextColumn x:Name="batteryColumn" Width="SizeToHeader" Header="Battery" Binding="{Binding Battery}" FontWeight="Normal" />
                     <DataGridTextColumn x:Name="idColumn" Width="40" Header="Id" Binding="{Binding Id}" CanUserResize="True"/>
                     <DataGridTextColumn x:Name="modelColumn" Width="60" Header="Model" Binding="{Binding Model}"/>
                     <DataGridTextColumn x:Name="parcelIdColumn" Width="SizeToHeader" Header="Parcel Id" Binding="{Binding ParcelId}"/>
@@ -44,6 +39,6 @@
             </DataGrid>
         </Grid>
         <Button x:Name="CloseButton" Content="Close" HorizontalAlignment="Left" Margin="457,453,0,0" VerticalAlignment="Top" Height="49" Width="132" Click="closeButton_Click" Grid.Row="1"/>
-        <Button x:Name="AddDroneButton_Copy" Content="Add a new drone" HorizontalAlignment="Left" Margin="617,453,0,0" VerticalAlignment="Top" Height="49" Width="132" Click="addDroneButton_Click" Grid.Row="1"/>
+        <Button x:Name="AddDroneButton" Content="Add a new drone" HorizontalAlignment="Left" Margin="617,453,0,0" VerticalAlignment="Top" Height="49" Width="132" Click="addDroneButton_Click" Grid.Row="1"/>
     </Grid>
 </Window>

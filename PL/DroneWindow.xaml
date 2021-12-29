@@ -5,13 +5,16 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
-        Title="DroneWindow" Height="450" Width="800" FontSize="13" >
-    <Window.Background>
-        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-            <GradientStop Color="#FFEAFFFE"/>
-            <GradientStop Color="#FFBFFEFC" Offset="0.505"/>
-        </LinearGradientBrush>
-    </Window.Background>
+        Title="Drone Window" Height="450" Width="800" FontSize="13" 
+        Background="{StaticResource windowBackground}">
+    <!--<Window.Resources>
+        <Style x:Key="buttonStyle" TargetType="Button">    
+        <Setter Property="FontSize" Value="14" />     
+        <Setter Property="FontFamily" Value="Segoe UI Emoji" />
+        <Setter Property="FontWeight" Value="Bold" />
+    </Style>
+    </Window.Resources>--> 
+    
     <Grid>
         <Grid x:Name="gridOneDrone"  HorizontalAlignment="Center" Margin="0,103,0,0" VerticalAlignment="Top" Visibility="Visible">
             <Grid.ColumnDefinitions>
@@ -33,7 +36,7 @@
             <Label x:Name="IdLabel" Content="Id:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="1" VerticalAlignment="Center" FontWeight="Bold"/>
             <TextBox x:Name="idTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="1" Text="{Binding Id, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120" PreviewKeyDown="textBox_OnlyNumbers_PreviewKeyDown" TextChanged="idTextBox_TextChanged" />
             <Label x:Name="ModelLabel" Content="Model:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="2" VerticalAlignment="Center" FontWeight="Bold"/>
-            <TextBox x:Name="modelTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="2" Text="{Binding Model, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120" TextChanged="modelTextBox_TextChanged"/>
+            <TextBox x:Name="modelTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="2" Text="{Binding Model, Mode=TwoWay, NotifyOnValidationError=true,UpdateSourceTrigger=Explicit, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120" TextChanged="modelTextBox_TextChanged"/>
             <Label x:Name="ParcelIdLabel" Content="Parcel Id:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="5" VerticalAlignment="Center" FontWeight="Bold"/>
             <TextBox x:Name="parcelIdTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="5" Text="{Binding ParcelId, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120" IsEnabled="False"/>
             <Label x:Name="WeightLabel" Content="Weight:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="3" VerticalAlignment="Center" FontWeight="Bold"/>

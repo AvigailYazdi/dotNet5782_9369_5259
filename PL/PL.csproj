@@ -9,7 +9,6 @@
 
   <ItemGroup>
     <None Remove="DeliveryDrones.jpg" />
-    <None Remove="משלוחי רחפן אביגיל.jpg" />
   </ItemGroup>
 
   <ItemGroup>

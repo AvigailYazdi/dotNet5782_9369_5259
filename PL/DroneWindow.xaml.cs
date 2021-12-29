@@ -106,7 +106,8 @@ namespace PL
                 }
                 else // The button is update
                 {
-                    bl.UpdateDroneName(currentDroneToL.Id, currentDroneToL.Model);
+                    modelTextBox.GetBindingExpression(TextBox.TextProperty).UpdateSource();
+                    //bl.UpdateDroneName(currentDroneToL.Id, currentDroneToL.Model);
                     MessageBox.Show("The drone Model is updated successfully!", "Update", b, i);
                 }
             }
@@ -180,7 +181,7 @@ namespace PL
                     {
                         statusComboBox.SelectedItem = BO.DroneStatus.Maintenance;
                         i = MessageBoxImage.Error;
-                        MessageBox.Show("The connection failed", "ERROR", b, i);
+                        MessageBox.Show("There is not enough battery, go to charging", "ERROR", b, i);
                         i = MessageBoxImage.Information;
                     }
                 }
@@ -201,6 +202,12 @@ namespace PL
                         statusComboBox.SelectedItem = BO.DroneStatus.Avaliable;
                         MessageBox.Show("The parcel was provided", "Providing", b, i);
                     }
+                }
+                else
+                {
+                    i = MessageBoxImage.Error;
+                    MessageBox.Show("The drone is in maintenance", "ERROR", b, i);
+                    i = MessageBoxImage.Information;
                 }
             }
             catch (Exception ex)

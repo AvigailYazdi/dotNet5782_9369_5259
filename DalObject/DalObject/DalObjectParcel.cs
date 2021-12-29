@@ -32,15 +32,29 @@ namespace Dal
             p.Id = config.parcelId++;
             parcels.Add(p);
         }
+        /// <summary>
+        /// A function thet returns the index of the drone in the list
+        /// </summary>
+        /// <param name="id"> Id of a parcel</param>
+        /// <returns> The index of the drone</returns>
+        private int indexParcel(int id)
+        {
+            for (int i = 0; i < parcels.Count(); i++)
+            {
+                if (parcels[i].Id == id)
+                    return i;
+            }
+            return -1;
+        }
 
         /// <summary>
-        /// A function that updates a parcel
+        /// A function that updates a drone
         /// </summary>
         /// <param name="p">The updated parcel</param>
         public void UpdateParcel(Parcel p)
         {
-            DeleteParcel(p.Id);
-            AddParcel(p);
+            int i = indexParcel(p.Id);
+            parcels[i] = p;
         }
 
         /// <summary>

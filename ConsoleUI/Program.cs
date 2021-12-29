@@ -3,7 +3,6 @@
 using System;
 using System.Collections.Generic;
 using IDAL.DO;
-using DalObject;
 namespace ConsoleUI
 {
     /// <summary>
@@ -18,13 +17,14 @@ namespace ConsoleUI
         enum AddOrView { BaseStation=1, Drone, Customer, Parcel};
         enum UpDate { ParcelToDrone=1, Collect, Delivery, Charge , Discharge };
         enum ViewList { BaseStation=1, Drone, Customer, Parcel, NotConnected, AvaliableSlots};
+
         /// <summary>
         /// A function that runs the process with a client
         /// </summary>
         /// <param name="args"></param>
         static void Main(string[] args)
         {
-            DalObject.DalObject dal= new DalObject.DalObject();
+            DalObject.DalObject dal = new DalObject.DalObject();
             Drone d = new Drone() ;
             Parcel p = new Parcel() ;
             BaseStation b= new BaseStation();
