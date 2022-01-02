@@ -6,7 +6,19 @@
              xmlns:local="clr-namespace:PL"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-             
+    <Grid x:Name="customersListGrid" Style="{StaticResource gridStyle}">
+        <DataGrid x:Name="customerToLDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" Margin="189,84,172.333,136.667" RowDetailsVisibilityMode="VisibleWhenSelected" MouseDoubleClick="customerToLDataGrid_MouseDoubleClick">
+            <DataGrid.Columns>
+                <DataGridTextColumn x:Name="idColumn" Binding="{Binding Id}" Header="Id" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="nameColumn" Binding="{Binding Name}" Header="Name" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="numArrivedColumn" Binding="{Binding NumArrived}" Header="Num Arrived" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="numGotColumn" Binding="{Binding NumGot}" Header="Num Got" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="numOnWayColumn" Binding="{Binding NumOnWay}" Header="Num On Way" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="numSendColumn" Binding="{Binding NumSend}" Header="Num Send" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="phoneNumColumn" Binding="{Binding PhoneNum}" Header="Phone Num" Width="SizeToHeader"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button x:Name="CloseButton" Content="Close" HorizontalAlignment="Left" Margin="437,364,0,0" VerticalAlignment="Top" Height="49" Width="132" Click="closeButton_Click" Style="{StaticResource buttonStyle}"/>
+        <Button x:Name="AddCustomerButton" Content="Add a new customer" HorizontalAlignment="Left" Margin="600,364,0,0" VerticalAlignment="Top" Height="49" Width="149" Click="addCustomerButton_Click" Style="{StaticResource buttonStyle}"/>
     </Grid>
 </UserControl>

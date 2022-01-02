@@ -59,7 +59,7 @@ namespace PL
         private void addStationButton_Click(object sender, RoutedEventArgs e)
         {
             StationUserControl myUser = new StationUserControl(bl);
-            listGrid.Visibility = Visibility.Collapsed;
+            StationListGrid.Children.Clear();
             StationListGrid.Children.Add(myUser);
         }
 
@@ -74,7 +74,7 @@ namespace PL
             if (curStationToL != null)
             {
                 StationUserControl myUser = new StationUserControl(bl, curStationToL);
-                listGrid.Visibility = Visibility.Collapsed;
+                StationListGrid.Children.Clear();
                 StationListGrid.Children.Add(myUser);
             }
         }

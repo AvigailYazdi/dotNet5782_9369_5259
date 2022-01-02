@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using BlApi;
 
 namespace PL
 {
@@ -20,9 +21,36 @@ namespace PL
     /// </summary>
     public partial class CustomersListUserControl : UserControl
     {
-        public CustomersListUserControl()
+        IBL bl;
+        public CustomersListUserControl(IBL _bl)
         {
             InitializeComponent();
+            bl = _bl;
+            customerToLDataGrid.DataContext = bl.CustomerList();
+            customerToLDataGrid.IsReadOnly = true;
+        }
+
+        private void addCustomerButton_Click(object sender, RoutedEventArgs e)
+        {
+            CustomerUserControl myUser = new CustomerUserControl(bl);
+            customersListGrid.Children.Clear();
+            customersListGrid.Children.Add(myUser);
+        }
+
+        private void closeButton_Click(object sender, RoutedEventArgs e)
+        {
+            customersListGrid.Visibility = Visibility.Hidden;
+        }
+
+        private void customerToLDataGrid_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            BO.CustomerToL curCustomerToL = customerToLDataGrid.SelectedItem as BO.CustomerToL;
+            if (curCustomerToL != null)
+            {
+                CustomerUserControl myUser = new CustomerUserControl(bl, curCustomerToL);
+                customersListGrid.Children.Clear();
+                customersListGrid.Children.Add(myUser);
+            }
         }
     }
 }
