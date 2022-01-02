@@ -73,14 +73,14 @@ namespace PL
                     bs.Place.Longitude = Convert.ToDouble(longitudeTextBox.Text);
                     bs.Place.Latitude = Convert.ToDouble(latitudeTextBox.Text);
                     bl.AddStation(bs);
-                    MessageBox.Show("The drone is added successfully!", "Add", this.b, i);
+                    MessageBox.Show("The station is added successfully!", "Add", this.b, i);
                     this.Visibility=Visibility.Hidden;
                 }
                 else // The button is update
                 {
                     nameTextBox.GetBindingExpression(TextBox.TextProperty).UpdateSource();
                     avaliableSlotsComboBox.GetBindingExpression(ComboBox.SelectedItemProperty).UpdateSource();
-                    MessageBox.Show("The drone Model is updated successfully!", "Update", b, i);
+                    MessageBox.Show("The station is updated successfully!", "Update", b, i);
                 }
             }
             catch (Exception ex)
