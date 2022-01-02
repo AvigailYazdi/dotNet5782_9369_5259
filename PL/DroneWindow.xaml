@@ -7,14 +7,7 @@
         mc:Ignorable="d"
         Title="Drone Window" Height="450" Width="800" FontSize="13" 
         Background="{StaticResource windowBackground}" >
-    <!--<Window.Resources>
-        <Style x:Key="buttonStyle" TargetType="Button">    
-        <Setter Property="FontSize" Value="14" />     
-        <Setter Property="FontFamily" Value="Segoe UI Emoji" />
-        <Setter Property="FontWeight" Value="Bold" />
-    </Style>
-    </Window.Resources>--> 
-    
+
     <Grid>
         <Grid x:Name="gridOneDrone"  HorizontalAlignment="Center" Margin="0,103,0,0" VerticalAlignment="Top" Visibility="Visible">
             <Grid.ColumnDefinitions>
@@ -68,10 +61,10 @@
             </ComboBox>
             <Label x:Name="StationIdLabel" Content="Station Id:" Grid.Column="0" HorizontalAlignment="Left" Margin="3,-29,0,0" VerticalAlignment="Top" FontWeight="Bold" />
         </Grid>
-        <Button x:Name="CancelOrCloseButton" Content="Cancel" HorizontalAlignment="Left" Margin="196,340,0,0" VerticalAlignment="Top" Height="27" Width="104" Click="cancelOrCloseButton_Click"/>
-        <Button x:Name="OpButton" Content="Add" HorizontalAlignment="Left" Margin="70,340,0,0" VerticalAlignment="Top" Height="27" Width="104" Click="opButton_Click" Background="#FFDDDDDD" UseLayoutRounding="False" BorderBrush="#FF0C5990" BorderThickness="2,2,2,2"/>
-        <Button x:Name="ChargingButton" Content="Charge/Discharge" HorizontalAlignment="Left" Margin="486,340,0,0" VerticalAlignment="Top" Height="27" Width="110" Click="chargingButton_Click"/>
-        <Button x:Name="DelieveryButton" Content="Next Step of delievery" HorizontalAlignment="Left" Margin="320,340,0,0" VerticalAlignment="Top" Height="27" Width="144" Click="delieveryButton_Click"/>
+        <Button x:Name="CancelOrCloseButton" Content="Cancel" HorizontalAlignment="Left" Margin="196,340,0,0" VerticalAlignment="Top" Height="27" Width="104" Click="cancelOrCloseButton_Click" Style="{StaticResource buttonStyle}"/>
+        <Button x:Name="OpButton" Content="Add" HorizontalAlignment="Left" Margin="70,340,0,0" VerticalAlignment="Top" Height="27" Width="104" Click="opButton_Click" Background="#FFDDDDDD" UseLayoutRounding="False" BorderBrush="#FF0C5990" BorderThickness="2,2,2,2" Style="{StaticResource buttonStyle}"/>
+        <Button x:Name="ChargingButton" Content="Charge/Discharge" HorizontalAlignment="Left" Margin="506,340,0,0" VerticalAlignment="Top" Height="27" Width="133" Click="chargingButton_Click" Style="{StaticResource buttonStyle}"/>
+        <Button x:Name="DelieveryButton" Content="Next Step of delievery" HorizontalAlignment="Left" Margin="320,340,0,0" VerticalAlignment="Top" Height="27" Width="167" Click="delieveryButton_Click" Style="{StaticResource buttonStyle}"/>
         <Label x:Name="IntegrityIdLabel" Content="Id must have 3-4 digits" HorizontalAlignment="Left" Margin="359,124,0,0" VerticalAlignment="Top" Height="23" Width="114" FontSize="10" Foreground="#FFEE0808" Visibility="Collapsed"/>
 
     </Grid>

@@ -6,18 +6,29 @@
              xmlns:local="clr-namespace:PL"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid x:Name="StationListGrid" Background="White">
-        <DataGrid x:Name="stationToLDataGrid" RowDetailsVisibilityMode="VisibleWhenSelected" Margin="193,85,200.333,135.667" ItemsSource="{Binding}" EnableRowVirtualization="True" AutoGenerateColumns="False">
-            <DataGrid.Columns>
-                <DataGridTextColumn x:Name="avaliableSlotsColumn" Width="SizeToHeader" Header="Avaliable Slots" Binding="{Binding AvaliableSlots}"/>
-                <DataGridTextColumn x:Name="disAvaliableSlotsColumn" Width="SizeToHeader" Header="Dis Avaliable Slots" Binding="{Binding DisAvaliableSlots}"/>
-                <DataGridTextColumn x:Name="idColumn" Width="SizeToHeader" Header="Id" Binding="{Binding Id}"/>
-                <DataGridTextColumn x:Name="nameColumn" Width="SizeToHeader" Header="Name" Binding="{Binding Name}"/>
-            </DataGrid.Columns>
-        </DataGrid>
-        <CheckBox x:Name="avaliableCheckBox" Content="Is Avaliable?" HorizontalAlignment="Left" Margin="177,28,0,0" VerticalAlignment="Top" FontSize="20" FontFamily="Dubai Medium" Checked="avaliableCheckBox_Checked" />
-        <Label Content="Num Of Slots:" HorizontalAlignment="Left" Margin="323,22,0,0" VerticalAlignment="Top" FontSize="20" FontFamily="Dubai Medium"/>
-        <ComboBox x:Name="numSlotsSelector" HorizontalAlignment="Left" Margin="454,28,0,0" VerticalAlignment="Top" Width="46" Height="29" SelectionChanged="numSlotsSelector_SelectionChanged"/>
-
+    <Grid x:Name="StationListGrid" Style="{StaticResource gridStyle}" >
+        <Grid x:Name="listGrid">
+            <DataGrid x:Name="stationToLDataGrid" RowDetailsVisibilityMode="VisibleWhenSelected" Margin="244,129,260,170" ItemsSource="{Binding}" EnableRowVirtualization="True" AutoGenerateColumns="False" RenderTransformOrigin="0.5,0.5" MouseDoubleClick="doubleClickDataGrid">
+                <DataGrid.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform AngleY="-0.342"/>
+                        <RotateTransform/>
+                        <TranslateTransform Y="-1.214"/>
+                    </TransformGroup>
+                </DataGrid.RenderTransform>
+                <DataGrid.Columns>
+                    <DataGridTextColumn x:Name="nameColumn" Width="SizeToHeader" Header="Name" Binding="{Binding Name}"/>
+                    <DataGridTextColumn x:Name="idColumn" Width="SizeToHeader" Header="Id" Binding="{Binding Id}"/>
+                    <DataGridTextColumn x:Name="avaliableSlotsColumn" Width="SizeToHeader" Header="Avaliable Slots" Binding="{Binding AvaliableSlots}"/>
+                    <DataGridTextColumn x:Name="disAvaliableSlotsColumn" Width="SizeToHeader" Header="Not Avaliable Slots" Binding="{Binding DisAvaliableSlots}"/>
+                </DataGrid.Columns>
+            </DataGrid>
+            <CheckBox x:Name="avaliableCheckBox" Content="Is Avaliable?" HorizontalAlignment="Left" Margin="217,60,0,0" VerticalAlignment="Top" FontSize="20" FontFamily="Dubai Medium" Checked="avaliableCheckBox_Checked" />
+            <Label Content="Num Of Slots:" HorizontalAlignment="Left" Margin="395,52,0,0" VerticalAlignment="Top" FontSize="20" FontFamily="Dubai Medium"/>
+            <ComboBox x:Name="numSlotsSelector" HorizontalAlignment="Left" Margin="527,59,0,0" VerticalAlignment="Top" Width="46" Height="29" SelectionChanged="numSlotsSelector_SelectionChanged"/>
+            <Button x:Name="CloseButton" Content="Close" HorizontalAlignment="Left" Margin="457,364,0,0" VerticalAlignment="Top" Height="49" Width="132" Click="closeButton_Click" Style="{StaticResource buttonStyle}"/>
+            <Button x:Name="AddStationButton" Content="Add a new station" HorizontalAlignment="Left" Margin="617,364,0,0" VerticalAlignment="Top" Height="49" Width="132" Click="addStationButton_Click" Style="{StaticResource buttonStyle}"/>
+        </Grid>
     </Grid>
 </UserControl>

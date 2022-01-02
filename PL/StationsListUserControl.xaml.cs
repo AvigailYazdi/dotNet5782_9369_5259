@@ -21,31 +21,61 @@ namespace PL
     /// </summary>
     public partial class StationsListUserControl : UserControl
     {
-        enum NumSlots {}
         IBL bl;
+
         public StationsListUserControl(IBL _bl)
         {
             InitializeComponent();
             bl = _bl;
-            for (int i = 1; i < 101; i++)
+            for (int i = 1; i < 41; i++)
             {
                numSlotsSelector.Items.Add(i);
             }
+            numSlotsSelector.Items.Add("Clear");
+            stationToLDataGrid.DataContext = bl.StationList();
+            stationToLDataGrid.IsReadOnly = true;
         }
 
         private void avaliableCheckBox_Checked(object sender, RoutedEventArgs e)
         {
-            if (avaliableCheckBox.IsChecked == true)
-            {
+            if (avaliableCheckBox.IsChecked == false && (numSlotsSelector.SelectedIndex == -1 || numSlotsSelector.SelectedIndex == 40))
+                stationToLDataGrid.DataContext = bl.StationList();
+            else if (avaliableCheckBox.IsChecked == true && (numSlotsSelector.SelectedIndex==-1 || numSlotsSelector.SelectedIndex == 40))
                 stationToLDataGrid.DataContext = bl.AvaliableStationList();
-            }
+            else
+                stationToLDataGrid.DataContext = bl.GetStationToLByPredicate(s => s.AvaliableSlots == numSlotsSelector.SelectedIndex + 1);
         }
 
         private void numSlotsSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (numSlotsSelector.SelectedIndex >= 0 || numSlotsSelector.SelectedIndex < 100) 
+            if (avaliableCheckBox.IsChecked == false && (numSlotsSelector.SelectedIndex == -1 || numSlotsSelector.SelectedIndex == 40))
+                stationToLDataGrid.DataContext = bl.StationList();
+            else if (avaliableCheckBox.IsChecked == true && (numSlotsSelector.SelectedIndex == -1 || numSlotsSelector.SelectedIndex == 40))
+                stationToLDataGrid.DataContext = bl.AvaliableStationList();
+            else
+                stationToLDataGrid.DataContext = bl.GetStationToLByPredicate(s => s.AvaliableSlots == numSlotsSelector.SelectedIndex + 1);
+        }
+
+        private void addStationButton_Click(object sender, RoutedEventArgs e)
+        {
+            StationUserControl myUser = new StationUserControl(bl);
+            listGrid.Visibility = Visibility.Collapsed;
+            StationListGrid.Children.Add(myUser);
+        }
+
+        private void closeButton_Click(object sender, RoutedEventArgs e)
+        {
+            StationListGrid.Visibility = Visibility.Hidden;
+            
+        }
+        private void doubleClickDataGrid(object sender, MouseButtonEventArgs e)
+        {
+            BO.StationToL curStationToL = stationToLDataGrid.SelectedItem as BO.StationToL;
+            if (curStationToL != null)
             {
-                stationToLDataGrid.DataContext = bl.GetStationToLByPredicate(s => s.AvaliableSlots == numSlotsSelector.SelectedIndex + 1);   
+                StationUserControl myUser = new StationUserControl(bl, curStationToL);
+                listGrid.Visibility = Visibility.Collapsed;
+                StationListGrid.Children.Add(myUser);
             }
         }
     }

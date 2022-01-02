@@ -12,7 +12,6 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-
 using BlApi;
 
 namespace PL
@@ -38,6 +37,27 @@ namespace PL
         private void showDronesButton_Click(object sender, RoutedEventArgs e)
         {
             new DroneListWindow(bl).ShowDialog();
+        }
+
+        //private void Button_Click(object sender, RoutedEventArgs e)
+        //{
+        //    StationsListUserControl myUser = new StationsListUserControl(bl);
+        //    mainGrid.Opacity = 0.9;
+        //    //mainGrid.Children.Clear();
+        //    //mainGrid.Children.Add(myUser);
+        //}
+        private void back_hostUserControl(object sender, MouseButtonEventArgs e)
+        {
+            mainGrid.Children.Clear();
+            mainGrid.Children.Add(wingsGrid);
+        }
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            StationsListUserControl myUser = new StationsListUserControl(bl);
+            myUser.CloseButton.MouseLeftButtonDown += back_hostUserControl;
+            mainGrid.Opacity = 0.9;
+            mainGrid.Children.Clear();
+            mainGrid.Children.Add(myUser);
         }
     }
 }

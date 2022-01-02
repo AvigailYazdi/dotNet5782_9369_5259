@@ -48,7 +48,7 @@ namespace PL
             OpButton.Content = "Add";
             CancelOrCloseButton.Content = "Cancel";
             StationIdCBox.Visibility = StationIdLabel.Visibility = Visibility.Visible;
-            ChargingButton.Visibility = DelieveryButton.Visibility=Visibility.Collapsed;
+            ChargingButton.Visibility = DelieveryButton.Visibility = Visibility.Collapsed;
             batteryTextBox.Visibility = BatteryLabel.Visibility = Visibility.Collapsed;
             statusComboBox.Visibility = parcelIdTextBox.Visibility = Visibility.Collapsed;
             StatusLabel.Visibility = ParcelIdLabel.Visibility = Visibility.Collapsed;
@@ -332,14 +332,5 @@ namespace PL
                     OpButton.IsEnabled = false;
             }
         }
-
-        //private void ClosingWindow(object sender, System.ComponentModel.CancelEventArgs e)
-        //{
-        //    Button b = sender as Button;
-        //    if (b == null)
-        //        e.Cancel = false;
-        //    else
-        //        e.Cancel = false;
-        //}
     }
 }
