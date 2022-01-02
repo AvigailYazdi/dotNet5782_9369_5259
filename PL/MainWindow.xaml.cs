@@ -48,13 +48,23 @@ namespace PL
         //}
         private void back_hostUserControl(object sender, MouseButtonEventArgs e)
         {
-            mainGrid.Children.Clear();
+            //mainGrid.Children.Clear();
             mainGrid.Children.Add(wingsGrid);
+            mainGrid.Children.Clear();
         }
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             StationsListUserControl myUser = new StationsListUserControl(bl);
             myUser.CloseButton.MouseLeftButtonDown += back_hostUserControl;
+            mainGrid.Opacity = 0.9;
+            mainGrid.Children.Clear();
+            mainGrid.Children.Add(myUser);
+        }
+
+        private void logInButton_Click(object sender, RoutedEventArgs e)
+        {
+            LogInUserControl myUser = new LogInUserControl(bl);
+           // myUser.CloseButton.MouseLeftButtonDown += back_hostUserControl;
             mainGrid.Opacity = 0.9;
             mainGrid.Children.Clear();
             mainGrid.Children.Add(myUser);
