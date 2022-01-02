@@ -31,7 +31,6 @@ namespace PL
         {
             InitializeComponent();
             bl = _bl;
-            
             StatusSelector.ItemsSource = Enum.GetValues(typeof(Status));
             WeightSelector.ItemsSource = Enum.GetValues(typeof(Weight));
 
@@ -98,6 +97,11 @@ namespace PL
         private void closeButton_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
+        }
+
+        private void showParcelButton_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

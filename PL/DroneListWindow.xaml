@@ -1,4 +1,4 @@
-﻿<Window x:Name="DroneList" x:Class="PL.DroneListWindow"
+﻿<Window x:Name="DroneList" x:Class="PL.DroneListWindow" WindowStyle="None"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -25,7 +25,7 @@
             <Label x:Name="WeightLabel" Content="Weight:" Grid.Column="2" Margin="100,10,21,0" FontSize="20" FontFamily="Dubai Medium"/>
         </Grid>
         <Grid Grid.Row="1" >
-            <DataGrid x:Name="dronesDataGrid" RowDetailsVisibilityMode="VisibleWhenSelected" Margin="164,59,164,278" ItemsSource="{Binding}" EnableRowVirtualization="True" AutoGenerateColumns="False" MouseDoubleClick="doubleClickDataGrid">
+            <DataGrid x:Name="dronesDataGrid" RowDetailsVisibilityMode="VisibleWhenSelected" Margin="164,59,114,278" ItemsSource="{Binding}" EnableRowVirtualization="True" AutoGenerateColumns="False" MouseDoubleClick="doubleClickDataGrid" Background="{x:Null}">
                 <DataGrid.Columns>
                     <DataGridTextColumn x:Name="batteryColumn" Width="SizeToHeader" Header="Battery" Binding="{Binding Battery}" FontWeight="Normal" />
                     <DataGridTextColumn x:Name="idColumn" Width="40" Header="Id" Binding="{Binding Id}" CanUserResize="True"/>
@@ -35,6 +35,14 @@
                     <DataGridTextColumn x:Name="weightColumn" Width="60" Header="Weight" Binding="{Binding Weight}"/>
                     <DataGridTextColumn x:Name="longitudeColumn" Width="SizeToHeader" Header="Logitude" Binding="{Binding CurrentPlace.Longitude}"/>
                     <DataGridTextColumn x:Name="latitudeColumn" Width="SizeToHeader" Header="Latitude" Binding="{Binding CurrentPlace.Latitude}"/>
+                    <DataGridTemplateColumn x:Name="parcelColumn" Width="SizeToHeader" Header="Parcel">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button x:Name="showParcelButton" Content="show parcel" Click="showParcelButton_Click"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+
                 </DataGrid.Columns>
             </DataGrid>
         </Grid>

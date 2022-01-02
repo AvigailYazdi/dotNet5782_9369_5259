@@ -114,5 +114,11 @@ namespace BL
             return from item in dl.GetStationsByPerdicate(s => s.ChargeSlots != 0)
                    select GetStation(item.Id);
         }
+        public IEnumerable<BO.StationToL> GetStationToLByPredicate(Predicate<BO.StationToL> predicate)
+        {
+            return from item in StationList()
+                   where predicate(item)
+                   select item;
+        }
     }
 }

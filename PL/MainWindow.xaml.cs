@@ -28,7 +28,7 @@ namespace PL
         /// </summary>
         public MainWindow()
         {
-            InitializeComponent();           
+            InitializeComponent();
         }
         /// <summary>
         /// A function that opens the drone list window

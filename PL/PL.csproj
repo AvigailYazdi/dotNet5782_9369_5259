@@ -19,4 +19,8 @@
     <Resource Include="DeliveryDrones.jpg" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="images\" />
+  </ItemGroup>
+
 </Project>
