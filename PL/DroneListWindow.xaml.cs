@@ -103,5 +103,16 @@ namespace PL
         {
 
         }
+
+        private void GroupButton_Click(object sender, RoutedEventArgs e)
+        {
+            IEnumerable<IGrouping<BO.DroneStatus, BO.DroneToL>> result = from d in bl.DroneList()
+                                                                         group d by d.Status into gr
+                                                                         select gr;
+            dronesDataGrid2.DataContext = result;
+            dronesDataGrid2.Visibility = Visibility.Visible;
+            dronesDataGrid.Visibility = Visibility.Collapsed;
+
+        }
     }
 }

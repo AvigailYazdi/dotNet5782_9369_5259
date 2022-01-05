@@ -41,7 +41,7 @@ namespace PL
                 welcomeLabel.Content = "Welcome Dear Customer";
                 parcelLabel.Content = "Add a new parcel";
                 customerLabel.Content = "Update profile";
-                customerImage.Source = new BitmapImage(new Uri("images/profile.png"));
+                //customerImage.Source = new BitmapImage(new Uri("images/profile.png"));
             }
         }
     }

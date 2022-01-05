@@ -48,9 +48,8 @@ namespace PL
         //}
         private void back_hostUserControl(object sender, MouseButtonEventArgs e)
         {
-            //mainGrid.Children.Clear();
-            mainGrid.Children.Add(wingsGrid);
             mainGrid.Children.Clear();
+            mainGrid.Children.Add(wingsGrid);
         }
         private void Button_Click(object sender, RoutedEventArgs e)
         {

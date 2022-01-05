@@ -9,6 +9,15 @@
 
   <ItemGroup>
     <None Remove="DeliveryDrones.jpg" />
+    <None Remove="images\customer.jpg" />
+    <None Remove="images\drone.jpg" />
+    <None Remove="images\parcel.png" />
+    <None Remove="images\profile.jpg" />
+    <None Remove="images\sent.jpg" />
+    <None Remove="images\signIn.jpg" />
+    <None Remove="images\station.png" />
+    <None Remove="images\supplied.jpg" />
+    <None Remove="images\UserIcon2.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -17,10 +26,33 @@
 
   <ItemGroup>
     <Resource Include="DeliveryDrones.jpg" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="images\" />
+    <Resource Include="images\customer.jpg">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="images\drone.jpg">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="images\parcel.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="images\profile.jpg">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="images\sent.jpg">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="images\signIn.jpg">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="images\station.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="images\supplied.jpg">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="images\UserIcon2.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
 
 </Project>
