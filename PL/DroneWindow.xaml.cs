@@ -107,7 +107,6 @@ namespace PL
                 else // The button is update
                 {
                     modelTextBox.GetBindingExpression(TextBox.TextProperty).UpdateSource();
-                    //bl.UpdateDroneName(currentDroneToL.Id, currentDroneToL.Model);
                     MessageBox.Show("The drone Model is updated successfully!", "Update", b, i);
                 }
             }

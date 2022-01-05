@@ -37,7 +37,7 @@ namespace BlApi
         public void UpdateStation(int id, string name, int numSlots);
         public BO.BaseStation GetStation(int id);
         public IEnumerable<BO.StationToL> StationList();
-        public IEnumerable<BO.BaseStation> AvaliableStationList();
+        public IEnumerable<BO.StationToL> AvaliableStationList();
         public IEnumerable<BO.StationToL> GetStationToLByPredicate(Predicate<BO.StationToL> predicate);
         #endregion
         #region DroneToL

@@ -45,13 +45,32 @@ namespace PL
         private void selector_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if ((WeightSelector.SelectedIndex == -1 || WeightSelector.SelectedIndex == 3) && (StatusSelector.SelectedIndex == 3 || StatusSelector.SelectedIndex == -1))
+            {
+                group(bl.DroneList());
                 dronesDataGrid.DataContext = bl.DroneList();
+            }
             else if ((WeightSelector.SelectedIndex == -1 || WeightSelector.SelectedIndex == 3) && StatusSelector.SelectedIndex != 3)
+            {
+                group(bl.GetDronesByPerdicate(d => d.Status == (BO.DroneStatus)StatusSelector.SelectedItem));
                 dronesDataGrid.DataContext = bl.GetDronesByPerdicate(d => d.Status == (BO.DroneStatus)StatusSelector.SelectedItem);
+            }
             else if (WeightSelector.SelectedIndex != 3 && (StatusSelector.SelectedIndex == 3 || StatusSelector.SelectedIndex == -1))
+            {
+                group(bl.GetDronesByPerdicate(d => d.Weight == (BO.WeightCategories)WeightSelector.SelectedItem));
                 dronesDataGrid.DataContext = bl.GetDronesByPerdicate(d => d.Weight == (BO.WeightCategories)WeightSelector.SelectedItem);
+            }
             else
+            {
+                group(bl.GetDronesByPerdicate(d => d.Status == (BO.DroneStatus)StatusSelector.SelectedItem && d.Weight == (BO.WeightCategories)WeightSelector.SelectedItem));
                 dronesDataGrid.DataContext = bl.GetDronesByPerdicate(d => d.Status == (BO.DroneStatus)StatusSelector.SelectedItem && d.Weight == (BO.WeightCategories)WeightSelector.SelectedItem);
+            }
+        }
+        private void group(IEnumerable<BO.DroneToL> drones)
+        {
+            List<IGrouping<BO.DroneStatus, BO.DroneToL>> GroupingData = drones
+                    .GroupBy(d => d.Status)
+                    .ToList();
+            dronesDataGrid2.DataContext = GroupingData;
         }
         /// <summary>
         /// A function that opens the drone window for add
@@ -70,13 +89,25 @@ namespace PL
         private void activatedWindow(object sender, EventArgs e)
         {
             if ((WeightSelector.SelectedIndex == -1 || WeightSelector.SelectedIndex == 3) && (StatusSelector.SelectedIndex == 3 || StatusSelector.SelectedIndex == -1))
+            {
+                group(bl.DroneList());
                 dronesDataGrid.DataContext = bl.DroneList();
+            }
             else if ((WeightSelector.SelectedIndex == -1 || WeightSelector.SelectedIndex == 3) && StatusSelector.SelectedIndex != 3)
+            {
+                group(bl.GetDronesByPerdicate(d => d.Status == (BO.DroneStatus)StatusSelector.SelectedItem));
                 dronesDataGrid.DataContext = bl.GetDronesByPerdicate(d => d.Status == (BO.DroneStatus)StatusSelector.SelectedItem);
+            }
             else if (WeightSelector.SelectedIndex != 3 && (StatusSelector.SelectedIndex == 3 || StatusSelector.SelectedIndex == -1))
+            {
+                group(bl.GetDronesByPerdicate(d => d.Weight == (BO.WeightCategories)WeightSelector.SelectedItem));
                 dronesDataGrid.DataContext = bl.GetDronesByPerdicate(d => d.Weight == (BO.WeightCategories)WeightSelector.SelectedItem);
+            }
             else
+            {
+                group(bl.GetDronesByPerdicate(d => d.Status == (BO.DroneStatus)StatusSelector.SelectedItem && d.Weight == (BO.WeightCategories)WeightSelector.SelectedItem));
                 dronesDataGrid.DataContext = bl.GetDronesByPerdicate(d => d.Status == (BO.DroneStatus)StatusSelector.SelectedItem && d.Weight == (BO.WeightCategories)WeightSelector.SelectedItem);
+            }
         }
         /// <summary>
         /// A function that opens the drone window for update the selected drone
@@ -104,15 +135,24 @@ namespace PL
 
         }
 
-        private void GroupButton_Click(object sender, RoutedEventArgs e)
+        private void GroupCheckBox_Click(object sender, RoutedEventArgs e)
         {
-            IEnumerable<IGrouping<BO.DroneStatus, BO.DroneToL>> result = from d in bl.DroneList()
-                                                                         group d by d.Status into gr
-                                                                         select gr;
-            dronesDataGrid2.DataContext = result;
-            dronesDataGrid2.Visibility = Visibility.Visible;
-            dronesDataGrid.Visibility = Visibility.Collapsed;
-
+            if (GroupCheckBox.IsChecked == true)
+            {
+                List<IGrouping<BO.DroneStatus, BO.DroneToL>> GroupingData = bl.DroneList()
+                    .GroupBy(d => d.Status)
+                    .ToList();
+                dronesDataGrid2.DataContext = GroupingData;
+                dronesDataGrid2.Visibility = Visibility.Visible;
+                dronesDataGrid.Visibility = Visibility.Collapsed;
+                StatusSelector.IsEnabled = false;
+            }
+            else
+            {
+                dronesDataGrid.Visibility = Visibility.Visible;
+                dronesDataGrid2.Visibility = Visibility.Collapsed;
+                StatusSelector.IsEnabled = true;
+            }
         }
     }
 }

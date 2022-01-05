@@ -109,10 +109,10 @@ namespace BL
         /// A function that returns the stations with avaliable slots
         /// </summary>
         /// <returns>List of stations with avaliable slots</returns>
-        public IEnumerable<BO.BaseStation> AvaliableStationList()
+        public IEnumerable<BO.StationToL> AvaliableStationList()
         {
-            return from item in dl.GetStationsByPerdicate(s => s.ChargeSlots != 0)
-                   select GetStation(item.Id);
+            return from item in GetStationToLByPredicate(s => s.AvaliableSlots != 0)
+                   select item;
         }
         public IEnumerable<BO.StationToL> GetStationToLByPredicate(Predicate<BO.StationToL> predicate)
         {

@@ -17,6 +17,7 @@
             <Button x:Name="signUpButton" Content="Sign Up" HorizontalAlignment="Left" Margin="667,37,0,0" VerticalAlignment="Top" Style="{StaticResource buttonStyle}" Height="42" Width="85" Background="{x:Null}" BorderBrush="{x:Null}" FontSize="22"/>
             <Image HorizontalAlignment="Left" Height="30" Margin="756,45,0,0" VerticalAlignment="Top" Width="30" Source="images/signIn.jpg" RenderTransformOrigin="0.517,0.885"/>
             <Image HorizontalAlignment="Left" Height="30" Margin="629,45,0,0" VerticalAlignment="Top" Width="30" Source="images/UserIcon2.png"/>
+            <Button Content="Button" HorizontalAlignment="Left" Margin="147,100,0,0" VerticalAlignment="Top" Click="Button_Click_1"/>
         </Grid>
     </Grid>
 </Window>

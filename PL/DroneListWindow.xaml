@@ -25,17 +25,17 @@
             <Label x:Name="WeightLabel" Content="Weight:" Grid.Column="2" Margin="100,10,21,0" FontSize="20" FontFamily="Dubai Medium"/>
         </Grid>
         <Grid Grid.Row="1" >
-            <DataGrid x:Name="dronesDataGrid" RowDetailsVisibilityMode="VisibleWhenSelected" Margin="164,59,114,278" ItemsSource="{Binding}" EnableRowVirtualization="True" AutoGenerateColumns="False" MouseDoubleClick="doubleClickDataGrid" Background="{x:Null}">
+            <DataGrid x:Name="dronesDataGrid" RowDetailsVisibilityMode="VisibleWhenSelected" Margin="138,95,138,243" ItemsSource="{Binding}" EnableRowVirtualization="True" AutoGenerateColumns="False" MouseDoubleClick="doubleClickDataGrid" Background="{x:Null}">
                 <DataGrid.Columns>
-                    <DataGridTextColumn x:Name="batteryColumn" Width="SizeToHeader" Header="Battery" Binding="{Binding Battery}" FontWeight="Normal" />
                     <DataGridTextColumn x:Name="idColumn" Width="40" Header="Id" Binding="{Binding Id}" CanUserResize="True"/>
                     <DataGridTextColumn x:Name="modelColumn" Width="60" Header="Model" Binding="{Binding Model}"/>
-                    <DataGridTextColumn x:Name="parcelIdColumn" Width="SizeToHeader" Header="Parcel Id" Binding="{Binding ParcelId}"/>
                     <DataGridTextColumn x:Name="statusColumn" Width="80" Header="Status" Binding="{Binding Status}"/>
                     <DataGridTextColumn x:Name="weightColumn" Width="60" Header="Weight" Binding="{Binding Weight}"/>
+                    <DataGridTextColumn x:Name="batteryColumn" Width="SizeToHeader" Header="Battery" Binding="{Binding Battery}" FontWeight="Normal" />
                     <DataGridTextColumn x:Name="longitudeColumn" Width="SizeToHeader" Header="Logitude" Binding="{Binding CurrentPlace.Longitude}"/>
                     <DataGridTextColumn x:Name="latitudeColumn" Width="SizeToHeader" Header="Latitude" Binding="{Binding CurrentPlace.Latitude}"/>
-                    <DataGridTemplateColumn x:Name="parcelColumn" Width="SizeToHeader" Header="Parcel">
+                    <DataGridTextColumn x:Name="parcelIdColumn" Width="SizeToHeader" Header="Parcel Id" Binding="{Binding ParcelId}"/>
+                    <DataGridTemplateColumn x:Name="parcelColumn" Width="70" Header="Parcel">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <Button x:Name="showParcelButton" Content="show parcel" Click="showParcelButton_Click"/>
@@ -45,40 +45,33 @@
 
                 </DataGrid.Columns>
             </DataGrid>
-            <DataGrid x:Name="dronesDataGrid2" RowDetailsVisibilityMode="VisibleWhenSelected" Margin="164,59,114,278" ItemsSource="{Binding}" EnableRowVirtualization="True" AutoGenerateColumns="False" MouseDoubleClick="doubleClickDataGrid" Background="{x:Null}" Visibility="Collapsed">
+            <DataGrid x:Name="dronesDataGrid2" RowDetailsVisibilityMode="Visible" Margin="164,59,114,278" ItemsSource="{Binding}" EnableRowVirtualization="True" AutoGenerateColumns="False" Background="{x:Null}" Visibility="Collapsed">
                 <DataGrid.Columns>
-                    <DataGridTextColumn x:Name="batteryColumn2" Width="SizeToHeader" Header="Battery" Binding="{Binding Battery}" FontWeight="Normal" />
-                    <DataGridTextColumn x:Name="idColumn2" Width="40" Header="Id" Binding="{Binding Id}" CanUserResize="True"/>
-                    <DataGridTextColumn x:Name="modelColumn2" Width="60" Header="Model" Binding="{Binding Model}"/>
-                    <DataGridTextColumn x:Name="parcelIdColumn2" Width="SizeToHeader" Header="Parcel Id" Binding="{Binding ParcelId}"/>
-                    <DataGridTextColumn x:Name="statusColumn2" Width="80" Header="Status" Binding="{Binding Status}"/>
-                    <DataGridTextColumn x:Name="weightColumn2" Width="60" Header="Weight" Binding="{Binding Weight}"/>
-                    <DataGridTextColumn x:Name="longitudeColumn2" Width="SizeToHeader" Header="Logitude" Binding="{Binding CurrentPlace.Longitude}"/>
-                    <DataGridTextColumn x:Name="latitudeColumn2" Width="SizeToHeader" Header="Latitude" Binding="{Binding CurrentPlace.Latitude}"/>
-                    <DataGridTemplateColumn x:Name="parcelColumn2" Width="SizeToHeader" Header="Parcel" Visibility="Visible">
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <Button x:Name="showParcelButton" Content="show parcel" Click="showParcelButton_Click"/>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
+                    <DataGridTextColumn Binding="{Binding Key, Mode=OneWay}"/>
                 </DataGrid.Columns>
                 <DataGrid.RowDetailsTemplate>
                     <DataTemplate>
                         <StackPanel>
                             <DataGrid ItemsSource="{Binding}" AutoGenerateColumns="False">
                                 <DataGrid.Columns>
-                                    <DataGridTextColumn Binding="{Binding Data, Mode=OneWay}"/>
+                                    <DataGridTextColumn x:Name="idColumn2" Width="40" Header="Id" Binding="{Binding Id}" CanUserResize="True"/>
+                                    <DataGridTextColumn x:Name="modelColumn2" Width="60" Header="Model" Binding="{Binding Model}"/>
+                                    <DataGridTextColumn x:Name="statusColumn2" Width="80" Header="Status" Binding="{Binding Status}"/>
+                                    <DataGridTextColumn x:Name="weightColumn2" Width="60" Header="Weight" Binding="{Binding Weight}"/>
+                                    <DataGridTextColumn x:Name="batteryColumn2" Width="SizeToHeader" Header="Battery" Binding="{Binding Battery}" FontWeight="Normal" />
+                                    <DataGridTextColumn x:Name="longitudeColumn2" Width="SizeToHeader" Header="Logitude" Binding="{Binding CurrentPlace.Longitude}"/>
+                                    <DataGridTextColumn x:Name="latitudeColumn2" Width="SizeToHeader" Header="Latitude" Binding="{Binding CurrentPlace.Latitude}"/>
+                                    <DataGridTextColumn x:Name="parcelIdColumn2" Width="SizeToHeader" Header="Parcel Id" Binding="{Binding ParcelId}"/>
                                 </DataGrid.Columns>
                             </DataGrid>
                         </StackPanel>
                     </DataTemplate>
                 </DataGrid.RowDetailsTemplate>
             </DataGrid>
+            <CheckBox x:Name="GroupCheckBox" Content="Group by status" HorizontalAlignment="Left" Margin="25,26,0,0" VerticalAlignment="Top" Height="28" Width="141" FontWeight="Bold" FontSize="16" Click="GroupCheckBox_Click"/>
         </Grid>
         <Button x:Name="CloseButton" Content="Close" HorizontalAlignment="Left" Margin="457,453,0,0" VerticalAlignment="Top" Height="49" Width="132" Click="closeButton_Click" Grid.Row="1" Style="{StaticResource buttonStyle}"/>
         <Button x:Name="AddDroneButton" Content="Add a new drone" HorizontalAlignment="Left" Margin="617,453,0,0" VerticalAlignment="Top" Height="49" Width="132" Click="addDroneButton_Click" Grid.Row="1" Style="{StaticResource buttonStyle}"/>
-        <Button x:Name="GroupingButton" Content="Group by status" HorizontalAlignment="Left" Margin="302,453,0,0" VerticalAlignment="Top" Height="49" Width="132" Click="GroupButton_Click" Grid.Row="1" Style="{StaticResource buttonStyle}"/>
 
     </Grid>
 </Window>

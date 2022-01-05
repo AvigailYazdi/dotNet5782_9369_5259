@@ -68,5 +68,10 @@ namespace PL
             mainGrid.Children.Clear();
             mainGrid.Children.Add(myUser);
         }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            new CustomersListWindow(bl).ShowDialog();
+        }
     }
 }
