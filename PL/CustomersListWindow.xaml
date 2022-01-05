@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="CustomersListWindow" Height="450" Width="800" Activated="Window_Activated">
     <Grid x:Name="customerGrid">
-        <DataGrid x:Name="customerToLDataGrid" AutoGenerateColumns="False" ItemsSource="{Binding}"  EnableRowVirtualization="True" Margin="110,84,166,137" RowDetailsVisibilityMode="VisibleWhenSelected" MouseDoubleClick="customerToLDataGrid_MouseDoubleClick">
+        <DataGrid x:Name="customerToLDataGrid" AutoGenerateColumns="False" ItemsSource="{Binding}"  EnableRowVirtualization="True" Margin="110,84,86,137" RowDetailsVisibilityMode="VisibleWhenSelected" MouseDoubleClick="customerToLDataGrid_MouseDoubleClick">
             <DataGrid.Columns>
                 <DataGridTextColumn x:Name="idColumn" Binding="{Binding Id}" Header="Id" Width="70"/>
                 <DataGridTextColumn x:Name="nameColumn" Binding="{Binding Name}" Header="Name" Width="60"/>
@@ -16,6 +16,7 @@
                 <DataGridTextColumn x:Name="numGotColumn" Binding="{Binding NumGot}" Header="supplied &#xA;parcels" Width="SizeToHeader"/>
                 <DataGridTextColumn x:Name="numOnWayColumn" Binding="{Binding NumOnWay}" Header="on way &#xA;parcels" Width="SizeToHeader"/>
                 <DataGridTextColumn x:Name="numSendColumn" Binding="{Binding NumSend}" Header="sent and not- &#xA;supplied" Width="SizeToHeader"/>
+                <DataGridComboBoxColumn x:Name="SentParcelsCBox" Header="Sent parcels" Width="SizeToHeader" ItemsSource="{Binding}" DisplayMemberPath="Id" SelectedValuePath="Id"/>
             </DataGrid.Columns>
         </DataGrid>
         <Button x:Name="CloseButton" Content="Close" HorizontalAlignment="Left" Margin="437,364,0,0" VerticalAlignment="Top" Height="49" Width="132" Click="closeButton_Click" Style="{StaticResource buttonStyle}"/>

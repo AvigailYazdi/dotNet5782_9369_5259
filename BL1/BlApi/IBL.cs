@@ -38,6 +38,8 @@ namespace BlApi
         public BO.BaseStation GetStation(int id);
         public IEnumerable<BO.StationToL> StationList();
         public IEnumerable<BO.StationToL> AvaliableStationList();
+        public IEnumerable<BO.BaseStation> GetBaseStations();
+        public IEnumerable<BO.BaseStation> GetBaseStationsByPredicate(Predicate<BO.BaseStation> predicate);
         public IEnumerable<BO.StationToL> GetStationToLByPredicate(Predicate<BO.StationToL> predicate);
         #endregion
         #region DroneToL

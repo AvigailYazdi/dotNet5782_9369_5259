@@ -63,8 +63,9 @@ namespace PL
                     c.Id = int.Parse(idTextBox.Text);
                     c.Name = nameTextBox.Text;
                     c.PhoneNum = phoneNumTextBox.Text;
-                    c.Place.Longitude =Convert.ToInt64((longitudeTextBox.Text).ToString());
-                    c.Place.Latitude = Convert.ToDouble(latitudeTextBox.Text);
+                    c.Place = new BO.Location();
+                    c.Place.Longitude = double.Parse(longitudeTextBox.Text);
+                    c.Place.Latitude = double.Parse(latitudeTextBox.Text);
                     bl.AddCustomer(c);
                     MessageBox.Show("The customer is added successfully!", "Add", b, i);
                     this.Close();
@@ -73,6 +74,7 @@ namespace PL
                 {
                     nameTextBox.GetBindingExpression(TextBox.TextProperty).UpdateSource();
                     phoneNumTextBox.GetBindingExpression(TextBox.TextProperty).UpdateSource();
+                    bl.UpdateCustomer(int.Parse(idTextBox.Text), nameTextBox.Text, phoneNumTextBox.Text);
                     MessageBox.Show("The customer is updated successfully!", "Update", b, i);
                 }
             }

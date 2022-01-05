@@ -27,6 +27,7 @@ namespace PL
             bl = _bl;
             customerToLDataGrid.DataContext = bl.CustomerList();
             customerToLDataGrid.IsReadOnly = true;
+            
         }
 
         private void addCustomerButton_Click(object sender, RoutedEventArgs e)

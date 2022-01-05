@@ -361,5 +361,6 @@ namespace BL
             return from item in dl.GetParcelsByPerdicate(p => p.DroneId == 0)
                    select GetParcel(item.Id);
         }
+
     }
 }
