@@ -20,7 +20,15 @@ namespace Dal
         {
             return stations.Any(b => b.Id == id);
         }
-
+        private int indexStation(int id)
+        {
+            for (int i = 0; i < stations.Count(); i++)
+            {
+                if (stations[i].Id == id)
+                    return i;
+            }
+            return -1;
+        }
         /// <summary>
         /// A function that returns the number of not avaliable slots in a certain station
         /// </summary>
@@ -68,8 +76,10 @@ namespace Dal
         /// <param name="bs">The updated station</param>
         public void UpdateStation(BaseStation bs)
         {
-            DeleteStation(bs.Id);
-            AddBaseStation(bs);
+            int i = indexStation(bs.Id);
+            stations[i] = bs;
+            //DeleteStation(bs.Id);
+            //AddBaseStation(bs);
         }
 
         /// <summary>

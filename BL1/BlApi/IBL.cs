@@ -22,14 +22,19 @@ namespace BlApi
         public void UpdateParcelToDrone(int id);
         public void UpdateParcelCollect(int id);
         public void UpdateParcelProvide(int id);
+        public BO.ParcelStatus GetParcelStatus(int id);
+        public IEnumerable<BO.ParcelAtC> getRecievedParcel(int id);
+        public IEnumerable<BO.ParcelAtC> getSendParcel(int id);
         public BO.Parcel GetParcel(int id);
         public IEnumerable<BO.ParcelToL> ParcelList();
+        public void DeleteParcel(int id);
         public IEnumerable<BO.Parcel> NotConnectedParcelList();
         #endregion
         #region Customer
         public void AddCustomer(BO.Customer customer);
         public void UpdateCustomer(int id, string name, string phoneNum);
         public BO.Customer GetCustomer(int id);
+        public BO.CustomerToL getCustomerToL(int id);
         public IEnumerable<BO.CustomerToL> CustomerList();
         #endregion
         #region Station
@@ -38,8 +43,6 @@ namespace BlApi
         public BO.BaseStation GetStation(int id);
         public IEnumerable<BO.StationToL> StationList();
         public IEnumerable<BO.StationToL> AvaliableStationList();
-        public IEnumerable<BO.BaseStation> GetBaseStations();
-        public IEnumerable<BO.BaseStation> GetBaseStationsByPredicate(Predicate<BO.BaseStation> predicate);
         public IEnumerable<BO.StationToL> GetStationToLByPredicate(Predicate<BO.StationToL> predicate);
         #endregion
         #region DroneToL

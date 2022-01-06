@@ -151,9 +151,9 @@ namespace BL
                 {
                     droneBo.MyParcel = new BO.ParcelInTran() { };
                     droneBo.MyParcel.Id = droneToList.ParcelId;
-                    if (getParcelStatus(droneToList.ParcelId) == BO.ParcelStatus.Connected)
+                    if (GetParcelStatus(droneToList.ParcelId) == BO.ParcelStatus.Connected)
                         droneBo.MyParcel.ParcelStatus = BO.ParcelInTranStatus.WaitToCollect;
-                    else if (getParcelStatus(droneToList.ParcelId) == BO.ParcelStatus.PickedUp)
+                    else if (GetParcelStatus(droneToList.ParcelId) == BO.ParcelStatus.PickedUp)
                         droneBo.MyParcel.ParcelStatus = BO.ParcelInTranStatus.OnWay;
                     BO.Parcel p = GetParcel(droneToList.ParcelId);
                     droneBo.MyParcel.Weight = p.Weight;

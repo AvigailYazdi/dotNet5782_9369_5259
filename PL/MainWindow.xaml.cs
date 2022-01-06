@@ -46,32 +46,42 @@ namespace PL
         //    //mainGrid.Children.Clear();
         //    //mainGrid.Children.Add(myUser);
         //}
-        private void back_hostUserControl(object sender, MouseButtonEventArgs e)
-        {
-            mainGrid.Children.Clear();
-            mainGrid.Children.Add(wingsGrid);
-        }
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            StationsListUserControl myUser = new StationsListUserControl(bl);
-            myUser.CloseButton.MouseLeftButtonDown += back_hostUserControl;
-            mainGrid.Opacity = 0.9;
-            mainGrid.Children.Clear();
-            mainGrid.Children.Add(myUser);
-        }
+        //private void back_hostUserControl(object sender, MouseButtonEventArgs e)
+        //{
+        //    mainGrid.Children.Clear();
+        //    mainGrid.Children.Add(wingsGrid);
+        //}
+        //private void Button_Click(object sender, RoutedEventArgs e)
+        //{
+        //    StationsListUserControl myUser = new StationsListUserControl(bl);
+        //    myUser.CloseButton.MouseLeftButtonDown += back_hostUserControl;
+        //    mainGrid.Opacity = 0.9;
+        //    mainGrid.Children.Clear();
+        //    mainGrid.Children.Add(myUser);
+        //}
 
-        private void logInButton_Click(object sender, RoutedEventArgs e)
-        {
-            LogInUserControl myUser = new LogInUserControl(bl);
-           // myUser.CloseButton.MouseLeftButtonDown += back_hostUserControl;
-            mainGrid.Opacity = 0.9;
-            mainGrid.Children.Clear();
-            mainGrid.Children.Add(myUser);
-        }
+        //private void logInButton_Click(object sender, RoutedEventArgs e)
+        //{
+        //    LogInUserControl myUser = new LogInUserControl(bl);
+        //   // myUser.CloseButton.MouseLeftButtonDown += back_hostUserControl;
+        //    mainGrid.Opacity = 0.9;
+        //    mainGrid.Children.Clear();
+        //    mainGrid.Children.Add(myUser);
+        //}
 
-        private void Button_Click_1(object sender, RoutedEventArgs e)
+        private void showCustomersButton_Click(object sender, RoutedEventArgs e)
         {
             new CustomersListWindow(bl).ShowDialog();
+        }
+
+        private void showParcelsButton_Click(object sender, RoutedEventArgs e)
+        {
+            new ParcelsListWindow(bl).ShowDialog();
+        }
+
+        private void showStationsButton_Click(object sender, RoutedEventArgs e)
+        {
+            new StationsListWindow(bl).ShowDialog();
         }
     }
 }

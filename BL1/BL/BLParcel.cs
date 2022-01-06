@@ -20,7 +20,7 @@ namespace BL
         private IEnumerable<BO.ParcelAtC> getSentAndProviededParcels(int id)
         {
             return from item in getSendParcel(id)
-                   where getParcelStatus(item.Id) == BO.ParcelStatus.Provided
+                   where GetParcelStatus(item.Id) == BO.ParcelStatus.Provided
                    select item;
 
         }
@@ -32,7 +32,7 @@ namespace BL
         private IEnumerable<BO.ParcelAtC> getSentAndNotProviededParcels(int id)
         {
             return from item in getSendParcel(id)
-                   where getParcelStatus(item.Id) != BO.ParcelStatus.Provided
+                   where GetParcelStatus(item.Id) != BO.ParcelStatus.Provided
                    select item;
         }
         /// <summary>
@@ -42,14 +42,14 @@ namespace BL
         /// <returns> Parcels that on way</returns>
         private IEnumerable<BO.ParcelAtC> getOnWayParcels(int id)
         {
-            return from item in dl.GetParcelsByPerdicate(item => item.TargetId == id && getParcelStatus(item.Id) == BO.ParcelStatus.PickedUp)
+            return from item in dl.GetParcelsByPerdicate(item => item.TargetId == id && GetParcelStatus(item.Id) == BO.ParcelStatus.PickedUp)
                    let p = dl.GetParcel(item.Id)
                    select new BO.ParcelAtC()
                    {
                        Id = p.Id,
                        Weight = (BO.WeightCategories)p.Weight,
                        Priority = (BO.Priorities)p.Priority,
-                       Status = getParcelStatus(p.Id),
+                       Status = GetParcelStatus(p.Id),
                        OtherC = new BO.CustomerInP()
                        {
                            Id = p.Id,
@@ -62,7 +62,7 @@ namespace BL
         /// </summary>
         /// <param name="id"> The parcel</param>
         /// <returns> Returns the status</returns>
-        private BO.ParcelStatus getParcelStatus(int id)
+        public BO.ParcelStatus GetParcelStatus(int id)
         {
             try
             {
@@ -85,7 +85,7 @@ namespace BL
         /// </summary>
         /// <param name="id"> The id of the customer</param>
         /// <returns> The list of the parcels</returns>
-        private IEnumerable<BO.ParcelAtC> getSendParcel(int id)
+        public IEnumerable<BO.ParcelAtC> getSendParcel(int id)
         {
             try
             {
@@ -96,11 +96,11 @@ namespace BL
                            Id = p.Id,
                            Weight = (BO.WeightCategories)p.Weight,
                            Priority = (BO.Priorities)p.Priority,
-                           Status = getParcelStatus(p.Id),
+                           Status = GetParcelStatus(p.Id),
                            OtherC = new BO.CustomerInP()
                            {
                                Id = p.Id,
-                               Name = getCustomerName(p.SenderId)
+                               Name = getCustomerName(p.TargetId)
                            }
                        };
             }
@@ -114,22 +114,22 @@ namespace BL
         /// </summary>
         /// <param name="id"> The id of the customer</param>
         /// <returns> The list of the parcels </returns>
-        private IEnumerable<BO.ParcelAtC> getRecievedParcel(int id)
+        public IEnumerable<BO.ParcelAtC> getRecievedParcel(int id)
         {
             try
             {
-                return from item in dl.GetParcelsByPerdicate(item => item.TargetId == id && getParcelStatus(item.Id)==BO.ParcelStatus.Provided)
+                return from item in dl.GetParcelsByPerdicate(item => item.TargetId == id && GetParcelStatus(item.Id)==BO.ParcelStatus.Provided)
                        let p = dl.GetParcel(item.Id)
                        select new BO.ParcelAtC()
                        {
                            Id = p.Id,
                            Weight = (BO.WeightCategories)p.Weight,
                            Priority = (BO.Priorities)p.Priority,
-                           Status = getParcelStatus(p.Id),
+                           Status = GetParcelStatus(p.Id),
                            OtherC = new BO.CustomerInP()
                            {
                                Id = p.Id,
-                               Name = getCustomerName(p.TargetId)
+                               Name = getCustomerName(p.SenderId)
                            }
                        };
             }
@@ -246,7 +246,7 @@ namespace BL
             double dis;
             try
             {
-                if (droneToList.Status == BO.DroneStatus.Delivery && getParcelStatus(droneToList.ParcelId) == BO.ParcelStatus.Connected)
+                if (droneToList.Status == BO.DroneStatus.Delivery && GetParcelStatus(droneToList.ParcelId) == BO.ParcelStatus.Connected)
                 {
                     DO.Parcel p = dl.GetParcel(droneToList.ParcelId);
                     DO.Customer c = dl.GetCustomer(p.SenderId);
@@ -270,7 +270,7 @@ namespace BL
             double dis;
             try
             {
-                if (droneToList.Status == BO.DroneStatus.Delivery && getParcelStatus(droneToList.ParcelId) == BO.ParcelStatus.PickedUp)
+                if (droneToList.Status == BO.DroneStatus.Delivery && GetParcelStatus(droneToList.ParcelId) == BO.ParcelStatus.PickedUp)
                 {
                     DO.Parcel p = dl.GetParcel(droneToList.ParcelId);
                     DO.Customer c = dl.GetCustomer(p.TargetId);
@@ -349,7 +349,7 @@ namespace BL
                        ReceiverName= p.Receiver.Name,
                        Weight= p.Weight,
                        Priority= p.Priority,
-                       Status= getParcelStatus(p.Id)
+                       Status= GetParcelStatus(p.Id)
                    };
         }
         /// <summary>
@@ -360,6 +360,10 @@ namespace BL
         {
             return from item in dl.GetParcelsByPerdicate(p => p.DroneId == 0)
                    select GetParcel(item.Id);
+        }
+        public void DeleteParcel(int id)
+        {
+            dl.DeleteParcel(id);
         }
 
     }

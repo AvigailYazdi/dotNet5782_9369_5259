@@ -20,7 +20,15 @@ namespace Dal
         {
             return drones.Any(dn => dn.Id == id);
         }
-
+        private int indexDrone(int id)
+        {
+            for (int i = 0; i < drones.Count(); i++)
+            {
+                if (drones[i].Id == id)
+                    return i;
+            }
+            return -1;
+        }
         /// <summary>
         ///  A function that adds a drone to the array
         /// </summary>
@@ -124,8 +132,10 @@ namespace Dal
         /// <param name="d">The updated drone</param>
         public void UpdateDrone(Drone d)
         {
-            DeleteDrone(d.Id);
-            AddDrone(d);
+            int i = indexDrone(d.Id);
+            drones[i] = d;
+            //DeleteDrone(d.Id);
+            //AddDrone(d);
         }
 
         /// <summary>

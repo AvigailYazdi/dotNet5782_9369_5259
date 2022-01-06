@@ -120,17 +120,6 @@ namespace BL
                    where predicate(item)
                    select item;
         }
-        public IEnumerable<BO.BaseStation> GetBaseStations()
-        {
-            return from item in dl.ListBaseStation()
-                   select GetStation(item.Id);
-        }
-        public IEnumerable<BO.BaseStation> GetBaseStationsByPredicate(Predicate<BO.BaseStation> predicate)
-        {
-            return from item in GetBaseStations()
-                   where predicate(item)
-                   select item;
-        }
 
     }
 }

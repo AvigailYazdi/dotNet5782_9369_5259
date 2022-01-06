@@ -11,13 +11,15 @@
             <ImageBrush ImageSource="/DeliveryDrones.jpg"/>
         </Grid.Background>
         <Grid x:Name="wingsGrid">
-            <Button x:Name="ShowDronesButton" Content="Drones List" HorizontalAlignment="Center" Margin="0,332,0,54" Height="54" Width="194" Click="showDronesButton_Click" Background="{x:Null}" BorderBrush="{x:Null}" FontWeight="Bold" FontSize="34" />
+            <Button x:Name="ShowDronesButton" Content="Drones" HorizontalAlignment="Left" Margin="282,332,0,54" Height="54" Width="140" Click="showDronesButton_Click" Background="{x:Null}" BorderBrush="{x:Null}" FontWeight="Bold" FontSize="34" />
             <Label Name="WingsTitleLabel" Content="WINGS" HorizontalAlignment="Center" VerticalAlignment="Center" Height="94" Width="244" FontFamily="Segoe Script" FontWeight="Bold" FontSize="64"/>
-            <Button x:Name="logInButton" Content="Log In" HorizontalAlignment="Left" Margin="541,37,0,0" VerticalAlignment="Top" Style="{StaticResource buttonStyle}" Height="42" Width="85" Background="{x:Null}" BorderBrush="{x:Null}" FontSize="22" Click="logInButton_Click"/>
+            <Button x:Name="logInButton" Content="Log In" HorizontalAlignment="Left" Margin="541,37,0,0" VerticalAlignment="Top" Style="{StaticResource buttonStyle}" Height="42" Width="85" Background="{x:Null}" BorderBrush="{x:Null}" FontSize="22"/>
             <Button x:Name="signUpButton" Content="Sign Up" HorizontalAlignment="Left" Margin="667,37,0,0" VerticalAlignment="Top" Style="{StaticResource buttonStyle}" Height="42" Width="85" Background="{x:Null}" BorderBrush="{x:Null}" FontSize="22"/>
             <Image HorizontalAlignment="Left" Height="30" Margin="756,45,0,0" VerticalAlignment="Top" Width="30" Source="images/signIn.jpg" RenderTransformOrigin="0.517,0.885"/>
             <Image HorizontalAlignment="Left" Height="30" Margin="629,45,0,0" VerticalAlignment="Top" Width="30" Source="images/UserIcon2.png"/>
-            <Button Content="Button" HorizontalAlignment="Left" Margin="147,100,0,0" VerticalAlignment="Top" Click="Button_Click_1"/>
+            <Button x:Name="ShowParcelsButton" Content="Parcels" HorizontalAlignment="Left" Margin="122,332,0,54" Height="54" Width="140" Click="showParcelsButton_Click" Background="{x:Null}" BorderBrush="{x:Null}" FontWeight="Bold" FontSize="34" />
+            <Button x:Name="ShowStationsButton" Content="Stations" HorizontalAlignment="Left" Margin="432,332,0,54" Height="54" Width="140" Click="showStationsButton_Click" Background="{x:Null}" BorderBrush="{x:Null}" FontWeight="Bold" FontSize="34" />
+            <Button x:Name="ShowCustomersButton" Content="Customers" HorizontalAlignment="Left" Margin="586,332,0,54" Height="54" Width="185" Click="showCustomersButton_Click" Background="{x:Null}" BorderBrush="{x:Null}" FontWeight="Bold" FontSize="34" />
         </Grid>
     </Grid>
 </Window>

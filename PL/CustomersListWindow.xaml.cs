@@ -44,7 +44,10 @@ namespace PL
         {
             BO.CustomerToL curCustomerToL = customerToLDataGrid.SelectedItem as BO.CustomerToL;
             if (curCustomerToL != null)
-                new CustomerWindow(bl, curCustomerToL).ShowDialog();
+            {
+                BO.Customer c = bl.GetCustomer(curCustomerToL.Id);
+                new CustomerWindow(bl, c).ShowDialog();
+            }
         }
         private void Window_Activated(object sender, EventArgs e)
         {

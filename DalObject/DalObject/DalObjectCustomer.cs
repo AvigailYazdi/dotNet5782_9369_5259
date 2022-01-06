@@ -22,7 +22,15 @@ namespace Dal
         {
             return customers.Any(cs => cs.Id == id);
         }
-
+        private int indexCustomer(int id)
+        {
+            for (int i = 0; i < customers.Count(); i++)
+            {
+                if (customers[i].Id == id)
+                    return i;
+            }
+            return -1;
+        }
         /// <summary>
         /// A function that adds a customer to the array
         /// </summary>
@@ -52,8 +60,10 @@ namespace Dal
         /// <param name="c">The updated customer</param>
         public void UpdateCustomer(Customer c)
         {
-            DeleteCustomer(c.Id);
-            AddCustomer(c);
+            int i = indexCustomer(c.Id);
+            customers[i] = c;
+            //DeleteCustomer(c.Id);
+            //AddCustomer(c);
         }
 
         /// <summary>

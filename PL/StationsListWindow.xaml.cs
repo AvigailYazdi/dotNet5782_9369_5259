@@ -25,7 +25,7 @@ namespace PL
         {
             InitializeComponent();
             bl = _bl;
-            stationToLDataGrid.DataContext = bl.GetBaseStations();
+            stationToLDataGrid.DataContext = bl.StationList();
             stationToLDataGrid.IsReadOnly = true;
         }
         private void addStationButton_Click(object sender, RoutedEventArgs e)
@@ -39,10 +39,11 @@ namespace PL
         }
         private void doubleClickDataGrid(object sender, MouseButtonEventArgs e)
         {
-            BO.BaseStation curStationToL = stationToLDataGrid.SelectedItem as BO.BaseStation;
+            BO.StationToL curStationToL = stationToLDataGrid.SelectedItem as BO.StationToL;
             if (curStationToL != null)
             {
-                new StationWindow(bl, curStationToL).ShowDialog();
+                BO.BaseStation s = bl.GetStation(curStationToL.Id);
+                new StationWindow(bl, s).ShowDialog();
             }
         }
 
@@ -50,13 +51,13 @@ namespace PL
         {
             if (avaliableCheckBox.IsChecked == false)
             {
-                stationToLDataGrid.DataContext = bl.GetBaseStations();
-                group(bl.GetBaseStations());           
+                stationToLDataGrid.DataContext = bl.StationList();
+                group(bl.StationList());           
             }
             else
             {
-                stationToLDataGrid.DataContext = bl.GetBaseStationsByPredicate(s => s.AvaliableSlots != 0);
-                group(bl.GetBaseStationsByPredicate(s => s.AvaliableSlots != 0));
+                stationToLDataGrid.DataContext = bl.AvaliableStationList();
+                group(bl.AvaliableStationList());
             }
 
         }
@@ -65,7 +66,7 @@ namespace PL
         {
             if (GroupCheckBox.IsChecked == true)
             {
-                List<IGrouping<int, BO.BaseStation>> GroupingData = bl.GetBaseStations()
+                List<IGrouping<int, BO.StationToL>> GroupingData = bl.StationList()
                     .GroupBy(b =>b.AvaliableSlots)
                     .ToList();
                 stationToLDataGrid2.DataContext = GroupingData;
@@ -83,18 +84,18 @@ namespace PL
         {
             if (avaliableCheckBox.IsChecked == false)
             {
-                stationToLDataGrid.DataContext = bl.GetBaseStations();
-                group(bl.GetBaseStations());
+                stationToLDataGrid.DataContext = bl.StationList();
+                group(bl.StationList());
             }
             else
             {
-                stationToLDataGrid.DataContext = bl.GetBaseStationsByPredicate(s => s.AvaliableSlots != 0);
-                group(bl.GetBaseStationsByPredicate(s => s.AvaliableSlots != 0));
+                stationToLDataGrid.DataContext = bl.AvaliableStationList();
+                group(bl.AvaliableStationList());
             }
         }
-        private void group(IEnumerable<BO.BaseStation> stations)
+        private void group(IEnumerable<BO.StationToL> stations)
         {
-            List<IGrouping<int, BO.BaseStation>> GroupingData = stations
+            List<IGrouping<int, BO.StationToL>> GroupingData = stations
                     .GroupBy(b => b.AvaliableSlots)
                     .ToList();
             stationToLDataGrid2.DataContext = GroupingData;

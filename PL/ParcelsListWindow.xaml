@@ -1,0 +1,46 @@
+﻿<Window x:Class="PL.ParcelsListWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PL"
+        mc:Ignorable="d"
+        Title="ParcelsListWindow" Height="450" Width="800" Activated="Window_Activated">
+    <Grid>
+        <DataGrid x:Name="parcelToLDataGrid" ItemsSource="{Binding}" AutoGenerateColumns="False" EnableRowVirtualization="True" Margin="200,110,241,110" RowDetailsVisibilityMode="VisibleWhenSelected" MouseDoubleClick="parcelToLDataGrid_MouseDoubleClick">
+            <DataGrid.Columns>
+                <DataGridTextColumn x:Name="idColumn" Binding="{Binding Id}" Header="Id" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="priorityColumn" Binding="{Binding Priority}" Header="Priority" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="receiverNameColumn" Binding="{Binding ReceiverName}" Header="Receiver Name" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="senderNameColumn" Binding="{Binding SenderName}" Header="Sender Name" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="statusColumn" Binding="{Binding Status}" Header="Status" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="weightColumn" Binding="{Binding Weight}" Header="Weight" Width="SizeToHeader"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <DataGrid x:Name="parcelToLDataGrid2" Visibility="Collapsed" AutoGenerateColumns="False" EnableRowVirtualization="True" Margin="200,110,241,110" RowDetailsVisibilityMode="Visible" MouseDoubleClick="parcelToLDataGrid_MouseDoubleClick">
+            <DataGrid.Columns>
+            <DataGridTextColumn Binding="{Binding Key, Mode=OneWay}"/>
+            </DataGrid.Columns>
+            <DataGrid.RowDetailsTemplate>
+                <DataTemplate>
+                    <StackPanel>
+                        <DataGrid ItemsSource="{Binding}" AutoGenerateColumns="False">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn x:Name="idColumn2" Binding="{Binding Id}" Header="Id" Width="SizeToHeader"/>
+                                <DataGridTextColumn x:Name="priorityColumn2" Binding="{Binding Priority}" Header="Priority" Width="SizeToHeader"/>
+                                <DataGridTextColumn x:Name="receiverNameColumn2" Binding="{Binding ReceiverName}" Header="Receiver Name" Width="SizeToHeader"/>
+                                <DataGridTextColumn x:Name="senderNameColumn2" Binding="{Binding SenderName}" Header="Sender Name" Width="SizeToHeader"/>
+                                <DataGridTextColumn x:Name="statusColumn2" Binding="{Binding Status}" Header="Status" Width="SizeToHeader"/>
+                                <DataGridTextColumn x:Name="weightColumn2" Binding="{Binding Weight}" Header="Weight" Width="SizeToHeader"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </StackPanel>
+                </DataTemplate>
+            </DataGrid.RowDetailsTemplate>
+        </DataGrid>
+        <Button x:Name="CloseButton" Content="Close" HorizontalAlignment="Left" Margin="457,364,0,0" VerticalAlignment="Top" Height="49" Width="132" Click="closeButton_Click" Style="{StaticResource buttonStyle}"/>
+        <Button x:Name="AddParcelButton" Content="Add a new parcel" HorizontalAlignment="Left" Margin="617,364,0,0" VerticalAlignment="Top" Height="49" Width="132" Click="addParcelButton_Click" Style="{StaticResource buttonStyle}"/>
+        <CheckBox x:Name="GroupSenderCheckBox" Content="Group by Sender" HorizontalAlignment="Left" Margin="25,72,0,0" VerticalAlignment="Top" Height="28" Width="170" FontWeight="Bold" FontSize="16" Click="GroupSenderCheckBox_Click"/>
+        <CheckBox x:Name="GroupReceiverCheckBox" Content="Group by Receiver" HorizontalAlignment="Left" Margin="25,104,0,0" VerticalAlignment="Top" Height="31" Width="170" FontWeight="Bold" FontSize="16" Click="GroupReceiverCheckBox_Click"/>
+    </Grid>
+</Window>

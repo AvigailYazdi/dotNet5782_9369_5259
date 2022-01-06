@@ -24,37 +24,32 @@
                 <DataGridTextColumn x:Name="disAvaliableSlotsColumn" Width="SizeToHeader" Header="Not Avaliable Slots" Binding="{Binding DisAvaliableSlots}"/>
             </DataGrid.Columns>
         </DataGrid>-->
-        <DataGrid x:Name="stationToLDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Margin="260,110,250,110" RowDetailsVisibilityMode="VisibleWhenSelected">
+        <DataGrid x:Name="stationToLDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Margin="221,110,263,110" RowDetailsVisibilityMode="VisibleWhenSelected" MouseDoubleClick="doubleClickDataGrid">
             <DataGrid.Columns>
                 <DataGridTextColumn x:Name="idColumn" Binding="{Binding Id}" Header="Id" Width="40"/>
                 <DataGridTextColumn x:Name="nameColumn" Binding="{Binding Name}" Header="Name" Width="60"/>
                 <DataGridTextColumn x:Name="avaliableSlotsColumn" Binding="{Binding AvaliableSlots}" Header="Avaliable Slots" Width="SizeToHeader"/>
-                <DataGridTemplateColumn x:Name="droneSlotsColumn" Header="Drones in charge" Width="SizeToHeader" >
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <ComboBox DisplayMemberPath="Id, Name" SelectedValuePath="Id">
-                                <ComboBoxItem Content="{Binding DroneSlots}"/>
-                            </ComboBox>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
+                <DataGridTextColumn x:Name="disAvaliableSlotsColumn" Binding="{Binding DisAvaliableSlots}" Header="Not Avaliable Slots" Width="SizeToHeader"/>
             </DataGrid.Columns>
         </DataGrid>
-        <DataGrid x:Name="stationToLDataGrid2" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Margin="260,110,250,110" RowDetailsVisibilityMode="VisibleWhenSelected">
+        <DataGrid x:Name="stationToLDataGrid2" Visibility="Collapsed" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Margin="260,110,238,110" RowDetailsVisibilityMode="Visible">
             <DataGrid.Columns>
-                <DataGridTextColumn x:Name="idColumn2" Binding="{Binding Id}" Header="Id" Width="40"/>
-                <DataGridTextColumn x:Name="nameColumn2" Binding="{Binding Name}" Header="Name" Width="60"/>
-                <DataGridTextColumn x:Name="avaliableSlotsColumn2" Binding="{Binding AvaliableSlots}" Header="Avaliable Slots" Width="SizeToHeader"/>
-                <DataGridTemplateColumn x:Name="droneSlotsColumn2" Header="Drones in charge" Width="SizeToHeader" >
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <ComboBox DisplayMemberPath="Id, Name" SelectedValuePath="Id">
-                                <ComboBoxItem Content="{Binding DroneSlots}"/>
-                            </ComboBox>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
+                <DataGridTextColumn Binding="{Binding Key, Mode=OneWay}"/>
             </DataGrid.Columns>
+            <DataGrid.RowDetailsTemplate>
+                <DataTemplate>
+                    <StackPanel>
+                        <DataGrid ItemsSource="{Binding}" AutoGenerateColumns="False">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn x:Name="idColumn2" Binding="{Binding Id}" Header="Id" Width="40"/>
+                                <DataGridTextColumn x:Name="nameColumn2" Binding="{Binding Name}" Header="Name" Width="60"/>
+                                <DataGridTextColumn x:Name="avaliableSlotsColumn2" Binding="{Binding AvaliableSlots}" Header="Avaliable Slots" Width="SizeToHeader"/>
+                                <DataGridTextColumn x:Name="disAvaliableSlotsColumn2" Binding="{Binding DisAvaliableSlots}" Header="Not Avaliable Slots" Width="SizeToHeader"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </StackPanel>
+                </DataTemplate>
+            </DataGrid.RowDetailsTemplate>
         </DataGrid>
         <CheckBox x:Name="avaliableCheckBox" Content="Is Avaliable?" HorizontalAlignment="Left" Margin="427,53,0,0" VerticalAlignment="Top" FontSize="20" FontFamily="Dubai Medium" Click="avaliableCheckBox_Click"  />
         <!--<Label Content="Num Of Slots:" HorizontalAlignment="Left" Margin="395,52,0,0" VerticalAlignment="Top" FontSize="20" FontFamily="Dubai Medium"/>-->

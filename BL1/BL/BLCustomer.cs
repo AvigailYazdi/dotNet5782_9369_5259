@@ -120,5 +120,20 @@ namespace BL
                        NumOnWay= getOnWayParcels(c.Id).Count()
                    };
         }
+
+        public BO.CustomerToL getCustomerToL(int id)
+        {
+            BO.Customer c = GetCustomer(id);
+            return new BO.CustomerToL()
+                   {
+                       Id = c.Id,
+                       Name = c.Name,
+                       PhoneNum = c.PhoneNum,
+                       NumArrived = getSentAndProviededParcels(c.Id).Count(),
+                       NumSend = getSentAndNotProviededParcels(c.Id).Count(),
+                       NumGot = c.GetParcel.Count(),
+                       NumOnWay = getOnWayParcels(c.Id).Count()
+                   };
+        }
     }
 }

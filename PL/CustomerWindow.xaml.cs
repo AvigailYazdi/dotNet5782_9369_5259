@@ -24,37 +24,41 @@ namespace PL
         bool flag = true;
         enum op { Add, Update };
         op option;
-        BO.CustomerToL currentCustomerToL;
+        BO.Customer currentCustomer;
         MessageBoxButton b = MessageBoxButton.OK; // A button of the message box
         MessageBoxImage i = MessageBoxImage.Information; // An icon of the message box
         public CustomerWindow(IBL _bl)// ctor for add
         {
             InitializeComponent();
             bl = _bl;
-            currentCustomerToL = new BO.CustomerToL();
+            currentCustomer = new BO.Customer();
             option = op.Add;
             OpButton.Content = "Add";
             CancelOrCloseButton.Content = "Cancel";
-            numArrivedTextBox.Visibility = numGotTextBox.Visibility = numOnWayTextBox.Visibility = numSendTextBox.Visibility = Visibility.Collapsed;
-            numSentLabel.Visibility = numOnWayLabel.Visibility = numGotLabel.Visibility = numArrivedLabel.Visibility = Visibility.Collapsed;
             OpButton.IsEnabled = false;
+            sentParcelsDataGrid.Visibility = suppliedParcelsDataGrid.Visibility = Visibility.Collapsed;
         }
-        public CustomerWindow(IBL _bl, BO.CustomerToL _c)// ctor for update
+        public CustomerWindow(IBL _bl, BO.Customer _c)// ctor for update
         {
             InitializeComponent();
             bl = _bl;
-            currentCustomerToL = _c;
-            gridOneCustomer.DataContext = currentCustomerToL;
+            currentCustomer =_c;
+            gridOneCustomer.DataContext = currentCustomer;
             option = op.Update;
             OpButton.Content = "Update";
             CancelOrCloseButton.Content = "Close";
-            idTextBox.IsEnabled = numArrivedTextBox.IsEnabled = numGotTextBox.IsEnabled = numOnWayTextBox.IsEnabled = numSendTextBox.IsEnabled = false;
-            longitudeLabel.Visibility = longitudeTextBox.Visibility = latitudeLabel.Visibility = latitudeTextBox.Visibility = Visibility.Collapsed;
+            idTextBox.IsEnabled= longitudeTextBox.IsEnabled = latitudeTextBox.IsEnabled=false;
+            sentParcelsDataGrid.Visibility = Visibility.Visible;
+            sentParcelsDataGrid.DataContext = currentCustomer.SendParcel;
+            sentParcelsDataGrid.IsReadOnly = true;
+            suppliedParcelsDataGrid.Visibility = Visibility.Visible;
+            suppliedParcelsDataGrid.DataContext = currentCustomer.GetParcel;
+            suppliedParcelsDataGrid.IsReadOnly = true;
         }
 
         private void opButton_Click(object sender, RoutedEventArgs e)
         {
-            currentCustomerToL = gridOneCustomer.DataContext as BO.CustomerToL;
+            currentCustomer = gridOneCustomer.DataContext as BO.Customer;
             try
             {
                 if (option == op.Add)// The button is add
@@ -168,6 +172,36 @@ namespace PL
                     OpButton.IsEnabled = true;
                 else
                     OpButton.IsEnabled = false;
+            }
+        }
+
+        private void suppliedParcelsDataGrid_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            BO.ParcelAtC cur = suppliedParcelsDataGrid.SelectedItem as BO.ParcelAtC;
+            if (cur != null)
+            {
+                BO.Parcel p = bl.GetParcel(cur.Id);
+                //new ParcelWindow(bl, p).ShowDialog();
+            }
+        }
+
+        private void sentParcelsDataGrid_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            BO.ParcelAtC cur = sentParcelsDataGrid.SelectedItem as BO.ParcelAtC;
+            if (cur != null)
+            {
+                BO.Parcel p = bl.GetParcel(cur.Id);
+               // new ParcelWindow(bl, p).ShowDialog();
+            }
+        }
+
+        private void CustomerWindow_Activated(object sender, EventArgs e)
+        {
+            if (option == op.Update)
+            {
+                currentCustomer = bl.GetCustomer(currentCustomer.Id);
+                sentParcelsDataGrid.DataContext = currentCustomer.SendParcel;
+                suppliedParcelsDataGrid.DataContext = currentCustomer.GetParcel;
             }
         }
     }
