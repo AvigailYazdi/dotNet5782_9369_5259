@@ -42,7 +42,7 @@ namespace PL
             receiverComboBox.ItemsSource = bl.CustomerList();
             OpButton.IsEnabled = false;
         }
-        public ParcelWindow(IBL _bl, BO.Parcel _p,BO.ParcelStatus _ps)
+        public ParcelWindow(IBL _bl, BO.Parcel _p)
         {
             InitializeComponent();
             bl = _bl;
@@ -74,7 +74,7 @@ namespace PL
             priorityComboBox.SelectedItem = currentParcel.Priority;
             CancelOrCloseButton.Content = "Close";
             idTextBox.IsEnabled = weightComboBox.IsEnabled = priorityComboBox.IsEnabled = receiverComboBox.IsEnabled = senderComboBox.IsEnabled = requestedDatePicker.IsEnabled = false;
-            status(_ps);
+            status(bl.GetParcelStatus(_p.Id));
         }
 
         private void status(BO.ParcelStatus _ps)
@@ -125,7 +125,7 @@ namespace PL
                     MessageBox.Show("The parcel is added successfully!", "Add", this.b, i);
                     this.Close();
                 }
-                else if(option==op.Remove) // The button is update
+                else if (option == op.Remove)  // The button is update
                 {
                     bl.DeleteParcel(currentParcel.Id);
                     this.Close();
@@ -181,7 +181,7 @@ namespace PL
 
         private void showSenderButton_Click(object sender, RoutedEventArgs e)
         {
-            BO.Customer c = (BO.Customer)senderComboBox.SelectedItem;
+            BO.CustomerToL c = (BO.CustomerToL)senderComboBox.SelectedItem;
             new CustomerWindow(bl, bl.GetCustomer(c.Id)).ShowDialog();
         }
 

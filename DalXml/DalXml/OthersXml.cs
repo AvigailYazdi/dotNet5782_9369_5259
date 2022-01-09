@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 using DalApi;
 
 namespace Dal
@@ -16,7 +17,7 @@ namespace Dal
         /// </summary>
         /// <param name="num"> the number to change </param>
         /// <returns> returns the number number at base 60 </returns>
-        public string Base60(double num)///////////////////////////////////////////////////
+        public string Base60(double num)
         {
             string str = Math.Abs((int)num) + "°";
             num = (num - (int)num) * 60.0;
@@ -63,7 +64,12 @@ namespace Dal
         /// <returns>an array of the properties</returns>
         public double[] ElectricUse()
         {
-            double[] arr = new double[] { config.avaliable, config.light, config.medium, config.heavy, config.batteryCharge };
+            double avaliable = double.Parse(XElement.Load(configPath).Element("avaliable").Value);
+            double light= double.Parse(XElement.Load(configPath).Element("light").Value);
+            double medium = double.Parse(XElement.Load(configPath).Element("medium").Value);
+            double heavy = double.Parse(XElement.Load(configPath).Element("heavy").Value);
+            double batteryCharge = double.Parse(XElement.Load(configPath).Element("batteryCharge").Value);
+            double[] arr = new double[] { avaliable, light, medium, heavy, batteryCharge };
             return arr;
         }
     }

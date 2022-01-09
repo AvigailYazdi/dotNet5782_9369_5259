@@ -29,6 +29,7 @@ namespace DalObject
         internal static List<Customer> customers=new List<Customer>();
         internal static List<Parcel> parcels=new List<Parcel>();
         private static Random rand = new Random(DateTime.Now.Millisecond);
+  
 
 
         enum Name { Aviad,Shilat,Nitay,Rinat,Itay,Avigail,Yehuda,Eyal,Michal,Talya};
@@ -98,19 +99,21 @@ namespace DalObject
         {
             for (int i = 0; i < 10; i++)
             {
-                Parcel p = new Parcel()
+                Parcel p = new Parcel();
+                p.Id = config.parcelId;
+                p.SenderId = rand.Next(212435840, 212435850);//rand.Next(100000000, 1000000000),
+                p.TargetId = rand.Next(212435840, 212435850);//rand.Next(100000000, 1000000000),
+                while (p.SenderId == p.TargetId)
                 {
-                    Id = config.parcelId,
-                    SenderId = rand.Next(212435840, 212435850),//rand.Next(100000000, 1000000000),
-                    TargetId = rand.Next(212435840, 212435850), //rand.Next(100000000, 1000000000),
-                    Weight = (WeightCategories)rand.Next(3),
-                    Priority = (Priorities)rand.Next(3),
-                    Requested = DateTime.Now,
-                    DroneId = 0,
-                    Scheduled= null,
-                    Delivered= null,
-                    PickedUp = null,
-                };
+                    p.TargetId = rand.Next(212435840, 212435850);//rand.Next(100000000, 1000000000),
+                }
+                p.Weight = (WeightCategories)rand.Next(3);
+                p.Priority = (Priorities)rand.Next(3);
+                p.Requested = DateTime.Now;
+                p.DroneId = 0;
+                p.Scheduled = null;
+                p.Delivered = null;
+                p.PickedUp = null;
                 parcels.Add(p);
                 config.parcelId++;
             }

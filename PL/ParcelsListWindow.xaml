@@ -42,5 +42,11 @@
         <Button x:Name="AddParcelButton" Content="Add a new parcel" HorizontalAlignment="Left" Margin="617,364,0,0" VerticalAlignment="Top" Height="49" Width="132" Click="addParcelButton_Click" Style="{StaticResource buttonStyle}"/>
         <CheckBox x:Name="GroupSenderCheckBox" Content="Group by Sender" HorizontalAlignment="Left" Margin="25,72,0,0" VerticalAlignment="Top" Height="28" Width="170" FontWeight="Bold" FontSize="16" Click="GroupSenderCheckBox_Click"/>
         <CheckBox x:Name="GroupReceiverCheckBox" Content="Group by Receiver" HorizontalAlignment="Left" Margin="25,104,0,0" VerticalAlignment="Top" Height="31" Width="170" FontWeight="Bold" FontSize="16" Click="GroupReceiverCheckBox_Click"/>
+        <ComboBox x:Name="StatusSelector" Margin="101,23,0,0" Width="120" FontFamily="Arial Black"  SelectionChanged="selector_SelectionChanged" VerticalAlignment="Top" HorizontalAlignment="Left" Height="25"/>
+        <Label x:Name="StatusLabel" Content="Status:" Grid.Column="0" Margin="25,10,697,363" FontSize="20" FontFamily="Dubai Medium"/>
+        <Label x:Name="DateLabel" Content="Date rate:" Grid.Column="0" Margin="253,10,453,363" FontSize="20" FontFamily="Dubai Medium"/>
+        <Calendar x:Name="dateCalenderSent" HorizontalAlignment="Left" Margin="494,16,0,0" VerticalAlignment="Top" Height="156" Width="177" Visibility="Hidden" />
+        <Calendar x:Name="dateCalenderReceived" HorizontalAlignment="Left" Margin="494,16,0,0" VerticalAlignment="Top" Height="156" Width="177" Visibility="Hidden" />
+        <Button x:Name="dateButton" Content="choose dates" HorizontalAlignment="Left" Margin="348,24,0,0" VerticalAlignment="Top" Style="{StaticResource buttonStyle}" Width="119" Click="dateButton_Click"/>
     </Grid>
 </Window>

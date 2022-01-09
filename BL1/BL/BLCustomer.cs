@@ -116,7 +116,7 @@ namespace BL
                        PhoneNum= c.PhoneNum,
                        NumArrived= getSentAndProviededParcels(c.Id).Count(),
                        NumSend= getSentAndNotProviededParcels(c.Id).Count(),
-                       NumGot=c.GetParcel.Count(),
+                       NumGot= c.GetParcel.Count(),
                        NumOnWay= getOnWayParcels(c.Id).Count()
                    };
         }

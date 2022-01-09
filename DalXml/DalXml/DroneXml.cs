@@ -70,6 +70,7 @@ namespace Dal
         /// <param name="baseStationId"> the id of the base station</param>
         public void UpdateChargeDrone(int droneId, int baseStationId)
         {
+            List<DroneCharge> dronesCharge = XmlTools.LoadListFromXMLSerializer<DroneCharge>(dronesChargePath);
             if (!checkD(droneId))
                 throw new MissingIdException(droneId, "Drone");
             if (!checkS(baseStationId))

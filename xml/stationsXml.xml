@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<ArrayOfBaseStation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <BaseStation>
+    <Id>21001</Id>
+    <Name>Macabim</Name>
+    <Longitude>32.2</Longitude>
+    <Latitude>35.1</Latitude>
+    <ChargeSlots>26</ChargeSlots>
+  </BaseStation>
+  <BaseStation>
+    <Id>21002</Id>
+    <Name>Yarden</Name>
+    <Longitude>32.4</Longitude>
+    <Latitude>35.2</Latitude>
+    <ChargeSlots>27</ChargeSlots>
+  </BaseStation>
+</ArrayOfBaseStation>

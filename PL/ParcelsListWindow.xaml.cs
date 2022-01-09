@@ -21,12 +21,15 @@ namespace PL
     public partial class ParcelsListWindow : Window
     {
         IBL bl;
+        enum parcelStatus {Created, Connected, PickedUp, Provided, Clear };
+    
         public ParcelsListWindow(IBL _bl)
         {
             InitializeComponent();
             bl = _bl;
             parcelToLDataGrid.DataContext = bl.ParcelList();
             parcelToLDataGrid.IsReadOnly = true;
+            StatusSelector.ItemsSource = Enum.GetValues(typeof(parcelStatus));
         }
 
         private void addParcelButton_Click(object sender, RoutedEventArgs e)
@@ -45,7 +48,7 @@ namespace PL
             if (curParcelToL != null)
             {
                 BO.Parcel p = bl.GetParcel(curParcelToL.Id);
-                new ParcelWindow(bl, p, curParcelToL.Status).ShowDialog();
+                new ParcelWindow(bl, p).ShowDialog();
             }
         }
 
@@ -111,6 +114,16 @@ namespace PL
         {
             // parcelToLDataGrid.DataContext = bl.ParcelList();
             
+        }
+
+        private void selector_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void dateButton_Click(object sender, RoutedEventArgs e)
+        {
+            //dateCalender.Visibility = Visibility.Visible;
         }
     }
 }

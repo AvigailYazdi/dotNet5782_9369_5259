@@ -100,6 +100,5 @@ namespace PL
                     .ToList();
             stationToLDataGrid2.DataContext = GroupingData;
         }
-
     }
 }

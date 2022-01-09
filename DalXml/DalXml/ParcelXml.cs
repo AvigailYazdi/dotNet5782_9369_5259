@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 using DalApi;
 using DO;
 
@@ -30,8 +31,9 @@ namespace Dal
             List<Parcel> parcels = XmlTools.LoadListFromXMLSerializer<Parcel>(parcelsPath);
             if (checkP(p.Id))
                 throw new DuplicateIdException(p.Id, "Parcel");
-            //p.Id = int.Parse(configPath.Root.Element("parcelId").value);
-            p.Id = config.parcelId++;
+            p.Id = int.Parse(XElement.Load(configPath).Element("parcelId").Value);
+            XElement.Load(configPath).Element("parcelId").SetValue(p.Id + 1);
+            p.PickedUp = p.Requested = p.Scheduled = p.Delivered = null;
             parcels.Add(p);
             XmlTools.SaveListToXMLSerializer(parcels, parcelsPath);
         }

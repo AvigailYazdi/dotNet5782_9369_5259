@@ -30,6 +30,7 @@ namespace Dal
             if (checkP(p.Id))
                 throw new DuplicateIdException(p.Id, "Parcel");
             p.Id = config.parcelId++;
+            p.PickedUp = p.Requested = p.Scheduled = p.Delivered = null;
             parcels.Add(p);
         }
         /// <summary>
