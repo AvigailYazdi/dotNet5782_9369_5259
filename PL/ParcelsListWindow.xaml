@@ -19,7 +19,7 @@
         </DataGrid>
         <DataGrid x:Name="parcelToLDataGrid2" Visibility="Collapsed" AutoGenerateColumns="False" EnableRowVirtualization="True" Margin="200,110,241,110" RowDetailsVisibilityMode="Visible" MouseDoubleClick="parcelToLDataGrid_MouseDoubleClick">
             <DataGrid.Columns>
-            <DataGridTextColumn Binding="{Binding Key, Mode=OneWay}"/>
+                <DataGridTextColumn Binding="{Binding Key, Mode=OneWay}"/>
             </DataGrid.Columns>
             <DataGrid.RowDetailsTemplate>
                 <DataTemplate>

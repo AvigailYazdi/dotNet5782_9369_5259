@@ -134,7 +134,7 @@ namespace PL
         {
             BO.DroneToL curDroneToL = dronesDataGrid.SelectedItem as BO.DroneToL;
             if (curDroneToL != null)
-                new ParcelWindow(bl, bl.GetParcel(curDroneToL.ParcelId),bl.GetParcelStatus(curDroneToL.ParcelId));
+               new ParcelWindow(bl, bl.GetParcel(curDroneToL.ParcelId),bl.GetParcelStatus(curDroneToL.ParcelId)).ShowDialog();
         }
 
         private void GroupCheckBox_Click(object sender, RoutedEventArgs e)

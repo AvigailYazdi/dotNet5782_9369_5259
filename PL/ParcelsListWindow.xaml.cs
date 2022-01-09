@@ -51,9 +51,9 @@ namespace PL
 
         private void GroupSenderCheckBox_Click(object sender, RoutedEventArgs e)
         {
-            GroupReceiverCheckBox.IsEnabled = false;
             if (GroupSenderCheckBox.IsChecked == true)
             {
+                GroupReceiverCheckBox.IsEnabled = false;
                 List<IGrouping<string, BO.ParcelToL>> GroupingData = bl.ParcelList()
                     .GroupBy(b =>b.SenderName)
                     .ToList();
@@ -63,6 +63,7 @@ namespace PL
             }
             else
             {
+                GroupReceiverCheckBox.IsEnabled = true;
                 parcelToLDataGrid.Visibility = Visibility.Visible;
                 parcelToLDataGrid2.Visibility = Visibility.Collapsed;
             }
@@ -70,9 +71,9 @@ namespace PL
 
         private void GroupReceiverCheckBox_Click(object sender, RoutedEventArgs e)
         {
-            GroupSenderCheckBox.IsEnabled = false;
-            if (GroupSenderCheckBox.IsChecked == true)
+            if (GroupReceiverCheckBox.IsChecked == true)
             {
+                GroupSenderCheckBox.IsEnabled = false;
                 List<IGrouping<string, BO.ParcelToL>> GroupingData = bl.ParcelList()
                     .GroupBy(b => b.ReceiverName)
                     .ToList();
@@ -82,6 +83,7 @@ namespace PL
             }
             else
             {
+                GroupSenderCheckBox.IsEnabled = true;
                 parcelToLDataGrid.Visibility = Visibility.Visible;
                 parcelToLDataGrid2.Visibility = Visibility.Collapsed;
             }
@@ -107,7 +109,8 @@ namespace PL
 
         private void Window_Activated(object sender, EventArgs e)
         {
-            parcelToLDataGrid.DataContext = bl.ParcelList();
+            // parcelToLDataGrid.DataContext = bl.ParcelList();
+            
         }
     }
 }

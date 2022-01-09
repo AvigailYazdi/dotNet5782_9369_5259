@@ -20,18 +20,19 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleUI_BL", "ConsoleUI_B
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PL", "PL\PL.csproj", "{0C39DFBD-0ACA-447B-B37B-873A441160F1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DalFacade", "DalFacade\DalFacade.csproj", "{7D48C703-106F-4488-99B7-2ED531469779}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DalFacade", "DalFacade\DalFacade.csproj", "{7D48C703-106F-4488-99B7-2ED531469779}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DalObject", "DalObject\DalObject.csproj", "{E577B927-B97D-47BA-B97D-150DFD07623C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DalObject", "DalObject\DalObject.csproj", "{E577B927-B97D-47BA-B97D-150DFD07623C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DalXml", "DalXml\DalXml.csproj", "{B7D93A34-807B-41E1-AAAD-BA9F24D46FCF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DalXml", "DalXml\DalXml.csproj", "{B7D93A34-807B-41E1-AAAD-BA9F24D46FCF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BL1", "BL1\BL1.csproj", "{029DA3B8-4BBD-4C76-B91E-5BC36A26CBB0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BL1", "BL1\BL1.csproj", "{029DA3B8-4BBD-4C76-B91E-5BC36A26CBB0}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Previous", "Previous", "{924223F2-0C36-4217-B6BE-9B60F3C49F23}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "xml", "xml", "{FA40C392-7F04-4019-B34A-B595F82730F4}"
 	ProjectSection(SolutionItems) = preProject
+		xml\config.xml = xml\config.xml
 		xml\dal-config.xml = xml\dal-config.xml
 	EndProjectSection
 EndProject
