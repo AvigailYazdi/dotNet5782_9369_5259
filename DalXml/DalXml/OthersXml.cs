@@ -64,12 +64,13 @@ namespace Dal
         /// <returns>an array of the properties</returns>
         public double[] ElectricUse()
         {
-            double avaliable = double.Parse(XElement.Load(configPath).Element("avaliable").Value);
-            double light= double.Parse(XElement.Load(configPath).Element("light").Value);
-            double medium = double.Parse(XElement.Load(configPath).Element("medium").Value);
-            double heavy = double.Parse(XElement.Load(configPath).Element("heavy").Value);
-            double batteryCharge = double.Parse(XElement.Load(configPath).Element("batteryCharge").Value);
-            double[] arr = new double[] { avaliable, light, medium, heavy, batteryCharge };
+            double[] arr = { 1, 9 };
+            //double avaliable = double.Parse(XElement.Load(configPath).Element("avaliable").Value);
+            //double light= double.Parse(XElement.Load(configPath).Element("light").Value);
+            //double medium = double.Parse(XElement.Load(configPath).Element("medium").Value);
+            //double heavy = double.Parse(XElement.Load(configPath).Element("heavy").Value);
+            //double batteryCharge = double.Parse(XElement.Load(configPath).Element("batteryCharge").Value);
+            //double[] arr = new double[] { avaliable, light, medium, heavy, batteryCharge };
             return arr;
         }
     }

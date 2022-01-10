@@ -29,6 +29,10 @@ namespace PL
         {
             InitializeComponent();
         }
+        private void MyWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            frame.NavigationService.Navigate(new MainPage(bl));
+        }
         /// <summary>
         /// A function that opens the drone list window
         /// </summary>
@@ -36,7 +40,7 @@ namespace PL
         /// <param name="e"> Routed event args</param>
         private void showDronesButton_Click(object sender, RoutedEventArgs e)
         {
-            new DroneListWindow(bl).ShowDialog();
+            frame.NavigationService.Navigate(new DronesListPage(bl));
         }
 
         //private void Button_Click(object sender, RoutedEventArgs e)

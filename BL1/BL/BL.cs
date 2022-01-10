@@ -11,14 +11,12 @@ namespace BL
 {
     sealed partial class BL : IBL
     {
-        static readonly IBL instance = new BL();
-        public static IBL Instance { get => instance; }
-
-        internal IDal dl = DalFactory.GetDal();
-
         internal static Random rand;
+        internal IDal dl = DalFactory.GetDal();
         internal List<BO.DroneToL> dList;
         internal double[] electricUse;
+        static readonly IBL instance = new BL();
+        public static IBL Instance { get => instance; }
         /// <summary>
         /// A constructor
         /// </summary>

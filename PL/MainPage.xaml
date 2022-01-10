@@ -1,0 +1,21 @@
+﻿<Page x:Class="PL.MainPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:PL"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="MainPage">
+    <Grid x:Name="wingsGrid">
+        <Button x:Name="ShowDronesButton" Content="Drones" HorizontalAlignment="Left" Margin="242,339,0,57" Height="54" Width="140" Click="showDronesButton_Click" Background="{x:Null}" BorderBrush="{x:Null}" FontWeight="Bold" FontSize="34" />
+        <Label Name="WingsTitleLabel" Content="WINGS" HorizontalAlignment="Center" VerticalAlignment="Center" Height="94" Width="244" FontFamily="Segoe Script" FontWeight="Bold" FontSize="64"/>
+        <Button x:Name="logInButton" Content="Log In" HorizontalAlignment="Left" Margin="541,37,0,0" VerticalAlignment="Top" Style="{StaticResource buttonStyle}" Height="42" Width="85" Background="{x:Null}" BorderBrush="{x:Null}" FontSize="22"/>
+        <Button x:Name="signUpButton" Content="Sign Up" HorizontalAlignment="Left" Margin="667,37,0,0" VerticalAlignment="Top" Style="{StaticResource buttonStyle}" Height="42" Width="85" Background="{x:Null}" BorderBrush="{x:Null}" FontSize="22"/>
+        <Image HorizontalAlignment="Left" Height="30" Margin="756,45,0,0" VerticalAlignment="Top" Width="30" Source="images/signIn.jpg" RenderTransformOrigin="0.517,0.885"/>
+        <Image HorizontalAlignment="Left" Height="30" Margin="629,45,0,0" VerticalAlignment="Top" Width="30" Source="images/UserIcon2.png"/>
+        <Button x:Name="ShowParcelsButton" Content="Parcels" HorizontalAlignment="Left" Margin="82,339,0,57" Height="54" Width="140" Click="showParcelsButton_Click" Background="{x:Null}" BorderBrush="{x:Null}" FontWeight="Bold" FontSize="34" />
+        <Button x:Name="ShowStationsButton" Content="Stations" HorizontalAlignment="Left" Margin="392,339,0,57" Height="54" Width="140" Click="showStationsButton_Click" Background="{x:Null}" BorderBrush="{x:Null}" FontWeight="Bold" FontSize="34" />
+        <Button x:Name="ShowCustomersButton" Content="Customers" HorizontalAlignment="Left" Margin="546,339,0,57" Height="54" Width="185" Click="showCustomersButton_Click" Background="{x:Null}" BorderBrush="{x:Null}" FontWeight="Bold" FontSize="34" />
+    </Grid>
+</Page>

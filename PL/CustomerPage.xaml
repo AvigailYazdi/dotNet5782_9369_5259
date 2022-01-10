@@ -1,0 +1,53 @@
+﻿<Page x:Class="PL.CustomerPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:PL"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="CustomerPage">
+
+    <Grid Style="{StaticResource gridStyle }">
+        <Grid x:Name="gridOneCustomer" HorizontalAlignment="Left" Margin="187,121,0,0" VerticalAlignment="Top">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Label x:Name="idLabel" Content="Id:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="0" VerticalAlignment="Center"/>
+            <TextBox x:Name="idTextBox" Grid.Column="1" HorizontalAlignment="Center" Margin="0,5,0,5" Grid.Row="0" Text="{Binding Id, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Width="120" PreviewKeyDown="textBox_OnlyNumbers_PreviewKeyDown" TextChanged="idTextBox_TextChanged"/>
+            <Label x:Name="nameLabel" Content="Name:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="1" VerticalAlignment="Center"/>
+            <TextBox x:Name="nameTextBox" Grid.Column="1" HorizontalAlignment="Center" Margin="0,5,0,6" Grid.Row="1" Text="{Binding Name, Mode=TwoWay, NotifyOnValidationError=true,UpdateSourceTrigger=Explicit, ValidatesOnExceptions=true}" Width="120" TextChanged="TextBox_TextChanged"/>
+            <Label x:Name="phoneNumLabel" Content="Phone Number:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="2" VerticalAlignment="Center"/>
+            <TextBox x:Name="phoneNumTextBox" Grid.Column="1" HorizontalAlignment="Center" Margin="0,5,0,6" Grid.Row="2" Text="{Binding PhoneNum, Mode=TwoWay, NotifyOnValidationError=true,UpdateSourceTrigger=Explicit, ValidatesOnExceptions=true}" Width="120" TextChanged="TextBox_TextChanged"/>
+            <Label Content="Latitude:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="3" VerticalAlignment="Center"/>
+            <TextBox x:Name="latitudeTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="3" Text="{Binding Place.Latitude, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120" TextChanged="TextBox_TextChanged"/>
+            <Label Content="Longitude:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="4" VerticalAlignment="Center"/>
+            <TextBox x:Name="longitudeTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="4" Text="{Binding Place.Longitude, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120" TextChanged="TextBox_TextChanged"/>
+        </Grid>
+        <DataGrid x:Name="sentParcelsDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" DisplayMemberPath="Id,OtherC.Name" Margin="515,233,128,90" RowDetailsVisibilityMode="VisibleWhenSelected" MouseDoubleClick="sentParcelsDataGrid_MouseDoubleClick">
+            <DataGrid.Columns>
+                <DataGridTextColumn x:Name="idColumn" Binding="{Binding Id}" Header="Id" Width="40"/>
+                <DataGridTextColumn x:Name="nameColumn" Binding="{Binding OtherC.Name}" Header="Receiver Name" Width="sizeToHeader"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <DataGrid x:Name="suppliedParcelsDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" DisplayMemberPath="Id,OtherC.Name" Margin="524,102,136,234" RowDetailsVisibilityMode="VisibleWhenSelected" MouseDoubleClick="suppliedParcelsDataGrid_MouseDoubleClick">
+            <DataGrid.Columns>
+                <DataGridTextColumn x:Name="idColumn2" Binding="{Binding Id}" Header="Id" Width="40"/>
+                <DataGridTextColumn x:Name="nameColumn2" Binding="{Binding OtherC.Name}" Header="Sender Name" Width="sizeToHeader"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button x:Name="CancelOrCloseButton" Content="Cancel" HorizontalAlignment="Left" Margin="196,375,0,0" VerticalAlignment="Top" Height="27" Width="104" Click="cancelOrCloseButton_Click" Style="{StaticResource buttonStyle}"/>
+        <Button x:Name="OpButton" Content="Add" HorizontalAlignment="Left" Margin="70,375,0,0" VerticalAlignment="Top" Height="27" Width="104" Click="opButton_Click" Background="#FFDDDDDD" UseLayoutRounding="False" BorderBrush="#FF0C5990" BorderThickness="2,2,2,2" Style="{StaticResource buttonStyle}"/>
+        <Label x:Name="IntegrityIdLabel" Content="Id must have 9 digits" HorizontalAlignment="Left" Margin="295,142,0,0" VerticalAlignment="Top" Height="23" Width="114" FontSize="10" Foreground="#FFEE0808" Visibility="Collapsed"/>
+        <Label Content="supplied parcels" HorizontalAlignment="Left" Margin="541,73,0,0" VerticalAlignment="Top" Height="29" Width="113"/>
+        <Label Content="sent parcels" HorizontalAlignment="Left" Margin="549,205,0,0" VerticalAlignment="Top" Height="29" Width="83"/>
+    </Grid>
+</Page>
