@@ -25,10 +25,14 @@ namespace BlApi
         public BO.ParcelStatus GetParcelStatus(int id);
         public IEnumerable<BO.ParcelAtC> getRecievedParcel(int id);
         public IEnumerable<BO.ParcelAtC> getSendParcel(int id);
+        public IEnumerable<BO.ParcelToL> GetParcelByPredicate(Predicate<BO.ParcelToL> predicate);
         public BO.Parcel GetParcel(int id);
+        public BO.ParcelToL GetParcelToL(int id);
         public IEnumerable<BO.ParcelToL> ParcelList();
         public void DeleteParcel(int id);
         public IEnumerable<BO.Parcel> NotConnectedParcelList();
+        public int GetParcelId();
+
         #endregion
         #region Customer
         public void AddCustomer(BO.Customer customer);
@@ -41,6 +45,7 @@ namespace BlApi
         public void AddStation(BO.BaseStation station);
         public void UpdateStation(int id, string name, int numSlots);
         public BO.BaseStation GetStation(int id);
+        public BO.StationToL GetStationToL(int id);
         public IEnumerable<BO.StationToL> StationList();
         public IEnumerable<BO.StationToL> AvaliableStationList();
         public IEnumerable<BO.StationToL> GetStationToLByPredicate(Predicate<BO.StationToL> predicate);

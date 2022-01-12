@@ -67,5 +67,10 @@ namespace Dal
             double[] arr = new double[] { config.avaliable, config.light, config.medium, config.heavy, config.batteryCharge };
             return arr;
         }
+
+        public int GetParcelId()
+        {
+            return config.parcelId;
+        }
     }
 }

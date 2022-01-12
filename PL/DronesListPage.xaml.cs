@@ -25,7 +25,7 @@ namespace PL
         IBL bl;
         enum Weight { Light, Medium, Heavy, Clear };
         enum Status { Avaliable, Maintenance, Delivery, Clear }
-        ObservableCollection<BO.DroneToL> oc;
+        ObservableCollection<BO.DroneToL> od;
         /// <summary>
         /// ctor 
         /// </summary>
@@ -36,8 +36,8 @@ namespace PL
             bl = _bl;
             StatusSelector.ItemsSource = Enum.GetValues(typeof(Status));
             WeightSelector.ItemsSource = Enum.GetValues(typeof(Weight));
-            oc= new ObservableCollection<BO.DroneToL>(bl.DroneList());
-            dronesDataGrid.DataContext = oc;
+            od= new ObservableCollection<BO.DroneToL>(bl.DroneList());
+            dronesDataGrid.DataContext = od;
             dronesDataGrid.IsReadOnly = true;
         }
         /// <summary>
@@ -50,26 +50,26 @@ namespace PL
             if ((WeightSelector.SelectedIndex == -1 || WeightSelector.SelectedIndex == 3) && (StatusSelector.SelectedIndex == 3 || StatusSelector.SelectedIndex == -1))
             {
                 group(bl.DroneList());
-                oc= new ObservableCollection<BO.DroneToL>(bl.DroneList());
-                dronesDataGrid.DataContext = oc;
+                od= new ObservableCollection<BO.DroneToL>(bl.DroneList());
+                dronesDataGrid.DataContext = od;
             }
             else if ((WeightSelector.SelectedIndex == -1 || WeightSelector.SelectedIndex == 3) && StatusSelector.SelectedIndex != 3)
             {
                 group(bl.GetDronesByPerdicate(d => d.Status == (BO.DroneStatus)StatusSelector.SelectedItem));
-                oc= new ObservableCollection<BO.DroneToL>(bl.GetDronesByPerdicate(d => d.Status == (BO.DroneStatus)StatusSelector.SelectedItem));
-                dronesDataGrid.DataContext = oc;
+                od= new ObservableCollection<BO.DroneToL>(bl.GetDronesByPerdicate(d => d.Status == (BO.DroneStatus)StatusSelector.SelectedItem));
+                dronesDataGrid.DataContext = od;
             }
             else if (WeightSelector.SelectedIndex != 3 && (StatusSelector.SelectedIndex == 3 || StatusSelector.SelectedIndex == -1))
             {
                 group(bl.GetDronesByPerdicate(d => d.Weight == (BO.WeightCategories)WeightSelector.SelectedItem));
-                oc= new ObservableCollection<BO.DroneToL>(bl.GetDronesByPerdicate(d => d.Weight == (BO.WeightCategories)WeightSelector.SelectedItem));
-                dronesDataGrid.DataContext = oc;
+                od= new ObservableCollection<BO.DroneToL>(bl.GetDronesByPerdicate(d => d.Weight == (BO.WeightCategories)WeightSelector.SelectedItem));
+                dronesDataGrid.DataContext = od;
             }
             else
             {
                 group(bl.GetDronesByPerdicate(d => d.Status == (BO.DroneStatus)StatusSelector.SelectedItem && d.Weight == (BO.WeightCategories)WeightSelector.SelectedItem));
-                oc= new ObservableCollection<BO.DroneToL>(bl.GetDronesByPerdicate(d => d.Status == (BO.DroneStatus)StatusSelector.SelectedItem && d.Weight == (BO.WeightCategories)WeightSelector.SelectedItem));
-                dronesDataGrid.DataContext = oc;
+                od= new ObservableCollection<BO.DroneToL>(bl.GetDronesByPerdicate(d => d.Status == (BO.DroneStatus)StatusSelector.SelectedItem && d.Weight == (BO.WeightCategories)WeightSelector.SelectedItem));
+                dronesDataGrid.DataContext = od;
             }
         }
         private void group(IEnumerable<BO.DroneToL> drones)
@@ -86,7 +86,7 @@ namespace PL
         /// <param name="e"> Routed event args</param>
         private void addDroneButton_Click(object sender, RoutedEventArgs e)
         {
-            this.NavigationService.Navigate(new DronePage(bl));
+            this.NavigationService.Navigate(new DronePage(bl,od));
         }
         /// <summary>
         /// A function that keeps the window updated

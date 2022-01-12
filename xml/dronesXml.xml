@@ -25,4 +25,9 @@
     <Model>H234</Model>
     <MaxWeight>Heavy</MaxWeight>
   </Drone>
+  <Drone>
+    <Id>545</Id>
+    <Model>bhvhv</Model>
+    <MaxWeight>Medium</MaxWeight>
+  </Drone>
 </ArrayOfDrone>

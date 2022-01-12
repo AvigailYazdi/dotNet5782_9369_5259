@@ -23,22 +23,23 @@ namespace PL
     public partial class ParcelsListPage : Page
     {
         IBL bl;
-        ObservableCollection<BO.ParcelToL> oc;
+        ObservableCollection<BO.ParcelToL> op;
         enum parcelStatus { Created, Connected, PickedUp, Provided, Clear };
 
         public ParcelsListPage(IBL _bl)
         {
             InitializeComponent();
             bl = _bl;
-            oc = new ObservableCollection<BO.ParcelToL>(bl.ParcelList());
-            parcelToLDataGrid.DataContext = oc; 
+            op = new ObservableCollection<BO.ParcelToL>(bl.ParcelList());
+            parcelToLDataGrid.DataContext = op; 
             parcelToLDataGrid.IsReadOnly = true;
+            dateButton.Content = "choose dates";
             StatusSelector.ItemsSource = Enum.GetValues(typeof(parcelStatus));
         }
 
         private void addParcelButton_Click(object sender, RoutedEventArgs e)
         {
-            this.NavigationService.Navigate(new ParcelPage(bl));
+            this.NavigationService.Navigate(new ParcelPage(bl,op));
         }
 
         private void closeButton_Click(object sender, RoutedEventArgs e)
@@ -60,6 +61,7 @@ namespace PL
         {
             if (GroupSenderCheckBox.IsChecked == true)
             {
+                StatusSelector.IsEnabled = false;
                 GroupReceiverCheckBox.IsEnabled = false;
                 List<IGrouping<string, BO.ParcelToL>> GroupingData = bl.ParcelList()
                     .GroupBy(b => b.SenderName)
@@ -70,6 +72,7 @@ namespace PL
             }
             else
             {
+                StatusSelector.IsEnabled = true;
                 GroupReceiverCheckBox.IsEnabled = true;
                 parcelToLDataGrid.Visibility = Visibility.Visible;
                 parcelToLDataGrid2.Visibility = Visibility.Collapsed;
@@ -80,6 +83,7 @@ namespace PL
         {
             if (GroupReceiverCheckBox.IsChecked == true)
             {
+                StatusSelector.IsEnabled = false;
                 GroupSenderCheckBox.IsEnabled = false;
                 List<IGrouping<string, BO.ParcelToL>> GroupingData = bl.ParcelList()
                     .GroupBy(b => b.ReceiverName)
@@ -90,6 +94,7 @@ namespace PL
             }
             else
             {
+                StatusSelector.IsEnabled = true;
                 GroupSenderCheckBox.IsEnabled = true;
                 parcelToLDataGrid.Visibility = Visibility.Visible;
                 parcelToLDataGrid2.Visibility = Visibility.Collapsed;
@@ -114,20 +119,52 @@ namespace PL
             }
         }
 
-        private void Window_Activated(object sender, EventArgs e)
-        {
-            // parcelToLDataGrid.DataContext = bl.ParcelList();
-
-        }
-
         private void selector_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
+            if (StatusSelector.SelectedIndex == 4)
+            {
+                GroupReceiverCheckBox.IsEnabled = GroupSenderCheckBox.IsEnabled = true;
+                op = new ObservableCollection<BO.ParcelToL>(bl.ParcelList());
+                parcelToLDataGrid.DataContext = op;
+            }
+            else
+            {
+                GroupReceiverCheckBox.IsEnabled = GroupSenderCheckBox.IsEnabled = false;
+                op= new ObservableCollection<BO.ParcelToL>(bl.GetParcelByPredicate(p => p.Status == (BO.ParcelStatus)StatusSelector.SelectedItem));
+                parcelToLDataGrid.DataContext = op;
+            }
         }
 
         private void dateButton_Click(object sender, RoutedEventArgs e)
         {
-            //dateCalender.Visibility = Visibility.Visible;
+            if (dateButton.Content == "choose dates")
+            {
+                dateButton.Content = "Verification";
+                dateCalenderSent.Visibility = Visibility.Visible;
+                dateCalenderReceived.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                DateTime? dStart =dateCalenderSent.SelectedDate;
+                DateTime? dEnd = dateCalenderReceived.SelectedDate;
+                dateChoice(dStart, dEnd);
+                dateButton.Content = "choose dates";
+                dateCalenderSent.Visibility = Visibility.Hidden;
+                dateCalenderReceived.Visibility = Visibility.Hidden;
+            }
+        }
+        private void dateChoice(DateTime? dStart, DateTime? dEnd)
+        {
+            if (dStart != null && dEnd != null)
+            {
+                if (dEnd.HasValue)
+                    dEnd.Value.AddDays(1);
+                if (dStart <= dEnd)
+                {
+                    op = new ObservableCollection<BO.ParcelToL>(bl.GetParcelByPredicate(p => bl.GetParcel(p.Id).Requested >= dStart && bl.GetParcel(p.Id).Requested <= dEnd));
+                    parcelToLDataGrid.DataContext = op;
+                }
+            }
         }
     }
 }

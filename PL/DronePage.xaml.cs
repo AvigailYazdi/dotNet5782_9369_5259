@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -28,14 +29,16 @@ namespace PL
         bool flag = true; // A flag for id integrity
         MessageBoxButton b = MessageBoxButton.OK; // A button of the message box
         MessageBoxImage i = MessageBoxImage.Information; // An icon of the message box
+        ObservableCollection<BO.DroneToL> od;
         /// <summary>
         /// ctor for add
         /// </summary>
         /// <param name="_bl"> An accses for bl functions</param>
-        public DronePage(IBL _bl)
+        public DronePage(IBL _bl, ObservableCollection<BO.DroneToL> _od)
         {
             InitializeComponent();
             bl = _bl;
+            od = _od;
             weightComboBox.ItemsSource = Enum.GetValues(typeof(BO.WeightCategories));
             statusComboBox.ItemsSource = Enum.GetValues(typeof(BO.DroneStatus));
             StationIdCBox.ItemsSource = bl.AvaliableStationList();
@@ -102,6 +105,7 @@ namespace PL
                     d.Model = modelTextBox.Text;//currentDroneToL.Model;
                     d.Weight = (BO.WeightCategories)weightComboBox.SelectedItem;//currentDroneToL.Weight;
                     bl.AddDrone(d, int.Parse(StationIdCBox.SelectedValue.ToString()));
+                    od.Add(bl.GetDroneToL(d.Id));
                     MessageBox.Show("The drone is added successfully!", "Add", b, i);
                     this.NavigationService.GoBack();
                 }

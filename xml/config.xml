@@ -1,9 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<config>
-	<parcelId>11</parcelId>
-	<avaliable>0.05</avaliable>
-	<light>0.07</light>
-	<medium>0.1</medium>
-	<heavy>0.2</heavy>
-	<batteryCharge>50</batteryCharge>
-</config>
+<data-config>
+	<BatteryUsages>
+		<FreeBatteryUsing>0.05</FreeBatteryUsing>
+		<LightBatteryUsing>0.07</LightBatteryUsing>
+		<MediumBatteryUsing>0.1</MediumBatteryUsing>
+		<HeavyBatteryUsing>0.2</HeavyBatteryUsing>
+		<ChargingRate>50</ChargingRate>
+	</BatteryUsages>
+	<RowNumbers>
+		<NewParcelId>11</NewParcelId>
+	</RowNumbers>
+</data-config>

@@ -334,6 +334,20 @@ namespace BL
             }
             return parcelBo;
         }
+
+        public BO.ParcelToL GetParcelToL(int id)
+        {
+            BO.Parcel p = GetParcel(id);
+            return new BO.ParcelToL()
+            {
+                Id = p.Id,
+                SenderName = p.Sender.Name,
+                ReceiverName = p.Receiver.Name,
+                Weight = p.Weight,
+                Priority = p.Priority,
+                Status = GetParcelStatus(p.Id)
+            };
+        }
         /// <summary>
         /// A function that returns the parcels
         /// </summary>
@@ -361,9 +375,20 @@ namespace BL
             return from item in dl.GetParcelsByPerdicate(p => p.DroneId == 0)
                    select GetParcel(item.Id);
         }
+        public IEnumerable<BO.ParcelToL> GetParcelByPredicate(Predicate<BO.ParcelToL> predicate)
+        {
+            return from item in ParcelList()
+                   where predicate(item)
+                   select item;
+        }
         public void DeleteParcel(int id)
         {
             dl.DeleteParcel(id);
+        }
+
+        public int GetParcelId()
+        {
+            return dl.GetParcelId();
         }
 
     }

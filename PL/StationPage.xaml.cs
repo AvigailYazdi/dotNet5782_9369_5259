@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -29,10 +30,12 @@ namespace PL
         BO.BaseStation currentStation; // The selected station
         MessageBoxButton b = MessageBoxButton.OK; // A button of the message box
         MessageBoxImage i = MessageBoxImage.Information; // An icon of the message box
-        public StationPage(IBL _bl)
+        ObservableCollection<BO.StationToL> os;
+        public StationPage(IBL _bl, ObservableCollection<BO.StationToL> _os)
         {
             InitializeComponent();
             bl = _bl;
+            os = _os;
             currentStation = new BO.BaseStation();
             option = op.Add;
             OpButton.Content = "Add";
@@ -72,6 +75,7 @@ namespace PL
                     bs.Place.Longitude = double.Parse(longitudeTextBox.Text);
                     bs.Place.Latitude = double.Parse(latitudeTextBox.Text);
                     bl.AddStation(bs);
+                    os.Add(bl.GetStationToL(bs.Id));
                     MessageBox.Show("The station is added successfully!", "Add", this.b, i);
                     this.NavigationService.GoBack();
                 }

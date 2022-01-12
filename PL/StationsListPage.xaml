@@ -33,7 +33,7 @@
                 <DataGridTextColumn x:Name="disAvaliableSlotsColumn" Binding="{Binding DisAvaliableSlots}" Header="Not Avaliable Slots" Width="SizeToHeader"/>
             </DataGrid.Columns>
         </DataGrid>
-        <DataGrid x:Name="stationToLDataGrid2" Visibility="Collapsed" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Margin="260,110,238,110" RowDetailsVisibilityMode="Visible">
+        <DataGrid x:Name="stationToLDataGrid2" Visibility="Collapsed" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Margin="221,110,263,110" RowDetailsVisibilityMode="Visible">
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding Key, Mode=OneWay}"/>
             </DataGrid.Columns>

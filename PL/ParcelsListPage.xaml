@@ -18,7 +18,7 @@
                 <DataGridTextColumn x:Name="weightColumn" Binding="{Binding Weight}" Header="Weight" Width="SizeToHeader"/>
             </DataGrid.Columns>
         </DataGrid>
-        <DataGrid x:Name="parcelToLDataGrid2" Visibility="Collapsed" AutoGenerateColumns="False" EnableRowVirtualization="True" Margin="200,110,241,110" RowDetailsVisibilityMode="Visible" MouseDoubleClick="parcelToLDataGrid_MouseDoubleClick">
+        <DataGrid x:Name="parcelToLDataGrid2" Visibility="Collapsed" ItemsSource="{Binding}" AutoGenerateColumns="False" EnableRowVirtualization="True" Margin="200,110,241,110" RowDetailsVisibilityMode="Visible" MouseDoubleClick="parcelToLDataGrid_MouseDoubleClick">
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding Key, Mode=OneWay}"/>
             </DataGrid.Columns>
@@ -46,8 +46,8 @@
         <ComboBox x:Name="StatusSelector" Margin="101,23,0,0" Width="120" FontFamily="Arial Black"  SelectionChanged="selector_SelectionChanged" VerticalAlignment="Top" HorizontalAlignment="Left" Height="25"/>
         <Label x:Name="StatusLabel" Content="Status:" Grid.Column="0" Margin="25,10,697,363" FontSize="20" FontFamily="Dubai Medium"/>
         <Label x:Name="DateLabel" Content="Date rate:" Grid.Column="0" Margin="253,10,453,363" FontSize="20" FontFamily="Dubai Medium"/>
-        <Calendar x:Name="dateCalenderSent" HorizontalAlignment="Left" Margin="494,16,0,0" VerticalAlignment="Top" Height="156" Width="177" Visibility="Hidden" />
-        <Calendar x:Name="dateCalenderReceived" HorizontalAlignment="Left" Margin="494,16,0,0" VerticalAlignment="Top" Height="156" Width="177" Visibility="Hidden" />
+        <Calendar x:Name="dateCalenderSent" HorizontalAlignment="Left" Margin="484,16,0,0" VerticalAlignment="Top" Height="119" Width="144" Visibility="Hidden" />
+        <Calendar x:Name="dateCalenderReceived" HorizontalAlignment="Left" Margin="637,16,0,0" VerticalAlignment="Top" Height="119" Width="148" Visibility="Hidden" />
         <Button x:Name="dateButton" Content="choose dates" HorizontalAlignment="Left" Margin="348,24,0,0" VerticalAlignment="Top" Style="{StaticResource buttonStyle}" Width="119" Click="dateButton_Click"/>
     </Grid>
 </Page>

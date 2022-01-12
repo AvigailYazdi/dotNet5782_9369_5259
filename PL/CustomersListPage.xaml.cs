@@ -35,7 +35,7 @@ namespace PL
         private void addCustomerButton_Click(object sender, RoutedEventArgs e)
         {
 
-            this.NavigationService.Navigate(new CustomerPage(bl));
+            this.NavigationService.Navigate(new CustomerPage(bl,oc));
         }
 
         private void closeButton_Click(object sender, RoutedEventArgs e)
@@ -56,6 +56,7 @@ namespace PL
         {
             customerToLDataGrid.DataContext = bl.CustomerList();
         }
+
     }
 }
 

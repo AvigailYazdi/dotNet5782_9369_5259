@@ -89,6 +89,18 @@ namespace BL
             }
             return stationBo;
         }
+
+        public BO.StationToL GetStationToL(int id)
+        {
+            BO.BaseStation s = GetStation(id);
+            return new BO.StationToL()
+            {
+                Id = s.Id,
+                Name = s.Name,
+                AvaliableSlots = s.AvaliableSlots,
+                DisAvaliableSlots = dl.NumOfNotAvaliableSlots(s.Id)
+            };
+        }
         /// <summary>
         /// A function that returns stations
         /// </summary>

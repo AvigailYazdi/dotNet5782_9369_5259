@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -27,10 +28,12 @@ namespace PL
         BO.Parcel currentParcel; // The selected station
         MessageBoxButton b = MessageBoxButton.OK; // A button of the message box
         MessageBoxImage i = MessageBoxImage.Information; // An icon of the message box
-        public ParcelPage(IBL _bl)
+        ObservableCollection<BO.ParcelToL> oParcel;
+        public ParcelPage(IBL _bl, ObservableCollection<BO.ParcelToL> _op)
         {
             InitializeComponent();
             bl = _bl;
+            oParcel = _op;
             currentParcel = new BO.Parcel();
             option = op.Add;
             OpButton.Content = "Add";
@@ -123,6 +126,7 @@ namespace PL
                     p.Sender = new BO.CustomerInP { Id = c1.Id, Name = c1.Name };
                     p.Receiver = new BO.CustomerInP { Id = c2.Id, Name = c2.Name };
                     bl.AddParcel(p);
+                    oParcel.Add(bl.GetParcelToL(bl.GetParcelId()-1));
                     MessageBox.Show("The parcel is added successfully!", "Add", this.b, i);
                     this.NavigationService.GoBack();
                 }

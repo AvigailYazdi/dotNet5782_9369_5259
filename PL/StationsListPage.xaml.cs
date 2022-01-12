@@ -23,18 +23,18 @@ namespace PL
     public partial class StationsListPage : Page
     {
         IBL bl;
-        ObservableCollection<BO.StationToL> oc;
+        ObservableCollection<BO.StationToL> os;
         public StationsListPage(IBL _bl)
         {
             InitializeComponent();
             bl = _bl;
-            oc= new ObservableCollection<BO.StationToL>(bl.StationList());
-            stationToLDataGrid.DataContext = oc;
+            os= new ObservableCollection<BO.StationToL>(bl.StationList());
+            stationToLDataGrid.DataContext = os;
             stationToLDataGrid.IsReadOnly = true;
         }
         private void addStationButton_Click(object sender, RoutedEventArgs e)
         {
-            this.NavigationService.Navigate(new StationPage(bl));
+            this.NavigationService.Navigate(new StationPage(bl,os));
         }
 
         private void closeButton_Click(object sender, RoutedEventArgs e)
@@ -55,14 +55,14 @@ namespace PL
         {
             if (avaliableCheckBox.IsChecked == false)
             {
-                oc = new ObservableCollection<BO.StationToL>(bl.StationList());
-                stationToLDataGrid.DataContext = oc;
+                os = new ObservableCollection<BO.StationToL>(bl.StationList());
+                stationToLDataGrid.DataContext = os;
                 group(bl.StationList());
             }
             else
             {
-                oc = new ObservableCollection<BO.StationToL>(bl.AvaliableStationList());
-                stationToLDataGrid.DataContext = oc;
+                os = new ObservableCollection<BO.StationToL>(bl.AvaliableStationList());
+                stationToLDataGrid.DataContext = os;
                 group(bl.AvaliableStationList());
             }
 
@@ -90,14 +90,14 @@ namespace PL
         {
             if (avaliableCheckBox.IsChecked == false)
             {
-                oc = new ObservableCollection<BO.StationToL>(bl.StationList());
-                stationToLDataGrid.DataContext = oc;
+                os = new ObservableCollection<BO.StationToL>(bl.StationList());
+                stationToLDataGrid.DataContext = os;
                 group(bl.StationList());
             }
             else
             {
-                oc = new ObservableCollection<BO.StationToL>(bl.AvaliableStationList());
-                stationToLDataGrid.DataContext = oc;
+                os = new ObservableCollection<BO.StationToL>(bl.AvaliableStationList());
+                stationToLDataGrid.DataContext = os;
                 group(bl.AvaliableStationList());
             }
         }

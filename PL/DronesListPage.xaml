@@ -45,7 +45,7 @@
 
                 </DataGrid.Columns>
             </DataGrid>
-            <DataGrid x:Name="dronesDataGrid2" RowDetailsVisibilityMode="Visible" Margin="164,59,114,278" ItemsSource="{Binding}" EnableRowVirtualization="True" AutoGenerateColumns="False" Background="{x:Null}" Visibility="Collapsed">
+            <DataGrid x:Name="dronesDataGrid2" RowDetailsVisibilityMode="Visible" Margin="138,59,138,128" ItemsSource="{Binding}" EnableRowVirtualization="True" AutoGenerateColumns="False" Background="{x:Null}" Visibility="Collapsed">
                 <DataGrid.Columns>
                     <DataGridTextColumn Binding="{Binding Key, Mode=OneWay}"/>
                 </DataGrid.Columns>

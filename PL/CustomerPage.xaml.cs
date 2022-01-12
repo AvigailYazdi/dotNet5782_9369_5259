@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Collections.ObjectModel;
 using BlApi;
 
 namespace PL
@@ -28,10 +29,12 @@ namespace PL
         BO.Customer currentCustomer;
         MessageBoxButton b = MessageBoxButton.OK; // A button of the message box
         MessageBoxImage i = MessageBoxImage.Information; // An icon of the message box
-        public CustomerPage(IBL _bl)// ctor for add
+        ObservableCollection<BO.CustomerToL> oc;
+        public CustomerPage(IBL _bl, ObservableCollection<BO.CustomerToL> _oc )// ctor for add
         {
             InitializeComponent();
             bl = _bl;
+            oc = _oc;
             currentCustomer = new BO.Customer();
             option = op.Add;
             OpButton.Content = "Add";
@@ -72,6 +75,7 @@ namespace PL
                     c.Place.Longitude = double.Parse(longitudeTextBox.Text);
                     c.Place.Latitude = double.Parse(latitudeTextBox.Text);
                     bl.AddCustomer(c);
+                    oc.Add(bl.getCustomerToL(c.Id));
                     MessageBox.Show("The customer is added successfully!", "Add", b, i);
                     this.NavigationService.GoBack();
                 }
@@ -79,7 +83,7 @@ namespace PL
                 {
                     nameTextBox.GetBindingExpression(TextBox.TextProperty).UpdateSource();
                     phoneNumTextBox.GetBindingExpression(TextBox.TextProperty).UpdateSource();
-                    bl.UpdateCustomer(int.Parse(idTextBox.Text), nameTextBox.Text, phoneNumTextBox.Text);
+                   bl.UpdateCustomer(int.Parse(idTextBox.Text), nameTextBox.Text, phoneNumTextBox.Text);
                     MessageBox.Show("The customer is updated successfully!", "Update", b, i);
                 }
             }

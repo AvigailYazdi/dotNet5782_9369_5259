@@ -60,6 +60,7 @@ namespace DalApi
         public double DistanceInKm(double lat1, double lon1, double lat2, double lon2);
         public string Base60(double num);
         public double[] ElectricUse();
+        public int GetParcelId();
         #endregion
     }
 }
