@@ -158,7 +158,7 @@ namespace PL
             if (dStart != null && dEnd != null)
             {
                 if (dEnd.HasValue)
-                    dEnd.Value.AddDays(1);
+                    dEnd = dEnd.Value.AddDays(1);
                 if (dStart <= dEnd)
                 {
                     op = new ObservableCollection<BO.ParcelToL>(bl.GetParcelByPredicate(p => bl.GetParcel(p.Id).Requested >= dStart && bl.GetParcel(p.Id).Requested <= dEnd));

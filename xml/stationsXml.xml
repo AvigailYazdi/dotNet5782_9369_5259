@@ -16,9 +16,9 @@
   </BaseStation>
   <BaseStation>
     <Id>56567</Id>
-    <Name>gh</Name>
+    <Name>Shabbazi</Name>
     <Longitude>31</Longitude>
     <Latitude>32</Latitude>
-    <ChargeSlots>14</ChargeSlots>
+    <ChargeSlots>10</ChargeSlots>
   </BaseStation>
 </ArrayOfBaseStation>

@@ -19,7 +19,7 @@
             <Setter Property="Width" Value="800"/>
             <Setter Property="Height" Value="450"/>
             <Setter Property="Background" Value="White"/>
-            <!--<Setter Property="Opacity" Value="0.8"/>-->
+            <Setter Property="Opacity" Value="0.8"/>
         </Style>
         <Style TargetType="Label">
             <Setter Property="FontSize" Value="13" />

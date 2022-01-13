@@ -83,7 +83,7 @@ namespace PL
                 {
                     nameTextBox.GetBindingExpression(TextBox.TextProperty).UpdateSource();
                     phoneNumTextBox.GetBindingExpression(TextBox.TextProperty).UpdateSource();
-                   bl.UpdateCustomer(int.Parse(idTextBox.Text), nameTextBox.Text, phoneNumTextBox.Text);
+                    bl.UpdateCustomer(int.Parse(idTextBox.Text), nameTextBox.Text, phoneNumTextBox.Text);
                     MessageBox.Show("The customer is updated successfully!", "Update", b, i);
                 }
             }
