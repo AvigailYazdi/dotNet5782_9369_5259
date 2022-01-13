@@ -138,6 +138,7 @@ namespace PL
         /// <param name="e">Routed event args</param>
         private void chargingButton_Click(object sender, RoutedEventArgs e)
         {
+            currentDroneToL = gridOneDrone.DataContext as BO.DroneToL;
             try
             {
                 if (currentDroneToL.Status == BO.DroneStatus.Avaliable)
@@ -174,7 +175,7 @@ namespace PL
                 if (currentDroneToL.Status == BO.DroneStatus.Avaliable)
                 {
                     bl.UpdateParcelToDrone(currentDroneToL.Id);
-                    if (currentDroneToL.ParcelId != -1)
+                    if (currentDroneToL.ParcelId != -1)//////////////
                     {
                         parcelIdTextBox.Text = Convert.ToString(currentDroneToL.ParcelId);
                         statusComboBox.SelectedItem = BO.DroneStatus.Delivery;

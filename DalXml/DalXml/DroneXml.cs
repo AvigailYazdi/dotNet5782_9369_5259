@@ -91,6 +91,8 @@ namespace Dal
             dc.StationId = baseStationId;
             dc.insertTime = DateTime.Now;
             dronesCharge.Add(dc);
+            XmlTools.SaveListToXMLSerializer(dronesCharge, dronesChargePath);
+
         }
 
         /// <summary>

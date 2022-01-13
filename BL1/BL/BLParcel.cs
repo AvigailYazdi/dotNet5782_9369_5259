@@ -152,9 +152,9 @@ namespace BL
                 Weight = (DO.WeightCategories)parcel.Weight,
                 Priority = (DO.Priorities)parcel.Priority,
                 Requested = DateTime.Now,
-                Scheduled = new DateTime(),
-                PickedUp = new DateTime(),
-                Delivered = new DateTime()
+                Scheduled = null,
+                PickedUp = null,
+                Delivered = null
             };
             try
             {

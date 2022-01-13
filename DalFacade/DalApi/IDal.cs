@@ -54,6 +54,7 @@ namespace DalApi
         #region DroneCharge
         public IEnumerable<DroneCharge> GetDronesInChargeByPerdicate(Predicate<DroneCharge> predicate);
         public DroneCharge GetDroneCharge(int id);
+        public bool checkDc(int id);
         public void DeleteDroneCharge(int id);
         #endregion
         #region Others

@@ -35,7 +35,7 @@ namespace Dal
         /// A function that checks if a drone charge appears int the list
         /// </summary>
         /// <param name="id">The id of drone charge</param>
-        private bool checkDc(int id)
+        public bool checkDc(int id)
         {
             IEnumerable<DroneCharge> dronesCharge = DroneChargesList();
             return dronesCharge.Any(b => b.DroneId == id);

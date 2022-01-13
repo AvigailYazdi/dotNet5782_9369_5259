@@ -32,9 +32,8 @@ namespace Dal
             if (checkP(p.Id))
                 throw new DuplicateIdException(p.Id, "Parcel");
             p.Id = GetParcelId();
-            List<int> id = new List<int>() { p.Id + 1 };
-           // XmlTools.SaveListToXMLElement(configPath,)
-            p.PickedUp = p.Requested = p.Scheduled = p.Delivered = null;
+            SaveParcelId(p.Id+1);
+            p.PickedUp =p.Scheduled = p.Delivered = null;
             parcels.Add(p);
             XmlTools.SaveListToXMLSerializer(parcels, parcelsPath);
         }

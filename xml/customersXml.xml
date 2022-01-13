@@ -70,11 +70,4 @@
     <Longitude>31.9</Longitude>
     <Latitude>36</Latitude>
   </Customer>
-  <Customer>
-    <Id>566667654</Id>
-    <Name>jhv</Name>
-    <Phone>8655</Phone>
-    <Longitude>43</Longitude>
-    <Latitude>45</Latitude>
-  </Customer>
 </ArrayOfCustomer>

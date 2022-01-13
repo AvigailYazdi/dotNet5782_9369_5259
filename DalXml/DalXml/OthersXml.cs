@@ -70,9 +70,16 @@ namespace Dal
 
         public int GetParcelId()
         {
-            int [] arr= XmlTools.LoadListFromXMLElement(configPath).Element("RowNumbers").Elements()
-                .Select(e => Convert.ToInt32(e.Value)).ToArray();
-            return arr[0];
+            return XmlTools.LoadListFromXMLElement(configPath).Element("RowNumbers").Elements()
+                .Select(e => Convert.ToInt32(e.Value)).FirstOrDefault();
         }
+        private void SaveParcelId(int id)
+        {
+            XElement parcelIdRoot = XmlTools.LoadListFromXMLElement(configPath);
+            parcelIdRoot.Element("RowNumbers").Element("NewParcelId").Value = id.ToString();
+            XmlTools.SaveListToXMLElement(parcelIdRoot, configPath);
+
+        }
+
     }
 }

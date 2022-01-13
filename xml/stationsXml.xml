@@ -5,20 +5,20 @@
     <Name>Macabim</Name>
     <Longitude>32.2</Longitude>
     <Latitude>35.1</Latitude>
-    <ChargeSlots>13</ChargeSlots>
+    <ChargeSlots>5</ChargeSlots>
   </BaseStation>
   <BaseStation>
     <Id>21002</Id>
     <Name>Yarden</Name>
     <Longitude>32.4</Longitude>
     <Latitude>35.2</Latitude>
-    <ChargeSlots>6</ChargeSlots>
+    <ChargeSlots>8</ChargeSlots>
   </BaseStation>
   <BaseStation>
     <Id>56567</Id>
     <Name>Shabbazi</Name>
     <Longitude>31</Longitude>
     <Latitude>32</Latitude>
-    <ChargeSlots>10</ChargeSlots>
+    <ChargeSlots>4</ChargeSlots>
   </BaseStation>
 </ArrayOfBaseStation>
