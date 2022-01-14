@@ -19,6 +19,20 @@
     <Name>Shabbazi</Name>
     <Longitude>31</Longitude>
     <Latitude>32</Latitude>
-    <ChargeSlots>4</ChargeSlots>
+    <ChargeSlots>5</ChargeSlots>
+  </BaseStation>
+  <BaseStation>
+    <Id>12345</Id>
+    <Name>Hashalom</Name>
+    <Longitude>32</Longitude>
+    <Latitude>34</Latitude>
+    <ChargeSlots>8</ChargeSlots>
+  </BaseStation>
+  <BaseStation>
+    <Id>45632</Id>
+    <Name>Dajgf</Name>
+    <Longitude>31</Longitude>
+    <Latitude>32</Latitude>
+    <ChargeSlots>8</ChargeSlots>
   </BaseStation>
 </ArrayOfBaseStation>
