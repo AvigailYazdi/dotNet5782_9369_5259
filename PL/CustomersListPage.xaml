@@ -20,6 +20,7 @@
                 <DataGridTextColumn x:Name="numSendColumn" Binding="{Binding NumSend}" Header="sent and not- &#xA;supplied" Width="SizeToHeader"/>
             </DataGrid.Columns>
         </DataGrid>
+        <Image x:Name="ArrowImage" HorizontalAlignment="Left" Height="28" Margin="47,31,0,0" VerticalAlignment="Top" Width="30" Source="/images/arrow.png" MouseLeftButtonDown="GoBack" MouseRightButtonDown="GoBack"/>
         <Button x:Name="CloseButton" Content="Close" HorizontalAlignment="Left" Margin="437,364,0,0" VerticalAlignment="Top" Height="49" Width="132" Click="closeButton_Click" Style="{StaticResource buttonStyle}"/>
         <Button x:Name="AddCustomerButton" Content="Add a new customer" HorizontalAlignment="Left" Margin="600,364,0,0" VerticalAlignment="Top" Height="49" Width="149" Click="addCustomerButton_Click" Style="{StaticResource buttonStyle}"/>
     </Grid>

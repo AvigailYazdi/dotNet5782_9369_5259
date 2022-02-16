@@ -57,6 +57,12 @@ namespace DalApi
         public bool checkDc(int id);
         public void DeleteDroneCharge(int id);
         #endregion
+        #region User
+        public void AddUser(User c);
+        public User GetUser(string password);
+        public IEnumerable<User> ListUser();
+        public IEnumerable<User> GetUsersByPerdicate(Predicate<User> predicate);
+        #endregion
         #region Others
         public double DistanceInKm(double lat1, double lon1, double lat2, double lon2);
         public string Base60(double num);

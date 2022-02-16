@@ -166,6 +166,11 @@ namespace PL
                 }
             }
         }
+
+        private void GoBack(object sender, MouseButtonEventArgs e)
+        {
+            this.NavigationService.GoBack();
+        }
     }
 }
 

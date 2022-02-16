@@ -57,6 +57,10 @@ namespace PL
             customerToLDataGrid.DataContext = bl.CustomerList();
         }
 
+        private void GoBack(object sender, MouseButtonEventArgs e)
+        {
+            this.NavigationService.GoBack();
+        }
     }
 }
 

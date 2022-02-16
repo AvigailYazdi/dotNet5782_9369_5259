@@ -11,5 +11,6 @@ namespace BO
     public enum DroneStatus { Avaliable, Maintenance, Delivery }
     public enum ParcelStatus { Created, Connected, PickedUp, Provided }
     public enum ParcelInTranStatus { WaitToCollect, OnWay }
+    public enum Role { Manager, Customer }
 
 }

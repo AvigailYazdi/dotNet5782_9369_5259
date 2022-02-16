@@ -38,10 +38,22 @@ namespace Dal
         public void AddCustomer(Customer c)
         {
             List<Customer> customers = XmlTools.LoadListFromXMLSerializer<Customer>(customersPath);
+            List<User> users = XmlTools.LoadListFromXMLSerializer<User>(usersPath);
+
             if (checkC(c.Id))
                 throw new DuplicateIdException(c.Id, "Customer");
+            if (checkU(c.Password))
+                throw new DuplicatePasswordException();
             customers.Add(c);
+            User u = new User()
+            {
+                Name = c.Name,
+                Password = c.Password,
+                UserRole = Role.Customer
+            };
+            users.Add(u);
             XmlTools.SaveListToXMLSerializer(customers, customersPath);
+            XmlTools.SaveListToXMLSerializer(users, usersPath);
         }
 
         /// <summary>

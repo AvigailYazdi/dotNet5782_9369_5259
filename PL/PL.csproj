@@ -9,14 +9,22 @@
 
   <ItemGroup>
     <None Remove="DeliveryDrones.jpg" />
+    <None Remove="images\add.png" />
+    <None Remove="images\airplane.png" />
+    <None Remove="images\arrow.png" />
     <None Remove="images\customer.jpg" />
     <None Remove="images\drone.jpg" />
+    <None Remove="images\droneI.jpg" />
+    <None Remove="images\garbage.png" />
     <None Remove="images\parcel.png" />
+    <None Remove="images\Plus_Icon.png" />
     <None Remove="images\profile.jpg" />
+    <None Remove="images\Received package.png" />
     <None Remove="images\sent.jpg" />
     <None Remove="images\signIn.jpg" />
     <None Remove="images\station.png" />
     <None Remove="images\supplied.jpg" />
+    <None Remove="images\tracking-icon.jpg" />
     <None Remove="images\UserIcon2.png" />
   </ItemGroup>
 
@@ -26,16 +34,37 @@
 
   <ItemGroup>
     <Resource Include="DeliveryDrones.jpg" />
+    <Resource Include="images\add.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="images\airplane.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="images\arrow.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="images\customer.jpg">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="images\drone.jpg">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="images\droneI.jpg">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="images\garbage.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="images\parcel.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="images\Plus_Icon.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="images\profile.jpg">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="images\Received package.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="images\sent.jpg">

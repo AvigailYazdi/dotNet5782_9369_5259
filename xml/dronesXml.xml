@@ -3,22 +3,22 @@
   <Drone>
     <Id>450</Id>
     <Model>GC126</Model>
-    <MaxWeight>Light</MaxWeight>
+    <MaxWeight>Medium</MaxWeight>
   </Drone>
   <Drone>
     <Id>451</Id>
     <Model>UI538X</Model>
-    <MaxWeight>Heavy</MaxWeight>
+    <MaxWeight>Light</MaxWeight>
   </Drone>
   <Drone>
     <Id>452</Id>
     <Model>E765</Model>
-    <MaxWeight>Light</MaxWeight>
+    <MaxWeight>Heavy</MaxWeight>
   </Drone>
   <Drone>
     <Id>453</Id>
     <Model>RFT3</Model>
-    <MaxWeight>Heavy</MaxWeight>
+    <MaxWeight>Medium</MaxWeight>
   </Drone>
   <Drone>
     <Id>454</Id>
@@ -26,8 +26,8 @@
     <MaxWeight>Heavy</MaxWeight>
   </Drone>
   <Drone>
-    <Id>545</Id>
-    <Model>BGF54</Model>
-    <MaxWeight>Medium</MaxWeight>
+    <Id>3552</Id>
+    <Model>PO987</Model>
+    <MaxWeight>Light</MaxWeight>
   </Drone>
 </ArrayOfDrone>

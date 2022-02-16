@@ -39,7 +39,16 @@ namespace Dal
         {
             if (checkC(c.Id))
                 throw new DuplicateIdException(c.Id, "Customer");
+            if (checkU(c.Password))
+                throw new DuplicatePasswordException();
             customers.Add(c);
+            User u = new User()
+            {
+                Name= c.Name,
+                Password= c.Password,
+                UserRole= Role.Customer
+            };
+            users.Add(u);
         }
 
         /// <summary>

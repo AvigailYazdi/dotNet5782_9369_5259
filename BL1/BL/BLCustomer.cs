@@ -42,7 +42,8 @@ namespace BL
                 Name = customerBo.Name,
                 Phone = customerBo.PhoneNum,
                 Longitude = customerBo.Place.Longitude,
-                Latitude = customerBo.Place.Latitude
+                Latitude = customerBo.Place.Latitude,
+                Password=customerBo.Password
             };
             try
             {
@@ -51,6 +52,10 @@ namespace BL
             catch(DO.DuplicateIdException ex)
             {
                 throw new BO.DuplicateIdException(ex.Id, ex.EntityName);
+            }
+            catch (DO.DuplicatePasswordException ex)
+            {
+                throw new BO.DuplicatePasswordException(ex.Message);
             }
         }
         /// <summary>
@@ -125,15 +130,15 @@ namespace BL
         {
             BO.Customer c = GetCustomer(id);
             return new BO.CustomerToL()
-                   {
-                       Id = c.Id,
-                       Name = c.Name,
-                       PhoneNum = c.PhoneNum,
-                       NumArrived = getSentAndProviededParcels(c.Id).Count(),
-                       NumSend = getSentAndNotProviededParcels(c.Id).Count(),
-                       NumGot = c.GetParcel.Count(),
-                       NumOnWay = getOnWayParcels(c.Id).Count()
-                   };
+            {
+                Id = c.Id,
+                Name = c.Name,
+                PhoneNum = c.PhoneNum,
+                NumArrived = getSentAndProviededParcels(c.Id).Count(),
+                NumSend = getSentAndNotProviededParcels(c.Id).Count(),
+                NumGot = c.GetParcel.Count(),
+                NumOnWay = getOnWayParcels(c.Id).Count()
+            };
         }
     }
 }

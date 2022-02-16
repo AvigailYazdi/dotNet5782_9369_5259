@@ -58,5 +58,6 @@
         <Button x:Name="CloseButton" Content="Close" HorizontalAlignment="Left" Margin="457,364,0,0" VerticalAlignment="Top" Height="49" Width="132" Click="closeButton_Click" Style="{StaticResource buttonStyle}"/>
         <Button x:Name="AddStationButton" Content="Add a new station" HorizontalAlignment="Left" Margin="617,364,0,0" VerticalAlignment="Top" Height="49" Width="132" Click="addStationButton_Click" Style="{StaticResource buttonStyle}"/>
         <CheckBox x:Name="GroupCheckBox" Content="Group by avaliable slots" HorizontalAlignment="Left" Margin="187,55,0,0" VerticalAlignment="Top" Height="28" Width="213" FontWeight="Bold" FontSize="16" Click="GroupCheckBox_Click" />
+        <Image x:Name="ArrowImage" HorizontalAlignment="Left" Height="28" Margin="47,31,0,0" VerticalAlignment="Top" Width="30" Source="/images/arrow.png" MouseLeftButtonDown="GoBack" MouseRightButtonDown="GoBack"/>
     </Grid>
 </Page>

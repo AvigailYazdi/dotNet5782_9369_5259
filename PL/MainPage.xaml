@@ -8,14 +8,11 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="MainPage">
     <Grid x:Name="wingsGrid">
-        <Button x:Name="ShowDronesButton" Content="Drones" HorizontalAlignment="Left" Margin="242,339,0,57" Height="54" Width="140" Click="showDronesButton_Click" Background="{x:Null}" BorderBrush="{x:Null}" FontWeight="Bold" FontSize="34" />
-        <Label Name="WingsTitleLabel" Content="WINGS" HorizontalAlignment="Center" VerticalAlignment="Center" Height="94" Width="244" FontFamily="Segoe Script" FontWeight="Bold" FontSize="64"/>
-        <Button x:Name="logInButton" Content="Log In" HorizontalAlignment="Left" Margin="541,37,0,0" VerticalAlignment="Top" Style="{StaticResource buttonStyle}" Height="42" Width="85" Background="{x:Null}" BorderBrush="{x:Null}" FontSize="22"/>
-        <Button x:Name="signUpButton" Content="Sign Up" HorizontalAlignment="Left" Margin="667,37,0,0" VerticalAlignment="Top" Style="{StaticResource buttonStyle}" Height="42" Width="85" Background="{x:Null}" BorderBrush="{x:Null}" FontSize="22"/>
-        <Image HorizontalAlignment="Left" Height="30" Margin="756,45,0,0" VerticalAlignment="Top" Width="30" Source="images/signIn.jpg" RenderTransformOrigin="0.517,0.885"/>
-        <Image HorizontalAlignment="Left" Height="30" Margin="629,45,0,0" VerticalAlignment="Top" Width="30" Source="images/UserIcon2.png"/>
-        <Button x:Name="ShowParcelsButton" Content="Parcels" HorizontalAlignment="Left" Margin="82,339,0,57" Height="54" Width="140" Click="showParcelsButton_Click" Background="{x:Null}" BorderBrush="{x:Null}" FontWeight="Bold" FontSize="34" />
-        <Button x:Name="ShowStationsButton" Content="Stations" HorizontalAlignment="Left" Margin="392,339,0,57" Height="54" Width="140" Click="showStationsButton_Click" Background="{x:Null}" BorderBrush="{x:Null}" FontWeight="Bold" FontSize="34" />
-        <Button x:Name="ShowCustomersButton" Content="Customers" HorizontalAlignment="Left" Margin="546,339,0,57" Height="54" Width="185" Click="showCustomersButton_Click" Background="{x:Null}" BorderBrush="{x:Null}" FontWeight="Bold" FontSize="34" />
+        <Label Name="WingsTitleLabel" Content="W I N G S" HorizontalAlignment="Center" VerticalAlignment="Top" Height="94" Width="366" FontFamily="Segoe Script" FontWeight="Bold" FontSize="64" Margin="0,70,0,0"/>
+        <Button x:Name="logInButton" Content="Log In" HorizontalAlignment="Left" Margin="185,306,0,0" VerticalAlignment="Top" Style="{StaticResource buttonStyle}" Height="61" Width="127" Background="{x:Null}" BorderBrush="{x:Null}" FontSize="36" Click="logInButton_Click"/>
+        <Button x:Name="signUpButton" Content="Sign Up" HorizontalAlignment="Left" Margin="404,306,0,0" VerticalAlignment="Top" Style="{StaticResource buttonStyle}" Height="61" Width="145" Background="{x:Null}" BorderBrush="{x:Null}" FontSize="36" Click="signUpButton_Click"/>
+        <Image HorizontalAlignment="Left" Height="43" Margin="553,318,0,0" VerticalAlignment="Top" Width="36" Source="images/signIn.jpg" RenderTransformOrigin="0.517,0.885"/>
+        <Image HorizontalAlignment="Left" Height="43" Margin="315,318,0,0" VerticalAlignment="Top" Width="36" Source="images/UserIcon2.png"/>
+        <Label Content="Wellcome To Our Web-Site" HorizontalAlignment="Center" Margin="0,195,0,0" VerticalAlignment="Top" FontSize="40" FontFamily="Comic Sans MS" Width="568"/>
     </Grid>
 </Page>

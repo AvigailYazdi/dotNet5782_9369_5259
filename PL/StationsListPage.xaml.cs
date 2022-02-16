@@ -108,5 +108,10 @@ namespace PL
                     .ToList();
             stationToLDataGrid2.DataContext = GroupingData;
         }
+
+        private void GoBack(object sender, MouseButtonEventArgs e)
+        {
+            this.NavigationService.GoBack();
+        }
     }
 }

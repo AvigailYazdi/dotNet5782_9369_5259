@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<ArrayOfManager xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Manager>
+    <Id>326754987</Id>
+    <Name>Daniel</Name>
+    <Password>d123</Password>
+  </Manager>
+  <Manager>
+    <Id>366654213</Id>
+    <Name>Reuven</Name>
+    <Password>r123</Password>
+  </Manager>
+  <Manager>
+    <Id>313256743</Id>
+    <Name>Naftali</Name>
+    <Password>n123</Password>
+  </Manager>
+</ArrayOfManager>

@@ -66,6 +66,7 @@
         <Button x:Name="ChargingButton" Content="Charge/Discharge" HorizontalAlignment="Left" Margin="506,340,0,0" VerticalAlignment="Top" Height="27" Width="133" Click="chargingButton_Click" Style="{StaticResource buttonStyle}"/>
         <Button x:Name="DelieveryButton" Content="Next Step of delievery" HorizontalAlignment="Left" Margin="320,340,0,0" VerticalAlignment="Top" Height="27" Width="167" Click="delieveryButton_Click" Style="{StaticResource buttonStyle}"/>
         <Label x:Name="IntegrityIdLabel" Content="Id must have 3-4 digits" HorizontalAlignment="Left" Margin="359,124,0,0" VerticalAlignment="Top" Height="23" Width="114" FontSize="10" Foreground="#FFEE0808" Visibility="Collapsed"/>
+        <Image HorizontalAlignment="Left" Height="233" Margin="571,10,0,0" VerticalAlignment="Top" Width="219" Source="images/droneI.jpg"/>
 
     </Grid>
 </Page>

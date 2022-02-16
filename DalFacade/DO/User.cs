@@ -4,17 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BO
+namespace DO
 {
-    public class Customer
+    public struct User
     {
-        public int Id { get; set; }
         public string Name { get; set; }
-        public string PhoneNum { get; set; }
-        public Location Place { get; set; }
-        public IEnumerable<ParcelAtC> SendParcel { get; set; }
-        public IEnumerable<ParcelAtC> GetParcel { get; set; }
         public string Password { get; set; }
+        public Role UserRole { get; set; }
         public override string ToString()
         {
             return this.ToStringProperty();

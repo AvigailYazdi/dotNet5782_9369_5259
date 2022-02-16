@@ -57,5 +57,12 @@ namespace BlApi
         public void AddDroneToL(BO.DroneToL d);
 
         #endregion
+        #region User
+        public void AddUser(BO.User c);
+        public BO.User GetUser(string password);
+        public IEnumerable<BO.User> ListUser();
+        
+        // public IEnumerable<BO.User> GetUsersByPerdicate(Predicate<BO.User> predicate);
+        #endregion
     }
 }

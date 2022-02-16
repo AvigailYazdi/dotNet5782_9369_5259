@@ -58,6 +58,7 @@ namespace PL
             suppliedParcelsDataGrid.Visibility = Visibility.Visible;
             suppliedParcelsDataGrid.DataContext = currentCustomer.GetParcel;
             suppliedParcelsDataGrid.IsReadOnly = true;
+            passwordTextBox.Visibility = passwordLabel.Visibility = Visibility.Collapsed;
         }
 
         private void opButton_Click(object sender, RoutedEventArgs e)
@@ -74,6 +75,7 @@ namespace PL
                     c.Place = new BO.Location();
                     c.Place.Longitude = double.Parse(longitudeTextBox.Text);
                     c.Place.Latitude = double.Parse(latitudeTextBox.Text);
+                    c.Password = passwordTextBox.Text;
                     bl.AddCustomer(c);
                     oc.Add(bl.getCustomerToL(c.Id));
                     MessageBox.Show("The customer is added successfully!", "Add", b, i);

@@ -164,6 +164,11 @@ namespace PL
                 StatusSelector.IsEnabled = true;
             }
         }
+
+        private void GoBack(object sender, MouseButtonEventArgs e)
+        {
+            this.NavigationService.GoBack();
+        }
     }
 }
 

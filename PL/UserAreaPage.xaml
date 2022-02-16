@@ -1,0 +1,22 @@
+﻿<Page x:Class="PL.UserAreaPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:PL"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="UserAreaPage">
+
+    <Grid Style="{StaticResource gridStyle}">
+        <Label x:Name="welcomeLabel" Content="Welcome Dear Customer" HorizontalAlignment="Center" Margin="0,20,0,0" VerticalAlignment="Top" Height="66" Width="384" FontSize="30" Foreground="#FF669AC3" RenderTransformOrigin="-0.961,0.198" FontFamily="Segoe Print" Background="Transparent"/>
+        <Image x:Name="ArrowImage" HorizontalAlignment="Left" Height="28" Margin="33,19,0,0" VerticalAlignment="Top" Width="30" Source="/images/arrow.png" MouseLeftButtonDown="GoBack" MouseRightButtonDown="GoBack"/>
+        <Image x:Name="MyParcelImage" HorizontalAlignment="Left" Height="120" Margin="117,107,0,0" VerticalAlignment="Top" Width="115" Source="images/parcel.png" MouseEnter="Image_MouseEnter" MouseLeave="Image_MouseLeave"/>
+        <Label x:Name="MyParcelsLabel" Content="My Parcels" HorizontalAlignment="Left" Margin="111,228,0,0" VerticalAlignment="Top" Width="159" FontSize="25" Foreground="#FF39BD74"/>
+        <Image x:Name="AddParcelImage" HorizontalAlignment="Left" Height="139" Margin="536,95,0,0" VerticalAlignment="Top" Width="140" Source="images/Plus_Icon.png" MouseEnter="Image_MouseEnter" MouseLeave="Image_MouseLeave"/>
+        <Label x:Name="AddParcelLabel" Content="Add a new Parcel" HorizontalAlignment="Left" Margin="486,228,0,0" VerticalAlignment="Top" Width="258" FontSize="25" Foreground="#FF39BD74"/>
+        <Image x:Name="CollectImage" HorizontalAlignment="Left" Height="150" Margin="315,228,0,0" VerticalAlignment="Top" Width="135" Source="images/Received package.png" MouseEnter="Image_MouseEnter" MouseLeave="Image_MouseLeave"/>
+        <Label x:Name="CollectLabel" Content="Collect Parcel" HorizontalAlignment="Left" Margin="301,363,0,0" VerticalAlignment="Top" Width="206" FontSize="25" Foreground="#FF39BD74"/>
+
+    </Grid>
+</Page>

@@ -20,6 +20,7 @@ namespace Dal
         string stationsPath = @"stationsXml.xml";
         string customersPath = @"customersXml.xml";
         string dronesChargePath = @"dronesChargeXml.xml";
+        string usersPath = @"usersXml.xml";
         string configPath = @"config.xml";
         #endregion
 

@@ -6,18 +6,10 @@ using System.Threading.Tasks;
 
 namespace DO
 {
-    /// <summary>
-    /// A struct of the customers.
-    /// fields: id, name, phone number, Longitude and Lattitude .
-    /// functions: To string- a function that returns the string to print.
-    /// </summary>
-    public struct Customer
+    public struct Manager
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public string Phone { get; set; }
-        public double Longitude { get; set; }
-        public double Latitude { get; set; }
         public string Password { get; set; }
         public override string ToString()
         {

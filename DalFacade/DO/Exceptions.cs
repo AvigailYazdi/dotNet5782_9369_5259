@@ -72,4 +72,26 @@ namespace DO
         { xmlFilePath = xmlPath; }
         public override string ToString() => base.ToString() + $", fail to load or create xml file: {xmlFilePath}";
     }
+
+    [Serializable]
+    public class DuplicatePasswordException : Exception
+    {
+        public DuplicatePasswordException() : base() { }
+        public DuplicatePasswordException(string message) : base(message) { }
+        public override string ToString()
+        {
+            return $"The password is already exist";
+        }
+    }
+
+    [Serializable]
+    public class MissingPasswordException : Exception
+    {
+        public MissingPasswordException() : base() { }
+        public MissingPasswordException(string message) : base(message) { }
+        public override string ToString()
+        {
+            return $"The password is not exist";
+        }
+    }
 }

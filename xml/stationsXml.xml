@@ -3,36 +3,22 @@
   <BaseStation>
     <Id>21001</Id>
     <Name>Macabim</Name>
-    <Longitude>32.2</Longitude>
-    <Latitude>35.1</Latitude>
-    <ChargeSlots>5</ChargeSlots>
+    <Longitude>31.9</Longitude>
+    <Latitude>35.7</Latitude>
+    <ChargeSlots>15</ChargeSlots>
   </BaseStation>
   <BaseStation>
     <Id>21002</Id>
     <Name>Yarden</Name>
     <Longitude>32.4</Longitude>
-    <Latitude>35.2</Latitude>
-    <ChargeSlots>8</ChargeSlots>
+    <Latitude>35</Latitude>
+    <ChargeSlots>19</ChargeSlots>
   </BaseStation>
   <BaseStation>
-    <Id>56567</Id>
-    <Name>Shabbazi</Name>
-    <Longitude>31</Longitude>
-    <Latitude>32</Latitude>
-    <ChargeSlots>5</ChargeSlots>
-  </BaseStation>
-  <BaseStation>
-    <Id>12345</Id>
-    <Name>Hashalom</Name>
-    <Longitude>32</Longitude>
-    <Latitude>34</Latitude>
-    <ChargeSlots>8</ChargeSlots>
-  </BaseStation>
-  <BaseStation>
-    <Id>45632</Id>
-    <Name>Dajgf</Name>
-    <Longitude>31</Longitude>
-    <Latitude>32</Latitude>
-    <ChargeSlots>8</ChargeSlots>
+    <Id>32245</Id>
+    <Name>Kishun</Name>
+    <Longitude>32.1</Longitude>
+    <Latitude>31.1</Latitude>
+    <ChargeSlots>23</ChargeSlots>
   </BaseStation>
 </ArrayOfBaseStation>

@@ -26,23 +26,15 @@ namespace PL
             InitializeComponent();
             bl = _bl;
         }
-        private void showCustomersButton_Click(object sender, RoutedEventArgs e)
+
+        private void logInButton_Click(object sender, RoutedEventArgs e)
         {
-            this.NavigationService.Navigate(new CustomersListPage(bl));
+            this.NavigationService.Navigate(new LogInPage(bl));
         }
 
-        private void showParcelsButton_Click(object sender, RoutedEventArgs e)
+        private void signUpButton_Click(object sender, RoutedEventArgs e)
         {
-            this.NavigationService.Navigate(new ParcelsListPage(bl));
-        }
-
-        private void showStationsButton_Click(object sender, RoutedEventArgs e)
-        {
-            this.NavigationService.Navigate(new StationsListPage(bl));
-        }
-        private void showDronesButton_Click(object sender, RoutedEventArgs e)
-        {
-            this.NavigationService.Navigate(new DronesListPage(bl));
+            this.NavigationService.Navigate(new SignUpPage(bl));
         }
     }
 }
