@@ -14,6 +14,7 @@ namespace BlApi
         public void UpdateDroneToCharge(int id);
         public void UpdateDisChargeDrone(int id);
         public BO.Drone GetDrone(int id);
+        public void NextState(int id);
         public IEnumerable<BO.DroneToL> DroneList();
         public IEnumerable<BO.DroneToL> GetDronesByPerdicate(Predicate<BO.DroneToL> predicate);
         #endregion

@@ -281,6 +281,7 @@ namespace BL
                     UpdateDroneToL(droneToList);
                     dl.UpdateParcelDelivery(droneToList.ParcelId);
                     droneToList.ParcelId = -1;
+                    UpdateDroneToL(droneToList);
                 }
                 else
                     throw new BO.NotInDeliveryException(id);

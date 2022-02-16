@@ -25,7 +25,8 @@
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
             <Label x:Name="BatteryLabel" Content="Battery:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="0" VerticalAlignment="Center" FontWeight="Bold" />
-            <TextBox x:Name="batteryTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="0" Text="{Binding Battery, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120" IsEnabled="False"/>
+            <ProgressBar x:Name="BatteryProgressBar" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="0" Value="{Binding Battery, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120" IsEnabled="False" Foreground="#FF4A9D6F"/>
+            <TextBox x:Name="batteryTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="0" Text="{Binding Battery, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120" IsEnabled="False" Background="{x:Null}" BorderBrush="{x:Null}" TextAlignment="Center"/>
             <Label x:Name="IdLabel" Content="Id:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="1" VerticalAlignment="Center" FontWeight="Bold"/>
             <TextBox x:Name="idTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="1" Text="{Binding Id, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120" PreviewKeyDown="textBox_OnlyNumbers_PreviewKeyDown" TextChanged="idTextBox_TextChanged" />
             <Label x:Name="ModelLabel" Content="Model:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="2" VerticalAlignment="Center" FontWeight="Bold"/>
@@ -67,6 +68,8 @@
         <Button x:Name="DelieveryButton" Content="Next Step of delievery" HorizontalAlignment="Left" Margin="320,340,0,0" VerticalAlignment="Top" Height="27" Width="167" Click="delieveryButton_Click" Style="{StaticResource buttonStyle}"/>
         <Label x:Name="IntegrityIdLabel" Content="Id must have 3-4 digits" HorizontalAlignment="Left" Margin="359,124,0,0" VerticalAlignment="Top" Height="23" Width="114" FontSize="10" Foreground="#FFEE0808" Visibility="Collapsed"/>
         <Image HorizontalAlignment="Left" Height="233" Margin="571,10,0,0" VerticalAlignment="Top" Width="219" Source="images/droneI.jpg"/>
+        <Button x:Name="AutomaticButton" Content="Automatic" HorizontalAlignment="Left" Margin="649,340,0,0" VerticalAlignment="Top" Height="27" Width="91" Style="{StaticResource buttonStyle}" Click="AutomaticButton_Click"/>
+        <!--<ProgressBar x:Name="BatteryProgressBar" HorizontalAlignment="Left" Height="23" Margin="458,103,0,0" VerticalAlignment="Top" Width="120" />-->
 
     </Grid>
 </Page>

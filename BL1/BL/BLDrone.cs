@@ -188,5 +188,65 @@ namespace BL
                    where predicate(item)
                    select item;
         }
+
+        public void NextState(int id)
+        {
+            bool flag = false;
+            BO.Drone d = GetDrone(id);
+            switch (d.Status)
+            {
+                case BO.DroneStatus.Avaliable:
+                    try
+                    {
+                        UpdateParcelToDrone(id);
+                    }
+                    catch(Exception)
+                    {
+                        UpdateDroneToCharge(id);
+                    }
+                    break;
+                case BO.DroneStatus.Maintenance:
+                    if(d.Battery==100)
+                    {
+                        UpdateDisChargeDrone(id);
+                        UpdateParcelToDrone(id);
+                    }
+                    else
+                    {
+                        flag = true;
+                        //d.Battery= (int)(Math.Min(5 + d.Battery, 100) * 100) / 100.0;
+                    }
+                    break;
+                case BO.DroneStatus.Delivery:
+                    switch (d.MyParcel.ParcelStatus)
+                    {
+                        case BO.ParcelInTranStatus.WaitToCollect:
+                            UpdateParcelCollect(id);
+                            break;
+                        case BO.ParcelInTranStatus.OnWay:
+                            UpdateParcelProvide(id);
+                            break;
+                        default:
+                            break;
+                    }
+                    break;
+                default:
+                    break;
+            }
+            d = GetDrone(id);
+            if(flag)
+                d.Battery = (int)(Math.Min(5 + d.Battery, 100) * 100) / 100.0;
+            BO.DroneToL dlist = new BO.DroneToL()
+            {
+                Id = d.Id,
+                Model = d.Model,
+                Weight = d.Weight,
+                Battery = d.Battery,
+                Status = d.Status,
+                CurrentPlace = new BO.Location { Longitude = d.CurrentPlace.Longitude, Latitude = d.CurrentPlace.Latitude },
+                ParcelId=(d.MyParcel==null)?-1:d.MyParcel.Id
+            };
+            UpdateDroneToL(dlist);
+        }
     }
 }

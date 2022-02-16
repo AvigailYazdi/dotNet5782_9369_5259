@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -23,6 +25,7 @@ namespace PL
     public partial class DronePage : Page
     {
         IBL bl;
+        BackgroundWorker bwDrone;
         enum op { Add, Update }; // Enum of the options 
         op option; // The selected option- add/ update
         BO.DroneToL currentDroneToL; // The selected drone 
@@ -53,7 +56,8 @@ namespace PL
             CancelOrCloseButton.Content = "Cancel";
             StationIdCBox.Visibility = StationIdLabel.Visibility = Visibility.Visible;
             ChargingButton.Visibility = DelieveryButton.Visibility = Visibility.Collapsed;
-            batteryTextBox.Visibility = BatteryLabel.Visibility = Visibility.Collapsed;
+            //batteryTextBox.Visibility = BatteryLabel.Visibility = Visibility.Collapsed;
+            BatteryProgressBar.Visibility= BatteryLabel.Visibility= batteryTextBox.Visibility = Visibility.Collapsed;
             statusComboBox.Visibility = parcelIdTextBox.Visibility = Visibility.Collapsed;
             StatusLabel.Visibility = ParcelIdLabel.Visibility = Visibility.Collapsed;
             OpButton.IsEnabled = false;
@@ -78,6 +82,14 @@ namespace PL
             OpButton.Content = "Update";
             CancelOrCloseButton.Content = "Close";
 
+            bwDrone = new BackgroundWorker();
+            bwDrone.DoWork += BwDrone_DoWork;
+            bwDrone.ProgressChanged += BwDrone_ProgressChanged;
+            bwDrone.RunWorkerCompleted += BwDrone_RunWorkerCompleted;
+
+            bwDrone.WorkerReportsProgress = true;
+            bwDrone.WorkerSupportsCancellation = true;
+
             StationIdCBox.Visibility = StationIdLabel.Visibility = Visibility.Hidden;
             ChargingButton.Visibility = DelieveryButton.Visibility = Visibility.Visible;
             statusComboBox.Visibility = parcelIdTextBox.Visibility = Visibility.Visible;
@@ -88,6 +100,53 @@ namespace PL
             weightComboBox.SelectedItem = currentDroneToL.Weight;
             statusComboBox.SelectedItem = currentDroneToL.Status;
         }
+        private void AutomaticButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (AutomaticButton.Content.ToString() == "Automatic")
+            {
+                if (bwDrone.IsBusy != true)
+                {
+                    this.Cursor = Cursors.Wait;
+                    AutomaticButton.Content = "Release";
+                    bwDrone.RunWorkerAsync();
+                }
+            }
+            else
+            {
+                AutomaticButton.Content = "Automatic";
+                if (bwDrone.WorkerSupportsCancellation == true)
+                    bwDrone.CancelAsync();
+            }
+        }
+
+        private void BwDrone_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            this.Cursor = Cursors.Arrow;
+        }
+
+        private void BwDrone_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+            batteryTextBox.Text = currentDroneToL.Battery.ToString();
+            BatteryProgressBar.Value = currentDroneToL.Battery;
+            statusComboBox.SelectedItem = currentDroneToL.Status;
+            parcelIdTextBox.Text = currentDroneToL.ParcelId.ToString();
+        }
+
+        private void BwDrone_DoWork(object sender, DoWorkEventArgs e)
+        {
+            while(bwDrone.CancellationPending!=true)
+            {
+                Thread.Sleep(1000);
+                int i = currentDroneToL.Id;
+                bl.NextState(i);
+                currentDroneToL = bl.GetDroneToL(i);
+                if (bwDrone.WorkerReportsProgress == true)
+                    bwDrone.ReportProgress(1);
+            }
+            if (bwDrone.CancellationPending == true)
+                e.Cancel = true;
+        }
+
         /// <summary>
         /// A function that adds/ updates a drone
         /// </summary>
@@ -129,6 +188,9 @@ namespace PL
         /// <param name="e"> Routed event args</param>
         private void cancelOrCloseButton_Click(object sender, RoutedEventArgs e)
         {
+            if (bwDrone.WorkerSupportsCancellation == true)
+                bwDrone.CancelAsync();
+            Thread.Sleep(1000);
             this.NavigationService.GoBack();
         }
         /// <summary>
@@ -152,6 +214,7 @@ namespace PL
                     bl.UpdateDisChargeDrone(currentDroneToL.Id);
                     statusComboBox.SelectedItem = BO.DroneStatus.Avaliable;
                     batteryTextBox.Text = Convert.ToString(currentDroneToL.Battery);
+                    BatteryProgressBar.Value = currentDroneToL.Battery;
                     MessageBox.Show("The drone discharged", "Discharging", b, i);
 
                 }
@@ -180,6 +243,7 @@ namespace PL
                         parcelIdTextBox.Text = Convert.ToString(currentDroneToL.ParcelId);
                         statusComboBox.SelectedItem = BO.DroneStatus.Delivery;
                         batteryTextBox.Text = Convert.ToString(currentDroneToL.Battery);
+                        BatteryProgressBar.Value = currentDroneToL.Battery;
                         MessageBox.Show("The drone is connected to a parcel", "Connection", b, i);
                     }
                     else
@@ -197,12 +261,14 @@ namespace PL
                     {
                         bl.UpdateParcelCollect(currentDroneToL.Id);
                         batteryTextBox.Text = Convert.ToString(currentDroneToL.Battery);
+                        BatteryProgressBar.Value = currentDroneToL.Battery;
                         MessageBox.Show("The parcel was picked up", "Picking up", b, i);
                     }
                     else if (p.PickedUp != null && p.Delivered == null)
                     {
                         bl.UpdateParcelProvide(currentDroneToL.Id);
                         batteryTextBox.Text = Convert.ToString(currentDroneToL.Battery);
+                        BatteryProgressBar.Value = currentDroneToL.Battery;
                         parcelIdTextBox.Text = "-1";
                         statusComboBox.SelectedItem = BO.DroneStatus.Avaliable;
                         MessageBox.Show("The parcel was provided", "Providing", b, i);
