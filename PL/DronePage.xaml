@@ -9,7 +9,7 @@
       Title="DronePage">
 
     <Grid Style="{StaticResource gridStyle }">
-        <Grid x:Name="gridOneDrone"  HorizontalAlignment="Center" Margin="0,103,0,0" VerticalAlignment="Top" Visibility="Visible">
+        <Grid x:Name="gridOneDrone"  HorizontalAlignment="Center" Margin="0,79,0,0" VerticalAlignment="Top" Visibility="Visible">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="Auto"/>
@@ -49,18 +49,16 @@
                     </ItemsPanelTemplate>
                 </ComboBox.ItemsPanel>
             </ComboBox>
-            <Label Content="Latitude:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="6" VerticalAlignment="Center" Visibility="Collapsed"/>
-            <TextBox x:Name="latitudeTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="6" Text="{Binding CurrentPlace.Latitude, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120" Visibility="Collapsed"/>
-            <Label Content="Longitude:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="7" VerticalAlignment="Center" Visibility="Collapsed"/>
-            <TextBox x:Name="longitudeTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="7" Text="{Binding CurrentPlace.Longitude, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120" Visibility="Collapsed"/>
-            <ComboBox x:Name="StationIdCBox" Grid.Column="1" HorizontalAlignment="Center" Height="Auto" VerticalAlignment="Top" Width="120" SelectionChanged="comboBox_SelectionChanged" Margin="0,-25,0,0">
+            <Label x:Name="locationLabel" Content="Location:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="6" VerticalAlignment="Center" Visibility="Visible"/>
+            <TextBox x:Name="locationTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3,0,0,0" Grid.Row="6" VerticalAlignment="Center" Width="161" Visibility="Visible" IsEnabled="False"/>
+            <ComboBox x:Name="StationIdCBox" Grid.Column="1" HorizontalAlignment="Left" Height="Auto" VerticalAlignment="Top" Width="120" SelectionChanged="comboBox_SelectionChanged" Margin="2,-27,0,0">
                 <ComboBox.ItemsPanel>
                     <ItemsPanelTemplate>
                         <VirtualizingStackPanel/>
                     </ItemsPanelTemplate>
                 </ComboBox.ItemsPanel>
             </ComboBox>
-            <Label x:Name="StationIdLabel" Content="Station Id:" Grid.Column="0" HorizontalAlignment="Left" Margin="3,-29,0,0" VerticalAlignment="Top" FontWeight="Bold" />
+            <Label x:Name="StationIdLabel" Content="Station Id:" HorizontalAlignment="Left" Margin="-2,-31,0,0" VerticalAlignment="Top" FontWeight="Bold" />
         </Grid>
 
         <Grid x:Name="gridParcel" HorizontalAlignment="Left" Margin="51,121,0,0" VerticalAlignment="Top" Visibility="Collapsed">

@@ -248,5 +248,11 @@ namespace BL
             };
             UpdateDroneToL(dlist);
         }
+
+        public string GetLocation(int id)
+        {
+            BO.Drone d = GetDrone(id);
+            return "( " + dl.Base60(d.CurrentPlace.Longitude) + " , " + dl.Base60(d.CurrentPlace.Latitude) + " )";
+        }
     }
 }

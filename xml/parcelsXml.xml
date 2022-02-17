@@ -115,9 +115,9 @@
     <Weight>Light</Weight>
     <Priority>Normal</Priority>
     <Requested>2022-02-15T19:10:25.3802485+02:00</Requested>
-    <DroneId>0</DroneId>
-    <Scheduled xsi:nil="true" />
-    <PickedUp xsi:nil="true" />
-    <Delivered xsi:nil="true" />
+    <DroneId>452</DroneId>
+    <Scheduled>2022-02-17T17:39:04.5590321+02:00</Scheduled>
+    <PickedUp>2022-02-17T17:39:05.5923414+02:00</PickedUp>
+    <Delivered>2022-02-17T17:39:06.617211+02:00</Delivered>
   </Parcel>
 </ArrayOfParcel>

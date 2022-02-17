@@ -61,6 +61,7 @@ namespace PL
             //batteryTextBox.Visibility = BatteryLabel.Visibility = Visibility.Collapsed;
             BatteryProgressBar.Visibility= BatteryLabel.Visibility= batteryTextBox.Visibility = Visibility.Collapsed;
             statusComboBox.Visibility = parcelIdTextBox.Visibility = Visibility.Collapsed;
+            locationTextBox.Visibility = locationLabel.Visibility = Visibility.Collapsed;
             StatusLabel.Visibility = ParcelIdLabel.Visibility = Visibility.Collapsed;
             OpButton.IsEnabled = false;
 
@@ -106,6 +107,7 @@ namespace PL
                 gridParcel.DataContext = bl.GetParcel(currentDroneToL.ParcelId);
                 gridParcel.Visibility = Visibility.Visible;
             }
+            locationTextBox.Text = bl.GetLocation(currentDroneToL.Id);
         }
         private void AutomaticButton_Click(object sender, RoutedEventArgs e)
         {
@@ -144,6 +146,7 @@ namespace PL
             }
             else 
                 gridParcel.Visibility = Visibility.Collapsed;
+            locationTextBox.Text = bl.GetLocation(currentDroneToL.Id);
         }
 
         private void BwDrone_DoWork(object sender, DoWorkEventArgs e)
@@ -225,6 +228,7 @@ namespace PL
                     bl.UpdateDroneToCharge(currentDroneToL.Id);
                     statusComboBox.SelectedItem = BO.DroneStatus.Maintenance;
                     gridParcel.Visibility = Visibility.Collapsed;
+                    locationTextBox.Text = bl.GetLocation(currentDroneToL.Id);
                     MessageBox.Show("The drone is in charge", "Charging", b, i);
                 }
                 else if (currentDroneToL.Status == BO.DroneStatus.Maintenance)
@@ -234,6 +238,7 @@ namespace PL
                     batteryTextBox.Text = Convert.ToString(currentDroneToL.Battery);
                     BatteryProgressBar.Value = currentDroneToL.Battery;
                     gridParcel.Visibility = Visibility.Collapsed;
+                    locationTextBox.Text = bl.GetLocation(currentDroneToL.Id);
                     MessageBox.Show("The drone discharged", "Discharging", b, i);
 
                 }
@@ -273,6 +278,7 @@ namespace PL
                     else
                     {
                         statusComboBox.SelectedItem = BO.DroneStatus.Maintenance;
+                        locationTextBox.Text = bl.GetLocation(currentDroneToL.Id);
                         i = MessageBoxImage.Error;
                         MessageBox.Show("There is not enough battery, go to charging", "ERROR", b, i);
                         i = MessageBoxImage.Information;
@@ -286,6 +292,7 @@ namespace PL
                         bl.UpdateParcelCollect(currentDroneToL.Id);
                         batteryTextBox.Text = Convert.ToString(currentDroneToL.Battery);
                         BatteryProgressBar.Value = currentDroneToL.Battery;
+                        locationTextBox.Text = bl.GetLocation(currentDroneToL.Id);
                         MessageBox.Show("The parcel was picked up", "Picking up", b, i);
                     }
                     else if (p.PickedUp != null && p.Delivered == null)
@@ -296,6 +303,7 @@ namespace PL
                         parcelIdTextBox.Text = "-1";
                         statusComboBox.SelectedItem = BO.DroneStatus.Avaliable;
                         gridParcel.Visibility = Visibility.Collapsed;
+                        locationTextBox.Text = bl.GetLocation(currentDroneToL.Id);
                         MessageBox.Show("The parcel was provided", "Providing", b, i);
                     }
                 }
