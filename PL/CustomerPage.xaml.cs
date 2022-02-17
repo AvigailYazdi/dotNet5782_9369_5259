@@ -41,6 +41,7 @@ namespace PL
             CancelOrCloseButton.Content = "Cancel";
             OpButton.IsEnabled = false;
             sentParcelsDataGrid.Visibility = suppliedParcelsDataGrid.Visibility = Visibility.Collapsed;
+            sentLabel.Visibility = suppliedLabel.Visibility = Visibility.Collapsed;
         }
         public CustomerPage(IBL _bl, BO.Customer _c)// ctor for update
         {

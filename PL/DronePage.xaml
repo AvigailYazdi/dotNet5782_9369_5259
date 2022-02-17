@@ -62,6 +62,24 @@
             </ComboBox>
             <Label x:Name="StationIdLabel" Content="Station Id:" Grid.Column="0" HorizontalAlignment="Left" Margin="3,-29,0,0" VerticalAlignment="Top" FontWeight="Bold" />
         </Grid>
+
+        <Grid x:Name="gridParcel" HorizontalAlignment="Left" Margin="51,121,0,0" VerticalAlignment="Top" Visibility="Collapsed">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Label x:Name="idLabel" Content="Id:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="0" VerticalAlignment="Center"/>
+            <TextBox x:Name="idPTextBox" Grid.Column="1" HorizontalAlignment="Center" Margin="0,5,0,5" Grid.Row="0" Text="{Binding Id, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Width="120" BorderBrush="{x:Null}" />
+            <Label x:Name="nameSenderLabel" Content="Sender:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="1" VerticalAlignment="Center"/>
+            <TextBox x:Name="nameSenderTextBox" Grid.Column="1" HorizontalAlignment="Center" Margin="0,5,0,6" Grid.Row="1" Text="{Binding Sender.Name, Mode=TwoWay, NotifyOnValidationError=true,UpdateSourceTrigger=Explicit, ValidatesOnExceptions=true}" Width="120" BorderBrush="{x:Null}" />
+            <Label x:Name="nameRecieverLabel" Content="Receiver:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="2" VerticalAlignment="Center"/>
+            <TextBox x:Name="nameRecieverTextBox" Grid.Column="1" HorizontalAlignment="Center" Margin="0,5,0,6" Grid.Row="2" Text="{Binding Receiver.Name, Mode=TwoWay, NotifyOnValidationError=true,UpdateSourceTrigger=Explicit, ValidatesOnExceptions=true}" Width="120" BorderBrush="{x:Null}" />
+        </Grid>
         <Button x:Name="CancelOrCloseButton" Content="Cancel" HorizontalAlignment="Left" Margin="196,340,0,0" VerticalAlignment="Top" Height="27" Width="104" Click="cancelOrCloseButton_Click" Style="{StaticResource buttonStyle}"/>
         <Button x:Name="OpButton" Content="Add" HorizontalAlignment="Left" Margin="70,340,0,0" VerticalAlignment="Top" Height="27" Width="104" Click="opButton_Click" Background="#FFDDDDDD" UseLayoutRounding="False" BorderBrush="#FF0C5990" BorderThickness="2,2,2,2" Style="{StaticResource buttonStyle}"/>
         <Button x:Name="ChargingButton" Content="Charge/Discharge" HorizontalAlignment="Left" Margin="506,340,0,0" VerticalAlignment="Top" Height="27" Width="133" Click="chargingButton_Click" Style="{StaticResource buttonStyle}"/>

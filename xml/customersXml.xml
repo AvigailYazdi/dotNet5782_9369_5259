@@ -104,4 +104,12 @@
     <Latitude>31.1</Latitude>
     <Password>talya</Password>
   </Customer>
+  <Customer>
+    <Id>234516789</Id>
+    <Name>Evyatar</Name>
+    <Phone>0543267854</Phone>
+    <Longitude>32.5</Longitude>
+    <Latitude>31.4</Latitude>
+    <Password>5432</Password>
+  </Customer>
 </ArrayOfCustomer>

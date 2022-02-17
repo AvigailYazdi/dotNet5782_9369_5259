@@ -11,6 +11,7 @@
         <Label Content="User Name:" HorizontalAlignment="Left" Margin="224,160,0,0" VerticalAlignment="Top" Foreground="#FF4A9D6F" FontSize="30"/>
         <Label Content="Password:" HorizontalAlignment="Left" Margin="224,234,0,0" VerticalAlignment="Top" Foreground="#FF4A9D6F" FontSize="30"/>
         <TextBox x:Name="NameTextBox" HorizontalAlignment="Left" Margin="404,171,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="164" Height="43" BorderBrush="#FF4A9D6F" FontSize="22" TextAlignment="Center" TextChanged="TextBox_TextChanged"/>
+        <TextBox x:Name="PasswordTextBox" HorizontalAlignment="Left" Margin="404,244,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="164" Height="43" BorderBrush="#FF4A9D6F" FontSize="22" TextAlignment="Center" TextChanged="TextBox_TextChanged" Visibility="Collapsed"/>
         <PasswordBox x:Name="PasswordBox" HorizontalAlignment="Left" Margin="404,244,0,0"  VerticalAlignment="Top" Width="164" Height="42" BorderBrush="#FF4A9D6F" FontSize="22" PasswordChanged="PasswordBox_PasswordChanged" PasswordChar="*" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
         <Label Content="WELLCOME!" Foreground="#FF4A9D6F" FontSize="40" HorizontalAlignment="Center" Margin="0,48,0,0" VerticalAlignment="Top" FontFamily="Bradley Hand ITC"/>
         <Label Content="user name or password is wrong!" Foreground="Red" FontSize="15" HorizontalAlignment="Center" Margin="0,326,0,0" VerticalAlignment="Top" Visibility="Collapsed" />

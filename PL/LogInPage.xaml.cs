@@ -83,13 +83,17 @@ namespace PL
             if (i.Name == "eye00")
             {
                 i.Visibility = Visibility.Collapsed;
-                PasswordBox.PasswordChar = '\0';
+                PasswordTextBox.Text = PasswordBox.Password;
+                PasswordBox.Visibility=Visibility.Collapsed;
+                PasswordTextBox.Visibility = Visibility.Visible;
                 eye01.Visibility = Visibility.Visible;
             }
             else
             {
                 i.Visibility = Visibility.Collapsed;
-                PasswordBox.PasswordChar = '*';
+                PasswordBox.Password = PasswordTextBox.Text;
+                PasswordBox.Visibility = Visibility.Visible;
+                PasswordTextBox.Visibility = Visibility.Collapsed;
                 eye00.Visibility = Visibility.Visible;
             }
 

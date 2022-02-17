@@ -12,7 +12,7 @@
     <Name>Yarden</Name>
     <Longitude>32.4</Longitude>
     <Latitude>35</Latitude>
-    <ChargeSlots>34</ChargeSlots>
+    <ChargeSlots>35</ChargeSlots>
   </BaseStation>
   <BaseStation>
     <Id>32245</Id>
