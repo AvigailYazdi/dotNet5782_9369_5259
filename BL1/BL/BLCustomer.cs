@@ -126,6 +126,13 @@ namespace BL
                    };
         }
 
+        public IEnumerable<BO.CustomerToL> GetCustomersByPredicate(Predicate<BO.CustomerToL> predicate)
+        {
+            return from item in CustomerList()
+                   where predicate(item)
+                   select item;
+        }
+
         public BO.CustomerToL getCustomerToL(int id)
         {
             BO.Customer c = GetCustomer(id);

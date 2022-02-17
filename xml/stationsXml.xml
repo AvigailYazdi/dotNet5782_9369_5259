@@ -12,13 +12,13 @@
     <Name>Yarden</Name>
     <Longitude>32.4</Longitude>
     <Latitude>35</Latitude>
-    <ChargeSlots>34</ChargeSlots>
+    <ChargeSlots>35</ChargeSlots>
   </BaseStation>
   <BaseStation>
     <Id>32245</Id>
     <Name>Kishun</Name>
     <Longitude>32.1</Longitude>
     <Latitude>31.1</Latitude>
-    <ChargeSlots>19</ChargeSlots>
+    <ChargeSlots>18</ChargeSlots>
   </BaseStation>
 </ArrayOfBaseStation>

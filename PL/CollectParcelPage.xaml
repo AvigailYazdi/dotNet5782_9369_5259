@@ -11,5 +11,22 @@
     <Grid Style="{StaticResource gridStyle}">
         <Label x:Name="welcomeLabel" Content="Collect A Parcel" HorizontalAlignment="Center" Margin="0,20,0,0" VerticalAlignment="Top" Height="66" Width="257" FontSize="30" Foreground="#FF669AC3" RenderTransformOrigin="-0.961,0.198" FontFamily="Segoe Print" Background="Transparent"/>
         <Image x:Name="ArrowImage" HorizontalAlignment="Left" Height="28" Margin="47,31,0,0" VerticalAlignment="Top" Width="30" Source="/images/arrow.png" MouseLeftButtonDown="GoBack" MouseRightButtonDown="GoBack"/>
+        <DataGrid x:Name="parcelToLDataGrid" ItemsSource="{Binding}" AutoGenerateColumns="False" EnableRowVirtualization="True" Margin="182,142,181,177" RowDetailsVisibilityMode="VisibleWhenSelected" >
+            <DataGrid.Columns>
+                <DataGridTextColumn x:Name="idColumn" Binding="{Binding Id}" Header="Id" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="priorityColumn" Binding="{Binding Priority}" Header="Priority" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="receiverNameColumn" Binding="{Binding ReceiverName}" Header="Receiver Name" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="senderNameColumn" Binding="{Binding SenderName}" Header="Sender Name" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="statusColumn" Binding="{Binding Status}" Header="Status" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="weightColumn" Binding="{Binding Weight}" Header="Weight" Width="SizeToHeader"/>
+                <DataGridTemplateColumn x:Name="ConfirmCollectionColumn" Width="sizeToHeader" Header="Confirm Collection">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button x:Name="confirmButton" Content="confirm" Click="confirmButton_Click"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
     </Grid>
 </Page>

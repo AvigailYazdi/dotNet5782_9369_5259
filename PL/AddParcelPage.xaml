@@ -9,9 +9,9 @@
       Title="AddParcelPage">
 
     <Grid Style="{StaticResource gridStyle}">
-        <Label x:Name="welcomeLabel" Content="Add A New Parcel" HorizontalAlignment="Center" Margin="0,20,0,0" VerticalAlignment="Top" Height="66" Width="285" FontSize="30" Foreground="#FF669AC3" RenderTransformOrigin="-0.961,0.198" FontFamily="Segoe Print" Background="Transparent"/>
+        <Label x:Name="welcomeLabel" Content="Add A New Parcel" HorizontalAlignment="Center" Margin="0,20,0,0" VerticalAlignment="Top" Height="66" Width="297" FontSize="30" Foreground="#FF669AC3" RenderTransformOrigin="-0.961,0.198" FontFamily="Segoe Print" Background="Transparent"/>
         <Image x:Name="ArrowImage" HorizontalAlignment="Left" Height="28" Margin="47,31,0,0" VerticalAlignment="Top" Width="30" Source="/images/arrow.png" MouseLeftButtonDown="GoBack" MouseRightButtonDown="GoBack"/>
-        <Grid x:Name="oneParcelGrid" DataContext="{Binding}" HorizontalAlignment="Left" Margin="301,102,0,0" VerticalAlignment="Top">
+        <Grid x:Name="oneParcelGrid" DataContext="{Binding}" HorizontalAlignment="Left" Margin="301,134,0,0" VerticalAlignment="Top">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="Auto"/>
@@ -56,5 +56,7 @@
                 </ComboBox.ItemsPanel>
             </ComboBox>
         </Grid>
+        <Image x:Name="addImage" HorizontalAlignment="Left" Height="56" Margin="386,324,0,0" VerticalAlignment="Top" Width="46" Source="/images/add.png" MouseLeftButtonDown="addUser" MouseRightButtonDown="addUser"/>
+        <Image x:Name="garbageImage" HorizontalAlignment="Left" Height="56" Margin="450,324,0,0" VerticalAlignment="Top" Width="46" Source="/images/garbage.png" MouseLeftButtonDown="GoBack" MouseRightButtonDown="GoBack"/>
     </Grid>
 </Page>

@@ -11,7 +11,7 @@
     <Grid Style="{StaticResource gridStyle}">
         <Label x:Name="welcomeLabel" Content="My Parcels:" HorizontalAlignment="Left" Margin="300,20,0,0" VerticalAlignment="Top" Height="66" Width="208" FontSize="30" Foreground="#FF669AC3" RenderTransformOrigin="-0.961,0.198" FontFamily="Segoe Print" Background="Transparent"/>
         <Image x:Name="ArrowImage" HorizontalAlignment="Left" Height="28" Margin="47,31,0,0" VerticalAlignment="Top" Width="30" Source="/images/arrow.png" MouseLeftButtonDown="GoBack" MouseRightButtonDown="GoBack"/>
-        <DataGrid x:Name="parcelToLDataGrid" ItemsSource="{Binding}" AutoGenerateColumns="False" EnableRowVirtualization="True" Margin="222,110,219,209" RowDetailsVisibilityMode="VisibleWhenSelected" MouseDoubleClick="parcelToLDataGrid_MouseDoubleClick">
+        <DataGrid x:Name="parcelToLDataGrid" ItemsSource="{Binding}" AutoGenerateColumns="False" EnableRowVirtualization="True" Margin="222,134,219,185" RowDetailsVisibilityMode="VisibleWhenSelected" MouseDoubleClick="parcelToLDataGrid_MouseDoubleClick" >
             <DataGrid.Columns>
                 <DataGridTextColumn x:Name="idColumn" Binding="{Binding Id}" Header="Id" Width="SizeToHeader"/>
                 <DataGridTextColumn x:Name="priorityColumn" Binding="{Binding Priority}" Header="Priority" Width="SizeToHeader"/>

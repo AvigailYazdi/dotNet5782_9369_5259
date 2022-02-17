@@ -42,6 +42,7 @@ namespace BlApi
         public BO.Customer GetCustomer(int id);
         public BO.CustomerToL getCustomerToL(int id);
         public IEnumerable<BO.CustomerToL> CustomerList();
+        public IEnumerable<BO.CustomerToL> GetCustomersByPredicate(Predicate<BO.CustomerToL> predicate);
         public bool CheckId(int id);
 
         #endregion
