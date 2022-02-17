@@ -42,6 +42,8 @@ namespace BlApi
         public BO.Customer GetCustomer(int id);
         public BO.CustomerToL getCustomerToL(int id);
         public IEnumerable<BO.CustomerToL> CustomerList();
+        public bool CheckId(int id);
+
         #endregion
         #region Station
         public void AddStation(BO.BaseStation station);

@@ -44,10 +44,10 @@ namespace PL
                     this.NavigationService.Navigate(new UserAreaPage(bl));
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 i = MessageBoxImage.Error;
-                MessageBox.Show(ex.ToString(), "ERROR", b, i);
+                MessageBox.Show("User name or Password are wrong", "ERROR", b, i);
                 i = MessageBoxImage.Information;
             }
         }

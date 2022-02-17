@@ -80,6 +80,15 @@ namespace PL
                 idTextBox.BorderBrush = Brushes.Red;
                 addImage.IsEnabled = false;
                 flag = false;
+                IntegrityIdLabel.Content = "Id must have 9 digits";
+                IntegrityIdLabel.Visibility = Visibility.Visible;
+            }
+            else if (idTextBox.Text.Length == 9 && !bl.CheckId(int.Parse(idTextBox.Text)))
+            {
+                idTextBox.BorderBrush = Brushes.Red;
+                addImage.IsEnabled = false;
+                flag = false;
+                IntegrityIdLabel.Content = "Invalid Id";
                 IntegrityIdLabel.Visibility = Visibility.Visible;
             }
             else

@@ -30,7 +30,7 @@ namespace PL
         MessageBoxButton b = MessageBoxButton.OK; // A button of the message box
         MessageBoxImage i = MessageBoxImage.Information; // An icon of the message box
         ObservableCollection<BO.CustomerToL> oc;
-        public CustomerPage(IBL _bl, ObservableCollection<BO.CustomerToL> _oc )// ctor for add
+        public CustomerPage(IBL _bl, ObservableCollection<BO.CustomerToL> _oc)// ctor for add
         {
             InitializeComponent();
             bl = _bl;
@@ -161,6 +161,15 @@ namespace PL
                     idTextBox.BorderBrush = Brushes.Red;
                     OpButton.IsEnabled = false;
                     flag = false;
+                    IntegrityIdLabel.Content = "Id must have 9 digits";
+                    IntegrityIdLabel.Visibility = Visibility.Visible;
+                }
+                else if(idTextBox.Text.Length==9 && !bl.CheckId(int.Parse(idTextBox.Text)))
+                {
+                    idTextBox.BorderBrush = Brushes.Red;
+                    OpButton.IsEnabled = false;
+                    flag = false;
+                    IntegrityIdLabel.Content = "Invalid Id";
                     IntegrityIdLabel.Visibility = Visibility.Visible;
                 }
                 else
@@ -203,15 +212,6 @@ namespace PL
             }
         }
 
-        private void CustomerWindow_Activated(object sender, EventArgs e)
-        {
-            if (option == op.Update)
-            {
-                currentCustomer = bl.GetCustomer(currentCustomer.Id);
-                sentParcelsDataGrid.DataContext = currentCustomer.SendParcel;
-                suppliedParcelsDataGrid.DataContext = currentCustomer.GetParcel;
-            }
-        }
-    }
+    }    
 }
 

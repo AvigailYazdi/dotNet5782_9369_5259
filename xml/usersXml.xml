@@ -6,7 +6,7 @@
     <UserRole>Customer</UserRole>
   </User>
   <User>
-    <Name>Shilat</Name>
+    <Name>Daniel</Name>
     <Password>1404</Password>
     <UserRole>Customer</UserRole>
   </User>
@@ -26,7 +26,7 @@
     <UserRole>Customer</UserRole>
   </User>
   <User>
-    <Name>Avigail</Name>
+    <Name>Naftali</Name>
     <Password>3570</Password>
     <UserRole>Customer</UserRole>
   </User>
@@ -56,8 +56,8 @@
     <UserRole>Customer</UserRole>
   </User>
   <User>
-    <Name>Daniel</Name>
-    <Password>d123</Password>
+    <Name>Shilat</Name>
+    <Password>s123</Password>
     <UserRole>Manager</UserRole>
   </User>
   <User>
@@ -66,8 +66,8 @@
     <UserRole>Manager</UserRole>
   </User>
   <User>
-    <Name>Naftali</Name>
-    <Password>n123</Password>
+    <Name>Avigail</Name>
+    <Password>a123</Password>
     <UserRole>Manager</UserRole>
   </User>
   <User>
@@ -78,11 +78,6 @@
   <User>
     <Name>Elazar</Name>
     <Password>talya</Password>
-    <UserRole>Customer</UserRole>
-  </User>
-  <User>
-    <Name>Evyatar</Name>
-    <Password>5432</Password>
     <UserRole>Customer</UserRole>
   </User>
 </ArrayOfUser>

@@ -49,7 +49,7 @@
         </DataGrid>
         <Button x:Name="CancelOrCloseButton" Content="Cancel" HorizontalAlignment="Left" Margin="196,375,0,0" VerticalAlignment="Top" Height="27" Width="104" Click="cancelOrCloseButton_Click" Style="{StaticResource buttonStyle}"/>
         <Button x:Name="OpButton" Content="Add" HorizontalAlignment="Left" Margin="70,375,0,0" VerticalAlignment="Top" Height="27" Width="104" Click="opButton_Click" Background="#FFDDDDDD" UseLayoutRounding="False" BorderBrush="#FF0C5990" BorderThickness="2,2,2,2" Style="{StaticResource buttonStyle}"/>
-        <Label x:Name="IntegrityIdLabel" Content="Id must have 9 digits" HorizontalAlignment="Left" Margin="295,142,0,0" VerticalAlignment="Top" Height="23" Width="114" FontSize="10" Foreground="#FFEE0808" Visibility="Collapsed"/>
+        <Label x:Name="IntegrityIdLabel" HorizontalAlignment="Left" Margin="295,142,0,0" VerticalAlignment="Top" Height="23" Width="114" FontSize="10" Foreground="#FFEE0808" Visibility="Collapsed"/>
         <Label x:Name="suppliedLabel" Content="supplied parcels" HorizontalAlignment="Left" Margin="541,73,0,0" VerticalAlignment="Top" Height="29" Width="113"/>
         <Label x:Name="sentLabel" Content="sent parcels" HorizontalAlignment="Left" Margin="549,209,0,0" VerticalAlignment="Top" Height="29" Width="83"/>
     </Grid>

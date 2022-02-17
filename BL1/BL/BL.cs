@@ -254,5 +254,34 @@ namespace BL
             }
             return battery;
         }
+
+        private int sumDigits(int num)//get: a positive integer number, return:the sum of its digits
+        {
+            int sum = 0;
+            while (num > 0)//'while' loop foe sum of its digits
+            {
+                sum = sum + num % 10;
+                num = num / 10;
+            }
+            return sum;
+        }
+        private int lastDigitId(int num)//get: a positive integer number with 8 digits, return:ID Check Digit
+        {
+            int sum = 0;
+            for (int i = 8; i >= 1; i--)//'for' loop to scan over the eight digits of the number
+            {
+                if (i % 2 != 0)//to check if the location of the digit is odd
+                    sum = sum + sumDigits(num % 10);
+                else//in case that the location of the digit is even
+                    sum = sum + sumDigits(num % 10 * 2);
+                num = num / 10;
+            }
+            return (10 - sum % 10);
+        }
+
+        public bool CheckId(int id)
+        {
+            return id % 10 == lastDigitId((int)(id / 10));
+        }
     }
 }
