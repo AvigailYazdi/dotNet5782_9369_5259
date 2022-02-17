@@ -76,5 +76,24 @@ namespace PL
             else
                 SignButton.IsEnabled = false;
         }
+
+        private void Image_MouseButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            Image i = sender as Image;
+            if (i.Name == "eye00")
+            {
+                i.Visibility = Visibility.Collapsed;
+                PasswordBox.PasswordChar = '\0';
+                eye01.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                i.Visibility = Visibility.Collapsed;
+                PasswordBox.PasswordChar = '*';
+                eye00.Visibility = Visibility.Visible;
+            }
+
+
+        }
     }
 }

@@ -17,5 +17,7 @@
         <Button x:Name="SignButton" Content="Verify" Style="{StaticResource buttonStyle}" Foreground="#FF4A9D6F" FontSize="20" HorizontalAlignment="Center" Margin="0,297,0,0" VerticalAlignment="Top" Width="124" Background="{x:Null}" BorderBrush="{x:Null}" Click="Button_Click" IsEnabled="False" Height="38"/>
         <Image x:Name="ArrowImage" HorizontalAlignment="Left" Height="28" Margin="33,19,0,0" VerticalAlignment="Top" Width="30" Source="/images/arrow.png" MouseLeftButtonDown="GoBack" MouseRightButtonDown="GoBack"/>
         <Image HorizontalAlignment="Left" Height="112" Margin="615,26,0,0" VerticalAlignment="Top" Width="104" Source="images/UserIcon2.png"/>
+        <Image x:Name="eye00" HorizontalAlignment="Left" Height="36" Margin="577,249,0,0" VerticalAlignment="Top" Width="43" MouseLeftButtonDown="Image_MouseButtonDown" MouseRightButtonDown="Image_MouseButtonDown" Source="images/eye00.png" Visibility="Visible"/>
+        <Image x:Name="eye01" HorizontalAlignment="Left" Height="36" Margin="577,249,0,0" VerticalAlignment="Top" Width="43" MouseLeftButtonDown="Image_MouseButtonDown" MouseRightButtonDown="Image_MouseButtonDown" Source="images/eye01.png" Visibility="Collapsed"/>
     </Grid>
 </Page>

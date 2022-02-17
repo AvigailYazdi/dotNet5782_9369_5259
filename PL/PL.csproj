@@ -15,6 +15,10 @@
     <None Remove="images\customer.jpg" />
     <None Remove="images\drone.jpg" />
     <None Remove="images\droneI.jpg" />
+    <None Remove="images\eye00.png" />
+    <None Remove="images\eye01.png" />
+    <None Remove="images\eye1.jpg" />
+    <None Remove="images\eye2.jpg" />
     <None Remove="images\garbage.png" />
     <None Remove="images\parcel.png" />
     <None Remove="images\Plus_Icon.png" />
@@ -50,6 +54,12 @@
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="images\droneI.jpg">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="images\eye00.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="images\eye01.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="images\garbage.png">
