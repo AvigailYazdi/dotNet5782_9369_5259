@@ -169,6 +169,12 @@ namespace PL
         {
             this.NavigationService.GoBack();
         }
+
+        private void Page_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            od = new ObservableCollection<BO.DroneToL>(bl.DroneList());
+            dronesDataGrid.DataContext = od;
+        }
     }
 }
 

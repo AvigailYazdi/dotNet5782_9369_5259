@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:PL"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="StationsListPage" >
+      Title="StationsListPage" IsVisibleChanged="Page_IsVisibleChanged" >
     <Grid Style="{StaticResource gridStyle }">
 
         <!--<DataGrid x:Name="stationToLDataGrid" RowDetailsVisibilityMode="VisibleWhenSelected" Margin="244,129,260,170" ItemsSource="{Binding}" EnableRowVirtualization="True" AutoGenerateColumns="False" RenderTransformOrigin="0.5,0.5" MouseDoubleClick="doubleClickDataGrid">

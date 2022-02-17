@@ -286,9 +286,9 @@ namespace BL
                 else
                     throw new BO.NotInDeliveryException(id);
             }
-            catch (DO.DuplicateIdException ex)
+            catch (DO.MissingIdException ex)
             {
-                throw new BO.DuplicateIdException(ex.Id, ex.EntityName);
+                throw new BO.MissingIdException(ex.Id, ex.EntityName);
             }
         }
         /// <summary>

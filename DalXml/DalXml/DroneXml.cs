@@ -54,8 +54,7 @@ namespace Dal
             if (checkD(id))
             {
                 List<Parcel> parcels = XmlTools.LoadListFromXMLSerializer<Parcel>(parcelsPath);
-                pr = parcels.Find(p => p.DroneId == id);
-
+                pr = parcels.Find(p => p.DroneId == id && p.Delivered==null);
             }
             if (pr.Id != 0)
                 return pr.Id;

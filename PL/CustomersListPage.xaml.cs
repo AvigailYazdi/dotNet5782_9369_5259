@@ -61,6 +61,12 @@ namespace PL
         {
             this.NavigationService.GoBack();
         }
+
+        private void Page_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            oc = new ObservableCollection<BO.CustomerToL>(bl.CustomerList());
+            customerToLDataGrid.DataContext = oc;
+        }
     }
 }
 

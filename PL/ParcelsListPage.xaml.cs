@@ -171,6 +171,12 @@ namespace PL
         {
             this.NavigationService.GoBack();
         }
+
+        private void Page_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            op = new ObservableCollection<BO.ParcelToL>(bl.ParcelList());
+            parcelToLDataGrid.DataContext = op;
+        }
     }
 }
 

@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:PL"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="ParcelsListPage">
+      Title="ParcelsListPage" IsVisibleChanged="Page_IsVisibleChanged">
     <Grid Style="{StaticResource gridStyle }">
         <DataGrid x:Name="parcelToLDataGrid" ItemsSource="{Binding}" AutoGenerateColumns="False" EnableRowVirtualization="True" Margin="200,110,241,110" RowDetailsVisibilityMode="VisibleWhenSelected" MouseDoubleClick="parcelToLDataGrid_MouseDoubleClick">
             <DataGrid.Columns>

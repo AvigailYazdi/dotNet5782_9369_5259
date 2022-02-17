@@ -35,7 +35,7 @@ namespace PL
         {
             try
             {
-                BO.User u = bl.GetUser(PasswordTextBox.Text);
+                BO.User u = bl.GetUser(PasswordBox.Password);
                 if (u.UserRole == BO.Role.Manager)
                     this.NavigationService.Navigate(new ManagerAreaPage(bl));
                 else
@@ -54,7 +54,7 @@ namespace PL
 
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (NameTextBox.Text != "" && PasswordTextBox.Text != "")
+            if (NameTextBox.Text != "" && PasswordBox.Password != "")
             {
                 SignButton.IsEnabled = true;
             }
@@ -65,6 +65,16 @@ namespace PL
         private void GoBack(object sender, MouseButtonEventArgs e)
         {
             this.NavigationService.GoBack();
+        }
+
+        private void PasswordBox_PasswordChanged(object sender, RoutedEventArgs e)
+        {
+            if (NameTextBox.Text != "" && PasswordBox.Password != "")
+            {
+                SignButton.IsEnabled = true;
+            }
+            else
+                SignButton.IsEnabled = false;
         }
     }
 }
