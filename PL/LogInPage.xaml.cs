@@ -41,7 +41,7 @@ namespace PL
                 else
                 {
                     //לשלוח פרטים על הלקוח
-                    this.NavigationService.Navigate(new UserAreaPage(bl));
+                    this.NavigationService.Navigate(new UserAreaPage(bl, NameTextBox.Text));
                 }
             }
             catch (Exception)

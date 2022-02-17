@@ -22,10 +22,12 @@ namespace PL
     public partial class UserAreaPage : Page
     {
         IBL bl;
-        public UserAreaPage(IBL _bl)
+        string UserName;
+        public UserAreaPage(IBL _bl, string _UserName)
         {
             InitializeComponent();
             bl = _bl;
+            UserName = _UserName;
         }
 
         private void GoBack(object sender, MouseButtonEventArgs e)
@@ -60,5 +62,19 @@ namespace PL
                 AddParcelLabel.FontSize -= 5;
         }
 
+        private void MyParcelImage_MouseButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            this.NavigationService.Navigate(new MyParcelsPage(bl, UserName));
+        }
+
+        private void AddParcelImage_MouseButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            this.NavigationService.Navigate(new AddParcelPage(bl));
+        }
+
+        private void CollectImage_MouseButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            this.NavigationService.Navigate(new CollectParcelPage(bl));
+        }
     }
 }
