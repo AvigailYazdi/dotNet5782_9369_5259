@@ -69,7 +69,7 @@ namespace PL
 
         private void AddParcelImage_MouseButtonDown(object sender, MouseButtonEventArgs e)
         {
-            this.NavigationService.Navigate(new AddParcelPage(bl));
+            this.NavigationService.Navigate(new AddParcelPage(bl, UserName));
         }
 
         private void CollectImage_MouseButtonDown(object sender, MouseButtonEventArgs e)

@@ -22,10 +22,12 @@ namespace PL
     public partial class AddParcelPage : Page
     {
         IBL bl;
-        public AddParcelPage(IBL _bl)
+        string UserName;
+        public AddParcelPage(IBL _bl, string _UserName)
         {
             InitializeComponent();
             bl = _bl;
+            UserName = _UserName;
         }
 
         private void GoBack(object sender, MouseButtonEventArgs e)
