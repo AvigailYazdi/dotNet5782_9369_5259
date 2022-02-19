@@ -44,6 +44,7 @@ namespace PL
         {
             BO.ParcelToL currentParcel = parcelToLDataGrid.SelectedItem as BO.ParcelToL;
             oParcel.Remove(currentParcel);
+            bl.DeleteParcel(currentParcel.Id);
         }
     }
 }
