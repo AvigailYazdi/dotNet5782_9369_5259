@@ -6,9 +6,14 @@
     <insertTime>2022-02-15T23:16:45.2666079+02:00</insertTime>
   </DroneCharge>
   <DroneCharge>
+    <DroneId>432</DroneId>
+    <StationId>21002</StationId>
+    <insertTime>2022-02-20T09:06:44.967951+02:00</insertTime>
+  </DroneCharge>
+  <DroneCharge>
     <DroneId>454</DroneId>
-    <StationId>32245</StationId>
-    <insertTime>2022-02-17T21:20:49.3115672+02:00</insertTime>
+    <StationId>21002</StationId>
+    <insertTime>2022-02-20T09:08:29.1150096+02:00</insertTime>
   </DroneCharge>
   <DroneCharge>
     <DroneId>452</DroneId>

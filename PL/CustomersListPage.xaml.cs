@@ -34,7 +34,6 @@ namespace PL
 
         private void addCustomerButton_Click(object sender, RoutedEventArgs e)
         {
-
             this.NavigationService.Navigate(new CustomerPage(bl,oc));
         }
 
@@ -48,13 +47,9 @@ namespace PL
             BO.CustomerToL curCustomerToL = customerToLDataGrid.SelectedItem as BO.CustomerToL;
             if (curCustomerToL != null)
             {
-                BO.Customer c = bl.GetCustomer(curCustomerToL.Id);
+               BO.Customer c = bl.GetCustomer(curCustomerToL.Id);
                this.NavigationService.Navigate(new CustomerPage(bl, c));
             }
-        }
-        private void Window_Activated(object sender, EventArgs e)
-        {
-            customerToLDataGrid.DataContext = bl.CustomerList();
         }
 
         private void GoBack(object sender, MouseButtonEventArgs e)

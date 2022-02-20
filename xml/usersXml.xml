@@ -81,8 +81,13 @@
     <UserRole>Customer</UserRole>
   </User>
   <User>
-    <Name>Yosef</Name>
-    <Password>y111</Password>
+    <Name>zohar</Name>
+    <Password>5432</Password>
+    <UserRole>Customer</UserRole>
+  </User>
+  <User>
+    <Name>Yael</Name>
+    <Password>y123</Password>
     <UserRole>Customer</UserRole>
   </User>
 </ArrayOfUser>

@@ -5,27 +5,27 @@
     <Name>Macabim</Name>
     <Longitude>31.9</Longitude>
     <Latitude>35.7</Latitude>
-    <ChargeSlots>8</ChargeSlots>
+    <ChargeSlots>7</ChargeSlots>
   </BaseStation>
   <BaseStation>
     <Id>21002</Id>
     <Name>Yarden</Name>
     <Longitude>32.4</Longitude>
     <Latitude>35</Latitude>
-    <ChargeSlots>35</ChargeSlots>
+    <ChargeSlots>34</ChargeSlots>
   </BaseStation>
   <BaseStation>
     <Id>32245</Id>
     <Name>Kishun</Name>
     <Longitude>32.1</Longitude>
     <Latitude>31.1</Latitude>
-    <ChargeSlots>17</ChargeSlots>
+    <ChargeSlots>15</ChargeSlots>
   </BaseStation>
   <BaseStation>
-    <Id>32514</Id>
-    <Name>Gefen</Name>
-    <Longitude>31.6</Longitude>
-    <Latitude>31.5</Latitude>
-    <ChargeSlots>8</ChargeSlots>
+    <Id>54321</Id>
+    <Name>gefen</Name>
+    <Longitude>31.4</Longitude>
+    <Latitude>32.1</Latitude>
+    <ChargeSlots>21</ChargeSlots>
   </BaseStation>
 </ArrayOfBaseStation>

@@ -29,7 +29,7 @@ namespace PL
         MessageBoxButton b = MessageBoxButton.OK; // A button of the message box
         MessageBoxImage i = MessageBoxImage.Information; // An icon of the message box
         ObservableCollection<BO.ParcelToL> oParcel;
-        public ParcelPage(IBL _bl, ObservableCollection<BO.ParcelToL> _op)
+        public ParcelPage(IBL _bl, ObservableCollection<BO.ParcelToL> _op)//for add
         {
             InitializeComponent();
             bl = _bl;
@@ -46,7 +46,7 @@ namespace PL
             receiverComboBox.ItemsSource = bl.CustomerList();
             OpButton.IsEnabled = false;
         }
-        public ParcelPage(IBL _bl, BO.Parcel _p)
+        public ParcelPage(IBL _bl, BO.Parcel _p)//for update
         {
             InitializeComponent();
             bl = _bl;
@@ -144,7 +144,7 @@ namespace PL
                     MessageBox.Show("The parcel was picked up", "Picking up", b, i);
                     status(BO.ParcelStatus.PickedUp);
                 }
-                else
+                else//provided
                 {
                     bl.UpdateParcelProvide(currentParcel.MyDrone.Id);
                     BO.Parcel p = bl.GetParcel(currentParcel.Id);

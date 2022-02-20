@@ -30,4 +30,24 @@
     <Model>PO987</Model>
     <MaxWeight>Light</MaxWeight>
   </Drone>
+  <Drone>
+    <Id>546</Id>
+    <Model>TR543</Model>
+    <MaxWeight>Heavy</MaxWeight>
+  </Drone>
+  <Drone>
+    <Id>456</Id>
+    <Model>DF65</Model>
+    <MaxWeight>Heavy</MaxWeight>
+  </Drone>
+  <Drone>
+    <Id>654</Id>
+    <Model>GY23</Model>
+    <MaxWeight>Heavy</MaxWeight>
+  </Drone>
+  <Drone>
+    <Id>432</Id>
+    <Model>Rd43</Model>
+    <MaxWeight>Medium</MaxWeight>
+  </Drone>
 </ArrayOfDrone>

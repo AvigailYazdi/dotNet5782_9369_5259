@@ -39,10 +39,7 @@ namespace PL
                 if (u.UserRole == BO.Role.Manager)
                     this.NavigationService.Navigate(new ManagerAreaPage(bl));
                 else
-                {
-                    //לשלוח פרטים על הלקוח
                     this.NavigationService.Navigate(new UserAreaPage(bl, NameTextBox.Text));
-                }
             }
             catch (Exception)
             {
@@ -80,24 +77,25 @@ namespace PL
         private void Image_MouseButtonDown(object sender, MouseButtonEventArgs e)
         {
             Image i = sender as Image;
-            if (i.Name == "eye00")
+            if (i != null)
             {
-                i.Visibility = Visibility.Collapsed;
-                PasswordTextBox.Text = PasswordBox.Password;
-                PasswordBox.Visibility=Visibility.Collapsed;
-                PasswordTextBox.Visibility = Visibility.Visible;
-                eye01.Visibility = Visibility.Visible;
+                if (i.Name == "eye00")
+                {
+                    i.Visibility = Visibility.Collapsed;
+                    PasswordTextBox.Text = PasswordBox.Password;
+                    PasswordBox.Visibility = Visibility.Collapsed;
+                    PasswordTextBox.Visibility = Visibility.Visible;
+                    eye01.Visibility = Visibility.Visible;
+                }
+                else
+                {
+                    i.Visibility = Visibility.Collapsed;
+                    PasswordBox.Password = PasswordTextBox.Text;
+                    PasswordBox.Visibility = Visibility.Visible;
+                    PasswordTextBox.Visibility = Visibility.Collapsed;
+                    eye00.Visibility = Visibility.Visible;
+                }
             }
-            else
-            {
-                i.Visibility = Visibility.Collapsed;
-                PasswordBox.Password = PasswordTextBox.Text;
-                PasswordBox.Visibility = Visibility.Visible;
-                PasswordTextBox.Visibility = Visibility.Collapsed;
-                eye00.Visibility = Visibility.Visible;
-            }
-
-
         }
     }
 }

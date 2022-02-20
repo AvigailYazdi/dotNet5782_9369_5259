@@ -262,7 +262,7 @@ namespace PL
                 if (currentDroneToL.Status == BO.DroneStatus.Avaliable)
                 {
                     bl.UpdateParcelToDrone(currentDroneToL.Id);
-                    if (currentDroneToL.ParcelId != -1)//////////////
+                    if (currentDroneToL.ParcelId != -1)
                     {
                         parcelIdTextBox.Text = Convert.ToString(currentDroneToL.ParcelId);
                         statusComboBox.SelectedItem = BO.DroneStatus.Delivery;

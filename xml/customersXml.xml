@@ -3,7 +3,7 @@
   <Customer>
     <Id>212435840</Id>
     <Name>Aviad</Name>
-    <Phone>0528753911</Phone>
+    <Phone>0528753910</Phone>
     <Longitude>31.8</Longitude>
     <Latitude>35.3</Latitude>
     <Password>2679</Password>
@@ -105,11 +105,19 @@
     <Password>talya</Password>
   </Customer>
   <Customer>
-    <Id>324233915</Id>
-    <Name>Yosef</Name>
-    <Phone>0543778788</Phone>
-    <Longitude>32.3</Longitude>
-    <Latitude>31.1</Latitude>
-    <Password>y111</Password>
+    <Id>203908678</Id>
+    <Name>zohar</Name>
+    <Phone>05678633</Phone>
+    <Longitude>31.3</Longitude>
+    <Latitude>32.4</Latitude>
+    <Password>5432</Password>
+  </Customer>
+  <Customer>
+    <Id>216543553</Id>
+    <Name>Yael</Name>
+    <Phone>054632768</Phone>
+    <Longitude>35.1</Longitude>
+    <Latitude>32.4</Latitude>
+    <Password>y123</Password>
   </Customer>
 </ArrayOfCustomer>
