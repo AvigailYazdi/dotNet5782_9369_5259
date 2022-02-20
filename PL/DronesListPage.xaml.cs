@@ -88,34 +88,7 @@ namespace PL
         {
             this.NavigationService.Navigate(new DronePage(bl,od));
         }
-        /// <summary>
-        /// A function that keeps the window updated
-        /// </summary>
-        /// <param name="sender"> The sent object </param>
-        /// <param name="e"> Event args</param>
-        private void activatedWindow(object sender, EventArgs e)
-        {
-            if ((WeightSelector.SelectedIndex == -1 || WeightSelector.SelectedIndex == 3) && (StatusSelector.SelectedIndex == 3 || StatusSelector.SelectedIndex == -1))
-            {
-                group(bl.DroneList());
-                dronesDataGrid.DataContext = bl.DroneList();
-            }
-            else if ((WeightSelector.SelectedIndex == -1 || WeightSelector.SelectedIndex == 3) && StatusSelector.SelectedIndex != 3)
-            {
-                group(bl.GetDronesByPerdicate(d => d.Status == (BO.DroneStatus)StatusSelector.SelectedItem));
-                dronesDataGrid.DataContext = bl.GetDronesByPerdicate(d => d.Status == (BO.DroneStatus)StatusSelector.SelectedItem);
-            }
-            else if (WeightSelector.SelectedIndex != 3 && (StatusSelector.SelectedIndex == 3 || StatusSelector.SelectedIndex == -1))
-            {
-                group(bl.GetDronesByPerdicate(d => d.Weight == (BO.WeightCategories)WeightSelector.SelectedItem));
-                dronesDataGrid.DataContext = bl.GetDronesByPerdicate(d => d.Weight == (BO.WeightCategories)WeightSelector.SelectedItem);
-            }
-            else
-            {
-                group(bl.GetDronesByPerdicate(d => d.Status == (BO.DroneStatus)StatusSelector.SelectedItem && d.Weight == (BO.WeightCategories)WeightSelector.SelectedItem));
-                dronesDataGrid.DataContext = bl.GetDronesByPerdicate(d => d.Status == (BO.DroneStatus)StatusSelector.SelectedItem && d.Weight == (BO.WeightCategories)WeightSelector.SelectedItem);
-            }
-        }
+
         /// <summary>
         /// A function that opens the drone window for update the selected drone
         /// </summary>
@@ -126,8 +99,8 @@ namespace PL
             BO.DroneToL curDroneToL = dronesDataGrid.SelectedItem as BO.DroneToL;
             if (curDroneToL != null)
                 this.NavigationService.Navigate(new DronePage(bl, curDroneToL));
-                //new DroneWindow(bl, curDroneToL).ShowDialog();
         }
+
         /// <summary>
         /// A function that closes the window
         /// </summary>

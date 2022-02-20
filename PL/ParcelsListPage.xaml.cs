@@ -121,7 +121,7 @@ namespace PL
 
         private void selector_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (StatusSelector.SelectedIndex == 4)
+            if (StatusSelector.SelectedIndex == 4)//clear
             {
                 GroupReceiverCheckBox.IsEnabled = GroupSenderCheckBox.IsEnabled = true;
                 op = new ObservableCollection<BO.ParcelToL>(bl.ParcelList());

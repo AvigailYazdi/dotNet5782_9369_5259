@@ -19,6 +19,6 @@
     <Name>Kishun</Name>
     <Longitude>32.1</Longitude>
     <Latitude>31.1</Latitude>
-    <ChargeSlots>16</ChargeSlots>
+    <ChargeSlots>15</ChargeSlots>
   </BaseStation>
 </ArrayOfBaseStation>

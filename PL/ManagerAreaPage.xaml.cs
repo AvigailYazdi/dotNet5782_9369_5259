@@ -28,37 +28,40 @@ namespace PL
             bl = _bl;
         }
 
-
-
         private void Image_MouseEnter(object sender, MouseEventArgs e)
         {
             Image i = sender as Image;
-            i.Width += 10;
-            i.Height += 10;
-            if (i.Name == "DroneImage")
-                DroneLabel.FontSize += 5;
-            else if (i.Name == "ParcelImage")
-                ParcelLabel.FontSize += 5;
-            else if (i.Name == "CustomerImage")
-                CustomerLabel.FontSize += 5;
-            else
-                StationLabel.FontSize += 5;
-
+            if (i != null)
+            {
+                i.Width += 10;
+                i.Height += 10;
+                if (i.Name == "DroneImage")
+                    DroneLabel.FontSize += 5;
+                else if (i.Name == "ParcelImage")
+                    ParcelLabel.FontSize += 5;
+                else if (i.Name == "CustomerImage")
+                    CustomerLabel.FontSize += 5;
+                else
+                    StationLabel.FontSize += 5;
+            }
         }
 
         private void Image_MouseLeave(object sender, MouseEventArgs e)
         {
             Image i = sender as Image;
-            i.Width -= 10;
-            i.Height -= 10;
-            if (i.Name == "DroneImage")
-                DroneLabel.FontSize -= 5;
-            else if (i.Name == "ParcelImage")
-                ParcelLabel.FontSize -= 5;
-            else if (i.Name == "CustomerImage")
-                CustomerLabel.FontSize -= 5;
-            else
-                StationLabel.FontSize -= 5;
+            if (i != null)
+            {
+                i.Width -= 10;
+                i.Height -= 10;
+                if (i.Name == "DroneImage")
+                    DroneLabel.FontSize -= 5;
+                else if (i.Name == "ParcelImage")
+                    ParcelLabel.FontSize -= 5;
+                else if (i.Name == "CustomerImage")
+                    CustomerLabel.FontSize -= 5;
+                else
+                    StationLabel.FontSize -= 5;
+            }
         }
 
         private void DroneImage_MouseButtonDown(object sender, MouseButtonEventArgs e)

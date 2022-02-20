@@ -31,7 +31,7 @@ namespace PL
         MessageBoxButton b = MessageBoxButton.OK; // A button of the message box
         MessageBoxImage i = MessageBoxImage.Information; // An icon of the message box
         ObservableCollection<BO.StationToL> os;
-        public StationPage(IBL _bl, ObservableCollection<BO.StationToL> _os)
+        public StationPage(IBL _bl, ObservableCollection<BO.StationToL> _os)//for add
         {
             InitializeComponent();
             bl = _bl;
@@ -44,7 +44,7 @@ namespace PL
             OpButton.IsEnabled = false;
         }
 
-        public StationPage(IBL _bl, BO.BaseStation _s)
+        public StationPage(IBL _bl, BO.BaseStation _s)//for update
         {
             InitializeComponent();
             bl = _bl;
@@ -187,8 +187,6 @@ namespace PL
 
         private void avaliableSlotsTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            //if (option == op.Add)
-            //{
             if (avaliableSlotsTextBox.Text == "" || int.Parse(avaliableSlotsTextBox.Text) <= 0 || int.Parse(avaliableSlotsTextBox.Text) >= 41)
             {
                 avaliableSlotsTextBox.BorderBrush = Brushes.Red;
@@ -205,25 +203,6 @@ namespace PL
                     OpButton.IsEnabled = true;
                 else
                     OpButton.IsEnabled = false;
-            }
-            //}
-            //else
-            //{
-            //    if (nameTextBox.Text != "")
-            //        OpButton.IsEnabled = true;
-            //    else
-            //        OpButton.IsEnabled = false;
-            //}
-        }
-
-        private void StationWindow_Activated(object sender, EventArgs e)
-        {
-            if (option == op.Update)
-            {
-                currentStation = bl.GetStation(currentStation.Id);
-                IEnumerable<BO.DroneToL> drones = from item in currentStation.DroneSlots
-                                                  select bl.GetDroneToL(item.Id);
-                dronesDataGrid.DataContext = drones;
             }
         }
     }

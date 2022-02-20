@@ -51,23 +51,6 @@ namespace PL
             }
         }
 
-        private void Window_Activated(object sender, EventArgs e)
-        {
-            if (avaliableCheckBox.IsChecked == false)
-            {
-                os = new ObservableCollection<BO.StationToL>(bl.StationList());
-                stationToLDataGrid.DataContext = os;
-                group(bl.StationList());
-            }
-            else
-            {
-                os = new ObservableCollection<BO.StationToL>(bl.AvaliableStationList());
-                stationToLDataGrid.DataContext = os;
-                group(bl.AvaliableStationList());
-            }
-
-        }
-
         private void GroupCheckBox_Click(object sender, RoutedEventArgs e)
         {
             if (GroupCheckBox.IsChecked == true)
