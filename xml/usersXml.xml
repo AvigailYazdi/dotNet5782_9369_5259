@@ -85,4 +85,9 @@
     <Password>5432</Password>
     <UserRole>Customer</UserRole>
   </User>
+  <User>
+    <Name>Yael</Name>
+    <Password>y123</Password>
+    <UserRole>Customer</UserRole>
+  </User>
 </ArrayOfUser>

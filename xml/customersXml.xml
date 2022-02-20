@@ -112,4 +112,12 @@
     <Latitude>32.4</Latitude>
     <Password>5432</Password>
   </Customer>
+  <Customer>
+    <Id>216543553</Id>
+    <Name>Yael</Name>
+    <Phone>054632768</Phone>
+    <Longitude>35.1</Longitude>
+    <Latitude>32.4</Latitude>
+    <Password>y123</Password>
+  </Customer>
 </ArrayOfCustomer>
