@@ -80,4 +80,9 @@
     <Password>talya</Password>
     <UserRole>Customer</UserRole>
   </User>
+  <User>
+    <Name>Yosef</Name>
+    <Password>y111</Password>
+    <UserRole>Customer</UserRole>
+  </User>
 </ArrayOfUser>

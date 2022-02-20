@@ -19,6 +19,13 @@
     <Name>Kishun</Name>
     <Longitude>32.1</Longitude>
     <Latitude>31.1</Latitude>
-    <ChargeSlots>18</ChargeSlots>
+    <ChargeSlots>17</ChargeSlots>
+  </BaseStation>
+  <BaseStation>
+    <Id>32514</Id>
+    <Name>Gefen</Name>
+    <Longitude>31.6</Longitude>
+    <Latitude>31.5</Latitude>
+    <ChargeSlots>8</ChargeSlots>
   </BaseStation>
 </ArrayOfBaseStation>
